@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_margin="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:elevation="1dp"
+        app:cardCornerRadius="15dp"
+        android:background="@drawable/bg_text"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+     <LinearLayout
+         android:background="@color/note"
+         android:orientation="vertical"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+         <FrameLayout
+             android:background="#FF0000"
+             android:layout_width="match_parent"
+             android:layout_height="10dp"/>
+         <TextView
+             android:id="@+id/name"
+             android:padding="10dp"
+             android:textColor="@color/black"
+             android:textSize="15sp"
+             android:layout_marginStart="20dp"
+             android:text="Bùi Ngọc Bình"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"/>
+     </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

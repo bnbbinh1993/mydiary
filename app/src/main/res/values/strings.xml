@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">mydiary</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="_create">Create</string>
+    <string name="_diary">Diary</string>
+    <string name="_follow">Follow</string>
+    <string name="_setting">Setting</string>
+    <string name="_note">Note</string>
+    <string name="_event">Event</string>
+    <string name="_mood">Mood</string>
+    <string name="_count_time">Countdown</string>
+    <string name="_title">Title</string>
+    <string name="_content">Content...</string>
+    <string name="_work">Work</string>
+    <string name="_travel">Travel</string>
+    <string name="_shopping">Shopping</string>
+    <string name="_upcoming">Upcoming</string>
+    <string name="_celebration">Celebration</string>
+    <string name="_place">Place</string>
+    <string name="_color">Color</string>
+</resources>

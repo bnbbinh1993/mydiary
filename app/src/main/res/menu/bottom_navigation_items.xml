@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/workId"
+        android:fontFamily="@font/nobile"
+        android:icon="@drawable/ic_pen"
+        android:title="@string/_create"/>
+    <item android:id="@+id/homeId"
+        android:fontFamily="@font/nobile"
+        android:icon="@drawable/ic_book"
+        android:title="@string/_diary"/>
+    <item android:id="@+id/historyId"
+        android:fontFamily="@font/nobile"
+        android:icon="@drawable/ic_history"
+        android:title="@string/_follow"/>
+    <item android:id="@+id/profileId"
+        android:fontFamily="@font/nobile"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/_setting"/>
+</menu>

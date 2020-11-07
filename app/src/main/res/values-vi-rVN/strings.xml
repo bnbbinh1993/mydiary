@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">mydiary</string>
+    <string name="_create">Tạo</string>
+    <string name="_diary">Nhật Ký</string>
+    <string name="_follow">Theo dõi</string>
+    <string name="_setting">Cài đặt</string>
+    <string name="_note">Ghi chú</string>
+    <string name="_event">Sự kiện</string>
+    <string name="_mood">Tâm trạng</string>
+    <string name="_count_time">Đếm ngược</string>
+    <string name="_title">TIêu đề</string>
+    <string name="_content">Nội dung...</string>
+    <string name="_work">Công việc</string>
+    <string name="_travel">Du lịch</string>
+    <string name="_shopping">Mua sắm</string>
+    <string name="_upcoming">Sắp tới</string>
+    <string name="_celebration">Lễ kỷ niệm</string>
+    <string name="_place">Địa điểm</string>
+    <string name="_color">Màu sắc</string>
+</resources>

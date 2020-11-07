@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.CreateFragment">
+    <TextView
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/mTV"
+        android:text="@string/_diary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <GridView
+
+        android:layout_below="@+id/mTV"
+        android:id="@+id/mGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
+        android:numColumns="4" />
+    <TextView
+        android:id="@+id/mTV2"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/mGridView"
+        android:text="@string/_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <GridView
+        android:layout_below="@+id/mTV2"
+        android:id="@+id/mGridView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
+        android:numColumns="4" />
+
+
+</RelativeLayout>
