@@ -6,7 +6,7 @@ public class Show {
     private String content;
     private String date;
     private String address;
-    private byte [] image;
+    private String image;
     private int vote;
     private int filter;
 
@@ -14,7 +14,7 @@ public class Show {
     public Show() {
     }
 
-    public Show(int id,String title, String content, String date, String address, byte[] image, int vote, int filter) {
+    public Show(int id,String title, String content, String date, String address, String image, int vote, int filter) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -65,11 +65,11 @@ public class Show {
         this.address = address;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

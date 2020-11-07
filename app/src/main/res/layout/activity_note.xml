@@ -32,7 +32,7 @@
                 android:src="@drawable/ic_back" />
 
             <ImageButton
-                android:id="@+id/mSave"
+                android:id="@+id/save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -42,6 +42,8 @@
                 android:visibility="visible" />
 
             <TextView
+                android:layout_toStartOf="@+id/spinner"
+                android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/mBack"
@@ -50,6 +52,14 @@
                 android:text="11.07.2020 02:22 AM"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
+            <Spinner
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/mBack"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </RelativeLayout>
 
@@ -62,40 +72,56 @@
             android:layout_marginEnd="10dp"
             android:background="#fff" />
 
+      <androidx.core.widget.NestedScrollView
+          android:overScrollMode="never"
+          android:layout_above="@+id/bottom"
+          android:layout_below="@+id/ke_top"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+              <EditText
+                  android:id="@+id/title"
+                  android:paddingTop="10dp"
+                  android:paddingBottom="10dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/bg_edt"
+                  android:hint="Type a title here"
+                  android:paddingStart="10dp"
+                  android:textColor="@color/black"
+                  android:textSize="20sp" />
+              <GridView
+                  android:padding="10dp"
+                  android:choiceMode="none"
+                  android:overScrollMode="never"
+                  android:columnWidth="5dp"
+                  android:numColumns="2"
+                  android:id="@+id/gridview"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"/>
+
+              <EditText
+                  android:id="@+id/body"
+                  android:paddingTop="20dp"
+                  android:paddingBottom="20dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/bg_edt"
+                  android:hint="Note here"
+                  android:paddingStart="10dp"
+                  android:textColor="@color/black"
+                  android:textSize="14sp" />
+
+          </LinearLayout>
+      </androidx.core.widget.NestedScrollView>
+
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/bottom"
-            android:layout_below="@+id/ke_top"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <EditText
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edt"
-                android:hint="Type a title here"
-                android:paddingStart="10dp"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <EditText
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_edt"
-                android:hint="Note here"
-                android:paddingStart="10dp"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:padding="8dp"
             android:id="@+id/bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,6 +140,7 @@
                 android:src="@drawable/ic_color_palette" />
 
             <ImageButton
+                android:id="@+id/btnImage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

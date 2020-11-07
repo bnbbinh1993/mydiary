@@ -122,13 +122,14 @@
             android:background="@drawable/bg_text"
             android:orientation="horizontal"
             android:padding="10dp">
+
             <EditText
                 android:id="@+id/mContent"
-                android:gravity="top"
-                android:hint="@string/_content"
-                android:background="@drawable/bg_edit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/bg_edit"
+                android:gravity="top"
+                android:hint="@string/_content"
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"

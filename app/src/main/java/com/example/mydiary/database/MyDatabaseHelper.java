@@ -38,7 +38,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COL_2 + " TEXT, " +
                 COL_3 + " TEXT, " +
                 COL_4 + " TEXT, " +
-                COL_5 + " BOLB, " +
+                COL_5 + " TEXT, " +
                 COL_6 + " INTEGER, "+
                 COL_7 + " INTEGER)";
         db.execSQL(sqlQuery);
@@ -64,7 +64,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                         cursor.getString(2),
                         cursor.getString(3),
                         cursor.getString(4),
-                        cursor.getBlob(5),
+                        cursor.getString(5),
                         cursor.getInt(6),
                         cursor.getInt(7)));
             }

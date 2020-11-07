@@ -12,10 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mydiary.models.Show;
 import com.example.mydiary.R;
 import com.example.mydiary.utils.OnClickItem;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +45,17 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         holder.content.setText(model.getContent());
         holder.date.setText(model.getDate());
         if (model.getImage()!= null){
-
+            String s[] = model.getImage().split("\\s+");
+            File file = new File(s[0]);
+            Glide.with(context)
+                    .load(file)
+                    .centerCrop()
+                    .into(holder.image);
         }else {
             holder.image.setVisibility(View.GONE);
         }
 
-       switch (model.getFilter()){
+       switch (model.getVote()){
            case 1:{
                holder.body.setBackgroundColor(context.getResources().getColor(R.color.note));
                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_note));
