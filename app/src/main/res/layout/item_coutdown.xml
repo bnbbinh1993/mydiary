@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_marginBottom="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:padding="15dp"
+    android:background="@drawable/bg_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:background="@drawable/bg_frame"
+        android:layout_margin="5dp"
+        android:id="@+id/mOvel"
+        android:layout_width="10dp"
+        android:layout_height="10dp"/>
+    <LinearLayout
+        android:layout_marginStart="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/mName"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:text="Bùi Ngọc Bình"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/mTime"
+            android:layout_marginTop="5dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="Vào lúc 22:15 - 12.11.2020"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="2dp"
+            android:id="@+id/mPlace"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:text="Tại 234 Phạm Văn Đồng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="2dp"
+            android:id="@+id/mCount"
+            android:textSize="10sp"
+            android:textColor="@color/black"
+            android:text="100 ngày 12 giờ 23 phút 23 giây"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</LinearLayout>

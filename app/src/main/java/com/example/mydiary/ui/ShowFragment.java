@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,21 +11,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiary.R;
 import com.example.mydiary.adapters.ShowAdapter;
-import com.example.mydiary.database.MyDatabaseHelper;
-import com.example.mydiary.models.Show;
-import com.google.android.material.tabs.TabItem;
+import com.example.mydiary.database.DatabaseHelper;
+import com.example.mydiary.models.Diary;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 public class ShowFragment extends Fragment {
     private RecyclerView recyclerView;
     private ShowAdapter adapter;
-    private ArrayList<Show> list;
+    private ArrayList<Diary> list;
     private TabLayout tabs2;
-    private MyDatabaseHelper helper;
+    private DatabaseHelper helper;
     private int filter = 0;
 
     @Override
@@ -40,7 +37,7 @@ public class ShowFragment extends Fragment {
 
     private void init(View view) {
         tabs2 = view.findViewById(R.id.tabs2);
-        helper = new MyDatabaseHelper(getContext());
+        helper = new DatabaseHelper(getContext());
         recyclerView = view.findViewById(R.id.mRecyclerview);
         list = new ArrayList<>();
         setView();
@@ -81,9 +78,9 @@ public class ShowFragment extends Fragment {
         if (filter == 0) {
             list = helper.getData();
         } else {
-            for (Show show : helper.getData()) {
-                if (show.getFilter() == filter) {
-                    list.add(show);
+            for (Diary diary : helper.getData()) {
+                if (diary.getFilter() == filter) {
+                    list.add(diary);
                 }
             }
         }

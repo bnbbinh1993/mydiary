@@ -25,4 +25,13 @@
     <string name="_minute">Phút</string>
     <string name="_close">Đóng</string>
     <string name="_yes">Có</string>
+    <string name="_seconds_item">giây</string>
+    <string name="_hours_item">giờ</string>
+    <string name="_minute_item">phút</string>
+    <string name="_day_item">ngày</string>
+    <string name="_create_successfully">Tạo thành công</string>
+    <string name="_successfully">Đã thêm thành công một sự kiện vào danh sách</string>
+    <string name="_successfully2">Bạn có thể điều chỉnh thông tin hoạt động trong danh sách quản lý</string>
+    <string name="_done">Xong</string>
+    <string name="_create_a_new_event">Tạo một sự kiện mới</string>
 </resources>

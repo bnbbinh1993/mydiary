@@ -4,18 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.mydiary.R;
-import com.example.mydiary.database.MyDatabaseHelper;
-import com.example.mydiary.models.Show;
+import com.example.mydiary.database.DatabaseHelper;
+import com.example.mydiary.models.Diary;
 
 public class MoodActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;
@@ -25,13 +23,13 @@ public class MoodActivity extends AppCompatActivity {
     private TextView mDate;
     private String title;
     private EditText mContent;
-    private MyDatabaseHelper helper;
+    private DatabaseHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood);
-        helper = new MyDatabaseHelper(this);
+        helper = new DatabaseHelper(this);
         init();
         setSpinner();
         setOnclick();
@@ -64,13 +62,13 @@ public class MoodActivity extends AppCompatActivity {
         String date = mDate.getText().toString();
         int filter = 2;
         int vote = 0;
-        Show show = new Show();
-        show.setTitle(title);
-        show.setContent(content);
-        show.setDate(date);
-        show.setFilter(filter);
-        show.setVote(vote);
-        helper.adđ(show);
+        Diary diary = new Diary();
+        diary.setTitle(title);
+        diary.setContent(content);
+        diary.setDate(date);
+        diary.setFilter(filter);
+        diary.setVote(vote);
+        helper.adđ(diary);
         finish();
     }
 

@@ -26,4 +26,13 @@
     <string name="_minute">Minute</string>
     <string name="_close">Close</string>
     <string name="_yes">Yes</string>
+    <string name="_seconds_item">seconds</string>
+    <string name="_hours_item">hours</string>
+    <string name="_minute_item">minute</string>
+    <string name="_day_item">day</string>
+    <string name="_create_successfully">Create successfully</string>
+    <string name="_successfully">Successfully added an event to the list</string>
+    <string name="_successfully2">You can adjust the activity information in the management list</string>
+    <string name="_done">Done</string>
+    <string name="_create_a_new_event">Create a new event</string>
 </resources>

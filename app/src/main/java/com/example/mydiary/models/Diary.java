@@ -1,6 +1,6 @@
 package com.example.mydiary.models;
 
-public class Show {
+public class Diary {
     private int id;
     private String title;
     private String content;
@@ -11,10 +11,10 @@ public class Show {
     private int filter;
 
 
-    public Show() {
+    public Diary() {
     }
 
-    public Show(int id,String title, String content, String date, String address, String image, int vote, int filter) {
+    public Diary(int id, String title, String content, String date, String address, String image, int vote, int filter) {
         this.id = id;
         this.title = title;
         this.content = content;

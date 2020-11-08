@@ -4,15 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +25,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
-import com.example.mydiary.database.MyDatabaseHelper;
-import com.example.mydiary.models.Show;
+import com.example.mydiary.database.DatabaseHelper;
+import com.example.mydiary.models.Diary;
 import com.example.mydiary.utils.ImageFilePath;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -61,7 +56,7 @@ public class NoteActivity extends AppCompatActivity {
     private RadioButton rd4;
     private RadioButton rd5;
     private RadioButton rd6;
-    private MyDatabaseHelper helper;
+    private DatabaseHelper helper;
     private BottomSheetBehavior behavior;
     private CoordinatorLayout background;
     private Spinner spinner;
@@ -155,7 +150,7 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void initSetUp() {
-        helper = new MyDatabaseHelper(this);
+        helper = new DatabaseHelper(this);
         View bottomSheet = findViewById(R.id.viewColor);
         behavior = BottomSheetBehavior.from(bottomSheet);
         behavior.setPeekHeight(0);
@@ -203,7 +198,7 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 save();
-                finish();
+
             }
         });
         btnColor.setOnClickListener(new View.OnClickListener() {
@@ -276,14 +271,18 @@ public class NoteActivity extends AppCompatActivity {
         for (String s : resPath){
             image  += " "+s;
         }
-        Show show = new Show();
-        show.setTitle(title);
-        show.setContent(content);
-        show.setDate(date);
-        show.setFilter(filter);
-        show.setImage(image.trim());
-        show.setVote(vote);
-        helper.adđ(show);
+        Diary diary = new Diary();
+        diary.setTitle(title);
+        diary.setContent(content);
+        diary.setDate(date);
+        diary.setFilter(filter);
+        diary.setImage(image.trim());
+        diary.setVote(vote);
+        helper.adđ(diary);
+        Intent intent = new Intent(NoteActivity.this,FinishActivity.class);
+        intent.putExtra("I",1);
+        startActivity(intent);
+        finish();
         Log.d("IMAGE", "save: "+image);
     }
 

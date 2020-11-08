@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.mydiary.models.Show;
+import com.example.mydiary.models.Diary;
 import com.example.mydiary.R;
 import com.example.mydiary.utils.OnClickItem;
 
@@ -23,10 +23,10 @@ import java.util.List;
 
 public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     private Context context;
-    private List<Show> list = new ArrayList<>();
+    private List<Diary> list = new ArrayList<>();
     private static OnClickItem onClickItem;
 
-    public ShowAdapter(Context context, List<Show> list) {
+    public ShowAdapter(Context context, List<Diary> list) {
         this.context = context;
         this.list = list;
     }
@@ -40,7 +40,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Show model = list.get(position);
+        holder.setIsRecyclable(false);
+        Diary model = list.get(position);
         holder.name.setText(model.getTitle());
         holder.content.setText(model.getContent());
         holder.date.setText(model.getDate());

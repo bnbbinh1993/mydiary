@@ -120,7 +120,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:textColorHint="#DCDCDC"
-                android:id="@+id/mAddress"
+                android:id="@+id/mPlace"
                 android:hint="@string/_place"
                 android:maxLines="1"
                 android:inputType="textCapSentences"

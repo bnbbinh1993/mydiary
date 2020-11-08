@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
@@ -21,28 +22,35 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mydiary.R;
-import com.example.mydiary.database.MyDatabaseHelper;
+import com.example.mydiary.database.DatabaseCount;
+import com.example.mydiary.models.Count;
 import com.example.mydiary.utils.Pef;
 
 import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CountDownActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;
-    private String employees[] = {"Sự kiện", "Tâm trạng", "Công việc", "Shopping","Du lịch","Lễ kỷ niệm"};
+    private String employees[] = {"Sự kiện", "Tâm trạng", "Công việc", "Shopping", "Du lịch", "Lễ kỷ niệm"};
     private ImageButton mBack;
     private ImageButton mSave;
     private TextView mDate;
     private String title;
     private String resultTime;
-    private MyDatabaseHelper helper;
+    private DatabaseCount helper;
     private LinearLayout layout;
+    private EditText mTitle;
+    private EditText mPlace;
+    private EditText mDes;
+    private int filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +67,12 @@ public class CountDownActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
 
-        helper = new MyDatabaseHelper(this);
+        helper = new DatabaseCount(this);
         init();
         setSpinner();
         setOnclick();
     }
+
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -81,6 +90,9 @@ public class CountDownActivity extends AppCompatActivity {
         mSave = findViewById(R.id.mSave);
         mDate = findViewById(R.id.mDate);
         layout = findViewById(R.id.layout);
+        mTitle = findViewById(R.id.mTitle);
+        mPlace = findViewById(R.id.mPlace);
+        mDes = findViewById(R.id.mDes);
 
     }
 
@@ -94,7 +106,7 @@ public class CountDownActivity extends AppCompatActivity {
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //save();
+                save();
             }
         });
         mDate.setOnClickListener(new View.OnClickListener() {
@@ -105,10 +117,49 @@ public class CountDownActivity extends AppCompatActivity {
         });
     }
 
+    private void save() {
+        String title = mTitle.getText().toString().trim();
+        String des = mDes.getText().toString().trim();
+        String place = mPlace.getText().toString();
+        String date = mDate.getText().toString();
+
+        if (title.isEmpty()) {
+            Toast.makeText(this, "Tiêu đề không được để trống", Toast.LENGTH_SHORT).show();
+        } else if (des.isEmpty()) {
+            Toast.makeText(this, "Mô tả ngắn không được để trống", Toast.LENGTH_SHORT).show();
+        } else if (!checkDate(date)) {
+            Toast.makeText(this, "Không được chọn thời gian trong quá khứ", Toast.LENGTH_SHORT).show();
+        } else {
+            Count count = new Count();
+            count.setTitle(title);
+            count.setDes(des);
+            count.setPlace(place);
+            count.setDate(date);
+            count.setFilter(filter);
+            count.setVote(0);
+            helper.adđ(count);
+            Intent intent = new Intent(CountDownActivity.this,FinishActivity.class);
+            intent.putExtra("I",0);
+            startActivity(intent);
+            finish();
+        }
+
+    }
+
+    private boolean checkDate(String s) {
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyy");
+        try {
+            if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     private void setSpinner() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,
-                employees);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, employees);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerEmployee.setAdapter(adapter);
         spinnerEmployee.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -128,28 +179,34 @@ public class CountDownActivity extends AppCompatActivity {
 
     private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
         title = employees[position];
-        switch (position){
-            case 0:{
+        switch (position) {
+            case 0: {
+                filter = 0;
                 layout.setBackgroundColor(getResources().getColor(R.color.note));
                 break;
             }
-            case 1:{
+            case 1: {
+                filter = 1;
                 layout.setBackgroundColor(getResources().getColor(R.color.mood));
                 break;
             }
-            case 2:{
+            case 2: {
+                filter = 2;
                 layout.setBackgroundColor(getResources().getColor(R.color.event));
                 break;
             }
-            case 3:{
+            case 3: {
+                filter = 3;
                 layout.setBackgroundColor(getResources().getColor(R.color.travel));
                 break;
             }
-            case 4:{
+            case 4: {
+                filter = 4;
                 layout.setBackgroundColor(getResources().getColor(R.color.work));
                 break;
             }
-            case 5:{
+            case 5: {
+                filter = 5;
                 layout.setBackgroundColor(getResources().getColor(R.color.cele));
                 break;
             }
@@ -191,8 +248,8 @@ public class CountDownActivity extends AppCompatActivity {
         day.setValue(isPositon(d, Pef.dayList));
         month.setValue(isPositon(m, Pef.monthList));
         year.setValue(isPositon(y, Pef.isListYear()));
-        hours.setValue(isPositon(y, Pef.hoursList));
-        minute.setValue(isPositon(y, Pef.minuteList));
+        hours.setValue(isPositon(h, Pef.hoursList));
+        minute.setValue(isPositon(p, Pef.minuteList));
 
 
         builder.setPositiveButton(R.string._yes, new DialogInterface.OnClickListener() {
@@ -205,8 +262,8 @@ public class CountDownActivity extends AppCompatActivity {
                 int p5 = minute.getValue();
                 if (isDateFormat(Pef.dayList[p1], Pef.monthList[p2])) {
                     String dateResult = Pef.hoursList[p4] + ":" +
-                    Pef.minuteList[p5] +  " - " + Pef.dayList[p1] + "/" + Pef.monthList[p2]
-                            + "/" + Pef.isListYear()[p3];
+                            Pef.minuteList[p5] + " - " + Pef.dayList[p1] + "." + Pef.monthList[p2]
+                            + "." + Pef.isListYear()[p3];
                     mDate.setText(dateResult);
                     dialog.dismiss();
                     Log.d("TEST", "onClick: " + dateResult);
