@@ -19,4 +19,11 @@
     <string name="_celebration">Celebration</string>
     <string name="_place">Place</string>
     <string name="_color">Color</string>
+    <string name="_day">Day</string>
+    <string name="_month">Month</string>
+    <string name="_year">Year</string>
+    <string name="_hours">Hours</string>
+    <string name="_minute">Minute</string>
+    <string name="_close">Close</string>
+    <string name="_yes">Yes</string>
 </resources>

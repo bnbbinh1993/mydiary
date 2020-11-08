@@ -284,6 +284,7 @@ public class NoteActivity extends AppCompatActivity {
         show.setImage(image.trim());
         show.setVote(vote);
         helper.adđ(show);
+        Log.d("IMAGE", "save: "+image);
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {

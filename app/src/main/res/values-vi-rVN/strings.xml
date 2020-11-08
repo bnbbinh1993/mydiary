@@ -18,4 +18,11 @@
     <string name="_celebration">Lễ kỷ niệm</string>
     <string name="_place">Địa điểm</string>
     <string name="_color">Màu sắc</string>
+    <string name="_day">Ngày</string>
+    <string name="_month">Tháng</string>
+    <string name="_year">Năm</string>
+    <string name="_hours">Giờ</string>
+    <string name="_minute">Phút</string>
+    <string name="_close">Đóng</string>
+    <string name="_yes">Có</string>
 </resources>

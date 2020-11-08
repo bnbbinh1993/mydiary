@@ -71,8 +71,8 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="#fff" />
-
-      <androidx.core.widget.NestedScrollView
+      <HorizontalScrollView
+          android:fillViewport="true"
           android:overScrollMode="never"
           android:layout_above="@+id/bottom"
           android:layout_below="@+id/ke_top"
@@ -96,19 +96,20 @@
                   android:textColor="@color/black"
                   android:textSize="20sp" />
               <GridView
-                  android:padding="10dp"
+                  android:scrollbars="none"
+                  android:stretchMode="columnWidth"
+                  android:padding="5dp"
                   android:choiceMode="none"
                   android:overScrollMode="never"
                   android:columnWidth="5dp"
                   android:numColumns="2"
                   android:id="@+id/gridview"
                   android:layout_width="match_parent"
-                  android:layout_height="match_parent"/>
-
+                  android:layout_height="wrap_content"/>
               <EditText
                   android:id="@+id/body"
-                  android:paddingTop="20dp"
-                  android:paddingBottom="20dp"
+                  android:paddingTop="10dp"
+                  android:paddingBottom="10dp"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:background="@drawable/bg_edt"
@@ -117,8 +118,9 @@
                   android:textColor="@color/black"
                   android:textSize="14sp" />
 
+
           </LinearLayout>
-      </androidx.core.widget.NestedScrollView>
+      </HorizontalScrollView>
 
 
         <LinearLayout

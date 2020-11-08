@@ -4,27 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.viewpager.widget.ViewPager;
-
-import android.app.Activity;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-
 import com.example.mydiary.adapters.ViewPagerAdapter;
 import com.example.mydiary.ui.CreateFragment;
 import com.example.mydiary.ui.EventFragment;
 import com.example.mydiary.ui.SettingFragment;
 import com.example.mydiary.ui.ShowFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import static android.Manifest.permission.FOREGROUND_SERVICE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -39,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActivityCompat.requestPermissions(this,new String[]{FOREGROUND_SERVICE}, PackageManager.PERMISSION_GRANTED);
-
+        ActivityCompat.requestPermissions(this,new String[]{WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
         init();
         bottmNavigationView();
         viewpagerShow();

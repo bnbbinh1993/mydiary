@@ -35,7 +35,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_show_2,parent,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_show_2, parent, false));
     }
 
     @Override
@@ -44,67 +44,72 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         holder.name.setText(model.getTitle());
         holder.content.setText(model.getContent());
         holder.date.setText(model.getDate());
-        if (model.getImage()!= null){
-            String s[] = model.getImage().split("\\s+");
-            File file = new File(s[0]);
-            Glide.with(context)
-                    .load(file)
-                    .centerCrop()
-                    .into(holder.image);
-        }else {
+        if (model.getImage() != null) {
+            if (!model.getImage().trim().isEmpty()) {
+                String s[] = model.getImage().split("\\s+");
+                File file = new File(s[0]);
+                Glide.with(context)
+                        .load(file)
+                        .centerCrop()
+                        .into(holder.image);
+            } else {
+                holder.image.setVisibility(View.GONE);
+            }
+        } else {
             holder.image.setVisibility(View.GONE);
         }
 
-       switch (model.getVote()){
-           case 1:{
-               holder.body.setBackgroundColor(context.getResources().getColor(R.color.note));
-               holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_note));
-               break;
-           }
-           case 2:{
-               holder.body.setBackgroundColor(context.getResources().getColor(R.color.mood));
-               holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_mood));
-               break;
-           }
-           case 3:{
-               holder.body.setBackgroundColor(context.getResources().getColor(R.color.work));
-               holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_work));
-               break;
-           }
-           case 4:{
-               holder.body.setBackgroundColor(context.getResources().getColor(R.color.event));
-               holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_event));
-               break;
-           }
-           case 5:{
-               holder.body.setBackgroundColor(context.getResources().getColor(R.color.shopping));
-               holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_shopping));
-               break;
-           }
-           case 6:{
-               holder.body.setBackgroundColor(context.getResources().getColor(R.color.travel));
-               holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_travel));
-               break;
-           }
-           case 7:{
-               holder.body.setBackgroundColor(context.getResources().getColor(R.color.cele));
-               holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_cele));
-               break;
-           }
-       }
-
+        switch (model.getVote()) {
+            case 1: {
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.note));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_note));
+                break;
+            }
+            case 2: {
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.mood));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_mood));
+                break;
+            }
+            case 3: {
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.work));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_work));
+                break;
+            }
+            case 4: {
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.event));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_event));
+                break;
+            }
+            case 5: {
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.shopping));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_shopping));
+                break;
+            }
+            case 6: {
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.travel));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_travel));
+                break;
+            }
+            case 7: {
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.cele));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_cele));
+                break;
+            }
+        }
 
 
     }
-    public void setOnClickItem(OnClickItem onClickItem1){
+
+    public void setOnClickItem(OnClickItem onClickItem1) {
         this.onClickItem = onClickItem1;
     }
+
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private TextView name;
         private TextView content;
         private TextView date;
@@ -120,7 +125,6 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             image = itemView.findViewById(R.id.image);
             top = itemView.findViewById(R.id.top);
             body = itemView.findViewById(R.id.body);
-
         }
 
         @Override
