@@ -11,6 +11,7 @@
     tools:context=".activity.NoteActivity">
 
     <RelativeLayout
+        android:paddingTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="5dp"
-            android:paddingTop="30dp"
             android:paddingEnd="5dp"
             android:paddingBottom="5dp">
 
@@ -71,7 +71,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="#fff" />
-      <HorizontalScrollView
+      <androidx.core.widget.NestedScrollView
           android:fillViewport="true"
           android:overScrollMode="never"
           android:layout_above="@+id/bottom"
@@ -95,17 +95,15 @@
                   android:paddingStart="10dp"
                   android:textColor="@color/black"
                   android:textSize="20sp" />
-              <GridView
+
+              <androidx.recyclerview.widget.RecyclerView
+                  android:layout_gravity="center_horizontal"
                   android:scrollbars="none"
-                  android:stretchMode="columnWidth"
-                  android:padding="5dp"
-                  android:choiceMode="none"
-                  android:overScrollMode="never"
-                  android:columnWidth="5dp"
-                  android:numColumns="2"
-                  android:id="@+id/gridview"
+                  android:id="@+id/test_image"
                   android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
+                  android:layout_height="wrap_content"
+                  android:overScrollMode="never" />
+
               <EditText
                   android:id="@+id/body"
                   android:paddingTop="10dp"
@@ -119,8 +117,9 @@
                   android:textSize="14sp" />
 
 
+
           </LinearLayout>
-      </HorizontalScrollView>
+      </androidx.core.widget.NestedScrollView>
 
 
         <LinearLayout
@@ -160,6 +159,7 @@
         </LinearLayout>
     </RelativeLayout>
     <androidx.core.widget.NestedScrollView
+        android:visibility="visible"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:id="@+id/viewColor"
         android:layout_width="match_parent"

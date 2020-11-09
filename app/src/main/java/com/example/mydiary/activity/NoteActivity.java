@@ -2,6 +2,8 @@ package com.example.mydiary.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,13 +30,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
+import com.example.mydiary.adapters.ImageAdapter;
 import com.example.mydiary.database.DatabaseHelper;
+import com.example.mydiary.models.Count;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.utils.ImageFilePath;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
@@ -65,8 +70,11 @@ public class NoteActivity extends AppCompatActivity {
     private String path;
     private static final int SELECT_PICTURES = 1;
     private String imageEncoded;
-    private List<String> resPath;
-    private GridView gridView;
+    private ArrayList<String> resPath;
+    private ArrayList<String> list = new ArrayList<>();
+
+    private RecyclerView test_image;
+    private ImageAdapter adapter;
 
 
     @Override
@@ -90,45 +98,26 @@ public class NoteActivity extends AppCompatActivity {
         setOnclick();
         RDGroup();
         setSpinner();
-        setGridView();
+        setRecyclerview();
 
     }
 
-    private void setGridView() {
-        CustomAdapter adapter = new CustomAdapter();
-        gridView.setAdapter(adapter);
+    private void setRecyclerview() {
+        test_image.setHasFixedSize(true);
+        test_image.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        Log.d("TEST", "setRecyclerview: "+resPath.size());
+        adapter = new ImageAdapter(list,this);
+        test_image.setAdapter(adapter);
     }
 
-    private class CustomAdapter extends BaseAdapter{
-
-        @Override
-        public int getCount() {
-            return resPath.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.item_image,null);
-            ImageView image = view.findViewById(R.id.image);
-            File file = new File(resPath.get(position));
-            Glide.with(NoteActivity.this)
-                    .load(file)
-                    .centerCrop()
-                    .error(R.drawable.ic_launcher_background)
-                    .into(image);
-            return view;
-        }
+    public void updateData(ArrayList<String> viewModels) {
+        list.clear();
+        list.addAll(viewModels);
+        adapter.notifyDataSetChanged();
     }
+
+
+
 
     private void setSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -160,6 +149,7 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void init() {
+        test_image = findViewById(R.id.test_image);
         mBack = findViewById(R.id.mBack);
         mSave = findViewById(R.id.save);
         mDate = findViewById(R.id.date);
@@ -178,7 +168,7 @@ public class NoteActivity extends AppCompatActivity {
         rd6 = findViewById(R.id.rd6);
         spinner = findViewById(R.id.spinner);
         btnImage = findViewById(R.id.btnImage);
-        gridView = findViewById(R.id.gridview);
+
     }
 
     private void setOnclick() {
@@ -279,11 +269,19 @@ public class NoteActivity extends AppCompatActivity {
         diary.setImage(image.trim());
         diary.setVote(vote);
         helper.adđ(diary);
-        Intent intent = new Intent(NoteActivity.this,FinishActivity.class);
-        intent.putExtra("I",1);
-        startActivity(intent);
-        finish();
-        Log.d("IMAGE", "save: "+image);
+        try {
+            Thread.sleep(500);
+            Intent intent = new Intent(NoteActivity.this,FinishActivity.class);
+            intent.putExtra("I",1);
+            startActivity(intent);
+            finish();
+        } catch (InterruptedException e) {
+            Intent intent = new Intent(NoteActivity.this,FinishActivity.class);
+            intent.putExtra("I",1);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -331,7 +329,8 @@ public class NoteActivity extends AppCompatActivity {
                     path = ImageFilePath.getPath(NoteActivity.this, imageUri);
                     resPath.add(path);
                 }
-                setGridView();
+
+                updateData(resPath);
             }
         }
         Log.d("SIZE", "onActivityResult: " + resPath.size());

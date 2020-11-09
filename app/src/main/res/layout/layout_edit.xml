@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/layout_edit"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:visibility="visible"
+    android:paddingTop="35dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp">
+
+        <ImageButton
+            android:id="@+id/backEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/actionBarItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_back" />
+        <ImageButton
+            android:layout_toStartOf="@+id/save"
+            android:id="@+id/imageEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/actionBarItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_gallery"
+            android:visibility="visible" />
+
+
+        <ImageButton
+            android:id="@+id/saveEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="?attr/actionBarItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_save_file"
+            android:visibility="visible" />
+
+
+        <TextView
+            android:layout_toStartOf="@+id/spinner"
+            android:id="@+id/dateEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/backEdit"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:text="11.07.2020 02:22 AM"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+        <Spinner
+            android:text="accasdsa"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/backEdit"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/spinnerEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/ke_top"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/top"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="#fff" />
+    <androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@+id/ke_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/titleEdit"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edt"
+                android:hint="Type a title here"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_gravity="center_horizontal"
+                android:scrollbars="none"
+                android:id="@+id/mRecyclerviewEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
+
+            <EditText
+                android:id="@+id/bodyEdit"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edt"
+                android:hint="Note here"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

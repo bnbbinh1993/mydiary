@@ -71,12 +71,12 @@ public class CreateFragment extends Fragment {
 
     private void addList() {
         list.add(new Create(getResources().getString(R.string._note),R.drawable.ic_notes,R.color.note));
-        list.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
-        list.add(new Create(getResources().getString(R.string._work),R.drawable.ic_work,R.color.work));
-        list.add(new Create(getResources().getString(R.string._event),R.drawable.ic_confetti,R.color.event));
-        list.add(new Create(getResources().getString(R.string._shopping),R.drawable.ic_shopping_bag,R.color.shopping));
-        list.add(new Create(getResources().getString(R.string._travel),R.drawable.ic_travel,R.color.travel));
-        list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
+        //list.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
+        //list.add(new Create(getResources().getString(R.string._work),R.drawable.ic_work,R.color.work));
+        //list.add(new Create(getResources().getString(R.string._event),R.drawable.ic_confetti,R.color.event));
+        //list.add(new Create(getResources().getString(R.string._shopping),R.drawable.ic_shopping_bag,R.color.shopping));
+        //list.add(new Create(getResources().getString(R.string._travel),R.drawable.ic_travel,R.color.travel));
+        //list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
         list2.add(new Create(getResources().getString(R.string._count_time),R.drawable.ic_countdown,R.color.countdown));
 
     }

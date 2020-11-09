@@ -138,10 +138,19 @@ public class CountDownActivity extends AppCompatActivity {
             count.setFilter(filter);
             count.setVote(0);
             helper.adđ(count);
-            Intent intent = new Intent(CountDownActivity.this,FinishActivity.class);
-            intent.putExtra("I",0);
-            startActivity(intent);
-            finish();
+
+            try {
+                Thread.sleep(500);
+                Intent intent = new Intent(CountDownActivity.this,FinishActivity.class);
+                intent.putExtra("I",0);
+                startActivity(intent);
+                finish();
+            } catch (InterruptedException e) {
+                Intent intent = new Intent(CountDownActivity.this,FinishActivity.class);
+                intent.putExtra("I",0);
+                startActivity(intent);
+                finish();
+            }
         }
 
     }

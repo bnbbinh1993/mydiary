@@ -30,6 +30,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
     private Context context;
     private List<Count> list = new ArrayList<>();
     private static OnClickItem onClickItem;
+    private int choice;
 
     public CountAdapter(Context context, List<Count> list) {
         this.context = context;
@@ -44,9 +45,17 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
     }
 
     @Override
+    public int getItemViewType(int position) {
+        choice = position;
+        return choice;
+    }
+
+
+
+    @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setIsRecyclable(false);
-        Count model = list.get(position);
+
+        Count model = list.get(choice);
         holder.name.setText(model.getTitle());
         holder.time.setText(model.getDate());
         holder.place.setText(model.getPlace());
@@ -78,11 +87,11 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
         }
 
 
-        if (position == 0) {
+        if (choice == 0) {
             holder.ovel.setBackgroundResource(R.drawable.bg_frame_1);
-        } else if (position == 1) {
+        } else if (choice == 1) {
             holder.ovel.setBackgroundResource(R.drawable.bg_frame_2);
-        } else if (position == 2) {
+        } else if (choice == 2) {
             holder.ovel.setBackgroundResource(R.drawable.bg_frame_3);
         }
 

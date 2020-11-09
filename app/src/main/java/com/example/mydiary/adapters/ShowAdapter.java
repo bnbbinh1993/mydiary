@@ -25,10 +25,17 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     private Context context;
     private List<Diary> list = new ArrayList<>();
     private static OnClickItem onClickItem;
+    private int choice;
 
     public ShowAdapter(Context context, List<Diary> list) {
         this.context = context;
         this.list = list;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        choice = position;
+        return choice;
     }
 
 
@@ -40,8 +47,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setIsRecyclable(false);
-        Diary model = list.get(position);
+
+        Diary model = list.get(choice);
         holder.name.setText(model.getTitle());
         holder.content.setText(model.getContent());
         holder.date.setText(model.getDate());
