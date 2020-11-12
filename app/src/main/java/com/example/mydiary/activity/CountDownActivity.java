@@ -39,7 +39,7 @@ import java.util.Date;
 
 public class CountDownActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;
-    private String employees[] = {"Sự kiện", "Tâm trạng", "Công việc", "Shopping", "Du lịch", "Lễ kỷ niệm"};
+    private String employees[] ;
     private ImageButton mBack;
     private ImageButton mSave;
     private TextView mDate;
@@ -66,14 +66,12 @@ public class CountDownActivity extends AppCompatActivity {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-
         helper = new DatabaseCount(this);
         init();
         setSpinner();
         setOnclick();
     }
-
-    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
+    private static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {
@@ -83,7 +81,6 @@ public class CountDownActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
-
     private void init() {
         spinnerEmployee = findViewById(R.id.spinner_employee);
         mBack = findViewById(R.id.mBack);
@@ -94,13 +91,23 @@ public class CountDownActivity extends AppCompatActivity {
         mPlace = findViewById(R.id.mPlace);
         mDes = findViewById(R.id.mDes);
 
-    }
 
+
+        employees = new String[]{
+                getResources().getString(R.string._event),
+                getResources().getString(R.string._mood),
+                getResources().getString(R.string._work),
+                getResources().getString(R.string._shopping),
+                getResources().getString(R.string._travel),
+                getResources().getString(R.string._celebration)};
+
+
+    }
     private void setOnclick() {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                showdialog();
             }
         });
         mSave.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +123,6 @@ public class CountDownActivity extends AppCompatActivity {
             }
         });
     }
-
     private void save() {
         String title = mTitle.getText().toString().trim();
         String des = mDes.getText().toString().trim();
@@ -154,19 +160,6 @@ public class CountDownActivity extends AppCompatActivity {
         }
 
     }
-
-    private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyy");
-        try {
-            if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
-                return true;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     private void setSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, employees);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -184,8 +177,6 @@ public class CountDownActivity extends AppCompatActivity {
             }
         });
     }
-
-
     private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
         title = employees[position];
         switch (position) {
@@ -221,8 +212,28 @@ public class CountDownActivity extends AppCompatActivity {
             }
         }
     }
+    private void showdialog() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(CountDownActivity.this);
+        builder.setTitle(getResources().getString(R.string._messenger_back));
+        builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        builder.setNegativeButton(getResources().getString(R.string._no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
 
+            }
+        });
 
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
     private void date() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CountDownActivity.this);
         ViewGroup viewGroup = CountDownActivity.this.findViewById(android.R.id.content);
@@ -260,7 +271,6 @@ public class CountDownActivity extends AppCompatActivity {
         hours.setValue(isPositon(h, Pef.hoursList));
         minute.setValue(isPositon(p, Pef.minuteList));
 
-
         builder.setPositiveButton(R.string._yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -293,14 +303,23 @@ public class CountDownActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-
+    private boolean checkDate(String s) {
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyy");
+        try {
+            if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
     private void setNubmerPicker(NumberPicker nubmerPicker, String[] numbers) {
         nubmerPicker.setMaxValue(numbers.length - 1);
         nubmerPicker.setMinValue(0);
         nubmerPicker.setWrapSelectorWheel(true);
         nubmerPicker.setDisplayedValues(numbers);
     }
-
     private boolean isDateFormat(String day, String month) {
         int isDay = Integer.parseInt(day);
         int isMonth = Integer.parseInt(month);
@@ -311,7 +330,6 @@ public class CountDownActivity extends AppCompatActivity {
         }
         return true;
     }
-
     private int isPositon(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
@@ -322,8 +340,7 @@ public class CountDownActivity extends AppCompatActivity {
         }
         return res;
     }
-
-    public static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+    private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
 
         try {
             Field selectorWheelPaintField = numberPicker.getClass()
@@ -347,5 +364,8 @@ public class CountDownActivity extends AppCompatActivity {
         numberPicker.invalidate();
     }
 
-
+    @Override
+    public void onBackPressed() {
+        showdialog();
+    }
 }

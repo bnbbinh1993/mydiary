@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import com.example.mydiary.adapters.ViewPagerAdapter;
 import com.example.mydiary.ui.CreateFragment;
-import com.example.mydiary.ui.EventFragment;
+import com.example.mydiary.ui.FollowFragment;
 import com.example.mydiary.ui.SettingFragment;
 import com.example.mydiary.ui.ShowFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private MenuItem prevMenuItem;
     private CreateFragment createFragment;
     private ShowFragment showFragment;
-    private EventFragment eventFragment;
+    private FollowFragment followFragment;
     private SettingFragment settingFragment;
 
     @Override
@@ -69,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         createFragment = new CreateFragment();
         showFragment = new ShowFragment();
-        eventFragment = new EventFragment();
+        followFragment = new FollowFragment();
         settingFragment = new SettingFragment();
         adapter.addFragment(createFragment);
         adapter.addFragment(showFragment);
-        adapter.addFragment(eventFragment);
+        adapter.addFragment(followFragment);
         adapter.addFragment(settingFragment);
         viewPager.setAdapter(adapter);
 

@@ -1,13 +1,18 @@
 package com.example.mydiary.utils;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -132,5 +137,26 @@ public class Pef {
         }
         return listYear;
     }
+
+    public static ArrayList<String> getAllURIImage(Context activity) {
+        Uri uri;
+        ArrayList<String> listOfAllImages = new ArrayList<String>();
+        Cursor cursor;
+        int column_index_data;
+        String PathOfImage = null;
+        uri = android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI;
+
+        String[] projection = {MediaStore.MediaColumns.DATA};
+
+        cursor = activity.getContentResolver().query(uri, projection, null, null, null);
+
+        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+        while (cursor.moveToNext()) {
+            PathOfImage = cursor.getString(column_index_data);
+            listOfAllImages.add(PathOfImage);
+        }
+        return listOfAllImages;
+    }
+
 
 }

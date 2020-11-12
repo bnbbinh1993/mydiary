@@ -100,4 +100,13 @@ public class DatabaseCount extends SQLiteOpenHelper {
                 new String[] { String.valueOf(event.getId()) });
         db.close();
     }
+    public void deleteAll(ArrayList<Count> list) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        for (int i = 0;i<list.size();i++){
+            Count count = list.get(i);
+            db.delete(TABLE_NAME, ID + " = ?",
+                    new String[] { String.valueOf(count.getId()) });
+        }
+        db.close();
+    }
 }

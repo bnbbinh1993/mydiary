@@ -3,7 +3,6 @@
     android:id="@+id/layout_edit"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:visibility="visible"
-    android:paddingTop="35dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,14 +15,7 @@
         android:paddingBottom="5dp">
 
         <ImageButton
-            android:id="@+id/backEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/actionBarItemBackground"
-            android:padding="10dp"
-            android:src="@drawable/ic_back" />
-        <ImageButton
-            android:layout_toStartOf="@+id/save"
+            android:layout_toStartOf="@+id/saveEdit"
             android:id="@+id/imageEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,21 +37,23 @@
 
 
         <TextView
-            android:layout_toStartOf="@+id/spinner"
+            android:fontFamily="@font/nobile"
+            android:layout_toStartOf="@+id/spinnerEdit"
             android:id="@+id/dateEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/backEdit"
+            android:layout_below="@+id/imageEdit"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            android:text="11.07.2020 02:22 AM"
+            android:text="11.07.2020 02:22"
             android:textColor="@color/black"
             android:textSize="12sp" />
         <Spinner
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nobile"
             android:text="accasdsa"
             android:padding="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/backEdit"
+            android:layout_below="@+id/imageEdit"
             android:layout_alignParentEnd="true"
             android:id="@+id/spinnerEdit"
             android:layout_width="wrap_content"
@@ -89,6 +83,7 @@
             android:padding="10dp">
 
             <EditText
+                android:fontFamily="@font/nobile"
                 android:id="@+id/titleEdit"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -109,6 +104,8 @@
                 android:overScrollMode="never" />
 
             <EditText
+
+                android:fontFamily="@font/nobile"
                 android:id="@+id/bodyEdit"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"

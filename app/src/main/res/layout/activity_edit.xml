@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.EditActivity">
+    <RelativeLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/mBack"
+            android:padding="10dp"
+            android:background="?attr/actionBarItemBackground"
+            android:src="@drawable/ic_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:visibility="visible"
+            android:id="@+id/mEdit"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:background="?attr/actionBarItemBackground"
+            android:src="@drawable/ic_save_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <FrameLayout
+        android:background="#BFACACAC"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+    <TextView
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:background="@drawable/bg_edt"
+        android:hint="@string/_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

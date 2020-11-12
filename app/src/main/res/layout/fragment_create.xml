@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.CreateFragment">
     <TextView
+        android:fontFamily="@font/nobile"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:padding="10dp"
@@ -25,6 +26,7 @@
         android:layout_marginBottom="20dp"
         android:numColumns="4" />
     <TextView
+        android:fontFamily="@font/nobile"
         android:id="@+id/mTV2"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -42,6 +44,23 @@
         android:layout_centerVertical="true"
         android:layout_marginBottom="20dp"
         android:numColumns="4" />
-
-
+    <TextView
+        android:fontFamily="@font/nobile"
+        android:id="@+id/mTV3"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:layout_below="@+id/mGridView2"
+        android:text="@string/_meo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <GridView
+        android:layout_below="@+id/mTV3"
+        android:id="@+id/mGridView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="20dp"
+        android:numColumns="4" />
 </RelativeLayout>

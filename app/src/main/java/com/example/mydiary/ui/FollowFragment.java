@@ -1,33 +1,37 @@
 package com.example.mydiary.ui;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
+import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiary.R;
+import com.example.mydiary.activity.ShowFollowActivity;
 import com.example.mydiary.adapters.CountAdapter;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
-import com.example.mydiary.models.Diary;
+import com.example.mydiary.utils.OnClickItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class EventFragment extends Fragment {
+public class FollowFragment extends Fragment {
     private DatabaseCount helper;
     private ArrayList<Count> list;
+    private ArrayList<Count> listRes;
     private RecyclerView mRecyclerview;
     private CountAdapter adapter;
     private TabLayout tablayout;
@@ -35,32 +39,88 @@ public class EventFragment extends Fragment {
     private TabItem tab2;
     private TabItem tab3;
     private int filter = 0;
-
+    private LinearLayout no_item;
+    private FloatingActionButton fab;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_event, container, false);
+        View view = inflater.inflate(R.layout.fragment_follow, container, false);
         init(view);
         setUp();
         setData();
         countDown();
         Filter();
+        fabRecyclerview();
+        initClick();
         return view;
+    }
+
+    private void initClick() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete();
+            }
+        });
+    }
+
+    private void delete() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(getResources().getString(R.string._delete));
+        builder.setMessage(getResources().getString(R.string._messenger_delete_all));
+        builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                helper.deleteAll(list);
+                listRes.clear();
+                listRes = helper.getData();
+                updateFilter();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(getResources().getString(R.string._no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
     private void init(View v) {
         mRecyclerview = v.findViewById(R.id.mRecyclerview);
         tablayout = v.findViewById(R.id.tablayout);
+        no_item = v.findViewById(R.id.no_item);
         tab1 = v.findViewById(R.id.tab1);
         tab2 = v.findViewById(R.id.tab2);
         tab3 = v.findViewById(R.id.tab3);
+        fab = v.findViewById(R.id.fab);
     }
 
     private void setUp() {
         helper = new DatabaseCount(getContext());
         list = new ArrayList<>();
+        listRes = new ArrayList<>();
         list = helper.getData();
+        listRes = helper.getData();
         adapter = new CountAdapter(getContext(), list);
+    }
+
+    private void fabRecyclerview(){
+        mRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
+                    fab.hide();
+                } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
+                    fab.show();
+                }
+            }
+        });
     }
 
     private void Filter() {
@@ -98,9 +158,9 @@ public class EventFragment extends Fragment {
         list.clear();
         ArrayList<Count> test = new ArrayList<>();
         if (filter == 0) {
-            test = helper.getData();
+            test = listRes;
         } else {
-            for (Count count : helper.getData()) {
+            for (Count count : listRes) {
                 if (count.getVote() == (filter-1)) {
                     test.add(count);
                 }
@@ -114,6 +174,19 @@ public class EventFragment extends Fragment {
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mRecyclerview.setAdapter(adapter);
+        adapter.setOnClickItem(new OnClickItem() {
+            @Override
+            public void click(int position) {
+                Intent intent = new Intent(getContext(), ShowFollowActivity.class);
+                intent.putExtra("POSITION",position);
+                startActivity(intent);
+            }
+
+            @Override
+            public void longClick(int position) {
+
+            }
+        });
     }
 
     public void updateData(ArrayList<Count> viewModels) {
@@ -122,6 +195,11 @@ public class EventFragment extends Fragment {
         Collections.sort(list);
         Log.d("TEST", "updateFilter: "+list.size());
         adapter.notifyDataSetChanged();
+        if (list.size() <= 0){
+            no_item.setVisibility(View.VISIBLE);
+        }else {
+            no_item.setVisibility(View.GONE);
+        }
     }
 
     private void countDown() {

@@ -1,10 +1,10 @@
 package com.example.mydiary.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -12,16 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
+import com.example.mydiary.utils.OnClickItem;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
+public class ImageAdapterEdit extends RecyclerView.Adapter<ImageAdapterEdit.ViewHolder>{
     private ArrayList<String> list = new ArrayList<>();
     private Context context;
     private int choice;
+    private static OnClickItem onClickItem;
 
-    public ImageAdapter(ArrayList<String> list, Context context) {
+    public ImageAdapterEdit(ArrayList<String> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -29,7 +31,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_image_recyclerview,parent,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_image,parent,false));
     }
 
     @Override
@@ -45,6 +47,13 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
         }else {
             holder.imageView.setVisibility(View.GONE);
         }
+        holder.mDetele.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickItem.click(position);
+            }
+        });
+
 
     }
 
@@ -53,17 +62,25 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
         choice = position;
         return choice;
     }
+    public void setOnClickItem(OnClickItem onClickItem1) {
+        this.onClickItem = onClickItem1;
+    }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        ImageButton mDetele;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
+            mDetele = itemView.findViewById(R.id.mDetele);
+
         }
+
+
     }
 }

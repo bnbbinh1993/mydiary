@@ -69,8 +69,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
         switch (model.getVote()) {
             case 1: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.note));
-                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_note));
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.event));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_event));
                 break;
             }
             case 2: {
@@ -84,23 +84,23 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
                 break;
             }
             case 4: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.event));
-                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_event));
-                break;
-            }
-            case 5: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.shopping));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_shopping));
                 break;
             }
-            case 6: {
+            case 5: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.travel));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_travel));
                 break;
             }
-            case 7: {
+            case 6: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.cele));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_cele));
+                break;
+            }
+            default:{
+                holder.body.setBackgroundColor(context.getResources().getColor(R.color.note));
+                holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_note));
                 break;
             }
         }
@@ -133,6 +133,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             image = itemView.findViewById(R.id.image);
             top = itemView.findViewById(R.id.top);
             body = itemView.findViewById(R.id.body);
+
+            itemView.setOnClickListener(this::onClick);
         }
 
         @Override

@@ -95,6 +95,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
             holder.ovel.setBackgroundResource(R.drawable.bg_frame_3);
         }
 
+
     }
 
     public void setOnClickItem(OnClickItem onClickItem1) {
@@ -120,7 +121,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
             count = itemView.findViewById(R.id.mCount);
             ovel = itemView.findViewById(R.id.mOvel);
             place = itemView.findViewById(R.id.mPlace);
-
+            itemView.setOnClickListener(this::onClick);
 
         }
 

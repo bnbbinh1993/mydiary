@@ -2,7 +2,11 @@ package com.example.mydiary.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +18,8 @@ import android.widget.TextView;
 import com.example.mydiary.R;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
+
+import java.util.ArrayList;
 
 public class MoodActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;
@@ -95,4 +101,8 @@ public class MoodActivity extends AppCompatActivity {
     private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
             title = employees[position];
     }
+
+
+
+
 }

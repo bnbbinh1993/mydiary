@@ -69,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:fontFamily="@font/nobile"
                 android:textColorHint="#DCDCDC"
                 android:id="@+id/mTitle"
                 android:hint="@string/_title"
@@ -80,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textStyle="normal" />
         </LinearLayout>
         <LinearLayout
             android:padding="10dp"
@@ -94,9 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:fontFamily="@font/nobile"
                 android:textColorHint="#DCDCDC"
                 android:id="@+id/mDes"
-                android:hint="@string/_diary"
+                android:hint="chờ chút lát nữa làm"
                 android:maxLines="1"
                 android:inputType="textCapSentences"
                 android:background="@drawable/bg_edit"
@@ -105,7 +107,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textStyle="normal" />
         </LinearLayout>
         <LinearLayout
             android:padding="10dp"
@@ -119,6 +121,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
+                android:fontFamily="@font/nobile"
                 android:textColorHint="#DCDCDC"
                 android:id="@+id/mPlace"
                 android:hint="@string/_place"
@@ -130,7 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textStyle="normal" />
 
         </LinearLayout>
         <LinearLayout
@@ -145,6 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:fontFamily="@font/nobile"
                 android:id="@+id/mDate"
                 android:padding="10dp"
                 android:textSize="12sp"

@@ -59,7 +59,6 @@ public class FinishActivity extends AppCompatActivity {
         mDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplication(), MainActivity.class));
                 finish();
             }
         });

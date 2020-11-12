@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:fontFamily="@font/nobile"
             android:id="@+id/mName"
             android:textSize="16sp"
             android:textColor="@color/black"
@@ -27,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+            android:fontFamily="@font/nobile"
             android:id="@+id/mTime"
             android:layout_marginTop="5dp"
             android:textSize="14sp"
@@ -35,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+            android:fontFamily="@font/nobile"
             android:layout_marginTop="2dp"
             android:id="@+id/mPlace"
             android:textSize="10sp"
@@ -43,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+            android:fontFamily="@font/nobile"
             android:layout_marginTop="2dp"
             android:id="@+id/mCount"
             android:textSize="10sp"

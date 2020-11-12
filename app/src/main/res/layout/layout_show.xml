@@ -3,7 +3,6 @@
     android:id="@+id/layout_show"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:visibility="visible"
-    android:paddingTop="35dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,11 +30,12 @@
             android:layout_alignParentEnd="true"
             android:background="?attr/actionBarItemBackground"
             android:padding="10dp"
-            android:src="@drawable/ic_save_file"
+            android:src="@drawable/ic_edit_button"
             android:visibility="visible" />
 
 
         <TextView
+            android:fontFamily="@font/nobile"
             android:layout_toStartOf="@+id/filter"
             android:id="@+id/date"
             android:layout_width="match_parent"
@@ -43,13 +43,15 @@
             android:layout_below="@+id/back"
             android:layout_marginTop="10dp"
             android:padding="10dp"
-            android:text="11.07.2020 02:22 AM"
+            android:text="11.07.2020 02:22"
             android:textColor="@color/black"
             android:textSize="12sp" />
         <TextView
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nobile"
+            android:gravity="center"
             android:text="accasdsa"
             android:padding="10dp"
-            android:layout_marginTop="10dp"
             android:layout_below="@+id/back"
             android:layout_alignParentEnd="true"
             android:id="@+id/filter"
@@ -80,6 +82,7 @@
             android:padding="10dp">
 
             <TextView
+                android:fontFamily="@font/nobile"
                 android:id="@+id/title"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -95,11 +98,12 @@
                 android:id="@+id/mRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
                 android:overScrollMode="never"
                 android:scrollbars="none" />
 
             <TextView
+                android:fontFamily="@font/nobile"
                 android:id="@+id/body"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"

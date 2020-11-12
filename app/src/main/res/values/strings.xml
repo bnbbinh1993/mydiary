@@ -35,4 +35,22 @@
     <string name="_successfully2">You can adjust the activity information in the management list</string>
     <string name="_done">Done</string>
     <string name="_create_a_new_event">Create a new event</string>
+    <string name="_meo">You may not know?</string>
+    <string name="_date_of_the_event">Date of the event</string>
+    <string name="_messenger">Do you want to save it or not?</string>
+    <string name="_no">No</string>
+    <string name="_messenger_back">Are you sure you want to exit?</string>
+    <string name="_notification_title">The title cannot be left blank.</string>
+    <string name="_notification_des">Description cannot be left blank.</string>
+    <string name="_status_true">Accomplished</string>
+    <string name="_status_false">Unfinished</string>
+    <string name="_no_item">No event yet!</string>
+    <string name="_messenger_delete">Are you sure you want to delete it?</string>
+    <string name="_messenger_delete_all">Are you sure you want to delete all of them?</string>
+    <string name="_delete">Delete</string>
+    <string name="_all">All</string>
+    <string name="_watching">Watching</string>
+    <string name="_past">Past</string>
+    <string name="_type_a_title_here">Type a title here</string>
+    <string name="_note_here">Note here</string>
 </resources>

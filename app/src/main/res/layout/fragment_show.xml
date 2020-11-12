@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,7 @@
     tools:context=".ui.CreateFragment">
 
     <com.google.android.material.tabs.TabLayout
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
         android:id="@+id/tabs2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,42 +26,82 @@
         app:tabSelectedTextColor="#FFFFFF">
 
         <com.google.android.material.tabs.TabItem
+            android:fontFamily="@font/nobile"
             android:id="@+id/tab1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ALL" />
+            android:text="@string/_all" />
 
         <com.google.android.material.tabs.TabItem
+            android:fontFamily="@font/nobile"
             android:id="@+id/tab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Note" />
+            android:text="@string/_event" />
 
         <com.google.android.material.tabs.TabItem
+            android:fontFamily="@font/nobile"
             android:id="@+id/tab3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MOOD" />
+            android:text="@string/_mood" />
 
         <com.google.android.material.tabs.TabItem
+            android:fontFamily="@font/nobile"
             android:id="@+id/tab4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EVENT" />
+            android:text="@string/_work" />
 
         <com.google.android.material.tabs.TabItem
+            android:fontFamily="@font/nobile"
             android:id="@+id/tab5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_text"
-            android:text="Work" />
+            android:text="@string/_shopping" />
 
 
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/tabs2"
         android:id="@+id/mRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never" />
-</LinearLayout>
+    <LinearLayout
+        android:visibility="gone"
+        android:padding="50dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/tabs2"
+        android:orientation="vertical"
+        android:id="@+id/no_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@drawable/ic_zombie"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <TextView
+            android:fontFamily="@font/nobile"
+            android:textAlignment="center"
+            android:text="@string/_no_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        app:maxImageSize="18dp"
+        app:fabSize="auto"
+        app:fabCustomSize="45dp"
+        app:rippleColor="@color/white"
+        android:layout_gravity="center"
+        android:isScrollContainer="true"
+        android:src="@drawable/ic_iconfinder_miscellaneous_30_809419"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

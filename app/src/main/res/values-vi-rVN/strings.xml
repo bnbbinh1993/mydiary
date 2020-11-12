@@ -34,4 +34,22 @@
     <string name="_successfully2">Bạn có thể điều chỉnh thông tin hoạt động trong danh sách quản lý</string>
     <string name="_done">Xong</string>
     <string name="_create_a_new_event">Tạo một sự kiện mới</string>
+    <string name="_meo">Có thể bạn chưa biết?</string>
+    <string name="_date_of_the_event">Ngày diễn ra sự kiện</string>
+    <string name="_messenger">Bạn có muốn lưu nó hay không?</string>
+    <string name="_no">Không</string>
+    <string name="_messenger_back">Bạn có chắc bạn muốn thoát?</string>
+    <string name="_notification_title">Tiêu đề không được để trống.</string>
+    <string name="_notification_des">Mô tả không được để trống.</string>
+    <string name="_status_true">Đã hoàn thành</string>
+    <string name="_status_false">Chưa hoàn thành</string>
+    <string name="_no_item">Chưa có sự kiện nào!</string>
+    <string name="_messenger_delete">Bạn có chắc chắn muốn xóa nó?</string>
+    <string name="_messenger_delete_all">Bạn có chắc chắn muốn xóa tất cả chúng không?</string>
+    <string name="_delete">Xóa</string>
+    <string name="_all">Tất cả</string>
+    <string name="_watching">Đang theo dõi</string>
+    <string name="_past">Đã qua</string>
+    <string name="_type_a_title_here">Nhập tiêu đề ở đây</string>
+    <string name="_note_here">Ghi chú ở đây</string>
 </resources>

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.mydiary.models.Count;
 import com.example.mydiary.models.Diary;
 
 import java.util.ArrayList;
@@ -101,6 +102,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, ID + " = ?",
                 new String[] { String.valueOf(event.getId()) });
+        db.close();
+    }
+    public void deleteAll(ArrayList<Diary> list) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        for (int i = 0;i<list.size();i++){
+            Diary diary = list.get(i);
+            db.delete(TABLE_NAME, ID + " = ?",
+                    new String[] { String.valueOf(diary.getId()) });
+        }
         db.close();
     }
 }
