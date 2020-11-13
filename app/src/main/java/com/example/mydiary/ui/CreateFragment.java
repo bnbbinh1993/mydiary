@@ -38,7 +38,7 @@ public class CreateFragment extends Fragment {
     private GridView mGridView;
     private GridView mGridView2;
     private GridView mGridView3;
-    private AdView mAdView;
+
 
 
     @Override
@@ -46,22 +46,11 @@ public class CreateFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create, container, false);
         init(view);
-        ads(view);
+
         return view;
     }
 
-    private void ads(View view) {
-        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
 
-        mAdView = view.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-
-    }
 
     private void init(View v) {
         mGridView = v.findViewById(R.id.mGridView);
@@ -82,6 +71,7 @@ public class CreateFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     startActivity(new Intent(getContext(), NoteActivity.class));
+                    getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
                 } else if (position == 1) {
                     //startActivity(new Intent(getContext(), MoodActivity.class));
                     Toast.makeText(getContext(), "hihi", Toast.LENGTH_SHORT).show();
@@ -98,6 +88,7 @@ public class CreateFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     startActivity(new Intent(getContext(), CountDownActivity.class));
+                    getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
                 }
             }
         });
@@ -221,8 +212,6 @@ public class CreateFragment extends Fragment {
 
         }
     }
-
-
 
 
 }

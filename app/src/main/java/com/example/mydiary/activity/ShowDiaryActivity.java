@@ -299,6 +299,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
         imageEdit.setOnClickListener(new View.OnClickListener() {
@@ -395,6 +396,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
             showdialog();
         } else {
             super.onBackPressed();
+            overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
         }
 
     }

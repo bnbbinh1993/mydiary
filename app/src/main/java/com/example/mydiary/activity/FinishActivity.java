@@ -50,9 +50,11 @@ public class FinishActivity extends AppCompatActivity {
                 if (i == 0){
                     startActivity(new Intent(getApplication(),CountDownActivity.class));
                     finish();
+                    overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 }else if (i==1){
                     startActivity(new Intent(getApplication(),NoteActivity.class));
                     finish();
+                    overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 }
             }
         });
@@ -60,6 +62,7 @@ public class FinishActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.out_left, R.anim.in_left);
             }
         });
     }
@@ -77,6 +80,7 @@ public class FinishActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        finish();
+        overridePendingTransition(R.anim.out_left, R.anim.in_left);
     }
 }

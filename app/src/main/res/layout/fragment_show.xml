@@ -60,6 +60,20 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_text"
             android:text="@string/_shopping" />
+        <com.google.android.material.tabs.TabItem
+            android:fontFamily="@font/nobile"
+            android:id="@+id/tab6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_text"
+            android:text="@string/_travel" />
+        <com.google.android.material.tabs.TabItem
+            android:fontFamily="@font/nobile"
+            android:id="@+id/tab7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_text"
+            android:text="@string/_celebration" />
 
 
     </com.google.android.material.tabs.TabLayout>

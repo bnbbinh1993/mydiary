@@ -182,7 +182,7 @@ public class CountDownActivity extends AppCompatActivity {
         switch (position) {
             case 0: {
                 filter = 0;
-                layout.setBackgroundColor(getResources().getColor(R.color.note));
+                layout.setBackgroundColor(getResources().getColor(R.color.event));
                 break;
             }
             case 1: {
@@ -192,17 +192,17 @@ public class CountDownActivity extends AppCompatActivity {
             }
             case 2: {
                 filter = 2;
-                layout.setBackgroundColor(getResources().getColor(R.color.event));
+                layout.setBackgroundColor(getResources().getColor(R.color.work));
                 break;
             }
             case 3: {
                 filter = 3;
-                layout.setBackgroundColor(getResources().getColor(R.color.travel));
+                layout.setBackgroundColor(getResources().getColor(R.color.shopping));
                 break;
             }
             case 4: {
                 filter = 4;
-                layout.setBackgroundColor(getResources().getColor(R.color.work));
+                layout.setBackgroundColor(getResources().getColor(R.color.travel));
                 break;
             }
             case 5: {
@@ -220,6 +220,7 @@ public class CountDownActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 finish();
+                overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
         builder.setNegativeButton(getResources().getString(R.string._no), new DialogInterface.OnClickListener() {

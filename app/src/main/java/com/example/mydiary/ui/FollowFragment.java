@@ -41,6 +41,8 @@ public class FollowFragment extends Fragment {
     private int filter = 0;
     private LinearLayout no_item;
     private FloatingActionButton fab;
+    private CountDownTimer count;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,10 +50,10 @@ public class FollowFragment extends Fragment {
         init(view);
         setUp();
         setData();
-        countDown();
         Filter();
         fabRecyclerview();
         initClick();
+        countDown();
         return view;
     }
 
@@ -107,9 +109,10 @@ public class FollowFragment extends Fragment {
         list = helper.getData();
         listRes = helper.getData();
         adapter = new CountAdapter(getContext(), list);
+
     }
 
-    private void fabRecyclerview(){
+    private void fabRecyclerview() {
         mRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -161,7 +164,7 @@ public class FollowFragment extends Fragment {
             test = listRes;
         } else {
             for (Count count : listRes) {
-                if (count.getVote() == (filter-1)) {
+                if (count.getVote() == (filter - 1)) {
                     test.add(count);
                 }
             }
@@ -178,8 +181,9 @@ public class FollowFragment extends Fragment {
             @Override
             public void click(int position) {
                 Intent intent = new Intent(getContext(), ShowFollowActivity.class);
-                intent.putExtra("POSITION",position);
+                intent.putExtra("POSITION", position);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
 
             @Override
@@ -193,17 +197,23 @@ public class FollowFragment extends Fragment {
         list.clear();
         list.addAll(viewModels);
         Collections.sort(list);
-        Log.d("TEST", "updateFilter: "+list.size());
+        Log.d("TEST", "updateFilter: " + list.size());
         adapter.notifyDataSetChanged();
-        if (list.size() <= 0){
+        updateUI();
+    }
+
+    private void updateUI() {
+        if (list.size() <= 0) {
             no_item.setVisibility(View.VISIBLE);
-        }else {
+            mRecyclerview.setVisibility(View.GONE);
+        } else {
             no_item.setVisibility(View.GONE);
+            mRecyclerview.setVisibility(View.VISIBLE);
         }
     }
 
     private void countDown() {
-        CountDownTimer count = new CountDownTimer(180000, 1000) {
+        count = new CountDownTimer(180000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 updateFilter();
@@ -214,8 +224,42 @@ public class FollowFragment extends Fragment {
             public void onFinish() {
                 countDown();
             }
-        }.start();
+        };
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (count != null) {
+            count.onFinish();
+        }
+    }
 
+    @Override
+    public void onResume() {
+        setUp();
+        setData();
+        updateUI();
+        super.onResume();
+        if (count != null) {
+            count.start();
+        }
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (count != null) {
+            count.start();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (count != null) {
+            count.onFinish();
+        }
+    }
 }

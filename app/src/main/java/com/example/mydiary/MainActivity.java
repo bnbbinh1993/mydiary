@@ -13,6 +13,7 @@ import com.example.mydiary.ui.CreateFragment;
 import com.example.mydiary.ui.FollowFragment;
 import com.example.mydiary.ui.SettingFragment;
 import com.example.mydiary.ui.ShowFragment;
+import com.example.mydiary.utils.ZoomOutPageTransformer;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         bottomNavigationView = findViewById(R.id.bottomId);
         viewPager = findViewById(R.id.viewpager);
+        viewPager.setEnabled(false);
+        viewPager.setPageTransformer(true,new ZoomOutPageTransformer());
     }
     private void bottmNavigationView() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,12 +50,15 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.workId:
                         viewPager.setCurrentItem(0);
+
                         break;
                     case R.id.homeId:
                         viewPager.setCurrentItem(1);
+
                         break;
                     case R.id.historyId:
                         viewPager.setCurrentItem(2);
+
                         break;
                     case R.id.profileId:
                         viewPager.setCurrentItem(3);
@@ -76,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(followFragment);
         adapter.addFragment(settingFragment);
         viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true,new ZoomOutPageTransformer());
 
     }
 
@@ -105,5 +112,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setupViewPager(viewPager);
+
     }
 }

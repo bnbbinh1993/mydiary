@@ -127,6 +127,10 @@ public class ShowFragment extends Fragment {
                     filter = 3;
                 } else if (tab.getPosition() == 4) {
                     filter = 4;
+                }else if (tab.getPosition() == 5) {
+                    filter = 5;
+                }else if (tab.getPosition() == 6) {
+                    filter = 6;
                 }
                 setView();
             }
@@ -169,6 +173,7 @@ public class ShowFragment extends Fragment {
                 Intent intent = new Intent(getContext(), ShowDiaryActivity.class);
                 intent.putExtra("position",position);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
 
             @Override

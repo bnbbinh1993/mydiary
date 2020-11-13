@@ -222,6 +222,7 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
         mSave.setOnClickListener(new View.OnClickListener() {
@@ -270,11 +271,13 @@ public class NoteActivity extends AppCompatActivity {
                 Intent intent = new Intent(NoteActivity.this, FinishActivity.class);
                 intent.putExtra("I", 1);
                 startActivity(intent);
+                overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 finish();
             } catch (InterruptedException e) {
                 Intent intent = new Intent(NoteActivity.this, FinishActivity.class);
                 intent.putExtra("I", 1);
                 startActivity(intent);
+                overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 finish();
             }
         }
@@ -422,6 +425,7 @@ public class NoteActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 finish();
+                overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
         builder.setNegativeButton(getResources().getString(R.string._no), new DialogInterface.OnClickListener() {
