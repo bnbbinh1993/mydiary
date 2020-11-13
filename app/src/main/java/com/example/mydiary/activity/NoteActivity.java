@@ -186,7 +186,7 @@ public class NoteActivity extends AppCompatActivity {
         int y = calendar.get(Calendar.YEAR);
         int h = calendar.get(Calendar.HOUR);
         int p = calendar.get(Calendar.MINUTE);
-        mDate.setText(h+":"+p+" - "+d+"."+m+"."+y);
+        mDate.setText(String.format("%02d",h)+":"+String.format("%02d",p)+" - "+d+"."+m+"."+y);
         employees = new String[]{
                 getResources().getString(R.string._event),
                 getResources().getString(R.string._mood),
@@ -239,12 +239,7 @@ public class NoteActivity extends AppCompatActivity {
         });
 
 
-        mContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
+
 
 
     }

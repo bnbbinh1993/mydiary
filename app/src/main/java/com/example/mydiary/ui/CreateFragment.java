@@ -21,6 +21,11 @@ import com.example.mydiary.activity.EventActivity;
 import com.example.mydiary.activity.MoodActivity;
 import com.example.mydiary.activity.NoteActivity;
 import com.example.mydiary.models.Create;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.util.ArrayList;
 
@@ -33,13 +38,29 @@ public class CreateFragment extends Fragment {
     private GridView mGridView;
     private GridView mGridView2;
     private GridView mGridView3;
+    private AdView mAdView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create, container, false);
         init(view);
+        ads(view);
         return view;
+    }
+
+    private void ads(View view) {
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
     }
 
     private void init(View v) {
@@ -93,9 +114,9 @@ public class CreateFragment extends Fragment {
 
     private void addList() {
         list.add(new Create(getResources().getString(R.string._note), R.drawable.ic_notes, R.color.note));
-        list.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
+        //list.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
         //list.add(new Create(getResources().getString(R.string._work),R.drawable.ic_work,R.color.work));
-        //list.add(new Create(getResources().getString(R.string._event),R.drawable.ic_confetti,R.color.event));
+        //list.add(new Create(getResources().getString(R.string._   event),R.drawable.ic_confetti,R.color.event));
         //list.add(new Create(getResources().getString(R.string._shopping),R.drawable.ic_shopping_bag,R.color.shopping));
         //list.add(new Create(getResources().getString(R.string._travel),R.drawable.ic_travel,R.color.travel));
         //list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
@@ -103,9 +124,9 @@ public class CreateFragment extends Fragment {
 
         list3.add(new Create(getResources().getString(R.string._travel), R.drawable.ic_travel, R.color.travel));
         list3.add(new Create(getResources().getString(R.string._shopping), R.drawable.ic_shopping_bag, R.color.shopping));
-        list3.add(new Create(getResources().getString(R.string._celebration), R.drawable.ic_fireworks, R.color.cele));
-        list3.add(new Create(getResources().getString(R.string._event), R.drawable.ic_confetti, R.color.event));
-        list3.add(new Create(getResources().getString(R.string._mood), R.drawable.ic_angry, R.color.mood));
+        //list3.add(new Create(getResources().getString(R.string._celebration), R.drawable.ic_fireworks, R.color.cele));
+        //list3.add(new Create(getResources().getString(R.string._event), R.drawable.ic_confetti, R.color.event));
+        //list3.add(new Create(getResources().getString(R.string._mood), R.drawable.ic_angry, R.color.mood));
     }
 
     private class CustomAdapter extends BaseAdapter {

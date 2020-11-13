@@ -2,6 +2,8 @@
     <string name="app_name">mydiary</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ads_test" translatable="false">ca-app-pub-3940256099942544~6300978111</string>
     <string name="_create">Create</string>
     <string name="_diary">Diary</string>
     <string name="_follow">Follow</string>
@@ -53,4 +55,12 @@
     <string name="_past">Past</string>
     <string name="_type_a_title_here">Type a title here</string>
     <string name="_note_here">Note here</string>
+    <string name="_update_successful">Update successful !</string>
+    <string name="_update_failded">Update failed !</string>
+    <string name="_deleted">Deleted</string>
+    <string name="_delete_all">Delete all</string>
+    <string name="_time_takes_place">Time takes place</string>
+    <string name="_in">In</string>
+    <string name="_edit">Edit</string>
+    <string name="_description">Description</string>
 </resources>

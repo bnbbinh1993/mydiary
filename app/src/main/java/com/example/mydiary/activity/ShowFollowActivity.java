@@ -2,12 +2,18 @@ package com.example.mydiary.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,15 +30,37 @@ import java.util.Date;
 public class ShowFollowActivity extends AppCompatActivity {
     private ArrayList<Count> list = new ArrayList<>();
     private ImageButton mBack,mEdit;
-    private TextView mName,mFilter,mStatus,mDay,mHours,mMinute,mSeconds,mDate,mDes;
+    private TextView mName,mFilter,mStatus,mDay,mHours,mMinute,mSeconds,mDate,mDes,mPlace;
+    private LinearLayout background;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_follow);
+        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
+            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
+        }
+        if (Build.VERSION.SDK_INT >= 19) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+        if (Build.VERSION.SDK_INT >= 21) {
+            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
         init();
         getData();
         initClick();
         CountDown();
+    }
+
+    private static void setWindowFlag(Activity activity, final int bits, boolean on) {
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 
     private void initClick() {
@@ -45,7 +73,7 @@ public class ShowFollowActivity extends AppCompatActivity {
         mEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ShowFollowActivity.this, "wait...", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),EditCountActivity.class));
             }
         });
     }
@@ -75,6 +103,8 @@ public class ShowFollowActivity extends AppCompatActivity {
         mBack = findViewById(R.id.mBack);
         mEdit = findViewById(R.id.mEdit);
         mDes = findViewById(R.id.mDes);
+        mPlace = findViewById(R.id.mPlace);
+        background = findViewById(R.id.background);
     }
 
     private void getData() {
@@ -86,24 +116,29 @@ public class ShowFollowActivity extends AppCompatActivity {
         switch (list.get(position).getFilter()){
             case 0:{
                 mFilter.setText("Sự kiện");
+                background.setBackgroundColor(getResources().getColor(R.color.event));
                 break;
             }
             case 1:{
                 mFilter.setText("Công việc");
+                background.setBackgroundColor(getResources().getColor(R.color.event));
                 break;
             }
             case 2:{
                 mFilter.setText("Du lịch");
+                background.setBackgroundColor(getResources().getColor(R.color.travel));
                 break;
             }
             case 3:{
                 mFilter.setText("Sinh nhật");
+                background.setBackgroundColor(getResources().getColor(R.color.shopping));
                 break;
             }
         }
 
         mDate.setText(list.get(position).getDate());
         mDes.setText(list.get(position).getDes());
+        mPlace.setText(list.get(position).getPlace());
 
         SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
         try {

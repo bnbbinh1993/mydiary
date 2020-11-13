@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,17 +37,21 @@ public class ImageAdapterEdit extends RecyclerView.Adapter<ImageAdapterEdit.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String s = list.get(choice);
-
-        File file = new File(s);
+        String s = list.get(choice).trim();
         if (!s.isEmpty()){
-            Glide.with(context)
-                    .load(file)
-                    .centerCrop()
-                    .into(holder.imageView);
+            File file = new File(s);
+            if (!s.isEmpty()){
+                Glide.with(context)
+                        .load(file)
+                        .centerCrop()
+                        .into(holder.imageView);
+            }else {
+                holder.layout.setVisibility(View.GONE);
+            }
         }else {
-            holder.imageView.setVisibility(View.GONE);
+            holder.layout.setVisibility(View.GONE);
         }
+
         holder.mDetele.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,10 +79,12 @@ public class ImageAdapterEdit extends RecyclerView.Adapter<ImageAdapterEdit.View
     class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         ImageButton mDetele;
+        LinearLayout layout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
             mDetele = itemView.findViewById(R.id.mDetele);
+            layout = itemView.findViewById(R.id.layout);
 
         }
 

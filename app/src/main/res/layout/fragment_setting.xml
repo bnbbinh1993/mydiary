@@ -25,6 +25,7 @@
                 android:src="@drawable/ic_volume" />
 
             <Switch
+                android:id="@+id/mSound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true" />
@@ -51,6 +52,7 @@
                 android:src="@drawable/ic_mail" />
 
             <TextView
+                android:id="@+id/mFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -72,6 +74,7 @@
                 android:src="@drawable/ic_open_lock" />
 
             <TextView
+                android:id="@+id/mPollicy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -105,7 +108,7 @@
                 android:layout_height="35dp"/>
 
             <TextView
-                android:id="@+id/signinId"
+                android:id="@+id/mLogin"
                 android:layout_margin="5dp"
                 android:gravity="center"
                 android:layout_gravity="center"

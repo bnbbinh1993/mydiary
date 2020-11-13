@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/layout"
-    android:background="@color/note"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.CountDownActivity">
+    tools:context=".activity.EditCountActivity">
     <RelativeLayout
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="30dp"
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -27,7 +25,7 @@
             android:textColor="#000000"
             android:textStyle="bold"
             android:layout_centerInParent="true"
-            android:text="@string/_count_time"
+            android:text="@string/_edit"
             android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

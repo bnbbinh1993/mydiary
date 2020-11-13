@@ -52,4 +52,12 @@
     <string name="_past">Đã qua</string>
     <string name="_type_a_title_here">Nhập tiêu đề ở đây</string>
     <string name="_note_here">Ghi chú ở đây</string>
+    <string name="_update_successful">Cập nhật thành công !</string>
+    <string name="_update_failded">Cập nhật không thành công !</string>
+    <string name="_deleted">Đã xóa</string>
+    <string name="_delete_all">Xóa tất c</string>
+    <string name="_time_takes_place">Thời gian diễn ra</string>
+    <string name="_in">Tại</string>
+    <string name="_edit">Chỉnh sửa</string>
+    <string name="_description">Miêu tả</string>
 </resources>

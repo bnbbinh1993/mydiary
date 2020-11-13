@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -73,7 +74,7 @@ public class ShowFragment extends Fragment {
     private void delete() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(getResources().getString(R.string._delete));
+        builder.setTitle(getResources().getString(R.string._delete_all));
         builder.setMessage(getResources().getString(R.string._messenger_delete_all));
         builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
             @Override
@@ -82,6 +83,7 @@ public class ShowFragment extends Fragment {
                 list.clear();
                 updateUI();
                 Filter();
+                Toast.makeText(getContext(), getResources().getString(R.string._deleted), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
             }
         });

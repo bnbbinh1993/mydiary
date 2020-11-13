@@ -34,8 +34,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String s = list.get(choice);
-
+        String s = list.get(choice).trim();
         File file = new File(s);
         if (!s.isEmpty()){
             Glide.with(context)
