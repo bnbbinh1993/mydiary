@@ -21,14 +21,9 @@ import com.example.mydiary.activity.EventActivity;
 import com.example.mydiary.activity.MoodActivity;
 import com.example.mydiary.activity.NoteActivity;
 import com.example.mydiary.models.Create;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 
 import java.util.ArrayList;
-
 
 public class CreateFragment extends Fragment {
 
@@ -38,24 +33,18 @@ public class CreateFragment extends Fragment {
     private GridView mGridView;
     private GridView mGridView2;
     private GridView mGridView3;
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_create, container, false);
+        View view =  inflater.inflate(R.layout.fragment_create, container, false);
         init(view);
-
         return view;
     }
-
-
 
     private void init(View v) {
         mGridView = v.findViewById(R.id.mGridView);
         mGridView2 = v.findViewById(R.id.mGridView2);
-        mGridView3 = v.findViewById(R.id.mGridView3);
+        mGridView3   = v.findViewById(R.id.mGridView3);
         list = new ArrayList<>();
         list2 = new ArrayList<>();
         list3 = new ArrayList<>();
@@ -71,13 +60,11 @@ public class CreateFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     startActivity(new Intent(getContext(), NoteActivity.class));
-                    getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
-                } else if (position == 1) {
-                    //startActivity(new Intent(getContext(), MoodActivity.class));
-                    Toast.makeText(getContext(), "hihi", Toast.LENGTH_SHORT).show();
-                } else if (position == 2) {
+                } else if (position==1){
+                    startActivity(new Intent(getContext(), MoodActivity.class));
+                }else if (position==2){
                     // startActivity(new Intent(getContext(), MoodActivity.class));
-                } else if (position == 3) {
+                }else if (position==3){
                     startActivity(new Intent(getContext(), EventActivity.class));
                 }
 
@@ -88,7 +75,6 @@ public class CreateFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     startActivity(new Intent(getContext(), CountDownActivity.class));
-                    getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
                 }
             }
         });
@@ -96,30 +82,25 @@ public class CreateFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    // startActivity(new Intent(getContext(), CountDownActivity.class));
+                    Toast.makeText(getContext(), "abc", Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(getContext(), "Ahii chờ chút...", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void addList() {
-        list.add(new Create(getResources().getString(R.string._note), R.drawable.ic_notes, R.color.note));
+        list.add(new Create(getResources().getString(R.string._note),R.drawable.ic_notes,R.color.note));
         //list.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
-        //list.add(new Create(getResources().getString(R.string._work),R.drawable.ic_work,R.color.work));
-        //list.add(new Create(getResources().getString(R.string._   event),R.drawable.ic_confetti,R.color.event));
+       // list.add(new Create(getResources().getString(R.string._work),R.drawable.ic_work,R.color.work));
+       // list.add(new Create(getResources().getString(R.string._event),R.drawable.ic_confetti,R.color.event));
         //list.add(new Create(getResources().getString(R.string._shopping),R.drawable.ic_shopping_bag,R.color.shopping));
         //list.add(new Create(getResources().getString(R.string._travel),R.drawable.ic_travel,R.color.travel));
-        //list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
-        list2.add(new Create(getResources().getString(R.string._count_time), R.drawable.ic_countdown, R.color.countdown));
+       // list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
+        list2.add(new Create(getResources().getString(R.string._count_time),R.drawable.ic_countdown,R.color.countdown));
+        list3.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
+        list3.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
 
-        list3.add(new Create(getResources().getString(R.string._travel), R.drawable.ic_travel, R.color.travel));
-        list3.add(new Create(getResources().getString(R.string._shopping), R.drawable.ic_shopping_bag, R.color.shopping));
-        //list3.add(new Create(getResources().getString(R.string._celebration), R.drawable.ic_fireworks, R.color.cele));
-        //list3.add(new Create(getResources().getString(R.string._event), R.drawable.ic_confetti, R.color.event));
-        //list3.add(new Create(getResources().getString(R.string._mood), R.drawable.ic_angry, R.color.mood));
     }
-
     private class CustomAdapter extends BaseAdapter {
         @Override
         public int getCount() {
@@ -150,7 +131,6 @@ public class CreateFragment extends Fragment {
 
         }
     }
-
     private class CustomAdapter2 extends BaseAdapter {
         @Override
         public int getCount() {
@@ -181,7 +161,6 @@ public class CreateFragment extends Fragment {
 
         }
     }
-
     private class CustomAdapter3 extends BaseAdapter {
         @Override
         public int getCount() {
@@ -212,6 +191,4 @@ public class CreateFragment extends Fragment {
 
         }
     }
-
-
 }

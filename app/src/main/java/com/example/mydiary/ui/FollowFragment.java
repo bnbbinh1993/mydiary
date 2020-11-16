@@ -106,10 +106,14 @@ public class FollowFragment extends Fragment {
         helper = new DatabaseCount(getContext());
         list = new ArrayList<>();
         listRes = new ArrayList<>();
+        list.clear();
+        listRes.clear();
         list = helper.getData();
         listRes = helper.getData();
-        adapter = new CountAdapter(getContext(), list);
-
+        Collections.sort(list);
+        Collections.sort(listRes);
+        adapter = new CountAdapter(getActivity(),list);
+        mRecyclerview.setAdapter(adapter);
     }
 
     private void fabRecyclerview() {
@@ -177,20 +181,6 @@ public class FollowFragment extends Fragment {
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mRecyclerview.setAdapter(adapter);
-        adapter.setOnClickItem(new OnClickItem() {
-            @Override
-            public void click(int position) {
-                Intent intent = new Intent(getContext(), ShowFollowActivity.class);
-                intent.putExtra("POSITION", position);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
-            }
-
-            @Override
-            public void longClick(int position) {
-
-            }
-        });
     }
 
     public void updateData(ArrayList<Count> viewModels) {
@@ -198,7 +188,6 @@ public class FollowFragment extends Fragment {
         list.addAll(viewModels);
         Collections.sort(list);
         Log.d("TEST", "updateFilter: " + list.size());
-        adapter.notifyDataSetChanged();
         updateUI();
     }
 
@@ -210,14 +199,14 @@ public class FollowFragment extends Fragment {
             no_item.setVisibility(View.GONE);
             mRecyclerview.setVisibility(View.VISIBLE);
         }
+        adapter.notifyDataSetChanged();
     }
 
     private void countDown() {
         count = new CountDownTimer(180000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                updateFilter();
-
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -238,7 +227,6 @@ public class FollowFragment extends Fragment {
     @Override
     public void onResume() {
         setUp();
-        setData();
         updateUI();
         super.onResume();
         if (count != null) {

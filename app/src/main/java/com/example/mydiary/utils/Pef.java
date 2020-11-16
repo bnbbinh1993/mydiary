@@ -12,6 +12,8 @@ import android.provider.MediaStore;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -24,7 +26,8 @@ public class Pef {
     public static final String dayList[] = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
     public static final String monthList[] = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
     public static final String hoursList[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"};
-    public static final String minuteList[] = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
+    public static final String minuteList[] = {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+            "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59"};
     private static final String listYear[] = new String[100];
 
     private static Context context;
@@ -156,6 +159,17 @@ public class Pef {
             listOfAllImages.add(PathOfImage);
         }
         return listOfAllImages;
+    }
+
+    public static long getLongTime(String key) {
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
+        long res = 0;
+        try {
+            res = format.parse(key).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 
 

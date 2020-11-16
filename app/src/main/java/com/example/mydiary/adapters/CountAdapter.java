@@ -1,6 +1,10 @@
 package com.example.mydiary.adapters;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
+import com.example.mydiary.activity.ShowFollowActivity;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
 import com.example.mydiary.models.Diary;
+import com.example.mydiary.receiver.AlarmReceiver;
 import com.example.mydiary.utils.OnClickItem;
 
 import java.io.File;
@@ -27,13 +33,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> {
-    private Context context;
+
     private List<Count> list = new ArrayList<>();
     private static OnClickItem onClickItem;
     private int choice;
+    private Activity activity;
 
-    public CountAdapter(Context context, List<Count> list) {
-        this.context = context;
+    public CountAdapter(Activity activity, List<Count> list) {
+        this.activity = activity;
         this.list = list;
     }
 
@@ -41,7 +48,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_coutdown, parent, false));
+        return new ViewHolder(LayoutInflater.from(activity).inflate(R.layout.item_coutdown, parent, false));
     }
 
     @Override
@@ -69,15 +76,16 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
                     long hours = (timeRes / 1000) % 86400 / 60 / 60;
                     long minute = (timeRes / 1000) % 86400 / 60 % 60;
                     long seconds = (timeRes / 1000) % 86400 % 60;
-                    holder.count.setText(day + " " + context.getResources().getString(R.string._day_item)
-                            + " " + hours + " " + context.getResources().getString(R.string._hours_item)
-                            + " " + minute + " " + context.getResources().getString(R.string._minute_item)
-                            + " " + seconds + " " + context.getResources().getString(R.string._seconds_item));
+                    holder.count.setText(day + " " + activity.getResources().getString(R.string._day_item)
+                            + " " + hours + " " + activity.getResources().getString(R.string._hours_item)
+                            + " " + minute + " " + activity.getResources().getString(R.string._minute_item)
+                            + " " + seconds + " " + activity.getResources().getString(R.string._seconds_item));
                 } else {
                     holder.count.setText("Đã hoàn thành");
-                    DatabaseCount count = new DatabaseCount(context);
+                    DatabaseCount count = new DatabaseCount(activity);
                     model.setVote(1);
                     count.update(model);
+                    stopService(activity,(int)timeCount);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -87,6 +95,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
         }
 
 
+
         if (choice == 0) {
             holder.ovel.setBackgroundResource(R.drawable.bg_frame_1);
         } else if (choice == 1) {
@@ -94,8 +103,59 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
         } else if (choice == 2) {
             holder.ovel.setBackgroundResource(R.drawable.bg_frame_3);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ShowFollowActivity.class);
+                intent.putExtra("POSITION", position);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+            }
+        });
+        holder.ovel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ShowFollowActivity.class);
+                intent.putExtra("POSITION", position);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+            }
+        });
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ShowFollowActivity.class);
+                intent.putExtra("POSITION", position);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+            }
+        });
+        holder.time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ShowFollowActivity.class);
+                intent.putExtra("POSITION", position);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+            }
+        });
+        holder.place.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, ShowFollowActivity.class);
+                intent.putExtra("POSITION", position);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+            }
+        });
 
 
+    }
+    private void stopService(Context c,int id){
+        AlarmManager manager = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(c, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(c,id,intent,0);
+        manager.cancel(pendingIntent);
     }
 
     public void setOnClickItem(OnClickItem onClickItem1) {
@@ -121,7 +181,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
             count = itemView.findViewById(R.id.mCount);
             ovel = itemView.findViewById(R.id.mOvel);
             place = itemView.findViewById(R.id.mPlace);
-            itemView.setOnClickListener(this::onClick);
+
 
         }
 
