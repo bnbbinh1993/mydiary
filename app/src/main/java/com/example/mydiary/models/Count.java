@@ -11,8 +11,9 @@ public class Count implements Comparable {
     private String date;
     private int filter;
     private int vote;
+    private int prioritize;
 
-    public Count(int id, String title, String des, String place, String date, int filter, int vote) {
+    public Count(int id, String title, String des, String place, String date, int filter, int vote, int prioritize) {
         this.id = id;
         this.title = title;
         this.des = des;
@@ -20,6 +21,7 @@ public class Count implements Comparable {
         this.date = date;
         this.filter = filter;
         this.vote = vote;
+        this.prioritize = prioritize;
     }
 
     public Count() {
@@ -81,19 +83,30 @@ public class Count implements Comparable {
         this.vote = vote;
     }
 
+    public int getPrioritize() {
+        return prioritize;
+    }
+
+    public void setPrioritize(int prioritize) {
+        this.prioritize = prioritize;
+    }
+
     @Override
     public int compareTo(Object o) {
-
-        if (this.vote == ((Count) o).getVote()) {
-            SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
-            try {
-                long a = (format.parse(this.getDate()).getTime() - System.currentTimeMillis())/1000;
-                long b = (format.parse(((Count) o).getDate()).getTime() - System.currentTimeMillis())/1000;
-                return (int) (a - b);
-            } catch (ParseException e) {
-                e.printStackTrace();
+        if (this.prioritize == ((Count) o).getPrioritize()){
+            if (this.vote == ((Count) o).getVote()) {
+                SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyyy");
+                try {
+                    long a = (format.parse(this.getDate()).getTime() - System.currentTimeMillis())/1000;
+                    long b = (format.parse(((Count) o).getDate()).getTime() - System.currentTimeMillis())/1000;
+                    return (int) (a - b);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                return this.vote - ((Count) o).getVote();
             }
         }
-        return this.vote - ((Count) o).getVote();
+        return  ((Count) o).getPrioritize() - this.prioritize;
     }
 }

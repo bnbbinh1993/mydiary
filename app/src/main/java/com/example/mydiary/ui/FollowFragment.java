@@ -49,7 +49,6 @@ public class FollowFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_follow, container, false);
         init(view);
         setUp();
-        setData();
         Filter();
         fabRecyclerview();
         initClick();
@@ -113,6 +112,8 @@ public class FollowFragment extends Fragment {
         Collections.sort(list);
         Collections.sort(listRes);
         adapter = new CountAdapter(getActivity(),list);
+        mRecyclerview.setHasFixedSize(true);
+        mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mRecyclerview.setAdapter(adapter);
     }
 
@@ -177,11 +178,6 @@ public class FollowFragment extends Fragment {
         updateData(test);
     }
 
-    private void setData() {
-        mRecyclerview.setHasFixedSize(true);
-        mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
-        mRecyclerview.setAdapter(adapter);
-    }
 
     public void updateData(ArrayList<Count> viewModels) {
         list.clear();
@@ -203,7 +199,7 @@ public class FollowFragment extends Fragment {
     }
 
     private void countDown() {
-        count = new CountDownTimer(180000, 1000) {
+        count = new CountDownTimer(1800000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 adapter.notifyDataSetChanged();
@@ -220,7 +216,7 @@ public class FollowFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (count != null) {
-            count.onFinish();
+            count.cancel();
         }
     }
 
@@ -247,7 +243,7 @@ public class FollowFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if (count != null) {
-            count.onFinish();
+            count.cancel();
         }
     }
 }

@@ -4,12 +4,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +35,8 @@ import android.widget.Toast;
 import com.example.mydiary.R;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
+import com.example.mydiary.receiver.AlarmReceiver;
+import com.example.mydiary.receiver.BootReceiver;
 import com.example.mydiary.utils.Pef;
 
 import java.lang.reflect.Field;
@@ -39,7 +47,7 @@ import java.util.Date;
 
 public class CountDownActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;
-    private String employees[] ;
+    private String employees[];
     private ImageButton mBack;
     private ImageButton mSave;
     private TextView mDate;
@@ -71,6 +79,7 @@ public class CountDownActivity extends AppCompatActivity {
         setSpinner();
         setOnclick();
     }
+
     private static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -81,6 +90,7 @@ public class CountDownActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
+
     private void init() {
         spinnerEmployee = findViewById(R.id.spinner_employee);
         mBack = findViewById(R.id.mBack);
@@ -90,9 +100,6 @@ public class CountDownActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.mTitle);
         mPlace = findViewById(R.id.mPlace);
         mDes = findViewById(R.id.mDes);
-
-
-
         employees = new String[]{
                 getResources().getString(R.string._event),
                 getResources().getString(R.string._mood),
@@ -100,9 +107,13 @@ public class CountDownActivity extends AppCompatActivity {
                 getResources().getString(R.string._shopping),
                 getResources().getString(R.string._travel),
                 getResources().getString(R.string._celebration)};
+        Calendar calendar = Calendar.getInstance();
+        mDate.setText(calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE)
+                + " - " + calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
 
 
     }
+
     private void setOnclick() {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +134,7 @@ public class CountDownActivity extends AppCompatActivity {
             }
         });
     }
+
     private void save() {
         String title = mTitle.getText().toString().trim();
         String des = mDes.getText().toString().trim();
@@ -130,11 +142,11 @@ public class CountDownActivity extends AppCompatActivity {
         String date = mDate.getText().toString();
 
         if (title.isEmpty()) {
-            Toast.makeText(this, "Tiêu đề không được để trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string._notification_title), Toast.LENGTH_SHORT).show();
         } else if (des.isEmpty()) {
-            Toast.makeText(this, "Mô tả ngắn không được để trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string._notification_des), Toast.LENGTH_SHORT).show();
         } else if (!checkDate(date)) {
-            Toast.makeText(this, "Không được chọn thời gian trong quá khứ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string._notification_date), Toast.LENGTH_SHORT).show();
         } else {
             Count count = new Count();
             count.setTitle(title);
@@ -143,23 +155,28 @@ public class CountDownActivity extends AppCompatActivity {
             count.setDate(date);
             count.setFilter(filter);
             count.setVote(0);
+            count.setPrioritize(0);
             helper.adđ(count);
+
+            //BootReceiver bootReceiver = new BootReceiver(this);
+            start(Pef.getLongTime(date), title);
 
             try {
                 Thread.sleep(500);
-                Intent intent = new Intent(CountDownActivity.this,FinishActivity.class);
-                intent.putExtra("I",0);
+                Intent intent = new Intent(CountDownActivity.this, FinishActivity.class);
+                intent.putExtra("I", 0);
                 startActivity(intent);
                 finish();
             } catch (InterruptedException e) {
-                Intent intent = new Intent(CountDownActivity.this,FinishActivity.class);
-                intent.putExtra("I",0);
+                Intent intent = new Intent(CountDownActivity.this, FinishActivity.class);
+                intent.putExtra("I", 0);
                 startActivity(intent);
                 finish();
             }
         }
 
     }
+
     private void setSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, employees);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -168,7 +185,6 @@ public class CountDownActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 onItemSelectedHandler(parent, view, position, id);
-
             }
 
             @Override
@@ -177,6 +193,7 @@ public class CountDownActivity extends AppCompatActivity {
             }
         });
     }
+
     private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
         title = employees[position];
         switch (position) {
@@ -212,6 +229,7 @@ public class CountDownActivity extends AppCompatActivity {
             }
         }
     }
+
     private void showdialog() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(CountDownActivity.this);
         builder.setTitle(getResources().getString(R.string._messenger_back));
@@ -235,6 +253,7 @@ public class CountDownActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
     private void date() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CountDownActivity.this);
         ViewGroup viewGroup = CountDownActivity.this.findViewById(android.R.id.content);
@@ -259,7 +278,7 @@ public class CountDownActivity extends AppCompatActivity {
         int d = calendar.get(Calendar.DAY_OF_MONTH);
         int m = calendar.get(Calendar.MONTH) + 1;
         int y = calendar.get(Calendar.YEAR);
-        int h = calendar.get(Calendar.HOUR);
+        int h = calendar.get(Calendar.HOUR_OF_DAY);
         int p = calendar.get(Calendar.MINUTE);
 
         Log.d("D", "onClick: " + d);
@@ -304,10 +323,11 @@ public class CountDownActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyy");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
-            if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
+            if (format.parse(s).getTime() > (System.currentTimeMillis())) {
                 return true;
             }
         } catch (ParseException e) {
@@ -315,12 +335,14 @@ public class CountDownActivity extends AppCompatActivity {
         }
         return false;
     }
+
     private void setNubmerPicker(NumberPicker nubmerPicker, String[] numbers) {
         nubmerPicker.setMaxValue(numbers.length - 1);
         nubmerPicker.setMinValue(0);
         nubmerPicker.setWrapSelectorWheel(true);
         nubmerPicker.setDisplayedValues(numbers);
     }
+
     private boolean isDateFormat(String day, String month) {
         int isDay = Integer.parseInt(day);
         int isMonth = Integer.parseInt(month);
@@ -331,6 +353,7 @@ public class CountDownActivity extends AppCompatActivity {
         }
         return true;
     }
+
     private int isPositon(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
@@ -341,6 +364,7 @@ public class CountDownActivity extends AppCompatActivity {
         }
         return res;
     }
+
     private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
 
         try {
@@ -368,5 +392,23 @@ public class CountDownActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         showdialog();
+    }
+
+    public void start(long key, String title) {
+        long timedelay = key - System.currentTimeMillis();
+        int id = (int) key / 1000;
+        Log.d("TAG", "start: " + timedelay);
+        long time = key - System.currentTimeMillis();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(key);
+        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(CountDownActivity.this, AlarmReceiver.class);
+        intent.putExtra("title", title);
+        intent.putExtra("id", id);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(CountDownActivity.this, id, intent, 0);
+        manager.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + timedelay, pendingIntent);
+        ComponentName receiver = new ComponentName(CountDownActivity.this, AlarmReceiver.class);
+        PackageManager pm = CountDownActivity.this.getPackageManager();
+        pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
     }
 }

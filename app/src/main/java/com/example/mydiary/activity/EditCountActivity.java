@@ -304,7 +304,7 @@ public class EditCountActivity extends AppCompatActivity {
     }
 
     private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyy");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
             if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
                 return true;

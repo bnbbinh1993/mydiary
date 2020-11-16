@@ -10,6 +10,7 @@ import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -30,9 +31,10 @@ import java.util.Date;
 
 public class ShowFollowActivity extends AppCompatActivity {
     private ArrayList<Count> list = new ArrayList<>();
-    private ImageButton mBack,mEdit,mDelete;
+    private ImageButton mBack,mEdit,mDelete,mPrioritize;
     private TextView mName,mFilter,mStatus,mDay,mHours,mMinute,mSeconds,mDate,mDes,mPlace;
     private LinearLayout background;
+    private DatabaseCount helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +89,31 @@ public class ShowFollowActivity extends AppCompatActivity {
                showdialog();
             }
         });
+        mPrioritize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prioritize();
+            }
+        });
+    }
+
+    private void prioritize() {
+        ArrayList<Count> res = new ArrayList<>();
+        res.clear();
+        res = helper.getData();
+        Collections.sort(res);
+        int position = getIntent().getIntExtra("POSITION",0);
+        Count count = res.get(position);
+
+        if (count.getPrioritize() == 1){
+            count.setPrioritize(0);
+            mPrioritize.setImageResource(R.drawable.ic_badge);
+        }else {
+            count.setPrioritize(1);
+            mPrioritize.setImageResource(R.drawable.ic_badge_1_);
+        }
+        helper.update(count);
+        Log.d("TAG", "prioritize: "+count.getPrioritize());
     }
 
     private void delete() {
@@ -152,10 +179,12 @@ public class ShowFollowActivity extends AppCompatActivity {
         mPlace = findViewById(R.id.mPlace);
         background = findViewById(R.id.background);
         mDelete = findViewById(R.id.mDelete);
+        mPrioritize = findViewById(R.id.mPrioritize);
     }
 
     private void getData() {
-        list = new DatabaseCount(this).getData();
+        helper = new DatabaseCount(this);
+        list =helper.getData();
         Collections.sort(list);
         int position = getIntent().getIntExtra("POSITION",0);
         if (list.size()>0){
@@ -197,8 +226,13 @@ public class ShowFollowActivity extends AppCompatActivity {
             mDate.setText(list.get(position).getDate());
             mDes.setText(list.get(position).getDes());
             mPlace.setText(list.get(position).getPlace());
+            if (list.get(position).getPrioritize()==1){
+                mPrioritize.setImageResource(R.drawable.ic_badge_1_);
+            }else {
+                mPrioritize.setImageResource(R.drawable.ic_badge);
+            }
 
-            SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyyy");
             try {
                 Date date = format.parse(list.get(position).getDate());
                 long timeCount = date.getTime();

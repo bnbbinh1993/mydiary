@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:padding="15dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +10,6 @@
     tools:context=".ui.CreateFragment">
 
     <TextView
-
         android:fontFamily="@font/nobile"
         android:textStyle="bold"
         android:textColor="@color/black"

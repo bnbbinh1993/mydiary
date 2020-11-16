@@ -9,6 +9,7 @@
     tools:context=".ui.CreateFragment">
 
     <com.google.android.material.tabs.TabLayout
+        android:background="#00FFFFFF"
         app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
         android:id="@+id/tablayout"
         android:layout_width="match_parent"

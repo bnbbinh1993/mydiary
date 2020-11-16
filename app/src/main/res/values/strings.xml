@@ -63,4 +63,5 @@
     <string name="_in">In</string>
     <string name="_edit">Edit</string>
     <string name="_description">Description</string>
+    <string name="_notification_date">Please select the time again!</string>
 </resources>

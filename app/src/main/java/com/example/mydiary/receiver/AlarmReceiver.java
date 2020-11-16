@@ -20,11 +20,10 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent hihi = new Intent(context, MainActivity.class);
-
         String title  = intent.getStringExtra("title");
         int id  = intent.getIntExtra("id",100);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,id,hihi,PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,id,hihi,0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"study_reminder")
                 .setAutoCancel(true)
                 .setWhen(System.currentTimeMillis())
@@ -32,7 +31,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentTitle(title)
                 .setContentIntent(pendingIntent)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("Có sự kiện sắp diễn ra. Hãy vào để kiểm tra nào."))
-                .setContentText(title)
+                .setContentText("Có sự kiện sắp diễn ra. Hãy vào để kiểm tra nào.")
                 .setContentInfo("Có sự kiện sắp diễn ra. Hãy vào để kiểm tra nào.")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
@@ -40,7 +39,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         builder.setDefaults(Notification.DEFAULT_ALL);
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
             int impor = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("study_reminder","Study reminder",impor);
+            NotificationChannel channel = new NotificationChannel("study_reminder","my diary",impor);
             manager.createNotificationChannel(channel);
         }
 

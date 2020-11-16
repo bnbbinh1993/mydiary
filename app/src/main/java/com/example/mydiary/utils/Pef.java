@@ -162,7 +162,7 @@ public class Pef {
     }
 
     public static long getLongTime(String key) {
-        SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyyy");
         long res = 0;
         try {
             res = format.parse(key).getTime();

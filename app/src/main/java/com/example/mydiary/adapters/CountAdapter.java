@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -67,7 +68,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
         holder.time.setText(model.getDate());
         holder.place.setText(model.getPlace());
         if (model.getVote() == 0) {
-            SimpleDateFormat format = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyyy");
             try {
                 long timeCount = format.parse(model.getDate()).getTime();
                 long timeRes = timeCount - System.currentTimeMillis();
@@ -84,6 +85,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
                     holder.count.setText("Đã hoàn thành");
                     DatabaseCount count = new DatabaseCount(activity);
                     model.setVote(1);
+                    model.setPrioritize(0);
                     count.update(model);
                     stopService(activity,(int)timeCount);
                 }
@@ -103,6 +105,13 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
         } else if (choice == 2) {
             holder.ovel.setBackgroundResource(R.drawable.bg_frame_3);
         }
+
+        if (list.get(choice).getPrioritize()==1){
+            holder.mVote.setVisibility(View.VISIBLE);
+        }else {
+            holder.mVote.setVisibility(View.GONE);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +182,8 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
         private TextView count;
         private TextView place;
         private FrameLayout ovel;
+        private ImageView mVote;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -181,6 +192,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
             count = itemView.findViewById(R.id.mCount);
             ovel = itemView.findViewById(R.id.mOvel);
             place = itemView.findViewById(R.id.mPlace);
+            mVote = itemView.findViewById(R.id.mVote);
 
 
         }

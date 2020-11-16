@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -71,36 +72,43 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             case 1: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.event));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_event));
+                holder.startLayout.setBackgroundResource(R.drawable.bg_event);
                 break;
             }
             case 2: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.mood));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_mood));
+                holder.startLayout.setBackgroundResource(R.drawable.bg_mood);
                 break;
             }
             case 3: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.work));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_work));
+                holder.startLayout.setBackgroundResource(R.drawable.bg_work);
                 break;
             }
             case 4: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.shopping));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_shopping));
+                holder.startLayout.setBackgroundResource(R.drawable.bg_shopping);
                 break;
             }
             case 5: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.travel));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_travel));
+                holder.startLayout.setBackgroundResource(R.drawable.bg_travel);
                 break;
             }
             case 6: {
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.cele));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_cele));
+                holder.startLayout.setBackgroundResource(R.drawable.bg_celi);
                 break;
             }
             default:{
                 holder.body.setBackgroundColor(context.getResources().getColor(R.color.note));
                 holder.top.setBackgroundColor(context.getResources().getColor(R.color.top_note));
+                holder.startLayout.setBackgroundResource(R.drawable.bg_note);
                 break;
             }
         }
@@ -124,6 +132,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         private ImageView image;
         private RelativeLayout body;
         private FrameLayout top;
+        private LinearLayout startLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -133,6 +142,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             image = itemView.findViewById(R.id.image);
             top = itemView.findViewById(R.id.top);
             body = itemView.findViewById(R.id.body);
+            startLayout = itemView.findViewById(R.id.startLayout);
 
             itemView.setOnClickListener(this::onClick);
         }
