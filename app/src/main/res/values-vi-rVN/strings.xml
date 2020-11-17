@@ -61,4 +61,6 @@
     <string name="_edit">Chỉnh sửa</string>
     <string name="_description">Miêu tả</string>
     <string name="_notification_date">Vui lòng chọn lại thời gian!</string>
+    <string name="_tools">Công cụ</string>
+    <string name="_emotion">Cảm xúc</string>
 </resources>

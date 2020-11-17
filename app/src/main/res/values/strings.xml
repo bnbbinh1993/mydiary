@@ -64,4 +64,6 @@
     <string name="_edit">Edit</string>
     <string name="_description">Description</string>
     <string name="_notification_date">Please select the time again!</string>
+    <string name="_tools">Tools</string>
+    <string name="_emotion">Emotion</string>
 </resources>

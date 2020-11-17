@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_show"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:visibility="visible"
@@ -68,6 +68,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="#fff" />
+
     <androidx.core.widget.NestedScrollView
         android:fillViewport="true"
         android:overScrollMode="never"
@@ -95,6 +96,7 @@
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
+
                 android:id="@+id/mRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

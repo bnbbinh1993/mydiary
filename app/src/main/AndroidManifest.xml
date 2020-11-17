@@ -13,14 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mydiary">
-        <activity android:name=".activity.EditCountActivity"></activity>
+        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.EditCountActivity" />
         <activity android:name=".activity.EditActivity" />
         <activity android:name=".activity.ShowFollowActivity" />
         <activity android:name=".activity.ShowDiaryActivity" />
         <activity android:name=".activity.FinishActivity" />
         <activity android:name=".activity.CountDownActivity" />
-        <activity android:name=".activity.MoodActivity" />
-        <activity android:name=".activity.EventActivity" />
         <activity android:name=".activity.NoteActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -29,8 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".receiver.AlarmReceiver"/>
-        <receiver android:name=".receiver.AlarmToastReceiver"/>
+
+        <receiver android:name=".receiver.AlarmReceiver" />
+        <receiver android:name=".receiver.AlarmToastReceiver" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

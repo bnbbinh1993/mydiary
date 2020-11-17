@@ -3,7 +3,9 @@ package com.example.mydiary.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -28,11 +30,13 @@ import com.example.mydiary.R;
 import com.example.mydiary.adapters.ImageAdapter;
 import com.example.mydiary.adapters.ImageAdapterEdit;
 import com.example.mydiary.adapters.ShowAdapter;
+import com.example.mydiary.adapters.ViewPageAdapter;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.utils.ImageFilePath;
 import com.example.mydiary.utils.OnClickItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -76,8 +80,8 @@ public class ShowDiaryActivity extends AppCompatActivity {
         setSpinner();
         initClick();
         setLayoutShow();
-    }
 
+    }
 
     private void init() {
         edit = findViewById(R.id.edit);
@@ -177,7 +181,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
         adapter = new ImageAdapter(listPath, this);
         mRecyclerview.setHasFixedSize(true);
-        mRecyclerview.setLayoutManager(new GridLayoutManager(this, 2));
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
         mRecyclerview.setAdapter(adapter);
         title.setText(list.get(i).getTitle());
         body.setText(list.get(i).getContent());

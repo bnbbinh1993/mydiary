@@ -1,39 +1,43 @@
-package com.example.mydiary.ui;
+package com.example.mydiary.activity;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.fragment.app.Fragment;
 
 import com.example.mydiary.R;
 
-public class SettingFragment extends Fragment {
+public class SettingActivity extends AppCompatActivity {
     private TextView mFeedback, mLogin, mPollicy, mRate;
     private Switch mSound;
-
-    public static SettingFragment newInstance() {
-        SettingFragment fragment = new SettingFragment();
-        return fragment;
-    }
-
+    private ImageButton mBack;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, container, false);
-        init(view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
+        init();
         initClick();
-        return view;
     }
-
+    private void init() {
+        mFeedback = findViewById(R.id.mFeedback);
+        mLogin = findViewById(R.id.mLogin);
+        mPollicy = findViewById(R.id.mPollicy);
+        mSound = findViewById(R.id.mSound);
+        mRate = findViewById(R.id.mRate);
+        mBack = findViewById(R.id.mBack);
+    }
+    private void feedback() {
+        Intent mailIntent = new Intent(Intent.ACTION_VIEW);
+        Uri data = Uri.parse("mailto:?subject=" + "title: " + "&body=" + "content: " + "&to=" + "bnbbinh@mail.com");
+        mailIntent.setData(data);
+        startActivity(Intent.createChooser(mailIntent, "Send Gmail"));
+    }
     private void initClick() {
         mFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +75,13 @@ public class SettingFragment extends Fragment {
                 }
             }
         });
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                overridePendingTransition(R.anim.out_left, R.anim.in_left);
+            }
+        });
     }
 
     private void pollicy() {
@@ -85,18 +96,9 @@ public class SettingFragment extends Fragment {
 
     }
 
-    private void init(View view) {
-        mFeedback = view.findViewById(R.id.mFeedback);
-        mLogin = view.findViewById(R.id.mLogin);
-        mPollicy = view.findViewById(R.id.mPollicy);
-        mSound = view.findViewById(R.id.mSound);
-        mRate = view.findViewById(R.id.mRate);
-    }
-
-    private void feedback() {
-        Intent mailIntent = new Intent(Intent.ACTION_VIEW);
-        Uri data = Uri.parse("mailto:?subject=" + "title: " + "&body=" + "content: " + "&to=" + "bnbbinh@mail.com");
-        mailIntent.setData(data);
-        startActivity(Intent.createChooser(mailIntent, "Send Gmail"));
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.out_left, R.anim.in_left);
     }
 }

@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mydiary.R;
 import com.example.mydiary.activity.CountDownActivity;
-import com.example.mydiary.activity.EventActivity;
-import com.example.mydiary.activity.MoodActivity;
 import com.example.mydiary.activity.NoteActivity;
+import com.example.mydiary.activity.SettingActivity;
 import com.example.mydiary.models.Create;
 
 
@@ -33,6 +33,12 @@ public class CreateFragment extends Fragment {
     private GridView mGridView;
     private GridView mGridView2;
     private GridView mGridView3;
+    private ImageButton mSetting;
+
+    public static CreateFragment newInstance() {
+        CreateFragment fragment = new CreateFragment();
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,6 +51,7 @@ public class CreateFragment extends Fragment {
         mGridView = v.findViewById(R.id.mGridView);
         mGridView2 = v.findViewById(R.id.mGridView2);
         mGridView3   = v.findViewById(R.id.mGridView3);
+        mSetting   = v.findViewById(R.id.mSetting);
         list = new ArrayList<>();
         list2 = new ArrayList<>();
         list3 = new ArrayList<>();
@@ -61,11 +68,11 @@ public class CreateFragment extends Fragment {
                 if (position == 0) {
                     startActivity(new Intent(getContext(), NoteActivity.class));
                 } else if (position==1){
-                    startActivity(new Intent(getContext(), MoodActivity.class));
+                    //startActivity(new Intent(getContext(), MoodActivity.class));
                 }else if (position==2){
                     // startActivity(new Intent(getContext(), MoodActivity.class));
                 }else if (position==3){
-                    startActivity(new Intent(getContext(), EventActivity.class));
+                   //startActivity(new Intent(getContext(), EventActivity.class));
                 }
 
             }
@@ -86,19 +93,28 @@ public class CreateFragment extends Fragment {
                 }
             }
         });
+        mSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), SettingActivity.class));
+                getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
+            }
+        });
     }
 
     private void addList() {
         list.add(new Create(getResources().getString(R.string._note),R.drawable.ic_notes,R.color.note));
-        list.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
-        list.add(new Create(getResources().getString(R.string._work),R.drawable.ic_work,R.color.work));
-        list.add(new Create(getResources().getString(R.string._event),R.drawable.ic_confetti,R.color.event));
-        list.add(new Create(getResources().getString(R.string._shopping),R.drawable.ic_shopping_bag,R.color.shopping));
-        list.add(new Create(getResources().getString(R.string._travel),R.drawable.ic_travel,R.color.travel));
-        list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
+//        list.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
+//        list.add(new Create(getResources().getString(R.string._work),R.drawable.ic_work,R.color.work));
+//        list.add(new Create(getResources().getString(R.string._event),R.drawable.ic_confetti,R.color.event));
+//        list.add(new Create(getResources().getString(R.string._shopping),R.drawable.ic_shopping_bag,R.color.shopping));
+//        list.add(new Create(getResources().getString(R.string._travel),R.drawable.ic_travel,R.color.travel));
+//        list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
         list2.add(new Create(getResources().getString(R.string._count_time),R.drawable.ic_countdown,R.color.countdown));
+        list2.add(new Create(getResources().getString(R.string._emotion),R.drawable.ic_emoticons,R.color.event));
         list3.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
         list3.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
+
 
     }
     private class CustomAdapter extends BaseAdapter {

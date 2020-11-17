@@ -36,6 +36,10 @@ public class ShowFragment extends Fragment {
     private int filter;
     private FloatingActionButton fab;
 
+    public static ShowFragment newInstance() {
+        ShowFragment fragment = new ShowFragment();
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

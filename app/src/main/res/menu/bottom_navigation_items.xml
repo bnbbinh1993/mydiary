@@ -12,9 +12,13 @@
     <item android:id="@+id/historyId"
         android:fontFamily="@font/nobile"
         android:icon="@drawable/ic_history"
-        android:title="@string/_follow"/>
-    <item android:id="@+id/profileId"
+        android:title="@string/_count_time"/>
+    <item android:id="@+id/analysisId"
         android:fontFamily="@font/nobile"
-        android:icon="@drawable/ic_setting"
-        android:title="@string/_setting"/>
+        android:icon="@drawable/ic_pie_chart"
+        android:title="@string/_follow"/>
+<!--    <item android:id="@+id/profileId"-->
+<!--        android:fontFamily="@font/nobile"-->
+<!--        android:icon="@drawable/ic_setting"-->
+<!--        android:title="@string/_setting"/>-->
 </menu>

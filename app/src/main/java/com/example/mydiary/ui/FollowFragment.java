@@ -43,6 +43,11 @@ public class FollowFragment extends Fragment {
     private FloatingActionButton fab;
     private CountDownTimer count;
 
+    public static FollowFragment newInstance() {
+        FollowFragment fragment = new FollowFragment();
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
