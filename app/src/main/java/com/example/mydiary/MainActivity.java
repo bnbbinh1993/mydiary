@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private SettingFragment settingFragment;
     private AnalysisFragment analysisFragment;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

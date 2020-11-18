@@ -181,7 +181,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
         adapter = new ImageAdapter(listPath, this);
         mRecyclerview.setHasFixedSize(true);
-        mRecyclerview.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false));
+        mRecyclerview.setLayoutManager(new GridLayoutManager(this, 2));
         mRecyclerview.setAdapter(adapter);
         title.setText(list.get(i).getTitle());
         body.setText(list.get(i).getContent());
@@ -201,7 +201,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         adapterEdit.setOnClickItem(new OnClickItem() {
             @Override
             public void click(int position) {
-                daleteImage(listPath2,position);
+                daleteImage(listPath2, position);
             }
 
             @Override
@@ -210,11 +210,13 @@ public class ShowDiaryActivity extends AppCompatActivity {
             }
         });
     }
-    private void daleteImage(ArrayList<String> listImage,int position){
+
+    private void daleteImage(ArrayList<String> listImage, int position) {
         listImage.remove(position);
         updateUI();
     }
-    private void updateUI(){
+
+    private void updateUI() {
         adapter.notifyDataSetChanged();
         adapterEdit.notifyDataSetChanged();
     }
@@ -264,6 +266,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         listPath.addAll(viewModels);
         adapterEdit.notifyDataSetChanged();
     }
+
     private void setSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item,

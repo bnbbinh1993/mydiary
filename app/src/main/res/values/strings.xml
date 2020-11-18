@@ -66,4 +66,5 @@
     <string name="_notification_date">Please select the time again!</string>
     <string name="_tools">Tools</string>
     <string name="_emotion">Emotion</string>
+    <string name="_analysis">Analysis</string>
 </resources>

@@ -39,7 +39,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         builder.setDefaults(Notification.DEFAULT_ALL);
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
             int impor = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("study_reminder","my diary",impor);
+            NotificationChannel channel = new NotificationChannel("study_reminder","Study reminder",impor);
             manager.createNotificationChannel(channel);
         }
 

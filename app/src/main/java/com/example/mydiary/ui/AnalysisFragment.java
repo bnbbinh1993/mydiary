@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.mydiary.R;
 import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.CombinedData;
@@ -14,15 +17,22 @@ import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class AnalysisFragment extends Fragment implements OnChartValueSelectedListener {
     private CombinedChart mChart;
+    private PieChart mPieChart;
+
 
     public static AnalysisFragment newInstance() {
         AnalysisFragment fragment = new AnalysisFragment();
@@ -38,7 +48,11 @@ public class AnalysisFragment extends Fragment implements OnChartValueSelectedLi
     }
 
     private void init(View view) {
-        mChart = (CombinedChart) view.findViewById(R.id.combinedChart);
+        mChart = view.findViewById(R.id.combinedChart);
+        mPieChart = view.findViewById(R.id.mPieChart);
+
+        pieChart();
+
         mChart.getDescription().setEnabled(false);
         mChart.setBackgroundColor(Color.WHITE);
         mChart.setDrawGridBackground(false);
@@ -72,6 +86,55 @@ public class AnalysisFragment extends Fragment implements OnChartValueSelectedLi
         xAxis.setAxisMaximum(data.getXMax() + 0.25f);
         mChart.setData(data);
         mChart.invalidate();
+    }
+
+    private void pieChart() {
+
+        mPieChart.setRotationEnabled(true);
+        mPieChart.setDescription(new Description());
+        mPieChart.setHoleRadius(35f);
+        mPieChart.setTransparentCircleAlpha(0);
+        mPieChart.setCenterText("Hihi");
+        mPieChart.setDrawCenterText(true);
+        mPieChart.setCenterTextSize(10);
+        mPieChart.setDrawEntryLabels(true);
+
+        addDataSet(mPieChart);
+
+        mChart.setOnChartValueSelectedListener(this);
+    }
+    private static void addDataSet(PieChart pieChart) {
+        ArrayList<PieEntry> yEntrys = new ArrayList<>();
+        ArrayList<String> xEntrys = new ArrayList<>();
+        float[] yData = { 25, 40, 70, 45};
+        String[] xData = { "M", "T", "W" ,"f"};
+
+        for (int i = 0; i < yData.length;i++){
+            yEntrys.add(new PieEntry(yData[i],i));
+        }
+        for (int i = 0; i < xData.length;i++){
+            xEntrys.add(xData[i]);
+        }
+
+        PieDataSet pieDataSet = new PieDataSet(yEntrys,"Employee Sales");
+        pieDataSet.setSliceSpace(2);
+        pieDataSet.setValueTextSize(12);
+
+        ArrayList<Integer> colors=new ArrayList<>();
+        colors.add(Color.RED);
+        colors.add(Color.BLUE);
+        colors.add(Color.GREEN);
+        colors.add(Color.YELLOW);
+
+        pieDataSet.setColors(colors);
+
+        Legend legend=pieChart.getLegend();
+        legend.setForm(Legend.LegendForm.CIRCLE);
+      //  legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+
+        PieData pieData=new PieData(pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.invalidate();
     }
 
     @Override

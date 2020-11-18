@@ -16,7 +16,7 @@
     <item android:id="@+id/analysisId"
         android:fontFamily="@font/nobile"
         android:icon="@drawable/ic_pie_chart"
-        android:title="@string/_follow"/>
+        android:title="@string/_analysis"/>
 <!--    <item android:id="@+id/profileId"-->
 <!--        android:fontFamily="@font/nobile"-->
 <!--        android:icon="@drawable/ic_setting"-->
