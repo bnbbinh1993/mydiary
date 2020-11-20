@@ -111,25 +111,35 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.workId:
-                        selectedFragment = CreateFragment.newInstance();
+                        if (selectedFragment != CreateFragment.newInstance()){
+                            selectedFragment = CreateFragment.newInstance();
+                        }
+
                         //viewPager.setCurrentItem(0);
                         break;
                     case R.id.homeId:
-                        selectedFragment = ShowFragment.newInstance();
+                        if (selectedFragment != ShowFragment.newInstance()){
+                            selectedFragment = ShowFragment.newInstance();
+                        }
+
                        // viewPager.setCurrentItem(1);
                         break;
                     case R.id.historyId:
-                        selectedFragment = FollowFragment.newInstance();
+                        if (selectedFragment != FollowFragment.newInstance()){
+                            selectedFragment = FollowFragment.newInstance();
+                        }
                         //viewPager.setCurrentItem(2);
                         break;
-                    case R.id.analysisId:
-                        selectedFragment = AnalysisFragment.newInstance();
-                        //viewPager.setCurrentItem(3);
-                        break;
-//                    case R.id.profileId:
-//                        selectedFragment = SettingFragment.newInstance();
-//                        //viewPager.setCurrentItem(4);
+//                    case R.id.analysisId:
+//                        if (selectedFragment != AnalysisFragment.newInstance()){
+//                            selectedFragment = AnalysisFragment.newInstance();
+//                        }
+//                        //viewPager.setCurrentItem(3);
 //                        break;
+                    case R.id.profileId:
+                        selectedFragment = SettingFragment.newInstance();
+                        //viewPager.setCurrentItem(4);
+                        break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.content, selectedFragment).commit();
                 return true;

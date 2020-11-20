@@ -2,7 +2,6 @@
 <LinearLayout
     android:id="@+id/layout"
     android:layout_marginEnd="10dp"
-    android:layout_marginStart="20dp"
     android:layout_marginBottom="8dp"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,15 +11,15 @@
     <androidx.cardview.widget.CardView
         android:elevation="0dp"
         app:cardCornerRadius="5dp"
-        android:layout_width="160dp"
-        android:layout_height="140dp">
+        android:layout_width="140dp"
+        android:layout_height="120dp">
        <RelativeLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent">
            <ImageView
                android:id="@+id/image"
-               android:layout_width="160dp"
-               android:layout_height="140dp"/>
+               android:layout_width="140dp"
+               android:layout_height="120dp"/>
            <ImageButton
                android:id="@+id/mDetele"
                android:background="?attr/actionBarItemBackground"

@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"/>
                 <ImageButton
                     android:layout_marginEnd="10dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/mPrioritize"
                     android:layout_toStartOf="@+id/mDelete"
                     android:padding="10dp"

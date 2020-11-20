@@ -1,36 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_margin="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="horizontal">
+
     <androidx.cardview.widget.CardView
-        android:elevation="1dp"
-        app:cardCornerRadius="15dp"
-        android:background="@drawable/bg_text"
         android:layout_width="match_parent"
-        android:layout_height="120dp">
-     <LinearLayout
-         android:background="@color/note"
-         android:orientation="vertical"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent">
-         <FrameLayout
-             android:background="#FF0000"
-             android:layout_width="match_parent"
-             android:layout_height="10dp"/>
-         <TextView
-             android:fontFamily="@font/nobile"
-             android:id="@+id/name"
-             android:padding="10dp"
-             android:textColor="@color/black"
-             android:textSize="15sp"
-             android:layout_marginStart="20dp"
-             android:text="Bùi Ngọc Bình"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"/>
-     </LinearLayout>
+        android:layout_height="140dp"
+        android:background="?attr/selectableItemBackground"
+        android:elevation="5dp"
+        android:layoutMode="opticalBounds"
+        android:overScrollMode="never"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/note"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/top"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#FF0000" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/top"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_toStartOf="@+id/card"
+                android:fontFamily="@font/nobile"
+                android:text="Bùi Ngọc Bình"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/date"
+                android:layout_below="@+id/name"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_toStartOf="@+id/card"
+                android:fontFamily="@font/nobile"
+                android:maxLines="3"
+                android:text="Hôm nay chúng ta đi đâu được nhỉ hihi"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toStartOf="@+id/card"
+                android:fontFamily="@font/nobile"
+                android:maxLines="4"
+                android:text="11.03.2020"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="20dp"
+                android:elevation="0dp"
+                app:cardCornerRadius="5dp">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="#00FFFFFF" />
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>

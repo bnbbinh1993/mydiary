@@ -2,25 +2,35 @@ package com.example.mydiary.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -33,19 +43,27 @@ import com.example.mydiary.adapters.ShowAdapter;
 import com.example.mydiary.adapters.ViewPageAdapter;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
+import com.example.mydiary.utils.DatePef;
 import com.example.mydiary.utils.ImageFilePath;
 import com.example.mydiary.utils.OnClickItem;
+import com.example.mydiary.utils.Pef;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 
 public class ShowDiaryActivity extends AppCompatActivity {
     private ImageButton edit;
     private ImageButton back;
     private ImageButton imageEdit;
     private ImageButton saveEdit;
+    private ImageButton btnMic;
     private TextView date;
     private TextView filter;
     private TextView title;
@@ -63,9 +81,11 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private ImageAdapter adapter;
     private Spinner spinnerEdit;
     private static final int SELECT_PICTURES = 1;
+    private static final int REQ_CODE_SPEECH_INPUT = 100;
     private int filterEdit;
     private String path;
     private String employees[];
+    private String s;
     private ArrayList<String> listPath = new ArrayList<>();
     private ArrayList<String> listPath2 = new ArrayList<>();
     private ArrayList<Diary> list = new ArrayList<>();
@@ -104,6 +124,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         dateEdit = findViewById(R.id.dateEdit);
         spinnerEdit = findViewById(R.id.spinnerEdit);
         mRecyclerviewEdit = findViewById(R.id.mRecyclerviewEdit);
+        btnMic = findViewById(R.id.btnMic);
 
     }
 
@@ -113,23 +134,26 @@ public class ShowDiaryActivity extends AppCompatActivity {
         layout_show.setVisibility(View.VISIBLE);
         layout_edit.setVisibility(View.GONE);
 
+
     }
 
     private void setLayoutEdit() {
         setUp();
-        Log.d("TAG", "setLayoutEdit: " + listPath.size());
         layout_edit.setVisibility(View.VISIBLE);
         layout_show.setVisibility(View.GONE);
-//        if (listPath.size()>0){
-//            if (listPath.get(0).equals(" ")){
-//                listPath.clear();
-//                mRecyclerviewEdit.setVisibility(View.GONE);
-//                mRecyclerview.setVisibility(View.GONE);
-//            }else {
-//                mRecyclerviewEdit.setVisibility(View.VISIBLE);
-//                mRecyclerview.setVisibility(View.VISIBLE);
-//            }
-//        }
+        setViewRecyclerview();
+        titleEdit.requestFocus();
+
+    }
+    private void setViewRecyclerview(){
+        Log.d("TAG", "setViewRecyclerview: "+listPath2.size());
+        if (listPath2.size() > 0) {
+            mRecyclerviewEdit.setVisibility(View.VISIBLE);
+            mRecyclerview.setVisibility(View.VISIBLE);
+        } else {
+            mRecyclerviewEdit.setVisibility(View.GONE);
+            mRecyclerview.setVisibility(View.GONE);
+        }
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
@@ -174,14 +198,17 @@ public class ShowDiaryActivity extends AppCompatActivity {
         String s[] = list.get(i).getImage().trim().split("\\s+");
         if (s.length > 0) {
             for (int j = 0; j < s.length; j++) {
-                listPath.add(s[j]);
-                listPath2.add(s[j]);
+                if (!s[j].isEmpty()) {
+                    listPath.add(s[j]);
+                    listPath2.add(s[j]);
+                }
             }
         }
 
+
         adapter = new ImageAdapter(listPath, this);
         mRecyclerview.setHasFixedSize(true);
-        mRecyclerview.setLayoutManager(new GridLayoutManager(this, 2));
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerview.setAdapter(adapter);
         title.setText(list.get(i).getTitle());
         body.setText(list.get(i).getContent());
@@ -196,12 +223,15 @@ public class ShowDiaryActivity extends AppCompatActivity {
         //spinnerEdit.setPromptId(list.get(i).getFilter());
         adapterEdit = new ImageAdapterEdit(listPath2, this);
         mRecyclerviewEdit.setHasFixedSize(true);
-        mRecyclerviewEdit.setLayoutManager(new GridLayoutManager(this, 2));
+        mRecyclerviewEdit.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerviewEdit.setAdapter(adapterEdit);
         adapterEdit.setOnClickItem(new OnClickItem() {
             @Override
             public void click(int position) {
+                Log.d("TAG", "click: "+listPath2.size());
+                Log.d("TAG", "click: "+position);
                 daleteImage(listPath2, position);
+                updateUI();
             }
 
             @Override
@@ -213,10 +243,10 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
     private void daleteImage(ArrayList<String> listImage, int position) {
         listImage.remove(position);
-        updateUI();
     }
 
     private void updateUI() {
+        setViewRecyclerview();
         adapter.notifyDataSetChanged();
         adapterEdit.notifyDataSetChanged();
     }
@@ -321,7 +351,170 @@ public class ShowDiaryActivity extends AppCompatActivity {
                 delete();
             }
         });
+        btnMic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mic();
+            }
+        });
+        dateEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateClick();
+            }
+        });
 
+    }
+
+
+    private void dateClick() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(ShowDiaryActivity.this);
+        ViewGroup viewGroup = ShowDiaryActivity.this.findViewById(android.R.id.content);
+        View view = LayoutInflater.from(ShowDiaryActivity.this).inflate(R.layout.number_picker, viewGroup, false);
+        final NumberPicker day = view.findViewById(R.id.numberDay);
+        final NumberPicker month = view.findViewById(R.id.numberMonth);
+        final NumberPicker year = view.findViewById(R.id.numberYear);
+        final NumberPicker hours = view.findViewById(R.id.numberHours);
+        final NumberPicker minute = view.findViewById(R.id.numberminute);
+
+        setNubmerPicker(day, Pef.dayList);
+        setNubmerPicker(month, Pef.monthList);
+        setNubmerPicker(year, Pef.isListYear());
+        setNubmerPicker(hours, Pef.hoursList);
+        setNubmerPicker(minute, Pef.minuteList);
+
+        setNumberPickerTextColor(day, Color.BLACK);
+        setNumberPickerTextColor(month, Color.BLACK);
+        setNumberPickerTextColor(year, Color.BLACK);
+
+        Calendar calendar = Calendar.getInstance();
+        int d = calendar.get(Calendar.DAY_OF_MONTH);
+        int m = calendar.get(Calendar.MONTH) + 1;
+        int y = calendar.get(Calendar.YEAR);
+        int h = calendar.get(Calendar.HOUR_OF_DAY);
+        int p = calendar.get(Calendar.MINUTE);
+
+        Log.d("D", "onClick: " + d);
+        Log.d("M", "onClick: " + m);
+        Log.d("Y", "onClick: " + y);
+
+        day.setValue(isPositon(d, Pef.dayList));
+        month.setValue(isPositon(m, Pef.monthList));
+        year.setValue(isPositon(y, Pef.isListYear()));
+        hours.setValue(isPositon(h, Pef.hoursList));
+        minute.setValue(isPositon(p, Pef.minuteList));
+
+        builder.setPositiveButton(R.string._yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int p1 = day.getValue();
+                int p2 = month.getValue();
+                int p3 = year.getValue();
+                int p4 = hours.getValue();
+                int p5 = minute.getValue();
+                if (isDateFormat(Pef.dayList[p1], Pef.monthList[p2])) {
+                    String dateResult = Pef.hoursList[p4] + ":" +
+                            Pef.minuteList[p5] + " - " + Pef.dayList[p1] + "." + Pef.monthList[p2]
+                            + "." + Pef.isListYear()[p3];
+                    dateEdit.setText(dateResult);
+                    dialog.dismiss();
+                    Log.d("TEST", "onClick: " + dateResult);
+                } else {
+                    Toast.makeText(getApplicationContext(), "ERROR!", Toast.LENGTH_SHORT).show();
+                    Log.d("TEST", "ERROR!");
+                }
+
+            }
+        });
+        builder.setNegativeButton(R.string._close, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setView(view);
+        androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private boolean checkDate(String s) {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
+        try {
+            if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void setNubmerPicker(NumberPicker nubmerPicker, String[] numbers) {
+        nubmerPicker.setMaxValue(numbers.length - 1);
+        nubmerPicker.setMinValue(0);
+        nubmerPicker.setWrapSelectorWheel(true);
+        nubmerPicker.setDisplayedValues(numbers);
+    }
+
+    private boolean isDateFormat(String day, String month) {
+        int isDay = Integer.parseInt(day);
+        int isMonth = Integer.parseInt(month);
+        if (isMonth == 2 || isMonth == 4 || isMonth == 6 || isMonth == 9 || isMonth == 11) {
+            if (isDay > 30) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private int isPositon(int check, String[] list) {
+        int res = 1;
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].equals(String.format("%02d", check))) {
+                res = i;
+            }
+
+        }
+        return res;
+    }
+
+    private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+
+        try {
+            Field selectorWheelPaintField = numberPicker.getClass()
+                    .getDeclaredField("mSelectorWheelPaint");
+            selectorWheelPaintField.setAccessible(true);
+            ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
+        } catch (NoSuchFieldException e) {
+            Log.w("hihi", e);
+        } catch (IllegalAccessException e) {
+            Log.w("hihi", e);
+        } catch (IllegalArgumentException e) {
+            Log.w("hihi", e);
+        }
+
+        final int count = numberPicker.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View child = numberPicker.getChildAt(i);
+            if (child instanceof EditText)
+                ((EditText) child).setTextColor(color);
+        }
+        numberPicker.invalidate();
+    }
+
+    private void mic() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PackageManager.PERMISSION_GRANTED);
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say something…");
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(), "Sorry! Your device doesn\\'t support speech input",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void delete() {
@@ -371,6 +564,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+
     }
 
     private void save() {
@@ -383,9 +577,9 @@ public class ShowDiaryActivity extends AppCompatActivity {
         }
         Log.d("TAG", "save: " + image);
         Diary diary = list.get(i);
-        diary.setTitle(title.getText().toString());
-        diary.setContent(body.getText().toString());
-        diary.setDate(date.getText().toString());
+        diary.setTitle(titleEdit.getText().toString());
+        diary.setContent(bodyEdit.getText().toString());
+        diary.setDate(dateEdit.getText().toString());
         diary.setFilter(filterEdit);
         diary.setVote(filterEdit);
         diary.setImage(image.trim());
@@ -418,25 +612,45 @@ public class ShowDiaryActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SELECT_PICTURES) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data.getClipData() != null) {
-                    int count = data.getClipData().getItemCount();
-                    for (int i = 0; i < count; i++) {
-                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+        switch (requestCode) {
+            case SELECT_PICTURES: {
+                if (resultCode == RESULT_OK) {
+                    if (data.getClipData() != null) {
+                        int count = data.getClipData().getItemCount();
+                        for (int i = 0; i < count; i++) {
+                            Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                            path = ImageFilePath.getPath(ShowDiaryActivity.this, imageUri);
+                            listPath2.add(path);
+                        }
+                    } else if (data.getData() != null) {
+                        Uri imageUri = data.getData();
                         path = ImageFilePath.getPath(ShowDiaryActivity.this, imageUri);
                         listPath2.add(path);
                     }
-                } else if (data.getData() != null) {
-                    String imagePath = data.getData().getPath();
-                    Uri imageUri = data.getData();
-                    path = ImageFilePath.getPath(ShowDiaryActivity.this, imageUri);
-                    listPath2.add(path);
+
                 }
 
+                updateUI();
+                break;
+            }
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    //txtSpeechInput.setText(result.get(0));
+                    if (titleEdit.isFocused()) {
+                        titleEdit.setText((titleEdit.getText().toString() + " " + result.get(0)).trim());
+                        titleEdit.requestFocusFromTouch();
+                    } else if (bodyEdit.isFocused()) {
+                        bodyEdit.setText((bodyEdit.getText().toString() + " " + result.get(0)).trim());
+                        bodyEdit.requestFocusFromTouch();
+                    }
+
+                }
+                break;
             }
         }
-        updateUI();
+
 
     }
 }

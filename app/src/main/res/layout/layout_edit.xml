@@ -13,7 +13,14 @@
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:paddingBottom="5dp">
-
+        <ImageButton
+            android:layout_toStartOf="@+id/imageEdit"
+            android:id="@+id/btnMic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/actionBarItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_microphone" />
         <ImageButton
             android:layout_toStartOf="@+id/saveEdit"
             android:id="@+id/imageEdit"
@@ -72,7 +79,6 @@
     <androidx.core.widget.NestedScrollView
         android:fillViewport="true"
         android:overScrollMode="never"
-        android:layout_above="@+id/bottom"
         android:layout_below="@+id/ke_top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -92,10 +98,12 @@
                 android:background="@drawable/bg_edt"
                 android:hint="Type a title here"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:visibility="visible"
                 android:layout_gravity="center_horizontal"
                 android:scrollbars="none"
                 android:id="@+id/mRecyclerviewEdit"
@@ -104,16 +112,16 @@
                 android:overScrollMode="never" />
 
             <EditText
-
                 android:fontFamily="@font/nobile"
                 android:id="@+id/bodyEdit"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingBottom="100dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edt"
                 android:hint="Note here"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 

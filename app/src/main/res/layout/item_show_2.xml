@@ -10,6 +10,7 @@
     android:orientation="horizontal">
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/startLayout"
         android:layout_width="5dp"
         android:layout_height="110dp"
@@ -26,7 +27,7 @@
         android:layoutMode="opticalBounds"
         android:overScrollMode="never"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="5dp"
         app:cardElevation="5dp"
         app:cardMaxElevation="5dp"
         app:cardPreventCornerOverlap="true"
@@ -39,17 +40,10 @@
             android:background="@color/note"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/top"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="#FF0000" />
-
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/top"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_toStartOf="@+id/card"
@@ -93,17 +87,18 @@
                 android:id="@+id/card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="20dp"
+
+
+                android:layout_margin="10dp"
                 android:elevation="0dp"
                 app:cardCornerRadius="5dp">
 
                 <ImageView
                     android:id="@+id/image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:background="#00FFFFFF" />
             </androidx.cardview.widget.CardView>
 

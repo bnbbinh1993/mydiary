@@ -2,14 +2,18 @@ package com.example.mydiary.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,6 +21,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,14 +62,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class NoteActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
+    private static final int REQ_CODE_SPEECH_INPUT = 100;
     private int vote;
     private int filter;
     private ImageButton mBack;
     private ImageButton mSave;
     private ImageButton btnImage;
+    private ImageButton btnMic;
     private TextView mDate;
     private EditText mTitle;
     private EditText mContent;
@@ -131,28 +141,28 @@ public class NoteActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 title = employees[position];
                 filter = position + 1;
-                switch (position+1){
-                    case 1:{
+                switch (position + 1) {
+                    case 1: {
                         background.setBackgroundColor(getResources().getColor(R.color.event));
                         break;
                     }
-                    case 2:{
+                    case 2: {
                         background.setBackgroundColor(getResources().getColor(R.color.mood));
                         break;
                     }
-                    case 3:{
+                    case 3: {
                         background.setBackgroundColor(getResources().getColor(R.color.work));
                         break;
                     }
-                    case 4:{
+                    case 4: {
                         background.setBackgroundColor(getResources().getColor(R.color.shopping));
                         break;
                     }
-                    case 5:{
+                    case 5: {
                         background.setBackgroundColor(getResources().getColor(R.color.travel));
                         break;
                     }
-                    case 6:{
+                    case 6: {
                         background.setBackgroundColor(getResources().getColor(R.color.cele));
                         break;
                     }
@@ -184,9 +194,9 @@ public class NoteActivity extends AppCompatActivity {
         int d = calendar.get(Calendar.DAY_OF_MONTH);
         int m = calendar.get(Calendar.MONTH) + 1;
         int y = calendar.get(Calendar.YEAR);
-        int h = calendar.get(Calendar.HOUR);
+        int h = calendar.get(Calendar.HOUR_OF_DAY);
         int p = calendar.get(Calendar.MINUTE);
-        mDate.setText(String.format("%02d",h)+":"+String.format("%02d",p)+" - "+d+"."+m+"."+y);
+        mDate.setText(String.format("%02d", h) + ":" + String.format("%02d", p) + " - " + d + "." + m + "." + y);
         employees = new String[]{
                 getResources().getString(R.string._event),
                 getResources().getString(R.string._mood),
@@ -194,6 +204,13 @@ public class NoteActivity extends AppCompatActivity {
                 getResources().getString(R.string._shopping),
                 getResources().getString(R.string._travel),
                 getResources().getString(R.string._celebration)};
+
+
+        if (mTitle.getText().toString().isEmpty()) {
+            mTitle.requestFocus();
+        } else if (mContent.getText().toString().isEmpty()) {
+            mContent.requestFocus();
+        }
 
     }
 
@@ -207,6 +224,7 @@ public class NoteActivity extends AppCompatActivity {
         background = findViewById(R.id.background);
         spinner = findViewById(R.id.spinner);
         btnImage = findViewById(R.id.btnImage);
+        btnMic = findViewById(R.id.btnMic);
 
     }
 
@@ -221,8 +239,7 @@ public class NoteActivity extends AppCompatActivity {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                showdialog();
             }
         });
         mSave.setOnClickListener(new View.OnClickListener() {
@@ -238,11 +255,29 @@ public class NoteActivity extends AppCompatActivity {
                 date();
             }
         });
+        btnMic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mic();
+            }
+        });
 
 
+    }
 
-
-
+    private void mic() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PackageManager.PERMISSION_GRANTED);
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say something…");
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(), "Sorry! Your device doesn\\'t support speech input",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void save() {
@@ -254,8 +289,10 @@ public class NoteActivity extends AppCompatActivity {
             image += " " + s;
         }
         if (title.isEmpty()) {
+            mTitle.requestFocus();
             Toast.makeText(this, getResources().getString(R.string._notification_title), Toast.LENGTH_SHORT).show();
         } else if (content.isEmpty()) {
+            mContent.requestFocus();
             Toast.makeText(this, getResources().getString(R.string._notification_des), Toast.LENGTH_SHORT).show();
         } else {
             Diary diary = new Diary();
@@ -309,7 +346,7 @@ public class NoteActivity extends AppCompatActivity {
         int d = calendar.get(Calendar.DAY_OF_MONTH);
         int m = calendar.get(Calendar.MONTH) + 1;
         int y = calendar.get(Calendar.YEAR);
-        int h = calendar.get(Calendar.HOUR);
+        int h = calendar.get(Calendar.HOUR_OF_DAY);
         int p = calendar.get(Calendar.MINUTE);
 
         Log.d("D", "onClick: " + d);
@@ -354,6 +391,7 @@ public class NoteActivity extends AppCompatActivity {
         androidx.appcompat.app.AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
     private boolean checkDate(String s) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
@@ -365,12 +403,14 @@ public class NoteActivity extends AppCompatActivity {
         }
         return false;
     }
+
     private void setNubmerPicker(NumberPicker nubmerPicker, String[] numbers) {
         nubmerPicker.setMaxValue(numbers.length - 1);
         nubmerPicker.setMinValue(0);
         nubmerPicker.setWrapSelectorWheel(true);
         nubmerPicker.setDisplayedValues(numbers);
     }
+
     private boolean isDateFormat(String day, String month) {
         int isDay = Integer.parseInt(day);
         int isMonth = Integer.parseInt(month);
@@ -381,6 +421,7 @@ public class NoteActivity extends AppCompatActivity {
         }
         return true;
     }
+
     private int isPositon(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
@@ -391,6 +432,7 @@ public class NoteActivity extends AppCompatActivity {
         }
         return res;
     }
+
     private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
 
         try {
@@ -470,24 +512,46 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SELECT_PICTURES) {
-            if (resultCode == Activity.RESULT_OK) {
-                if (data.getClipData() != null) {
-                    int count = data.getClipData().getItemCount();
-                    for (int i = 0; i < count; i++) {
-                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
+        switch (requestCode) {
+            case SELECT_PICTURES: {
+                if (resultCode == Activity.RESULT_OK) {
+                    if (data.getClipData() != null) {
+                        int count = data.getClipData().getItemCount();
+                        for (int i = 0; i < count; i++) {
+                            Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                            path = ImageFilePath.getPath(NoteActivity.this, imageUri);
+                            resPath.add(path);
+                        }
+                    } else if (data.getData() != null) {
+                        String imagePath = data.getData().getPath();
+                        Uri imageUri = data.getData();
                         path = ImageFilePath.getPath(NoteActivity.this, imageUri);
                         resPath.add(path);
                     }
-                } else if (data.getData() != null) {
-                    String imagePath = data.getData().getPath();
-                    Uri imageUri = data.getData();
-                    path = ImageFilePath.getPath(NoteActivity.this, imageUri);
-                    resPath.add(path);
+                    updateData(resPath);
                 }
-                updateData(resPath);
+
+
+                break;
+            }
+            case REQ_CODE_SPEECH_INPUT:{
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    //txtSpeechInput.setText(result.get(0));
+                    if (mTitle.isFocused()){
+                        mTitle.setText((mTitle.getText().toString()+" "+result.get(0)).trim());
+                        mTitle.requestFocusFromTouch();
+                    }else if (mContent.isFocused()){
+                        mContent.setText((mContent.getText().toString()+" "+result.get(0)).trim());
+                        mContent.requestFocusFromTouch();
+                    }
+
+                }
             }
         }
+
         Log.d("SIZE", "onActivityResult: " + resPath.size());
     }
 

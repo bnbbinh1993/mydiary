@@ -14,13 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mydiary">
         <activity android:name=".activity.SettingActivity"></activity>
-        <activity android:name=".activity.EditCountActivity" />
+        <activity
+            android:name=".activity.EditCountActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.EditActivity" />
         <activity android:name=".activity.ShowFollowActivity" />
-        <activity android:name=".activity.ShowDiaryActivity" />
+        <activity
+            android:name=".activity.ShowDiaryActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.FinishActivity" />
-        <activity android:name=".activity.CountDownActivity" />
-        <activity android:name=".activity.NoteActivity" />
+        <activity
+            android:name=".activity.CountDownActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.NoteActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

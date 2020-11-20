@@ -67,6 +67,7 @@ public class CreateFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     startActivity(new Intent(getContext(), NoteActivity.class));
+                    getActivity(). overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
                 } else if (position==1){
                     //startActivity(new Intent(getContext(), MoodActivity.class));
                 }else if (position==2){
@@ -82,6 +83,7 @@ public class CreateFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
                     startActivity(new Intent(getContext(), CountDownActivity.class));
+                    getActivity(). overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
                 }
             }
         });
