@@ -1,6 +1,7 @@
 package com.example.mydiary.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,7 @@ import com.example.mydiary.R;
 import com.example.mydiary.activity.CountDownActivity;
 import com.example.mydiary.activity.NoteActivity;
 import com.example.mydiary.activity.SettingActivity;
+import com.example.mydiary.models.App;
 import com.example.mydiary.models.Create;
 
 
@@ -29,7 +31,7 @@ public class CreateFragment extends Fragment {
 
     private ArrayList<Create> list;
     private ArrayList<Create> list2;
-    private ArrayList<Create> list3;
+    private ArrayList<App> list3;
     private GridView mGridView;
     private GridView mGridView2;
     private GridView mGridView3;
@@ -91,7 +93,21 @@ public class CreateFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    Toast.makeText(getContext(), "abc", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=vn.bnb.binh.foreveralone"));
+
+                    try {
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }else if (position==1){
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=vn.truatvl.qrcodegenerator"));
+
+                    try {
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -114,8 +130,9 @@ public class CreateFragment extends Fragment {
 //        list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
         list2.add(new Create(getResources().getString(R.string._count_time),R.drawable.ic_countdown,R.color.countdown));
         list2.add(new Create(getResources().getString(R.string._emotion),R.drawable.ic_emoticons,R.color.event));
-        list3.add(new Create(getResources().getString(R.string._mood),R.drawable.ic_angry,R.color.mood));
-        list3.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
+        list3.add(new App("Đếm ngày cô đơn","Giải trí",R.drawable.alone,R.color.event));
+        list3.add(new App("Tạo và quét mã qr","Công cụ",R.drawable.qrapp,R.color.note));
+
 
 
     }
@@ -197,14 +214,16 @@ public class CreateFragment extends Fragment {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            View view2 = getLayoutInflater().inflate(R.layout.item_create, null);
+            View view2 = getLayoutInflater().inflate(R.layout.item_app, null);
 
             ImageView image = view2.findViewById(R.id.mIcon);
             TextView name = view2.findViewById(R.id.mName);
+            TextView category = view2.findViewById(R.id.mCategory);
 
             image.setImageResource(list3.get(i).getIcon());
             image.setBackgroundResource(list3.get(i).getColor());
             name.setText(list3.get(i).getName());
+            category.setText(list3.get(i).getCategory());
             return view2;
 
         }

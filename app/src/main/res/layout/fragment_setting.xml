@@ -36,11 +36,13 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"/>
             <TextView
-                android:fontFamily="@font/nobile"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/playball"
                 android:padding="2dp"
-                android:textColor="#DA00FF"
-                android:layout_marginTop="15dp"
-                android:text="@string/app_name"
+                android:textColor="#00FF0A"
+                android:text="My Diary"
                 android:layout_toEndOf="@+id/icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -48,8 +50,8 @@
                 android:layout_marginStart="10dp"
                 android:id="@+id/mContent"
                 android:layout_below="@+id/icon"
-                android:text="Tiếp tục viết trong 5 ngày nữa"
-                android:fontFamily="@font/crete_round"
+                android:text="Lưu trữ nhưng kỷ niểm của riêng bạn"
+                android:fontFamily="@font/nobile"
                 android:padding="2dp"
                 android:textColor="#FFFFFF"
                 android:layout_width="wrap_content"
@@ -99,7 +101,7 @@
         android:padding="15dp">
 
         <RelativeLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
@@ -108,22 +110,46 @@
                 android:id="@+id/img1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_volume" />
+                android:src="@drawable/ic_key" />
 
             <Switch
-                android:id="@+id/mSound"
+                android:id="@+id/mKey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true" />
 
             <TextView
+                android:fontFamily="@font/nobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img1"
-                android:text="Notification sound"
+                android:text="@string/_use_of_password"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imagekeys"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keys" />
+
+            <TextView
+                android:fontFamily="@font/nobile"
+                android:id="@+id/mKeys"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/imagekeys"
+                android:text="@string/_change_password"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -137,12 +163,13 @@
                 android:src="@drawable/ic_heart_shape" />
 
             <TextView
+                android:fontFamily="@font/nobile"
                 android:id="@+id/mRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/imageRate"
-                android:text="Rate app"
+                android:text="@string/_rate_app"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -160,12 +187,13 @@
                 android:src="@drawable/ic_mail" />
 
             <TextView
+                android:fontFamily="@font/nobile"
                 android:id="@+id/mFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img2"
-                android:text="Feedback"
+                android:text="@string/_feed_back"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -182,12 +210,13 @@
                 android:src="@drawable/ic_open_lock" />
 
             <TextView
+                android:fontFamily="@font/nobile"
                 android:id="@+id/mPollicy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img3"
-                android:text="Privacy policy"
+                android:text="@string/_privacy_policy"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -195,6 +224,7 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:visibility="gone"
         android:elevation="@dimen/cardview_compat_inset_shadow"
         android:layout_margin="30dp"
         android:layout_width="match_parent"

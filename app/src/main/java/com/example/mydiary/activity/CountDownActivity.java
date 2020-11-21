@@ -167,11 +167,13 @@ public class CountDownActivity extends AppCompatActivity {
                 intent.putExtra("I", 0);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.out_left, R.anim.in_left);
             } catch (InterruptedException e) {
                 Intent intent = new Intent(CountDownActivity.this, FinishActivity.class);
                 intent.putExtra("I", 0);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.out_left, R.anim.in_left);
             }
         }
 
@@ -405,6 +407,7 @@ public class CountDownActivity extends AppCompatActivity {
         Intent intent = new Intent(CountDownActivity.this, AlarmReceiver.class);
         intent.putExtra("title", title);
         intent.putExtra("id", id);
+        intent.putExtra("key",getString(R.string._messenger_notiofication));
         PendingIntent pendingIntent = PendingIntent.getBroadcast(CountDownActivity.this, id, intent, 0);
         manager.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + timedelay, pendingIntent);
         ComponentName receiver = new ComponentName(CountDownActivity.this, AlarmReceiver.class);

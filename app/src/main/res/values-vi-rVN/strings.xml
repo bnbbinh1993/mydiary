@@ -64,4 +64,16 @@
     <string name="_tools">Công cụ</string>
     <string name="_emotion">Cảm xúc</string>
     <string name="_analysis">Phân tích</string>
+    <string name="_messenger_password">Nhập mật mã gồm 6 chữ số</string>
+    <string name="_messenger_re_pass">Nhập lại mật mã mới</string>
+    <string name="_messenger_wrong">Mật mã không khớp</string>
+    <string name="_messenger_correct">Mật mã là chính xác</string>
+    <string name="_change_password">Đổi mật khẩu</string>
+    <string name="_use_of_password">Sử dụng mật khẩu</string>
+    <string name="_rate_app">Đánh giá úng dụng</string>
+    <string name="_feed_back">Phẩn hồi</string>
+    <string name="_privacy_policy">Chính sách bảo mật</string>
+    <string name="_messenger_keypass">Nhập mật mã cũ</string>
+    <string name="_messenger_remind">Hôm nay bạn thế nào? Viết nhanh những dòng nhật ký của bạn!</string>
+    <string name="_messenger_notiofication">Có những sự kiện đang diễn ra. Vui lòng kiểm tra lại!</string>
 </resources>

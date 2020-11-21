@@ -55,7 +55,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         holder.date.setText(model.getDate());
         if (model.getImage() != null) {
             if (!model.getImage().trim().isEmpty()) {
-                String s[] = model.getImage().split("\\s+");
+                String s[] = model.getImage().split("<->");
                 File file = new File(s[0]);
                 Glide.with(context)
                         .load(file)

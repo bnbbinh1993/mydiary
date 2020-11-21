@@ -21,7 +21,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Intent hihi = new Intent(context, MainActivity.class);
         String title  = intent.getStringExtra("title");
+        String key  = intent.getStringExtra("key");
         int id  = intent.getIntExtra("id",100);
+
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context,id,hihi,0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"study_reminder")
@@ -30,9 +32,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentIntent(pendingIntent)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("Có sự kiện sắp diễn ra. Hãy vào để kiểm tra nào."))
-                .setContentText("Có sự kiện sắp diễn ra. Hãy vào để kiểm tra nào.")
-                .setContentInfo("Có sự kiện sắp diễn ra. Hãy vào để kiểm tra nào.")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(key))
+                .setContentText(key)
+                .setContentInfo(key)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 

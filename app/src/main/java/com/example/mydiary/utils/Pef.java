@@ -33,9 +33,8 @@ public class Pef {
     private static Context context;
     private static String result;
     private static SharedPreferences preferences;
-
-    public Pef(Context context) {
-        this.context = context;
+    public static  void getReference(Context c){
+        context = c;
     }
 
     public static void setLong(String name, long gt) {

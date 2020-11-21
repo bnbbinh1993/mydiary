@@ -195,7 +195,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         int i = getIntent().getIntExtra("position", 0);
         list = new DatabaseHelper(this).getData();
         Collections.reverse(list);
-        String s[] = list.get(i).getImage().trim().split("\\s+");
+        String s[] = list.get(i).getImage().trim().split("<->");
         if (s.length > 0) {
             for (int j = 0; j < s.length; j++) {
                 if (!s[j].isEmpty()) {
@@ -573,7 +573,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         Collections.reverse(list);
         String image = "";
         for (String s : listPath2) {
-            image += " " + s;
+            image = image + s+"<->";
         }
         Log.d("TAG", "save: " + image);
         Diary diary = list.get(i);

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:padding="8dp"
+    android:gravity="start|center"
+    android:layout_gravity="start|center"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        app:cardMaxElevation="0dp"
+        android:elevation="0dp"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="8dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp">
+        <ImageView
+            android:id="@+id/mIcon"
+            android:background="#7CFFB69F"
+            android:padding="10dp"
+            android:src="@drawable/ic_notes"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+    </androidx.cardview.widget.CardView>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/mName"
+            android:textColor="@color/black"
+            android:fontFamily="@font/nobile"
+            android:textSize="12sp"
+            android:paddingStart="10dp"
+            android:text="Bùi Ngọc bình"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/mCategory"
+            android:textColor="#4E4E4E"
+            android:fontFamily="@font/nobile"
+            android:textSize="10sp"
+            android:paddingStart="10dp"
+            android:text="Giải trí"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

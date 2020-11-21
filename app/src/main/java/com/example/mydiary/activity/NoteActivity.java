@@ -286,7 +286,7 @@ public class NoteActivity extends AppCompatActivity {
         String date = mDate.getText().toString();
         String image = "";
         for (String s : resPath) {
-            image += " " + s;
+            image = image + s + "<->";
         }
         if (title.isEmpty()) {
             mTitle.requestFocus();
@@ -534,17 +534,17 @@ public class NoteActivity extends AppCompatActivity {
 
                 break;
             }
-            case REQ_CODE_SPEECH_INPUT:{
+            case REQ_CODE_SPEECH_INPUT: {
                 if (resultCode == RESULT_OK && null != data) {
 
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     //txtSpeechInput.setText(result.get(0));
-                    if (mTitle.isFocused()){
-                        mTitle.setText((mTitle.getText().toString()+" "+result.get(0)).trim());
+                    if (mTitle.isFocused()) {
+                        mTitle.setText((mTitle.getText().toString() + " " + result.get(0)).trim());
                         mTitle.requestFocusFromTouch();
-                    }else if (mContent.isFocused()){
-                        mContent.setText((mContent.getText().toString()+" "+result.get(0)).trim());
+                    } else if (mContent.isFocused()) {
+                        mContent.setText((mContent.getText().toString() + " " + result.get(0)).trim());
                         mContent.requestFocusFromTouch();
                     }
 

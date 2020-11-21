@@ -67,4 +67,16 @@
     <string name="_tools">Tools</string>
     <string name="_emotion">Emotion</string>
     <string name="_analysis">Analysis</string>
+    <string name="_messenger_password">Enter a passcode of 6 digits</string>
+    <string name="_messenger_re_pass">Re-enter new passcode</string>
+    <string name="_messenger_wrong">Passcode do not match</string>
+    <string name="_messenger_correct">Passcode is corect</string>
+    <string name="_change_password">Change Password</string>
+    <string name="_use_of_password">Use of passwords</string>
+    <string name="_rate_app">Rate app</string>
+    <string name="_feed_back">Feedback</string>
+    <string name="_privacy_policy">Privacy policy</string>
+    <string name="_messenger_keypass">Enter the old code</string>
+    <string name="_messenger_remind">How are you today? Write quickly your diary lines!</string>
+    <string name="_messenger_notiofication">There are events going on. Please check again!</string>
 </resources>

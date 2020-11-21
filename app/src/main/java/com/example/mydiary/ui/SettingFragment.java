@@ -14,11 +14,16 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.mydiary.MainActivity;
 import com.example.mydiary.R;
+import com.example.mydiary.activity.ChangePasswordActivity;
+import com.example.mydiary.activity.CreatePassWordActivity;
+import com.example.mydiary.models.Create;
+import com.example.mydiary.utils.Pef;
 
 public class SettingFragment extends Fragment {
-    private TextView mFeedback, mLogin, mPollicy, mRate;
-    private Switch mSound;
+    private TextView mFeedback, mLogin, mPollicy, mRate,mKeys;
+    private Switch mKey;
 
     public static SettingFragment newInstance() {
         SettingFragment fragment = new SettingFragment();
@@ -30,8 +35,14 @@ public class SettingFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         init(view);
+        initSetUp();
         initClick();
         return view;
+    }
+
+    private void initSetUp() {
+        Pef.getReference(getActivity());
+        mKey.setChecked(Pef.getBoolean("isPassWord"));
     }
 
     private void initClick() {
@@ -53,10 +64,10 @@ public class SettingFragment extends Fragment {
                 login();
             }
         });
-        mSound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        mKey.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                sound();
+               key(isChecked);
             }
         });
         mRate.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +82,28 @@ public class SettingFragment extends Fragment {
                 }
             }
         });
+        mKeys.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
+            }
+        });
+    }
+
+    private void key(boolean isChecked) {
+        if (!Pef.getBoolean("isPassWord") && Pef.getString("PassWord","isPassWord").equals("isPassWord")){
+            mKey.setChecked(isChecked);
+            Intent intent = new Intent(getContext(), CreatePassWordActivity.class);
+            startActivity(intent);
+        }else if (!Pef.getBoolean("isPassWord") && !Pef.getString("PassWord","isPassWord").equals("isPassWord")){
+            mKey.setChecked(isChecked);
+            Pef.setBoolean("isPassWord",isChecked);
+        }else if (Pef.getBoolean("isPassWord") && !Pef.getString("PassWord","isPassWord").equals("isPassWord")){
+            mKey.setChecked(isChecked);
+            Pef.setBoolean("isPassWord",isChecked);
+        }
     }
 
     private void pollicy() {
@@ -81,15 +114,14 @@ public class SettingFragment extends Fragment {
 
     }
 
-    private void sound() {
 
-    }
 
     private void init(View view) {
         mFeedback = view.findViewById(R.id.mFeedback);
         mLogin = view.findViewById(R.id.mLogin);
         mPollicy = view.findViewById(R.id.mPollicy);
-        mSound = view.findViewById(R.id.mSound);
+        mKey = view.findViewById(R.id.mKey);
+        mKeys = view.findViewById(R.id.mKeys);
         mRate = view.findViewById(R.id.mRate);
     }
 
