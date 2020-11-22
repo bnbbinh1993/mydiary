@@ -80,4 +80,7 @@
     <string name="_messenger_notiofication">There are events going on. Please check again!</string>
     <string name="_toast">Click it again to exit.</string>
     <string name="_celebration">Other</string>
+    <string name="_bands">Sorry ! Your account is temporarily locked.</string>
+    <string name="_bands_2">Please contact us for assistance.</string>
+    <string name="_enter_code">Enter code</string>
 </resources>

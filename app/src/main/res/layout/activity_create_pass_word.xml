@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.CreatePassWordActivity">
-    <com.hanks.passcodeview.PasscodeView
+    <com.example.mydiary.utils.Bands
         android:id="@+id/passcodeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

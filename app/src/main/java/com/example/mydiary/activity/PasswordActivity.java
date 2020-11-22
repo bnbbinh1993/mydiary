@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,55 +22,64 @@ import android.widget.Toast;
 import com.example.mydiary.MainActivity;
 import com.example.mydiary.R;
 import com.example.mydiary.receiver.AlarmReceiver;
+import com.example.mydiary.utils.Bands;
 import com.example.mydiary.utils.Pef;
 import com.hanks.passcodeview.PasscodeView;
 
 import java.util.Calendar;
 
 public class PasswordActivity extends AppCompatActivity {
-    private PasscodeView passcodeView;
+    private Bands passcodeView;
+    private int mSyntaxerror = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
-
+        passcodeView = findViewById(R.id.passcodeView);
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
+            Pef.setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
         }
         if (Build.VERSION.SDK_INT >= 19) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+            Pef.setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-
-        passcodeView = findViewById(R.id.passcodeView);
         Pef.getReference(getApplication());
 
         initNotification();
-
-        if (Pef.getBoolean("isPassWord")) {
-            passcodeView.setPasscodeLength(6).setLocalPasscode(Pef.getString("PassWord", "isPassWord")).setListener(new PasscodeView.PasscodeViewListener() {
-                @Override
-                public void onFail() {
-
-                }
-
-                @Override
-                public void onSuccess(String number) {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
-                    overridePendingTransition(R.anim.out_left, R.anim.in_left);
-                }
-            });
-
-        } else {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
+        if (Pef.getBoolean("isBands")) {
+            startActivity(new Intent(getApplicationContext(), BandsActivity.class));
             overridePendingTransition(R.anim.out_left, R.anim.in_left);
+            finish();
+        } else {
+            if (Pef.getBoolean("isPassWord")) {
+                passcodeView.setPasscodeLength(6)
+                        .setLocalPasscode(Pef.getString("PassWord", "isPassWord"))
+                        .setListener(new Bands.PasscodeViewListener() {
+                            @Override
+                            public void onFail() {
+
+                            }
+
+                            @Override
+                            public void onSuccess(String number) {
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
+                                overridePendingTransition(R.anim.out_left, R.anim.in_left);
+                            }
+                        });
+
+
+            } else {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+                overridePendingTransition(R.anim.out_left, R.anim.in_left);
+            }
         }
+
 
     }
 
@@ -91,16 +101,17 @@ public class PasswordActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
-    private void initNotification(){
+
+    private void initNotification() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 21);
         calendar.set(Calendar.MINUTE, 0);
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(PasswordActivity.this, AlarmReceiver.class);
-        intent.putExtra("key",getString(R.string._messenger_remind));
-        intent.putExtra("id",1000);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,1000,intent,0);
+        intent.putExtra("key", getString(R.string._messenger_remind));
+        intent.putExtra("id", 1000);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1000, intent, 0);
         manager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
         ComponentName receiver = new ComponentName(PasswordActivity.this, AlarmReceiver.class);

@@ -11,12 +11,13 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.mydiary.R;
+import com.example.mydiary.utils.Bands;
 import com.example.mydiary.utils.Pef;
 import com.hanks.passcodeview.PasscodeView;
 
 public class ChangePasswordActivity extends AppCompatActivity {
-    private PasscodeView passcodeView;
-    private PasscodeView passcodeView2;
+    private Bands passcodeView;
+    private Bands passcodeView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
         passcodeView2 = findViewById(R.id.passcodeView2);
         Pef.getReference(getApplication());
 
-        passcodeView.setPasscodeLength(6).setLocalPasscode(Pef.getString("PassWord", "isPassWord")).setListener(new PasscodeView.PasscodeViewListener() {
+        passcodeView.setPasscodeLength(6).
+                setLocalPasscode(Pef.getString("PassWord", "isPassWord"))
+                .setListener(new Bands.PasscodeViewListener() {
             @Override
             public void onFail() {
 
@@ -48,7 +51,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             public void onSuccess(String number) {
                 passcodeView.setVisibility(View.GONE);
                 passcodeView2.setVisibility(View.VISIBLE);
-                passcodeView2.setPasscodeLength(6).setListener(new PasscodeView.PasscodeViewListener() {
+                passcodeView2.setPasscodeLength(6).setListener(new Bands.PasscodeViewListener() {
                     @Override
                     public void onFail() {
 

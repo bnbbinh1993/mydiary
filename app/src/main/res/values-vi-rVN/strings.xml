@@ -70,11 +70,13 @@
     <string name="_messenger_correct">Mật mã là chính xác</string>
     <string name="_change_password">Đổi mật khẩu</string>
     <string name="_use_of_password">Sử dụng mật khẩu</string>
-    <string name="_rate_app">Đánh giá úng dụng</string>
+    <string name="_rate_app">Đánh giá ứng dụng</string>
     <string name="_feed_back">Phẩn hồi</string>
     <string name="_privacy_policy">Chính sách bảo mật</string>
     <string name="_messenger_keypass">Nhập mật mã cũ</string>
     <string name="_messenger_remind">Hôm nay bạn thế nào? Viết nhanh những dòng nhật ký của bạn!</string>
     <string name="_messenger_notiofication">Có những sự kiện đang diễn ra. Vui lòng kiểm tra lại!</string>
     <string name="_toast">Nhấp vào nó một lần nữa để thoát.</string>
+    <string name="_bands">Xin lỗi ! Tài khoản của bạn tàm thời bị khóa.</string>
+    <string name="_bands_2">Hãy liên hệ với chúng tôi để được hỗ trợ.</string>
 </resources>
