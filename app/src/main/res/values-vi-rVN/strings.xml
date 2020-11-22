@@ -15,7 +15,7 @@
     <string name="_travel">Du lịch</string>
     <string name="_shopping">Mua sắm</string>
     <string name="_upcoming">Sắp tới</string>
-    <string name="_celebration">Lễ kỷ niệm</string>
+    <string name="_celebration">Khác</string>
     <string name="_place">Địa điểm</string>
     <string name="_color">Màu sắc</string>
     <string name="_day">Ngày</string>
@@ -76,4 +76,5 @@
     <string name="_messenger_keypass">Nhập mật mã cũ</string>
     <string name="_messenger_remind">Hôm nay bạn thế nào? Viết nhanh những dòng nhật ký của bạn!</string>
     <string name="_messenger_notiofication">Có những sự kiện đang diễn ra. Vui lòng kiểm tra lại!</string>
+    <string name="_toast">Nhấp vào nó một lần nữa để thoát.</string>
 </resources>

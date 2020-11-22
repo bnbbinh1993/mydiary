@@ -42,15 +42,16 @@ public class MainActivity extends AppCompatActivity {
     private FollowFragment followFragment;
     private SettingFragment settingFragment;
     private AnalysisFragment analysisFragment;
+    private int backClick = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(this, new String[]{WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
         init();
         bottmNavigationView();
+
         //viewpagerShow();
         //showdialog();
     }
@@ -191,5 +192,15 @@ public class MainActivity extends AppCompatActivity {
 
         setupViewPager(viewPager);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backClick == 1) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, R.string._toast, Toast.LENGTH_SHORT).show();
+            backClick++;
+        }
     }
 }

@@ -73,4 +73,10 @@ public class CreatePassWordActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.out_left, R.anim.in_left);
+    }
 }

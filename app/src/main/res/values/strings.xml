@@ -18,7 +18,6 @@
     <string name="_travel">Travel</string>
     <string name="_shopping">Shopping</string>
     <string name="_upcoming">Upcoming</string>
-    <string name="_celebration">Celebration</string>
     <string name="_place">Place</string>
     <string name="_color">Color</string>
     <string name="_day">Day</string>
@@ -79,4 +78,6 @@
     <string name="_messenger_keypass">Enter the old code</string>
     <string name="_messenger_remind">How are you today? Write quickly your diary lines!</string>
     <string name="_messenger_notiofication">There are events going on. Please check again!</string>
+    <string name="_toast">Click it again to exit.</string>
+    <string name="_celebration">Other</string>
 </resources>

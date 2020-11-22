@@ -22,4 +22,7 @@
     <color name="top_shopping">#FFE900</color>
     <color name="cele">#DD98A7FF</color>
     <color name="top_cele">#0024FF</color>
+    <color name="bottom_navigation">#23cf5a</color>
+    <color name="bottom_navigation2">#9C27B0</color>
+
 </resources>

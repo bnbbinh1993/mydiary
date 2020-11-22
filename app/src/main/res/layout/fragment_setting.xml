@@ -27,69 +27,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/test2" />
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:src="@mipmap/ic_launcher"
-                android:layout_width="25dp"
-                android:layout_height="25dp"/>
+                android:src="@drawable/test3" />
             <TextView
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"
-                android:fontFamily="@font/playball"
-                android:padding="2dp"
-                android:textColor="#00FF0A"
-                android:text="My Diary"
-                android:layout_toEndOf="@+id/icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_marginStart="10dp"
-                android:id="@+id/mContent"
-                android:layout_below="@+id/icon"
-                android:text="Lưu trữ nhưng kỷ niểm của riêng bạn"
-                android:fontFamily="@font/nobile"
-                android:padding="2dp"
-                android:textColor="#FFFFFF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_margin="15dp"
+                android:layout_centerHorizontal="true"
 
-            <TextView
-                android:fontFamily="@font/playball"
-                android:id="@+id/mCount"
-                android:layout_margin="10dp"
-                android:textColor="@color/white"
-                android:layout_below="@+id/mContent"
-                android:textSize="30dp"
-                android:text="3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/mName"
-                android:layout_marginStart="10dp"
-                android:layout_below="@+id/mCount"
-                android:text="Nhật ký"
-                android:fontFamily="@font/playball"
-                android:padding="2dp"
-                android:textColor="#FFFFFF"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/mName"
-                android:layout_marginStart="10dp"
                 android:fontFamily="@font/playball"
                 android:padding="2dp"
-                android:text="A Diary Mean Yes Indeed"
-                android:textColor="#00FF54"
+                android:text="Cherish every minute and every second"
+                android:textColor="@color/bottom_navigation2"
                 android:textSize="20sp"
-                android:textStyle="italic" />
-
+                android:textStyle="bold" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
