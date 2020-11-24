@@ -87,7 +87,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
                     model.setVote(1);
                     model.setPrioritize(0);
                     count.update(model);
-                    stopService(activity,(int)timeCount);
+
                 }
             } catch (ParseException e) {
                 e.printStackTrace();

@@ -190,8 +190,10 @@ public class ShowFragment extends Fragment {
     private void updateUI() {
         if (list.size() <= 0){
             no_item.setVisibility(View.VISIBLE);
+            fab.setVisibility(View.GONE);
         }else {
             no_item.setVisibility(View.GONE);
+            fab.setVisibility(View.VISIBLE);
         }
     }
 

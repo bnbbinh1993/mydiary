@@ -22,14 +22,13 @@ import android.widget.Toast;
 import com.example.mydiary.MainActivity;
 import com.example.mydiary.R;
 import com.example.mydiary.receiver.AlarmReceiver;
-import com.example.mydiary.utils.Bands;
 import com.example.mydiary.utils.Pef;
 import com.hanks.passcodeview.PasscodeView;
 
 import java.util.Calendar;
 
 public class PasswordActivity extends AppCompatActivity {
-    private Bands passcodeView;
+    private PasscodeView passcodeView;
     private int mSyntaxerror = 0;
 
     @Override
@@ -58,11 +57,19 @@ public class PasswordActivity extends AppCompatActivity {
             if (Pef.getBoolean("isPassWord")) {
                 passcodeView.setPasscodeLength(6)
                         .setLocalPasscode(Pef.getString("PassWord", "isPassWord"))
-                        .setListener(new Bands.PasscodeViewListener() {
+                        .setListener(new PasscodeView.PasscodeViewListener() {
                             @Override
                             public void onFail() {
-
+                                Log.d("TAG", "onFail: đang ở đây nè <3");
+                                mSyntaxerror++;
+                                if (mSyntaxerror >= 5) {
+                                    Pef.setBoolean("isBands", true);
+                                    startActivity(new Intent(getApplicationContext(), BandsActivity.class));
+                                    overridePendingTransition(R.anim.out_left, R.anim.in_left);
+                                    finish();
+                                }
                             }
+
 
                             @Override
                             public void onSuccess(String number) {
@@ -71,7 +78,6 @@ public class PasswordActivity extends AppCompatActivity {
                                 overridePendingTransition(R.anim.out_left, R.anim.in_left);
                             }
                         });
-
 
             } else {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));

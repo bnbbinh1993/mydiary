@@ -8,7 +8,7 @@
     tools:context=".ui.CreateFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="190dp"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="10dp">
 
         <RelativeLayout
             android:visibility="visible"
@@ -149,6 +149,7 @@
 
         </RelativeLayout>
         <RelativeLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
@@ -174,9 +175,10 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:visibility="gone"
+        android:visibility="visible"
         android:elevation="@dimen/cardview_compat_inset_shadow"
-        android:layout_margin="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -188,7 +190,7 @@
             android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:src="@mipmap/ic_launcher"
-                android:id="@+id/iconuserId"
+                android:id="@+id/mAvt"
                 android:layout_margin="5dp"
                 android:gravity="center"
                 android:layout_gravity="center"
@@ -206,7 +208,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/signoutId"
+                android:id="@+id/mText"
                 android:layout_margin="5dp"
                 android:gravity="center"
                 android:layout_gravity="center"

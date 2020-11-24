@@ -13,13 +13,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.mydiary.R;
-import com.example.mydiary.utils.Bands;
 import com.example.mydiary.utils.Pef;
 import com.hanks.passcodeview.PasscodeView;
 
 public class CreatePassWordActivity extends AppCompatActivity {
 
-    private Bands passcodeView;
+    private PasscodeView passcodeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class CreatePassWordActivity extends AppCompatActivity {
         passcodeView = findViewById(R.id.passcodeView);
         Pef.getReference(getApplication());
 
-        passcodeView.setPasscodeLength(6).setListener(new Bands.PasscodeViewListener() {
+        passcodeView.setPasscodeLength(6).setListener(new PasscodeView.PasscodeViewListener() {
             @Override
             public void onFail() {
                 Toast.makeText(CreatePassWordActivity.this, "Faild", Toast.LENGTH_SHORT).show();

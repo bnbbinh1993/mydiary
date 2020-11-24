@@ -11,13 +11,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.mydiary.R;
-import com.example.mydiary.utils.Bands;
 import com.example.mydiary.utils.Pef;
 import com.hanks.passcodeview.PasscodeView;
 
 public class ChangePasswordActivity extends AppCompatActivity {
-    private Bands passcodeView;
-    private Bands passcodeView2;
+    private PasscodeView passcodeView;
+    private PasscodeView passcodeView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +37,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
         passcodeView = findViewById(R.id.passcodeView);
         passcodeView2 = findViewById(R.id.passcodeView2);
         Pef.getReference(getApplication());
-
-        passcodeView.setPasscodeLength(6).
-                setLocalPasscode(Pef.getString("PassWord", "isPassWord"))
-                .setListener(new Bands.PasscodeViewListener() {
+        passcodeView.setPasscodeLength(6).setLocalPasscode(Pef.getString("PassWord", "isPassWord")).setListener(new PasscodeView.PasscodeViewListener() {
             @Override
             public void onFail() {
-
             }
-
             @Override
             public void onSuccess(String number) {
                 passcodeView.setVisibility(View.GONE);
                 passcodeView2.setVisibility(View.VISIBLE);
-                passcodeView2.setPasscodeLength(6).setListener(new Bands.PasscodeViewListener() {
+                passcodeView2.setPasscodeLength(6).setListener(new PasscodeView.PasscodeViewListener() {
                     @Override
                     public void onFail() {
 
@@ -81,6 +75,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.out_left, R.anim.in_left);
+
     }
 }

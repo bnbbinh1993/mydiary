@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.mydiary.adapters.ViewPagerAdapter;
 import com.example.mydiary.ui.AnalysisFragment;
 import com.example.mydiary.ui.CreateFragment;
+import com.example.mydiary.ui.DairyFragment;
 import com.example.mydiary.ui.FollowFragment;
 import com.example.mydiary.ui.SettingFragment;
 import com.example.mydiary.ui.ShowFragment;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private MenuItem prevMenuItem;
     private CreateFragment createFragment;
-    private ShowFragment showFragment;
+    private DairyFragment dairyFragment;
     private FollowFragment followFragment;
     private SettingFragment settingFragment;
     private AnalysisFragment analysisFragment;
@@ -119,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
                         //viewPager.setCurrentItem(0);
                         break;
                     case R.id.homeId:
-                        if (selectedFragment != ShowFragment.newInstance()){
-                            selectedFragment = ShowFragment.newInstance();
+                        if (selectedFragment != DairyFragment.newInstance()){
+                            selectedFragment = DairyFragment.newInstance();
                         }
 
                        // viewPager.setCurrentItem(1);
@@ -151,12 +152,12 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         createFragment = new CreateFragment();
-        showFragment = new ShowFragment();
+        dairyFragment = new DairyFragment();
         followFragment = new FollowFragment();
         settingFragment = new SettingFragment();
         analysisFragment = new AnalysisFragment();
         adapter.addFragment(createFragment);
-        adapter.addFragment(showFragment);
+        adapter.addFragment(dairyFragment);
         adapter.addFragment(followFragment);
         adapter.addFragment(analysisFragment);
         adapter.addFragment(settingFragment);

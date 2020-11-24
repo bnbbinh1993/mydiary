@@ -1,6 +1,5 @@
 package com.example.mydiary.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,18 +11,37 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.mydiary.MainActivity;
 import com.example.mydiary.R;
 import com.example.mydiary.activity.ChangePasswordActivity;
 import com.example.mydiary.activity.CreatePassWordActivity;
-import com.example.mydiary.models.Create;
+import com.example.mydiary.activity.LoginActivity;
 import com.example.mydiary.utils.Pef;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApi;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class SettingFragment extends Fragment {
-    private TextView mFeedback, mLogin, mPollicy, mRate,mKeys;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+
+public class SettingFragment extends Fragment{
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private TextView mFeedback, mLogin, mPollicy, mRate, mKeys, mText;
+    private CircleImageView mAvt;
     private Switch mKey;
+    private static final int SIGN_IN = 1;
 
     public static SettingFragment newInstance() {
         SettingFragment fragment = new SettingFragment();
@@ -67,7 +85,7 @@ public class SettingFragment extends Fragment {
         mKey.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-               key(isChecked);
+                key(isChecked);
             }
         });
         mRate.setOnClickListener(new View.OnClickListener() {
@@ -85,36 +103,41 @@ public class SettingFragment extends Fragment {
         mKeys.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
+
+                if (Pef.getString("PassWord", "isPassWord").equals("isPassWord")){
+                    Intent intent = new Intent(getContext(), CreatePassWordActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
+                }else {
+                    Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
+                }
             }
         });
     }
 
     private void key(boolean isChecked) {
-        if (!Pef.getBoolean("isPassWord") && Pef.getString("PassWord","isPassWord").equals("isPassWord")){
+        if (!Pef.getBoolean("isPassWord") && Pef.getString("PassWord", "isPassWord").equals("isPassWord")) {
             mKey.setChecked(isChecked);
             Intent intent = new Intent(getContext(), CreatePassWordActivity.class);
             startActivity(intent);
-        }else if (!Pef.getBoolean("isPassWord") && !Pef.getString("PassWord","isPassWord").equals("isPassWord")){
+        } else if (!Pef.getBoolean("isPassWord") && !Pef.getString("PassWord", "isPassWord").equals("isPassWord")) {
             mKey.setChecked(isChecked);
-            Pef.setBoolean("isPassWord",isChecked);
-        }else if (Pef.getBoolean("isPassWord") && !Pef.getString("PassWord","isPassWord").equals("isPassWord")){
+            Pef.setBoolean("isPassWord", isChecked);
+        } else if (Pef.getBoolean("isPassWord") && !Pef.getString("PassWord", "isPassWord").equals("isPassWord")) {
             mKey.setChecked(isChecked);
-            Pef.setBoolean("isPassWord",isChecked);
+            Pef.setBoolean("isPassWord", isChecked);
         }
     }
 
     private void pollicy() {
 
     }
-
     private void login() {
-
+        startActivity(new Intent(getContext(), LoginActivity.class));
+        getActivity().overridePendingTransition(R.anim.out_left,R.anim.in_left);
     }
-
-
 
     private void init(View view) {
         mFeedback = view.findViewById(R.id.mFeedback);
@@ -123,6 +146,8 @@ public class SettingFragment extends Fragment {
         mKey = view.findViewById(R.id.mKey);
         mKeys = view.findViewById(R.id.mKeys);
         mRate = view.findViewById(R.id.mRate);
+        mText = view.findViewById(R.id.mText);
+        mAvt = view.findViewById(R.id.mAvt);
     }
 
     private void feedback() {
@@ -131,4 +156,5 @@ public class SettingFragment extends Fragment {
         mailIntent.setData(data);
         startActivity(Intent.createChooser(mailIntent, "Send Gmail"));
     }
+
 }
