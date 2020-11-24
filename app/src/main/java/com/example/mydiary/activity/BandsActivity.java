@@ -35,7 +35,6 @@ public class BandsActivity extends AppCompatActivity {
         }
         edtCode = findViewById(R.id.edtCode);
         btnSend = findViewById(R.id.btnSend);
-
         edtCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -54,7 +53,6 @@ public class BandsActivity extends AppCompatActivity {
                     btnSend.setVisibility(View.GONE);
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length()==9){

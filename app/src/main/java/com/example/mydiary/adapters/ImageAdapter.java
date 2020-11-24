@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
+import com.example.mydiary.utils.OnClickItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     private ArrayList<String> list = new ArrayList<>();
     private Context context;
     private int choice;
+    private OnClickItem clickItem;
 
     public ImageAdapter(ArrayList<String> list, Context context) {
         this.list = list;
@@ -44,6 +46,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
         }else {
             holder.imageView.setVisibility(View.GONE);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickItem.click(position);
+            }
+        });
 
     }
 
@@ -51,6 +59,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder>{
     public int getItemViewType(int position) {
         choice = position;
         return choice;
+    }
+    public void setOnClickItem(OnClickItem onClickItem1) {
+        this.clickItem = onClickItem1;
     }
 
     @Override

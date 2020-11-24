@@ -128,7 +128,7 @@ public class CreateFragment extends Fragment {
 //        list.add(new Create(getResources().getString(R.string._shopping),R.drawable.ic_shopping_bag,R.color.shopping));
 //        list.add(new Create(getResources().getString(R.string._travel),R.drawable.ic_travel,R.color.travel));
 //        list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
-        list2.add(new Create(getResources().getString(R.string._follow),R.drawable.ic_countdown,R.color.countdown));
+        list2.add(new Create(getResources().getString(R.string._follow),R.drawable.ic_flow_red,R.color.countdown));
         list2.add(new Create(getResources().getString(R.string._emotion),R.drawable.ic_emoticons,R.color.event));
         list3.add(new App("Đếm ngày cô đơn","Giải trí",R.drawable.alone,R.color.event));
         list3.add(new App("Tạo và quét mã qr","Công cụ",R.drawable.qrapp,R.color.note));

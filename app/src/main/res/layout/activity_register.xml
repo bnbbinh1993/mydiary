@@ -8,7 +8,7 @@
     android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".activity.LoginActivity">
+    tools:context=".activity.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,16 +36,29 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="10sp" />
-
         <EditText
-            android:id="@+id/mEmail"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
+            android:id="@+id/mYourName"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:background="@drawable/bg_login"
+            android:hint="Your name"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textColorHint="#CFCFCF"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/mEmail"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_login"
             android:hint="Email address"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
             android:padding="15dp"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -54,26 +67,41 @@
 
         <EditText
             android:id="@+id/mPassword"
-            android:maxLines="1"
-            android:password="true"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/bg_login"
             android:hint="*******"
+            android:maxLines="1"
             android:padding="15dp"
+            android:password="true"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textColorHint="#CFCFCF"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/mPassword2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_login"
+            android:hint="*******"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:password="true"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="#CFCFCF"
             android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/mLogin"
+            android:id="@+id/mRegister"
             android:layout_width="300dp"
             android:layout_height="45dp"
-            android:layout_marginTop="20dp"
+            android:layout_margin="20dp"
             android:background="@drawable/bg_button"
-            android:text="Login"
+            android:text="Register"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/white" />
@@ -82,35 +110,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/mResetPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nobile"
-                android:text="Password"
+                android:text="Bạn đã có tài khoản?"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
-
-            <FrameLayout
-                android:layout_width="1dp"
-                android:layout_height="24dp"
-                android:layout_margin="10dp"
-                android:background="@color/white" />
 
             <TextView
-                android:id="@+id/mRegister"
+                android:id="@+id/mLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:fontFamily="@font/nobile"
-                android:text="Register"
+                android:text="Đăng nhập"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textColor="#0048FF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
     <TextView
@@ -124,5 +146,6 @@
         android:text="Diary Life copyright by B-team"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
 
 </RelativeLayout>

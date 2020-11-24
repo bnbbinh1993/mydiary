@@ -20,6 +20,7 @@ public class DairyAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return fragmentList.get(position);
+
     }
 
     @Override

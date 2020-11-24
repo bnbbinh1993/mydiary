@@ -7,11 +7,11 @@
         android:title="@string/_create"/>
     <item android:id="@+id/homeId"
         android:fontFamily="@font/nobile"
-        android:icon="@drawable/ic_book"
+        android:icon="@drawable/ic_notebook"
         android:title="@string/_diary"/>
     <item android:id="@+id/historyId"
         android:fontFamily="@font/nobile"
-        android:icon="@drawable/ic_history"
+        android:icon="@drawable/ic_clock_1_"
         android:title="@string/_follow"/>
 <!--    <item android:id="@+id/analysisId"-->
 <!--        android:fontFamily="@font/nobile"-->

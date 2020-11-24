@@ -8,10 +8,30 @@
     tools:context=".ui.ImageFragment">
 
     <GridView
+        android:visibility="visible"
         android:numColumns="3"
         android:id="@+id/mGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <LinearLayout
+        android:visibility="gone"
+        android:padding="50dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:id="@+id/no_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@drawable/ic_zombie"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <TextView
+            android:fontFamily="@font/nobile"
+            android:textAlignment="center"
+            android:text="@string/_no_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
 
 </LinearLayout>

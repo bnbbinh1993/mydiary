@@ -36,6 +36,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
 import com.example.mydiary.adapters.ImageAdapter;
 import com.example.mydiary.adapters.ImageAdapterEdit;
@@ -47,9 +48,11 @@ import com.example.mydiary.utils.DatePef;
 import com.example.mydiary.utils.ImageFilePath;
 import com.example.mydiary.utils.OnClickItem;
 import com.example.mydiary.utils.Pef;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -216,6 +219,37 @@ public class ShowDiaryActivity extends AppCompatActivity {
         //filter.setText(list.get(i).getFilter());
         filterEdit = list.get(i).getFilter();
         updateFilter(filterEdit);
+        adapter.setOnClickItem(new OnClickItem() {
+            @Override
+            public void click(int position) {
+                android.app.AlertDialog.Builder build = new android.app.AlertDialog.Builder(ShowDiaryActivity.this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                ViewGroup viewGroup = findViewById(android.R.id.content);
+                View view1 = LayoutInflater.from(ShowDiaryActivity.this).inflate(R.layout.item_full_image, viewGroup, false);
+                ImageButton btnCancel = view1.findViewById(R.id.btnCancel);
+                PhotoView imageShowFull = view1.findViewById(R.id.photo_view);
+                File file = new File(listPath.get(position));
+                Glide.with(ShowDiaryActivity.this)
+                        .load(file)
+                        .error(R.mipmap.ic_launcher)
+                        .into(imageShowFull);
+
+
+                build.setView(view1);
+                final android.app.AlertDialog dialog = build.create();
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+            }
+
+            @Override
+            public void longClick(int position) {
+
+            }
+        });
 
         titleEdit.setText(list.get(i).getTitle());
         bodyEdit.setText(list.get(i).getContent());
