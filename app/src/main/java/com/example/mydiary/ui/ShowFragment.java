@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -15,11 +18,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiary.R;
+import com.example.mydiary.activity.NoteActivity;
 import com.example.mydiary.activity.ShowDiaryActivity;
 import com.example.mydiary.adapters.ShowAdapter;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.utils.OnClickItem;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -34,12 +39,15 @@ public class ShowFragment extends Fragment {
     private LinearLayout no_item;
     private DatabaseHelper helper;
     private int filter;
-    private FloatingActionButton fab;
+    private com.getbase.floatingactionbutton.FloatingActionButton fbutton1;
+    private com.getbase.floatingactionbutton.FloatingActionButton fbutton2;
+    private FloatingActionsMenu fab;
 
     public static ShowFragment newInstance() {
         ShowFragment fragment = new ShowFragment();
         return fragment;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,16 +61,28 @@ public class ShowFragment extends Fragment {
     }
 
     private void initClick() {
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        fbutton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delete();
+                fab.collapse();
+            }
+        });
+        fbutton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), NoteActivity.class));
+                getActivity(). overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
     }
 
     private void setUp() {
         filter = 0;
+
+        fab.setVisibility(View.VISIBLE);
+
         helper = new DatabaseHelper(getContext());
         list = new ArrayList<>();
         setView();
@@ -73,6 +93,8 @@ public class ShowFragment extends Fragment {
         no_item = view.findViewById(R.id.no_item);
         recyclerView = view.findViewById(R.id.mRecyclerview);
         fab = view.findViewById(R.id.fab);
+        fbutton1 = view.findViewById(R.id.fbutton1);
+        fbutton2 = view.findViewById(R.id.fbutton2);
     }
 
     private void delete() {
@@ -102,15 +124,25 @@ public class ShowFragment extends Fragment {
 
     }
 
-    private void fabRecyclerview(){
+    private void fabRecyclerview() {
+        Animation FabMenu_fadOut = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.in_left);
+        Animation FabMenu_fadIn = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.out_left);
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
-                    fab.hide();
+                    fab.startAnimation(FabMenu_fadOut);
+                    fab.collapse();
+                    fab.setVisibility(View.GONE);
+
                 } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
-                    fab.show();
+                    fab.startAnimation(FabMenu_fadIn);
+                    fab.collapse();
+                    fab.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -131,9 +163,9 @@ public class ShowFragment extends Fragment {
                     filter = 3;
                 } else if (tab.getPosition() == 4) {
                     filter = 4;
-                }else if (tab.getPosition() == 5) {
+                } else if (tab.getPosition() == 5) {
                     filter = 5;
-                }else if (tab.getPosition() == 6) {
+                } else if (tab.getPosition() == 6) {
                     filter = 6;
                 }
                 setView();
@@ -174,10 +206,14 @@ public class ShowFragment extends Fragment {
         adapter.setOnClickItem(new OnClickItem() {
             @Override
             public void click(int position) {
-                Intent intent = new Intent(getContext(), ShowDiaryActivity.class);
-                intent.putExtra("position",position);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                if (!fab.isExpanded()){
+                    Intent intent = new Intent(getContext(), ShowDiaryActivity.class);
+                    intent.putExtra("position", position);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                }else {
+                    fab.collapse();
+                }
             }
 
             @Override
@@ -188,10 +224,10 @@ public class ShowFragment extends Fragment {
     }
 
     private void updateUI() {
-        if (list.size() <= 0){
+        if (list.size() <= 0) {
             no_item.setVisibility(View.VISIBLE);
             fab.setVisibility(View.GONE);
-        }else {
+        } else {
             no_item.setVisibility(View.GONE);
             fab.setVisibility(View.VISIBLE);
         }
@@ -201,5 +237,12 @@ public class ShowFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setView();
+        fab.collapse();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        fab.collapse();
     }
 }

@@ -1,8 +1,5 @@
 package com.example.mydiary.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -32,18 +29,19 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mydiary.R;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
 import com.example.mydiary.receiver.AlarmReceiver;
-import com.example.mydiary.receiver.BootReceiver;
 import com.example.mydiary.utils.Pef;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class CountDownActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;

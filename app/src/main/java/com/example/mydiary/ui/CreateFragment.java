@@ -3,9 +3,6 @@ package com.example.mydiary.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,8 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.mydiary.R;
 import com.example.mydiary.activity.CountDownActivity;
@@ -23,7 +21,6 @@ import com.example.mydiary.activity.NoteActivity;
 import com.example.mydiary.activity.SettingActivity;
 import com.example.mydiary.models.App;
 import com.example.mydiary.models.Create;
-
 
 import java.util.ArrayList;
 

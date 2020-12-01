@@ -8,8 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.SystemClock;
 
-import com.example.mydiary.activity.CountDownActivity;
-
 import java.util.Calendar;
 
 public class BootReceiver {

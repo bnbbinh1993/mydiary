@@ -1,8 +1,5 @@
 package com.example.mydiary.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,7 +9,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.mydiary.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.example.mydiary.R;
 
 public class FinishActivity extends AppCompatActivity {

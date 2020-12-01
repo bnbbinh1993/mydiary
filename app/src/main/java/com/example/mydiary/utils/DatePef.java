@@ -1,7 +1,6 @@
 package com.example.mydiary.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,7 +13,6 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.example.mydiary.R;
-import com.example.mydiary.activity.NoteActivity;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;

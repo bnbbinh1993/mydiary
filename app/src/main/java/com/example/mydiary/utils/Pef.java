@@ -11,17 +11,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-import com.github.chrisbanes.photoview.PhotoView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

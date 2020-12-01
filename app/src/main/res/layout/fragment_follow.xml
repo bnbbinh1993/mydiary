@@ -78,19 +78,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/fab"
-        app:maxImageSize="18dp"
-        app:fabSize="auto"
-        app:fabCustomSize="45dp"
-        app:rippleColor="@color/white"
-        android:layout_gravity="center"
-        android:isScrollContainer="true"
-        android:src="@drawable/ic_iconfinder_miscellaneous_30_809419"
+        style="@style/custom_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:isScrollContainer="true"
+        app:fabCustomSize="45dp"
+        app:fabSize="auto"
+        app:fab_addButtonColorPressed="@color/bottom_navigation2"
+        app:fab_addButtonColorNormal="@color/bottom_navigation2"
+        app:maxImageSize="18dp"
+        app:rippleColor="@color/white">
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fbutton2"
+            app:fab_title="Xóa all"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/bottom_navigation2"
+            app:fab_size="mini"
+            app:fab_colorDisabled="@color/white"
+            app:rippleColor="@color/white"
+            app:fab_icon="@drawable/ic_notes_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fbutton1"
+            app:fab_title="Xóa all"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/bottom_navigation2"
+            app:fab_size="mini"
+            app:fab_colorDisabled="@color/white"
+            app:rippleColor="@color/white"
+            app:fab_icon="@drawable/ic_delete_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </RelativeLayout>

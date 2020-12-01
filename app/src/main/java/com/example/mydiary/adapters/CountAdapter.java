@@ -5,29 +5,23 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
 import com.example.mydiary.activity.ShowFollowActivity;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
-import com.example.mydiary.models.Diary;
 import com.example.mydiary.receiver.AlarmReceiver;
 import com.example.mydiary.utils.OnClickItem;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

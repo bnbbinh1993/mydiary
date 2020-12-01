@@ -1,8 +1,8 @@
 package com.example.mydiary.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mydiary.R;
 

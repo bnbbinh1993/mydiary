@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.mydiary.models.Count;
-import com.example.mydiary.models.Diary;
 
 import java.util.ArrayList;
 

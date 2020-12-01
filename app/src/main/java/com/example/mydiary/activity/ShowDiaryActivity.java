@@ -1,13 +1,5 @@
 package com.example.mydiary.activity;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -36,21 +28,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
 import com.example.mydiary.adapters.ImageAdapter;
 import com.example.mydiary.adapters.ImageAdapterEdit;
-import com.example.mydiary.adapters.ShowAdapter;
-import com.example.mydiary.adapters.ViewPageAdapter;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
-import com.example.mydiary.utils.DatePef;
 import com.example.mydiary.utils.ImageFilePath;
 import com.example.mydiary.utils.OnClickItem;
 import com.example.mydiary.utils.Pef;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 
 import java.io.File;
 import java.lang.reflect.Field;

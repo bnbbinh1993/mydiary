@@ -1,14 +1,12 @@
 package com.example.mydiary.ui;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.mydiary.R;
 import com.example.mydiary.adapters.DairyAdapter;
@@ -32,6 +30,7 @@ public class DairyFragment extends Fragment {
         init(view);
         return view;
     }
+
     private void init(View view) {
         viewPager = view.findViewById(R.id.viewpager);
         tablayout = view.findViewById(R.id.tablayout);

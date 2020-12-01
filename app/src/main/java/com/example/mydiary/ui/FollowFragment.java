@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
@@ -16,11 +18,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiary.R;
-import com.example.mydiary.activity.ShowFollowActivity;
+import com.example.mydiary.activity.CountDownActivity;
+import com.example.mydiary.activity.NoteActivity;
 import com.example.mydiary.adapters.CountAdapter;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
-import com.example.mydiary.utils.OnClickItem;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
@@ -40,7 +43,9 @@ public class FollowFragment extends Fragment {
     private TabItem tab3;
     private int filter = 0;
     private LinearLayout no_item;
-    private FloatingActionButton fab;
+    private com.getbase.floatingactionbutton.FloatingActionButton fbutton1;
+    private com.getbase.floatingactionbutton.FloatingActionButton fbutton2;
+    private FloatingActionsMenu fab;
     private CountDownTimer count;
 
     public static FollowFragment newInstance() {
@@ -62,10 +67,18 @@ public class FollowFragment extends Fragment {
     }
 
     private void initClick() {
-        fab.setOnClickListener(new View.OnClickListener() {
+        fbutton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fab.collapse();
                 delete();
+            }
+        });
+        fbutton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), CountDownActivity.class));
+                getActivity(). overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
     }
@@ -104,6 +117,8 @@ public class FollowFragment extends Fragment {
         tab2 = v.findViewById(R.id.tab2);
         tab3 = v.findViewById(R.id.tab3);
         fab = v.findViewById(R.id.fab);
+        fbutton1 = v.findViewById(R.id.fbutton1);
+        fbutton2 = v.findViewById(R.id.fbutton2);
     }
 
     private void setUp() {
@@ -123,14 +138,23 @@ public class FollowFragment extends Fragment {
     }
 
     private void fabRecyclerview() {
+        Animation FabMenu_fadOut = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.in_left);
+        Animation FabMenu_fadIn = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.out_left);
         mRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
-                    fab.hide();
+                    fab.startAnimation(FabMenu_fadOut);
+                    fab.collapse();
+                    fab.setVisibility(View.GONE);
+
                 } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
-                    fab.show();
+                    fab.startAnimation(FabMenu_fadIn);
+                    fab.collapse();
+                    fab.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -227,6 +251,7 @@ public class FollowFragment extends Fragment {
 
     @Override
     public void onResume() {
+        fab.collapse();
         setUp();
         updateUI();
         super.onResume();
@@ -239,6 +264,7 @@ public class FollowFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        fab.collapse();
         if (count != null) {
             count.start();
         }
