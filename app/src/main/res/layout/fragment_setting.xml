@@ -175,7 +175,7 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:visibility="visible"
+        android:visibility="gone"
         android:elevation="@dimen/cardview_compat_inset_shadow"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"

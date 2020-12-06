@@ -20,6 +20,7 @@
         android:background="@color/white" />
 
     <androidx.viewpager.widget.ViewPager
+        android:overScrollMode="never"
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

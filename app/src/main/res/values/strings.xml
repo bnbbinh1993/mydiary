@@ -84,4 +84,5 @@
     <string name="_bands_2">Sorry ! Your account is temporarily locked!</string>
     <string name="_enter_code">Enter code</string>
     <string name="_sigin_with_google">  sign in with google  </string>
+    <string name="_image">Image</string>
 </resources>

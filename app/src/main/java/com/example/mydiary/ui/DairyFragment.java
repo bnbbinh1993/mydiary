@@ -39,8 +39,8 @@ public class DairyFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new DairyAdapter(getChildFragmentManager());
-        adapter.addFragment(new ShowFragment(),"Daily");
-        adapter.addFragment(new ImageFragment(),"Image");
+        adapter.addFragment(new ShowFragment(),getString(R.string._all));
+        adapter.addFragment(new ImageFragment(),getString(R.string._image));
         viewPager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewPager);
     }

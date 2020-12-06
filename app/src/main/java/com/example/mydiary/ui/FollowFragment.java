@@ -86,7 +86,7 @@ public class FollowFragment extends Fragment {
     private void delete() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(getResources().getString(R.string._delete));
+        builder.setTitle(getResources().getString(R.string._delete_all));
         builder.setMessage(getResources().getString(R.string._messenger_delete_all));
         builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
             @Override
