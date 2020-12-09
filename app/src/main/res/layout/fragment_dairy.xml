@@ -8,6 +8,7 @@
     tools:context=".ui.DairyFragment">
 
     <com.google.android.material.tabs.TabLayout
+        app:tabTextAppearance="@style/MineCustomTabText"
         style="@style/MineCustomTabText"
         android:id="@+id/tablayout"
         app:tabGravity="fill"

@@ -28,7 +28,6 @@ public class ImageFragment extends Fragment {
     private GridView mGridView;
     private ArrayList<String> list = new ArrayList<>();
     private ArrayList<Diary> res = new ArrayList<>();
-    private DatabaseHelper helper;
     private CustomAdapter customAdapter;
     private LinearLayout no_item;
 
@@ -45,7 +44,8 @@ public class ImageFragment extends Fragment {
 
     private void checkUI() {
         list.clear();
-        res = helper.getData();
+        res = ShowFragment.getList();
+
         for (int i = 0; i < res.size(); i++) {
             String s[] = res.get(i).getImage().trim().split("<->");
             if (s.length > 0) {
@@ -56,7 +56,7 @@ public class ImageFragment extends Fragment {
                 }
             }
         }
-        Collections.reverse(list);
+
         if (list.size() > 0) {
             mGridView.setVisibility(View.VISIBLE);
             no_item.setVisibility(View.GONE);
@@ -68,8 +68,7 @@ public class ImageFragment extends Fragment {
 
     private void initAction() {
         list.clear();
-        helper = new DatabaseHelper(getContext());
-        res = helper.getData();
+        res = ShowFragment.getList();
         for (int i = 0; i < res.size(); i++) {
             String s[] = res.get(i).getImage().trim().split("<->");
             if (s.length > 0) {
@@ -80,7 +79,7 @@ public class ImageFragment extends Fragment {
                 }
             }
         }
-        Collections.reverse(list);
+
         customAdapter = new CustomAdapter();
         mGridView.setAdapter(customAdapter);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

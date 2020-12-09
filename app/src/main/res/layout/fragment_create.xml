@@ -1,80 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:padding="5dp"
     tools:context=".ui.CreateFragment">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:elevation="0dp"
+        android:layoutMode="opticalBounds"
+        android:overScrollMode="never"
+        android:padding="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/mAvtar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/test5" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
     <TextView
-        android:fontFamily="@font/nobile"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:padding="10dp"
-        android:textSize="18sp"
         android:id="@+id/mTV"
-        android:text="@string/_diary"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <ImageButton
-        android:visibility="gone"
-        android:id="@+id/mSetting"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top"
+        android:fontFamily="@font/nobile"
         android:padding="10dp"
-        android:background="?attr/actionBarItemBackground"
-        android:src="@drawable/ic_setting"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="@string/_tools"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
 
     <GridView
-        android:layout_below="@+id/mTV"
+        android:scrollbars="none"
+        android:overScrollMode="never"
         android:id="@+id/mGridView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:layout_below="@+id/mTV"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:numColumns="4" />
+
+
     <TextView
-        android:fontFamily="@font/nobile"
-        android:id="@+id/mTV2"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:padding="10dp"
-        android:textSize="18sp"
-        android:layout_below="@+id/mGridView"
-        android:text="@string/_tools"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <GridView
-        android:layout_below="@+id/mTV2"
-        android:id="@+id/mGridView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="20dp"
-        android:numColumns="4" />
-    <TextView
-        android:fontFamily="@font/nobile"
         android:id="@+id/mTV3"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:padding="10dp"
-        android:textSize="18sp"
-        android:layout_below="@+id/mGridView2"
-        android:text="@string/_meo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mGridView"
+        android:fontFamily="@font/nobile"
+        android:padding="10dp"
+        android:text="@string/_meo"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
     <GridView
-        android:gravity="start"
-        android:layout_below="@+id/mTV3"
+        android:scrollbars="none"
+        android:overScrollMode="never"
         android:id="@+id/mGridView3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_height="135dp"
+        android:layout_below="@+id/mTV3"
+        android:layout_marginBottom="5dp"
+        android:gravity="start"
         android:numColumns="1" />
 
 
+   <FrameLayout
+       android:layout_alignParentBottom="true"
+       android:id="@+id/adView"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
 </RelativeLayout>

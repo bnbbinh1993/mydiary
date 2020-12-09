@@ -353,7 +353,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         imageEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getMultipleImage();
+                getImageFromAlbum();
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -618,6 +618,16 @@ public class ShowDiaryActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURES);
+    }
+    private void getImageFromAlbum() {
+        try {
+            Intent i = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, SELECT_PICTURES);
+        } catch (Exception exp) {
+            Log.i("Error", exp.toString());
+        }
+
     }
 
     @Override

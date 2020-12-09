@@ -82,4 +82,7 @@
     <string name="_enter_code">Nhập mã</string>
     <string name="_sigin_with_google">"  Đăng nhập bằng Google  "</string>
     <string name="_image">Ảnh</string>
+    <string name="_fancy_text">Kí tự đặc biệt</string>
+    <string name="_alone">Đếm ngày cô đơn</string>
+    <string name="_entertaiment">Giải trí</string>
 </resources>

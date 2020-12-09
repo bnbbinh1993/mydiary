@@ -34,7 +34,7 @@ import java.util.Collections;
 public class ShowFragment extends Fragment {
     private RecyclerView recyclerView;
     private ShowAdapter adapter;
-    private ArrayList<Diary> list;
+    private static ArrayList<Diary> list;
     private TabLayout tabs2;
     private LinearLayout no_item;
     private DatabaseHelper helper;
@@ -42,6 +42,10 @@ public class ShowFragment extends Fragment {
     private com.getbase.floatingactionbutton.FloatingActionButton fbutton1;
     private com.getbase.floatingactionbutton.FloatingActionButton fbutton2;
     private FloatingActionsMenu fab;
+
+    public static ArrayList<Diary> getList(){
+        return list;
+    }
 
     public static ShowFragment newInstance() {
         ShowFragment fragment = new ShowFragment();

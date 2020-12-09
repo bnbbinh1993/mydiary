@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.CreateFragment">
 
     <com.google.android.material.tabs.TabLayout
-        android:background="#00FFFFFF"
-        app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
         android:clipToPadding="false"
         android:overScrollMode="never"
         app:tabBackground="@drawable/select_tab"
@@ -24,59 +23,61 @@
         app:tabPaddingEnd="10dp"
         app:tabPaddingStart="10dp"
         app:tabRippleColor="#fff"
-        app:tabSelectedTextColor="#FFFFFF">
+        app:tabSelectedTextColor="#FFFFFF"
+        app:tabTextAppearance="@style/MyTabLayoutTextAppearance">
 
         <com.google.android.material.tabs.TabItem
-            android:fontFamily="@font/nobile"
             android:id="@+id/tab1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nobile"
             android:text="@string/_all" />
 
         <com.google.android.material.tabs.TabItem
-            android:fontFamily="@font/nobile"
             android:id="@+id/tab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nobile"
             android:text="@string/_watching" />
 
         <com.google.android.material.tabs.TabItem
-            android:fontFamily="@font/nobile"
             android:id="@+id/tab3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nobile"
             android:text="@string/_past" />
-
-
 
 
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/tablayout"
         android:id="@+id/mRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never" />
-    <LinearLayout
-        android:visibility="gone"
-        android:padding="50dp"
-        android:gravity="center_horizontal"
         android:layout_below="@+id/tablayout"
-        android:orientation="vertical"
+        android:overScrollMode="never" />
+
+    <LinearLayout
         android:id="@+id/no_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tablayout"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="50dp"
+        android:visibility="gone">
+
         <ImageView
-            android:src="@drawable/ic_zombie"
             android:layout_width="40dp"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp"
+            android:src="@drawable/ic_zombie" />
+
         <TextView
-            android:fontFamily="@font/nobile"
-            android:textAlignment="center"
-            android:text="@string/_no_item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:fontFamily="@font/nobile"
+            android:text="@string/_no_item"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
@@ -89,32 +90,34 @@
         android:isScrollContainer="true"
         app:fabCustomSize="45dp"
         app:fabSize="auto"
-        app:fab_addButtonColorPressed="@color/bottom_navigation2"
         app:fab_addButtonColorNormal="@color/bottom_navigation2"
+        app:fab_addButtonColorPressed="@color/bottom_navigation2"
         app:maxImageSize="18dp"
         app:rippleColor="@color/white">
+
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fbutton2"
-            app:fab_title="Xóa all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorDisabled="@color/white"
             app:fab_colorNormal="@color/white"
             app:fab_colorPressed="@color/bottom_navigation2"
-            app:fab_size="mini"
-            app:fab_colorDisabled="@color/white"
-            app:rippleColor="@color/white"
             app:fab_icon="@drawable/ic_alarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:fab_size="mini"
+            app:fab_title="Xóa all"
+            app:rippleColor="@color/white" />
+
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fbutton1"
-            app:fab_title="Xóa all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorDisabled="@color/white"
             app:fab_colorNormal="@color/white"
             app:fab_colorPressed="@color/bottom_navigation2"
-            app:fab_size="mini"
-            app:fab_colorDisabled="@color/white"
-            app:rippleColor="@color/white"
             app:fab_icon="@drawable/ic_dustbin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:fab_size="mini"
+            app:fab_title="Xóa all"
+            app:rippleColor="@color/white" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

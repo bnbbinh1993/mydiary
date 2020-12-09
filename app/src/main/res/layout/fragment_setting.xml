@@ -1,48 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.CreateFragment">
-
-    <androidx.cardview.widget.CardView
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:elevation="0dp"
-        android:layoutMode="opticalBounds"
-        android:overScrollMode="never"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        app:cardMaxElevation="0dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/test3" />
-            <TextView
-                android:layout_margin="15dp"
-                android:layout_centerHorizontal="true"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/playball"
-                android:padding="2dp"
-                android:text="Cherish every minute and every second"
-                android:textColor="@color/bottom_navigation2"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,10 +15,10 @@
         android:padding="10dp">
 
         <RelativeLayout
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/img1"
@@ -69,15 +33,16 @@
                 android:layout_alignParentEnd="true" />
 
             <TextView
-                android:fontFamily="@font/nobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img1"
+                android:fontFamily="@font/nobile"
                 android:text="@string/_use_of_password"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,17 +55,18 @@
                 android:src="@drawable/ic_keys" />
 
             <TextView
-                android:fontFamily="@font/nobile"
                 android:id="@+id/mKeys"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/imagekeys"
+                android:fontFamily="@font/nobile"
                 android:text="@string/_change_password"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -113,12 +79,12 @@
                 android:src="@drawable/ic_heart_shape" />
 
             <TextView
-                android:fontFamily="@font/nobile"
                 android:id="@+id/mRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/imageRate"
+                android:fontFamily="@font/nobile"
                 android:text="@string/_rate_app"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -137,22 +103,23 @@
                 android:src="@drawable/ic_mail" />
 
             <TextView
-                android:fontFamily="@font/nobile"
                 android:id="@+id/mFeedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img2"
+                android:fontFamily="@font/nobile"
                 android:text="@string/_feed_back"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
         </RelativeLayout>
+
         <RelativeLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/img3"
@@ -161,12 +128,12 @@
                 android:src="@drawable/ic_open_lock" />
 
             <TextView
-                android:fontFamily="@font/nobile"
                 android:id="@+id/mPollicy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img3"
+                android:fontFamily="@font/nobile"
                 android:text="@string/_privacy_policy"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -175,46 +142,49 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:visibility="gone"
-        android:elevation="@dimen/cardview_compat_inset_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:elevation="@dimen/cardview_compat_inset_shadow"
+        android:visibility="gone">
+
         <LinearLayout
-            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:padding="15dp">
+
             <de.hdodenhof.circleimageview.CircleImageView
-                android:src="@mipmap/ic_launcher"
                 android:id="@+id/mAvt"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_width="35dp"
-                android:layout_height="35dp"/>
+                android:src="@mipmap/ic_launcher" />
 
             <TextView
                 android:id="@+id/mLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="#0277BD"
                 android:text="Sign in"
-                android:textSize="15sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textColor="#0277BD"
+                android:textSize="15sp" />
+
             <TextView
                 android:id="@+id/mText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:gravity="center"
-                android:layout_gravity="center"
-                android:text="Log in to sync your data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:text="Log in to sync your data" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

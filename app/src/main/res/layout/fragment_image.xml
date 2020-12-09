@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ui.ImageFragment">
 
     <GridView
-        android:visibility="visible"
-        android:numColumns="3"
         android:id="@+id/mGridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:visibility="visible" />
+
     <LinearLayout
-        android:visibility="gone"
-        android:padding="50dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
         android:id="@+id/no_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="50dp"
+        android:visibility="gone">
+
         <ImageView
-            android:src="@drawable/ic_zombie"
             android:layout_width="40dp"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp"
+            android:src="@drawable/ic_zombie" />
+
         <TextView
-            android:fontFamily="@font/nobile"
-            android:textAlignment="center"
-            android:text="@string/_no_item"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:fontFamily="@font/nobile"
+            android:text="@string/_no_item"
+            android:textAlignment="center" />
     </LinearLayout>
 
 

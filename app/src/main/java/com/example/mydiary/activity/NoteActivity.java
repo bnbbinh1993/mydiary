@@ -53,6 +53,7 @@ import java.util.Locale;
 public class NoteActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final int REQ_CODE_SPEECH_INPUT = 100;
+    private static final int SELECT_PICTURES = 1;
     private int vote;
     private int filter;
     private ImageButton mBack;
@@ -69,7 +70,7 @@ public class NoteActivity extends AppCompatActivity {
     private String employees[];
     private String title;
     private String path;
-    private static final int SELECT_PICTURES = 1;
+
     private ArrayList<String> resPath;
     private ArrayList<String> list = new ArrayList<>();
     private RecyclerView test_image;
@@ -210,7 +211,8 @@ public class NoteActivity extends AppCompatActivity {
         btnImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getMultipleImage();
+                getImageFromAlbum();
+                //getMultipleImage();
             }
         });
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -463,11 +465,14 @@ public class NoteActivity extends AppCompatActivity {
 
 
     private void getImageFromAlbum() {
-        try {
-            startActivityForResult(new Intent().setAction(Intent.ACTION_GET_CONTENT).setType("image/*"), RESULT_LOAD_IMAGE);
-        } catch (Exception exp) {
-            Log.i("Error", exp.toString());
+        try{
+            Intent i = new Intent(Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, RESULT_LOAD_IMAGE);
+        }catch(Exception exp){
+            Log.i("Error",exp.toString());
         }
+
     }
 
     private void getMultipleImage() {
