@@ -29,16 +29,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
-    private boolean rate  = false;
+    private boolean rate = false;
     private BottomNavigationView bottomNavigationView;
     private ViewPager viewPager;
     private MenuItem prevMenuItem;
-    private CreateFragment createFragment;
-    private DairyFragment dairyFragment;
-    private FollowFragment followFragment;
-    private SettingFragment settingFragment;
-    private AnalysisFragment analysisFragment;
+    private CreateFragment createFragment = new CreateFragment();
+    private DairyFragment dairyFragment = new DairyFragment();
+    private FollowFragment followFragment = new FollowFragment();
+    private SettingFragment settingFragment = new SettingFragment();
+    private AnalysisFragment analysisFragment = new AnalysisFragment();
     private int backClick = 0;
+    private Fragment selectedFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void showdialog() {
 
-        if (!rate){
+        if (!rate) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             ViewGroup viewGroup = findViewById(R.id.container);
-            View view = LayoutInflater.from(this).inflate(R.layout.dialog_daily,viewGroup,false);
+            View view = LayoutInflater.from(this).inflate(R.layout.dialog_daily, viewGroup, false);
             LinearLayout normal = view.findViewById(R.id.normal);
             LinearLayout sad = view.findViewById(R.id.sad);
             LinearLayout happy = view.findViewById(R.id.happy);
@@ -96,35 +97,33 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomId);
         //viewPager = findViewById(R.id.viewpager);
         //viewPager.setEnabled(false);
-       // viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-        Fragment selectedFragment = CreateFragment.newInstance();
+        // viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
+        selectedFragment = AnalysisFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.content, selectedFragment).commit();
     }
 
     private void bottmNavigationView() {
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.workId:
-                        if (selectedFragment != CreateFragment.newInstance()){
-                            selectedFragment = CreateFragment.newInstance();
-                        }
+
+                        selectedFragment = analysisFragment;
 
                         //viewPager.setCurrentItem(0);
                         break;
                     case R.id.homeId:
-                        if (selectedFragment != DairyFragment.newInstance()){
-                            selectedFragment = DairyFragment.newInstance();
-                        }
 
-                       // viewPager.setCurrentItem(1);
+                        selectedFragment = dairyFragment;
+                        // viewPager.setCurrentItem(1);
                         break;
                     case R.id.historyId:
-                        if (selectedFragment != FollowFragment.newInstance()){
-                            selectedFragment = FollowFragment.newInstance();
-                        }
+//                        if (selectedFragment != FollowFragment.newInstance()) {
+//                            selectedFragment = FollowFragment.newInstance();
+//                        }
+                        selectedFragment = followFragment;
                         //viewPager.setCurrentItem(2);
                         break;
 //                    case R.id.analysisId:
@@ -134,8 +133,9 @@ public class MainActivity extends AppCompatActivity {
 //                        //viewPager.setCurrentItem(3);
 //                        break;
                     case R.id.profileId:
-                        selectedFragment = SettingFragment.newInstance();
+
                         //viewPager.setCurrentItem(4);
+                        selectedFragment = settingFragment;
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.content, selectedFragment).commit();

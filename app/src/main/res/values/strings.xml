@@ -2,9 +2,15 @@
     <string name="app_name">mydiary</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
+    <string name="app_id" translatable="false">ca-app-pub-3584862127630500~5166487614</string>
     <string name="banner_id" translatable="false">ca-app-pub-3584862127630500/9753434037</string>
-    <string name="ads_test" translatable="false">ca-app-pub-3584862127630500~5166487614</string>
     <string name="interstitial_full_screen" translatable="false">ca-app-pub-3584862127630500/8468272526</string>
+
+    <string name="app_test" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="id_test2" translatable="false">ca-app-pub-3940256099942544/8691691433</string>
+
     <string name="_create">Create</string>
     <string name="_diary">Diary</string>
     <string name="_follow">Follow</string>
@@ -89,4 +95,7 @@
     <string name="_fancy_text">Fancy text</string>
     <string name="_alone">Lonely day counter</string>
     <string name="_entertaiment">Entertaiment</string>
+    <string name="_write_here">Write here</string>
+    <string name="_today">Today</string>
+    <string name="_calendar">Calendar</string>
 </resources>

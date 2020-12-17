@@ -45,7 +45,7 @@
                     android:layout_toStartOf="@+id/mEdit"
                     android:padding="10dp"
                     android:background="?attr/actionBarItemBackground"
-                    android:src="@drawable/ic_delete"
+                    android:src="@drawable/ic_dustbin_black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ImageButton
@@ -54,7 +54,7 @@
                     android:layout_alignParentEnd="true"
                     android:padding="10dp"
                     android:background="?attr/actionBarItemBackground"
-                    android:src="@drawable/ic_edit_button"
+                    android:src="@drawable/ic_pencil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

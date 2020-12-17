@@ -77,7 +77,7 @@ public class CreateFragment extends Fragment {
 
         Pef.getReference(getActivity());
         String res = Pef.getString("AVATAR", "ERROR");
-        if (!res.isEmpty() || !res.equals("ERROR")) {
+        if (!res.equals("ERROR")) {
             File file = new File(res);
             Glide.with(getContext())
                     .load(file)
@@ -154,7 +154,7 @@ public class CreateFragment extends Fragment {
         list.add(new Create(getResources().getString(R.string._follow), R.drawable.ic_flow_red, R.color.countdown));
         //list2.add(new Create(getResources().getString(R.string._emotion),R.drawable.ic_emoticons,R.color.event));
         list3.add(new App(getResources().getString(R.string._alone), getResources().getString(R.string._entertaiment), R.drawable.alone, R.color.note));
-        list3.add(new App(getResources().getString(R.string._fancy_text), getResources().getString(R.string._tools), R.drawable.fancytext, R.color.cele));
+        list3.add(new App(getResources().getString(R.string._fancy_text), getResources().getString(R.string._tools), R.drawable.fancytext, R.color.work));
 
 
     }
@@ -307,11 +307,12 @@ public class CreateFragment extends Fragment {
 
     private void loadAd(){
         mAdView = new AdView(getContext());
-        mAdView.setAdUnitId(getString(R.string.banner_id));
+        mAdView.setAdUnitId(getString(R.string.id_test));
         layout.addView(mAdView);
         MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
+
             }
         });
         AdRequest adRequest = new AdRequest.Builder()

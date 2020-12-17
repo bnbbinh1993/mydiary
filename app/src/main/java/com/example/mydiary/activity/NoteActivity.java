@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -70,7 +71,6 @@ public class NoteActivity extends AppCompatActivity {
     private String employees[];
     private String title;
     private String path;
-
     private ArrayList<String> resPath;
     private ArrayList<String> list = new ArrayList<>();
     private RecyclerView test_image;
@@ -281,7 +281,7 @@ public class NoteActivity extends AppCompatActivity {
             diary.setFilter(filter);
             diary.setImage(image.trim());
             diary.setVote(filter);
-            helper.adđ(diary);
+            helper.add(diary);
             try {
                 Thread.sleep(500);
                 Intent intent = new Intent(NoteActivity.this, FinishActivity.class);
@@ -439,7 +439,6 @@ public class NoteActivity extends AppCompatActivity {
 
     private void showdialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(NoteActivity.this);
-        builder.setTitle("Lưu dữ liệu");
         builder.setTitle(getResources().getString(R.string._messenger_back));
         builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
             @Override

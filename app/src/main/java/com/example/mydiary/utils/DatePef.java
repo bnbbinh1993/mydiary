@@ -20,12 +20,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DatePef {
+
     private static Activity activity;
     private static String res="";
     public static void getReference(Activity context){
         activity = context;
     }
-    public static String date() {
+    public static void date() {
 
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(activity);
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
@@ -94,6 +95,9 @@ public class DatePef {
         builder.setView(view);
         androidx.appcompat.app.AlertDialog alertDialog = builder.create();
         alertDialog.show();
+
+    }
+    public static String getResult(){
         return res;
     }
 

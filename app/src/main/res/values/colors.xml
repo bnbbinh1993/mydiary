@@ -6,13 +6,14 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="blackfake">#202020</color>
     <color name="white">#F4F4F4</color>
     <color name="note">#7CFFCAB9</color>
     <color name="top_note">#FF3D00</color>
-    <color name="event">#92EBFFD3</color>
-    <color name="top_event">#87F800</color>
-    <color name="mood">#94B7E9FF</color>
-    <color name="top_mood">#00B1FF</color>
+    <color name="event">#94B7E9FF</color>
+    <color name="top_event">#00B1FF</color>
+    <color name="mood">#DD98A7FF</color>
+    <color name="top_mood">#0024FF</color>
     <color name="countdown">#94FFD4E2</color>
     <color name="work">#C9EDC3FF</color>
     <color name="top_work">#AE00F8</color>
@@ -20,9 +21,13 @@
     <color name="top_travel">#F30052</color>
     <color name="shopping">#CEFBF6C2</color>
     <color name="top_shopping">#FFE900</color>
-    <color name="cele">#DD98A7FF</color>
-    <color name="top_cele">#0024FF</color>
+    <color name="cele">#92EBFFD3</color>
+    <color name="top_cele">#87F800</color>
     <color name="bottom_navigation">#23cf5a</color>
     <color name="bottom_navigation2">#FF1100</color>
+    <color name="red">#F44336</color>
+    <color name="select">#4cd137</color>
+    <color name="nul">#00000000</color>
+    <color name="red_orange">#ff3f34</color>
 
 </resources>

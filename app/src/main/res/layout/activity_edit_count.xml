@@ -11,17 +11,18 @@
         android:padding="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <ImageButton
             android:id="@+id/mBack"
-            android:padding="10dp"
-            android:background="?attr/actionBarItemBackground"
-            android:src="@drawable/ic_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="?attr/actionBarItemBackground"
+            android:padding="10dp"
+            android:src="@drawable/ic_left_arrow" />
         <TextView
             android:fontFamily="@font/nobile"
             android:textSize="16sp"
-            android:textColor="#000000"
+            android:textColor="@color/blackfake"
             android:textStyle="bold"
             android:layout_centerInParent="true"
             android:text="@string/_edit"

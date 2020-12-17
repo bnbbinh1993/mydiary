@@ -136,7 +136,7 @@ public class CountDownActivity extends AppCompatActivity {
             count.setFilter(filter);
             count.setVote(0);
             count.setPrioritize(0);
-            helper.adđ(count);
+            helper.add(count);
 
             //BootReceiver bootReceiver = new BootReceiver(this);
             start(Pef.getLongTime(date), title);

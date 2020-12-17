@@ -13,6 +13,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,7 +45,7 @@ public class ShowFragment extends Fragment {
     private com.getbase.floatingactionbutton.FloatingActionButton fbutton2;
     private FloatingActionsMenu fab;
 
-    public static ArrayList<Diary> getList(){
+    public static ArrayList<Diary> getList() {
         return list;
     }
 
@@ -56,12 +58,17 @@ public class ShowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_show, container, false);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         init(view);
         setUp();
         Filter();
         initClick();
         fabRecyclerview();
-        return view;
     }
 
     private void initClick() {
@@ -77,7 +84,7 @@ public class ShowFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), NoteActivity.class));
-                getActivity(). overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
     }
@@ -210,12 +217,12 @@ public class ShowFragment extends Fragment {
         adapter.setOnClickItem(new OnClickItem() {
             @Override
             public void click(int position) {
-                if (!fab.isExpanded()){
+                if (!fab.isExpanded()) {
                     Intent intent = new Intent(getContext(), ShowDiaryActivity.class);
                     intent.putExtra("position", position);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
-                }else {
+                } else {
                     fab.collapse();
                 }
             }

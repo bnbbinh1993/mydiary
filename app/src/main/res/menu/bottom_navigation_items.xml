@@ -4,7 +4,7 @@
     <item android:id="@+id/workId"
         android:fontFamily="@font/nobile"
         android:icon="@drawable/ic_pen"
-        android:title="@string/_create"/>
+        android:title="@string/_calendar"/>
     <item android:id="@+id/homeId"
         android:fontFamily="@font/nobile"
         android:icon="@drawable/ic_notebook"

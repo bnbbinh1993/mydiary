@@ -11,6 +11,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mydiary.R;
@@ -29,7 +31,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class SettingFragment extends Fragment{
+public class SettingFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private TextView mFeedback, mLogin, mPollicy, mRate, mKeys, mText;
@@ -47,10 +49,16 @@ public class SettingFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         init(view);
         initSetUp();
         initClick();
-        return view;
     }
 
     private void initSetUp() {
@@ -99,11 +107,11 @@ public class SettingFragment extends Fragment{
             @Override
             public void onClick(View v) {
 
-                if (Pef.getString("PassWord", "isPassWord").equals("isPassWord")){
+                if (Pef.getString("PassWord", "isPassWord").equals("isPassWord")) {
                     Intent intent = new Intent(getContext(), CreatePassWordActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
-                }else {
+                } else {
                     Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
                     startActivity(intent);
                     getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
@@ -129,9 +137,10 @@ public class SettingFragment extends Fragment{
     private void pollicy() {
 
     }
+
     private void login() {
         startActivity(new Intent(getContext(), LoginActivity.class));
-        getActivity().overridePendingTransition(R.anim.out_left,R.anim.in_left);
+        getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
     }
 
     private void init(View view) {
@@ -151,7 +160,8 @@ public class SettingFragment extends Fragment{
         mailIntent.setData(data);
         startActivity(Intent.createChooser(mailIntent, "Send Gmail"));
     }
-    private void siginGG(){
+
+    private void siginGG() {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -160,6 +170,7 @@ public class SettingFragment extends Fragment{
         startActivityForResult(signInIntent, SIGN_IN);
 
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -182,7 +193,7 @@ public class SettingFragment extends Fragment{
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
 
-           // updateUI(null);
+            // updateUI(null);
         }
 
     }

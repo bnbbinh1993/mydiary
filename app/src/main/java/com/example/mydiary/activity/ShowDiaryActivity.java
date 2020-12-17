@@ -61,6 +61,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private ImageButton imageEdit;
     private ImageButton saveEdit;
     private ImageButton btnMic;
+    private ImageButton mDelete;
     private TextView date;
     private TextView filter;
     private TextView title;
@@ -68,7 +69,6 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private TextView titleEdit;
     private TextView bodyEdit;
     private TextView dateEdit;
-    private FloatingActionButton fab;
     private RecyclerView mRecyclerviewEdit;
     private RecyclerView mRecyclerview;
     private RelativeLayout layout_show;
@@ -109,7 +109,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         date = findViewById(R.id.date);
         mRecyclerview = findViewById(R.id.mRecyclerview);
         layout_show = findViewById(R.id.layout_show);
-        fab = findViewById(R.id.fab);
+        mDelete = findViewById(R.id.mDelete);
         background = findViewById(R.id.background);
 
 
@@ -142,8 +142,9 @@ public class ShowDiaryActivity extends AppCompatActivity {
         titleEdit.requestFocus();
 
     }
-    private void setViewRecyclerview(){
-        Log.d("TAG", "setViewRecyclerview: "+listPath2.size());
+
+    private void setViewRecyclerview() {
+        Log.d("TAG", "setViewRecyclerview: " + listPath2.size());
         if (listPath2.size() > 0) {
             mRecyclerviewEdit.setVisibility(View.VISIBLE);
             mRecyclerview.setVisibility(View.VISIBLE);
@@ -152,7 +153,6 @@ public class ShowDiaryActivity extends AppCompatActivity {
             mRecyclerview.setVisibility(View.GONE);
         }
     }
-
 
 
     private void setUp() {
@@ -199,7 +199,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         adapter.setOnClickItem(new OnClickItem() {
             @Override
             public void click(int position) {
-                android.app.AlertDialog.Builder build = new android.app.AlertDialog.Builder(ShowDiaryActivity.this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+                android.app.AlertDialog.Builder build = new android.app.AlertDialog.Builder(ShowDiaryActivity.this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
                 ViewGroup viewGroup = findViewById(android.R.id.content);
                 View view1 = LayoutInflater.from(ShowDiaryActivity.this).inflate(R.layout.item_full_image, viewGroup, false);
                 ImageButton btnCancel = view1.findViewById(R.id.btnCancel);
@@ -239,8 +239,8 @@ public class ShowDiaryActivity extends AppCompatActivity {
         adapterEdit.setOnClickItem(new OnClickItem() {
             @Override
             public void click(int position) {
-                Log.d("TAG", "click: "+listPath2.size());
-                Log.d("TAG", "click: "+position);
+                Log.d("TAG", "click: " + listPath2.size());
+                Log.d("TAG", "click: " + position);
                 daleteImage(listPath2, position);
                 updateUI();
             }
@@ -356,7 +356,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
                 getImageFromAlbum();
             }
         });
-        fab.setOnClickListener(new View.OnClickListener() {
+        mDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delete();
@@ -584,7 +584,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         Collections.reverse(list);
         String image = "";
         for (String s : listPath2) {
-            image = image + s+"<->";
+            image = image + s + "<->";
         }
         Log.d("TAG", "save: " + image);
         Diary diary = list.get(i);
@@ -619,6 +619,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURES);
     }
+
     private void getImageFromAlbum() {
         try {
             Intent i = new Intent(Intent.ACTION_PICK,

@@ -71,7 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return list;
     }
-    public void adđ(Diary event){
+    public void add(Diary event){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_1, event.getTitle());

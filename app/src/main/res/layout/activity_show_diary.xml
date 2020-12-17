@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:paddingTop="35dp"
-    android:id="@+id/background"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="35dp"
     tools:context=".activity.ShowDiaryActivity">
+
     <include layout="@layout/layout_show" />
-    <include layout="@layout/layout_edit"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        app:maxImageSize="18dp"
-        app:fabSize="auto"
-        app:fabCustomSize="45dp"
-        app:rippleColor="@color/white"
-        android:layout_gravity="center"
-        android:isScrollContainer="true"
-        android:src="@drawable/ic_iconfinder_miscellaneous_30_809419"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
+    <include layout="@layout/layout_edit" />
+
 </RelativeLayout>

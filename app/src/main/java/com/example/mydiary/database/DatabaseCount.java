@@ -75,7 +75,7 @@ public class DatabaseCount extends SQLiteOpenHelper {
         return list;
     }
 
-    public void adđ(Count event) {
+    public void add(Count event) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_1, event.getTitle());

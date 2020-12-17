@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:background="@color/white"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ui.CreateFragment">
 
@@ -123,36 +122,36 @@
         android:isScrollContainer="true"
         app:fabCustomSize="45dp"
         app:fabSize="auto"
-        app:fab_addButtonColorPressed="@color/bottom_navigation2"
         app:fab_addButtonColorNormal="@color/bottom_navigation2"
+        app:fab_addButtonColorPressed="@color/bottom_navigation2"
         app:maxImageSize="18dp"
         app:rippleColor="@color/white">
+
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fbutton2"
-            app:fab_title="Xóa all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorDisabled="@color/white"
             app:fab_colorNormal="@color/white"
             app:fab_colorPressed="@color/bottom_navigation2"
-            app:fab_size="mini"
-            app:fab_colorDisabled="@color/white"
-            app:rippleColor="@color/white"
             app:fab_icon="@drawable/ic_notes_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:fab_size="mini"
+            app:fab_title="Xóa all"
+            app:rippleColor="@color/white" />
+
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fbutton1"
-            app:fab_title="Xóa all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorDisabled="@color/white"
             app:fab_colorNormal="@color/white"
             app:fab_colorPressed="@color/bottom_navigation2"
-            app:fab_size="mini"
-            app:fab_colorDisabled="@color/white"
-            app:rippleColor="@color/white"
             app:fab_icon="@drawable/ic_dustbin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:fab_size="mini"
+            app:fab_title="Xóa all"
+            app:rippleColor="@color/white" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-
 
 
 </RelativeLayout>
