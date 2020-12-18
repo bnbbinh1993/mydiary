@@ -62,6 +62,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private ImageButton saveEdit;
     private ImageButton btnMic;
     private ImageButton mDelete;
+    private ImageButton btnColor;
     private TextView date;
     private TextView filter;
     private TextView title;
@@ -80,6 +81,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private static final int SELECT_PICTURES = 1;
     private static final int REQ_CODE_SPEECH_INPUT = 100;
     private int filterEdit;
+    private int mColor;
     private String path;
     private String employees[];
     private String s;
@@ -111,6 +113,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         layout_show = findViewById(R.id.layout_show);
         mDelete = findViewById(R.id.mDelete);
         background = findViewById(R.id.background);
+        btnColor = findViewById(R.id.btnColor);
 
 
         layout_edit = findViewById(R.id.layout_edit);
@@ -195,7 +198,10 @@ public class ShowDiaryActivity extends AppCompatActivity {
         date.setText(list.get(i).getDate());
         //filter.setText(list.get(i).getFilter());
         filterEdit = list.get(i).getFilter();
+
         updateFilter(filterEdit);
+        mColor = list.get(i).getVote();
+        updateVote(mColor);
         adapter.setOnClickItem(new OnClickItem() {
             @Override
             public void click(int position) {
@@ -262,44 +268,111 @@ public class ShowDiaryActivity extends AppCompatActivity {
         adapterEdit.notifyDataSetChanged();
     }
 
-    private void updateFilter(int filterEdit) {
-        switch (filterEdit) {
+    private void updateFilter(int a) {
+        switch (a) {
             case 1: {
                 filter.setText(getResources().getString(R.string._event));
-                background.setBackgroundColor(getResources().getColor(R.color.event));
                 break;
             }
             case 2: {
                 filter.setText(getResources().getString(R.string._mood));
-                background.setBackgroundColor(getResources().getColor(R.color.mood));
+
                 break;
             }
             case 3: {
                 filter.setText(getResources().getString(R.string._work));
-                background.setBackgroundColor(getResources().getColor(R.color.work));
+
                 break;
             }
             case 4: {
                 filter.setText(getResources().getString(R.string._shopping));
-                background.setBackgroundColor(getResources().getColor(R.color.shopping));
+
                 break;
             }
             case 5: {
                 filter.setText(getResources().getString(R.string._travel));
-                background.setBackgroundColor(getResources().getColor(R.color.travel));
+
                 break;
             }
             case 6: {
                 filter.setText(getResources().getString(R.string._celebration));
-                background.setBackgroundColor(getResources().getColor(R.color.cele));
+
                 break;
             }
             default: {
-                filter.setText(getResources().getString(R.string._event));
-                background.setBackgroundColor(getResources().getColor(R.color.event));
+                filter.setText(getResources().getString(R.string._celebration));
+            }
+        }
+    }
+
+    private void updateVote(int color) {
+
+        switch (color) {
+            case 1: {
+                background.setBackgroundResource(R.drawable.bg_gradent_1);
+                break;
+            }
+            case 2: {
+                background.setBackgroundResource(R.drawable.bg_gradent_2);
+
+                break;
+            }
+            case 3: {
+                background.setBackgroundResource(R.drawable.bg_gradent_3);
+
+                break;
+            }
+            case 4: {
+                background.setBackgroundResource(R.drawable.bg_gradent_4);
+
+                break;
+            }
+            case 5: {
+                background.setBackgroundResource(R.drawable.bg_gradent_5);
+
+                break;
+            }
+            case 6: {
+                background.setBackgroundResource(R.drawable.bg_gradent_6);
+
+                break;
+            }
+            case 7: {
+                background.setBackgroundResource(R.drawable.bg_gradent_7);
+                break;
+            }
+            case 8: {
+                background.setBackgroundResource(R.drawable.bg_gradent_8);
+
+                break;
+            }
+            case 9: {
+                background.setBackgroundResource(R.drawable.bg_gradent_9);
+
+                break;
+            }
+            case 10: {
+                background.setBackgroundResource(R.drawable.bg_gradent_10);
+
+                break;
+            }
+            case 11: {
+                background.setBackgroundResource(R.drawable.bg_gradent_11);
+
+                break;
+            }
+            case 12: {
+                background.setBackgroundResource(R.drawable.bg_gradent_12);
+
+                break;
+            }
+            default: {
+                background.setBackgroundResource(R.drawable.bg_gradent_1);
+
                 break;
             }
         }
+
     }
 
     private void updateData(ArrayList<String> viewModels) {
@@ -319,7 +392,6 @@ public class ShowDiaryActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 filterEdit = position + 1;
-                updateFilter(filterEdit);
             }
 
             @Override
@@ -374,9 +446,135 @@ public class ShowDiaryActivity extends AppCompatActivity {
                 dateClick();
             }
         });
+        btnColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                color();
+            }
+        });
 
     }
 
+    private void color() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(ShowDiaryActivity.this);
+        ViewGroup viewGroup = findViewById(R.id.container);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_color, viewGroup, false);
+        TextView tv1 = view.findViewById(R.id.tv1);
+        TextView tv2 = view.findViewById(R.id.tv2);
+        TextView tv3 = view.findViewById(R.id.tv3);
+        TextView tv4 = view.findViewById(R.id.tv4);
+        TextView tv5 = view.findViewById(R.id.tv5);
+        TextView tv6 = view.findViewById(R.id.tv6);
+        TextView tv7 = view.findViewById(R.id.tv7);
+        TextView tv8 = view.findViewById(R.id.tv8);
+        TextView tv9 = view.findViewById(R.id.tv9);
+        TextView tv10 = view.findViewById(R.id.tv10);
+        TextView tv11 = view.findViewById(R.id.tv11);
+        TextView tv12 = view.findViewById(R.id.tv12);
+        builder.setView(view);
+        androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+
+        tv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 1;
+                background.setBackgroundResource(R.drawable.bg_gradent_1);
+                alertDialog.dismiss();
+            }
+        });
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 2;
+                background.setBackgroundResource(R.drawable.bg_gradent_2);
+                alertDialog.dismiss();
+            }
+        });
+        tv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 3;
+                background.setBackgroundResource(R.drawable.bg_gradent_3);
+                alertDialog.dismiss();
+            }
+        });
+        tv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 4;
+                background.setBackgroundResource(R.drawable.bg_gradent_4);
+                alertDialog.dismiss();
+            }
+        });
+        tv5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 5;
+                background.setBackgroundResource(R.drawable.bg_gradent_5);
+                alertDialog.dismiss();
+            }
+        });
+        tv6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 6;
+                background.setBackgroundResource(R.drawable.bg_gradent_6);
+                alertDialog.dismiss();
+            }
+        });
+        tv7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 7;
+                background.setBackgroundResource(R.drawable.bg_gradent_7);
+                alertDialog.dismiss();
+            }
+        });
+        tv8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 8;
+                background.setBackgroundResource(R.drawable.bg_gradent_8);
+                alertDialog.dismiss();
+            }
+        });
+        tv9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 9;
+                background.setBackgroundResource(R.drawable.bg_gradent_9);
+                alertDialog.dismiss();
+            }
+        });
+        tv10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 10;
+                background.setBackgroundResource(R.drawable.bg_gradent_10);
+                alertDialog.dismiss();
+            }
+        });
+        tv11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 11;
+                background.setBackgroundResource(R.drawable.bg_gradent_11);
+                alertDialog.dismiss();
+            }
+        });
+        tv12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 12;
+                background.setBackgroundResource(R.drawable.bg_gradent_12);
+                alertDialog.dismiss();
+            }
+        });
+
+
+        alertDialog.show();
+
+    }
 
     private void dateClick() {
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(ShowDiaryActivity.this);
@@ -592,7 +790,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         diary.setContent(bodyEdit.getText().toString());
         diary.setDate(dateEdit.getText().toString());
         diary.setFilter(filterEdit);
-        diary.setVote(filterEdit);
+        diary.setVote(mColor);
         diary.setImage(image.trim());
         boolean update = new DatabaseHelper(this).update(diary);
         if (update) {

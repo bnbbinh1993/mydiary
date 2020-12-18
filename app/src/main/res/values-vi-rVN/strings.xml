@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">mydiary</string>
+    <string name="app_name">Daily Life</string>
     <string name="_create">Tạo</string>
     <string name="_diary">Nhật Ký</string>
     <string name="_follow">Theo dõi</string>
@@ -71,7 +71,7 @@
     <string name="_change_password">Đổi mật khẩu</string>
     <string name="_use_of_password">Sử dụng mật khẩu</string>
     <string name="_rate_app">Đánh giá ứng dụng</string>
-    <string name="_feed_back">Phẩn hồi</string>
+    <string name="_feed_back">Phản hồi</string>
     <string name="_privacy_policy">Chính sách bảo mật</string>
     <string name="_messenger_keypass">Nhập mật mã cũ</string>
     <string name="_messenger_remind">Hôm nay bạn thế nào? Viết nhanh những dòng nhật ký của bạn!</string>
@@ -88,4 +88,13 @@
     <string name="_write_here">Viết ở đây</string>
     <string name="_today">Hôm nay</string>
     <string name="_calendar">Lịch</string>
+    <string name="_sun">CN</string>
+    <string name="_mon">T.2</string>
+    <string name="_tue">T.3</string>
+    <string name="_wed">T.4</string>
+    <string name="_thu">T.5</string>
+    <string name="_fri">T.6</string>
+    <string name="_sat">T.7</string>
+    <string name="_choose_the_background">Chọn màu nền bạn thích</string>
+    <string name="_erro_add_event">Lỗi! Nội dung còn trống!</string>
 </resources>

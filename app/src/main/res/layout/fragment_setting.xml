@@ -147,6 +147,76 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:elevation="@dimen/cardview_compat_inset_shadow"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:textStyle="bold"
+                android:fontFamily="@font/crete_round"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="Premium upgrades"
+                android:textColor="#0277BD"
+                android:textSize="16sp" />
+
+            <TextView
+                android:fontFamily="@font/crete_round"
+                android:textStyle="normal"
+                style="@style/TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="Remove ads for only 1 USD" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:textSize="20sp"
+        android:fontFamily="@font/playball"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        style="@style/TextView"
+        android:text="Daily Life"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:textStyle="normal"
+        android:textSize="12sp"
+        android:fontFamily="@font/crete_round"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        style="@style/TextView"
+        android:text="Version: 1.0.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:elevation="@dimen/cardview_compat_inset_shadow"
         android:visibility="gone">
 
         <LinearLayout

@@ -45,13 +45,12 @@ public class MyGridAdapter extends ArrayAdapter implements DisableGridView {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View view = layoutInflater.inflate(R.layout.single_cell_layout, parent, false);
+        TextView day_number = view.findViewById(R.id.calendar_day);
+        TextView testEvent = view.findViewById(R.id.testEvent);
+        LinearLayout testClick = view.findViewById(R.id.testClick);
         Calendar dateCalendar = Calendar.getInstance();
-        View view = convertView;
-        if (view == null) {
-            view = layoutInflater.inflate(R.layout.single_cell_layout, parent, false);
-        }
         dateCalendar.setTime(dates.get(position));
-
         int days = dateCalendar.get(Calendar.DAY_OF_MONTH);
         int months = dateCalendar.get(Calendar.MONTH) + 1;
         int years = dateCalendar.get(Calendar.YEAR);
@@ -60,11 +59,17 @@ public class MyGridAdapter extends ArrayAdapter implements DisableGridView {
         int currentYear = calendar.get(Calendar.YEAR);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        TextView day_number = view.findViewById(R.id.calendar_day);
-        TextView testEvent = view.findViewById(R.id.testEvent);
-        LinearLayout testClick = view.findViewById(R.id.testClick);
         day_number.setText(String.valueOf(days));
-
+        if (dateCalendar.getTimeInMillis() == currentCalendar.getTimeInMillis()) {
+            testClick.setBackgroundResource(R.drawable.bg_select);
+        }
+        if (calendar.getTimeInMillis() == toDay.getTimeInMillis() && days == day) {
+            day_number.setTextColor(getContext().getResources().getColor(R.color.red));
+        } else if (months == currentMonth && years == currentYear) {
+            day_number.setTextColor(getContext().getResources().getColor(R.color.black));
+        } else {
+            view.setVisibility(View.GONE);
+        }
         for (int i = 0; i < events.size(); i++) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(events.get(i));
@@ -75,17 +80,6 @@ public class MyGridAdapter extends ArrayAdapter implements DisableGridView {
                 testEvent.setBackgroundResource(R.drawable.bg_event_calendar);
             }
         }
-        if (calendar.getTimeInMillis() == toDay.getTimeInMillis() && days == day) {
-            day_number.setTextColor(getContext().getResources().getColor(R.color.red));
-        } else if (months == currentMonth && years == currentYear) {
-            day_number.setTextColor(getContext().getResources().getColor(R.color.black));
-        } else {
-            view.setVisibility(View.GONE);
-        }
-        if (dateCalendar.getTimeInMillis() == currentCalendar.getTimeInMillis()) {
-            testClick.setBackgroundResource(R.drawable.bg_select);
-        }
-
 
         return view;
     }
@@ -94,12 +88,12 @@ public class MyGridAdapter extends ArrayAdapter implements DisableGridView {
     public boolean isEnabled(int position) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dates.get(position));
-        int m = calendar.get(Calendar.MONTH)+1;
+        int m = calendar.get(Calendar.MONTH) + 1;
         int y = calendar.get(Calendar.YEAR);
 
-        int m1 = cal.get(Calendar.MONTH)+1;
+        int m1 = cal.get(Calendar.MONTH) + 1;
         int y1 = cal.get(Calendar.YEAR);
-        if (m==m1&& y==y1){
+        if (m == m1 && y == y1) {
             return true;
         }
         return false;

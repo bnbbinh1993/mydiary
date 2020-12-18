@@ -110,7 +110,7 @@ public class AddEventActivity extends AppCompatActivity {
 
         } else {
             body.requestFocus();
-            Toast.makeText(this, "Lỗi! Nội dung còn trống!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string._erro_add_event), Toast.LENGTH_SHORT).show();
         }
     }
 

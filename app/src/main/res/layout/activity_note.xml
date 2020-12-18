@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout android:id="@+id/background"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/note"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".activity.NoteActivity">
 
@@ -28,6 +29,15 @@
                 android:background="?attr/actionBarItemBackground"
                 android:padding="10dp"
                 android:src="@drawable/ic_left_arrow" />
+
+            <ImageButton
+                android:id="@+id/btnColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/btnMic"
+                android:background="?attr/actionBarItemBackground"
+                android:padding="10dp"
+                android:src="@drawable/ic_color_palette" />
 
             <ImageButton
                 android:id="@+id/btnMic"
@@ -72,6 +82,7 @@
 
             <Spinner
                 android:id="@+id/spinner"
+                style="@style/spiner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/mBack"

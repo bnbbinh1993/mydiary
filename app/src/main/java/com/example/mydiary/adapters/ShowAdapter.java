@@ -69,38 +69,66 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
         switch (model.getVote()) {
             case 1: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.event));
-                holder.startLayout.setBackgroundResource(R.drawable.bg_event);
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_1);
                 break;
             }
             case 2: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.mood));
-                holder.startLayout.setBackgroundResource(R.drawable.bg_mood);
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_2);
+
                 break;
             }
             case 3: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.work));
-                holder.startLayout.setBackgroundResource(R.drawable.bg_work);
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_3);
+
                 break;
             }
             case 4: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.shopping));
-                holder.startLayout.setBackgroundResource(R.drawable.bg_shopping);
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_4);
+
                 break;
             }
             case 5: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.travel));
-                holder.startLayout.setBackgroundResource(R.drawable.bg_travel);
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_5);
+
                 break;
             }
             case 6: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.cele));
-                holder.startLayout.setBackgroundResource(R.drawable.bg_celi);
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_6);
+
+                break;
+            }
+             case 7: {
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_7);
+                break;
+            }
+            case 8: {
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_8);
+
+                break;
+            }
+            case 9: {
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_9);
+
+                break;
+            }
+            case 10: {
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_10);
+
+                break;
+            }
+            case 11: {
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_11);
+
+                break;
+            }
+            case 12: {
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_12);
+
                 break;
             }
             default: {
-                holder.body.setBackgroundColor(context.getResources().getColor(R.color.note));
-                holder.startLayout.setBackgroundResource(R.drawable.bg_note);
+                holder.body.setBackgroundResource(R.drawable.bg_gradent_1);
+
                 break;
             }
         }
@@ -123,7 +151,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         private TextView date;
         private ImageView image;
         private RelativeLayout body;
-        private LinearLayout startLayout;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -132,7 +160,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             date = itemView.findViewById(R.id.date);
             image = itemView.findViewById(R.id.image);
             body = itemView.findViewById(R.id.body);
-            startLayout = itemView.findViewById(R.id.startLayout);
+
 
             itemView.setOnClickListener(this::onClick);
         }

@@ -29,5 +29,12 @@
     <color name="select">#4cd137</color>
     <color name="nul">#00000000</color>
     <color name="red_orange">#ff3f34</color>
+    <color name="gradient2">#DCB29C</color>
+    <color name="gradient3">#FBBFBF</color>
+    <color name="gradient4">#F8C9FF</color>
+    <color name="gradient5">#BBFFF8</color>
+    <color name="gradient6">#CEFBF6C2</color>
+    <color name="gradient7">#94B7E9FF</color>
+    <color name="gradient8">#E5FFC7</color>
 
 </resources>

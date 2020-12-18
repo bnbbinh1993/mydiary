@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">mydiary</string>
+    <string name="app_name">Daily Life</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
@@ -98,4 +98,13 @@
     <string name="_write_here">Write here</string>
     <string name="_today">Today</string>
     <string name="_calendar">Calendar</string>
+    <string name="_sun">Sun</string>
+    <string name="_mon">Mon</string>
+    <string name="_tue">Tue</string>
+    <string name="_wed">Wed</string>
+    <string name="_thu">Thu</string>
+    <string name="_fri">Fri</string>
+    <string name="_sat">Sat</string>
+    <string name="_choose_the_background">Choose the background color you like</string>
+    <string name="_erro_add_event">Error! Content is still available!</string>
 </resources>

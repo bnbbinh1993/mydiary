@@ -59,13 +59,13 @@
         android:paddingBottom="5dp">
 
         <TextView
-            android:layout_gravity="center"
+            style="@style/TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Sun"
-            style="@style/TextView"/>
+            android:text="@string/_sun" />
 
         <TextView
             android:layout_width="0dp"
@@ -73,16 +73,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Mon"
-            style="@style/TextView"/>
-
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Tue"
+            android:text="@string/_mon"
             style="@style/TextView"/>
 
         <TextView
@@ -91,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Wed"
+            android:text="@string/_tue"
             style="@style/TextView"/>
 
         <TextView
@@ -100,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Thu"
+            android:text="@string/_wed"
             style="@style/TextView"/>
 
         <TextView
@@ -109,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Fri"
+            android:text="@string/_thu"
             style="@style/TextView"/>
 
         <TextView
@@ -118,7 +109,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Sat"
+            android:text="@string/_fri"
+            style="@style/TextView"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/_sat"
             style="@style/TextView"/>
 
     </LinearLayout>

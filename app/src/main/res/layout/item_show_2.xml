@@ -8,15 +8,7 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/startLayout"
-        android:layout_width="5dp"
-        android:layout_height="110dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/bg_layout"
-        android:orientation="horizontal"
-        android:padding="5dp" />
+
 
     <androidx.cardview.widget.CardView
         android:layout_margin="2dp"

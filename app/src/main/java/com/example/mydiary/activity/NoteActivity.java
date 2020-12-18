@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mydiary.MainActivity;
 import com.example.mydiary.R;
 import com.example.mydiary.adapters.ImageAdapterEdit;
 import com.example.mydiary.database.DatabaseHelper;
@@ -61,6 +63,7 @@ public class NoteActivity extends AppCompatActivity {
     private ImageButton mSave;
     private ImageButton btnImage;
     private ImageButton btnMic;
+    private ImageButton btnColor;
     private TextView mDate;
     private EditText mTitle;
     private EditText mContent;
@@ -75,6 +78,7 @@ public class NoteActivity extends AppCompatActivity {
     private ArrayList<String> list = new ArrayList<>();
     private RecyclerView test_image;
     private ImageAdapterEdit adapter;
+    private int mColor = 0;
 
 
     @Override
@@ -126,32 +130,7 @@ public class NoteActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 title = employees[position];
                 filter = position + 1;
-                switch (position + 1) {
-                    case 1: {
-                        background.setBackgroundColor(getResources().getColor(R.color.event));
-                        break;
-                    }
-                    case 2: {
-                        background.setBackgroundColor(getResources().getColor(R.color.mood));
-                        break;
-                    }
-                    case 3: {
-                        background.setBackgroundColor(getResources().getColor(R.color.work));
-                        break;
-                    }
-                    case 4: {
-                        background.setBackgroundColor(getResources().getColor(R.color.shopping));
-                        break;
-                    }
-                    case 5: {
-                        background.setBackgroundColor(getResources().getColor(R.color.travel));
-                        break;
-                    }
-                    case 6: {
-                        background.setBackgroundColor(getResources().getColor(R.color.cele));
-                        break;
-                    }
-                }
+
             }
 
             @Override
@@ -203,6 +182,7 @@ public class NoteActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spinner);
         btnImage = findViewById(R.id.btnImage);
         btnMic = findViewById(R.id.btnMic);
+        btnColor = findViewById(R.id.btnColor);
 
     }
 
@@ -240,9 +220,138 @@ public class NoteActivity extends AppCompatActivity {
                 mic();
             }
         });
+        btnColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                color();
+            }
+        });
 
 
     }
+
+    private void color() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(NoteActivity.this);
+        ViewGroup viewGroup = findViewById(R.id.container);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_color, viewGroup, false);
+        TextView tv1 = view.findViewById(R.id.tv1);
+        TextView tv2 = view.findViewById(R.id.tv2);
+        TextView tv3 = view.findViewById(R.id.tv3);
+        TextView tv4 = view.findViewById(R.id.tv4);
+        TextView tv5 = view.findViewById(R.id.tv5);
+        TextView tv6 = view.findViewById(R.id.tv6);
+        TextView tv7 = view.findViewById(R.id.tv7);
+        TextView tv8 = view.findViewById(R.id.tv8);
+        TextView tv9 = view.findViewById(R.id.tv9);
+        TextView tv10 = view.findViewById(R.id.tv10);
+        TextView tv11 = view.findViewById(R.id.tv11);
+        TextView tv12 = view.findViewById(R.id.tv12);
+        builder.setView(view);
+        androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+
+        tv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 1;
+                background.setBackgroundResource(R.drawable.bg_gradent_1);
+                alertDialog.dismiss();
+            }
+        });
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 2;
+                background.setBackgroundResource(R.drawable.bg_gradent_2);
+                alertDialog.dismiss();
+            }
+        });
+        tv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 3;
+                background.setBackgroundResource(R.drawable.bg_gradent_3);
+                alertDialog.dismiss();
+            }
+        });
+        tv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 4;
+                background.setBackgroundResource(R.drawable.bg_gradent_4);
+                alertDialog.dismiss();
+            }
+        });
+        tv5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 5;
+                background.setBackgroundResource(R.drawable.bg_gradent_5);
+                alertDialog.dismiss();
+            }
+        });
+        tv6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 6;
+                background.setBackgroundResource(R.drawable.bg_gradent_6);
+                alertDialog.dismiss();
+            }
+        });
+        tv7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 7;
+                background.setBackgroundResource(R.drawable.bg_gradent_7);
+                alertDialog.dismiss();
+            }
+        });
+        tv8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 8;
+                background.setBackgroundResource(R.drawable.bg_gradent_8);
+                alertDialog.dismiss();
+            }
+        });
+        tv9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 9;
+                background.setBackgroundResource(R.drawable.bg_gradent_9);
+                alertDialog.dismiss();
+            }
+        });
+        tv10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 10;
+                background.setBackgroundResource(R.drawable.bg_gradent_10);
+                alertDialog.dismiss();
+            }
+        });
+        tv11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 11;
+                background.setBackgroundResource(R.drawable.bg_gradent_11);
+                alertDialog.dismiss();
+            }
+        });
+        tv12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mColor = 12;
+                background.setBackgroundResource(R.drawable.bg_gradent_12);
+                alertDialog.dismiss();
+            }
+        });
+
+
+        alertDialog.show();
+
+    }
+
+
 
     private void mic() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PackageManager.PERMISSION_GRANTED);
@@ -280,7 +389,7 @@ public class NoteActivity extends AppCompatActivity {
             diary.setDate(date);
             diary.setFilter(filter);
             diary.setImage(image.trim());
-            diary.setVote(filter);
+            diary.setVote(mColor);
             helper.add(diary);
             try {
                 Thread.sleep(500);
@@ -462,14 +571,13 @@ public class NoteActivity extends AppCompatActivity {
     }
 
 
-
     private void getImageFromAlbum() {
-        try{
+        try {
             Intent i = new Intent(Intent.ACTION_PICK,
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(i, RESULT_LOAD_IMAGE);
-        }catch(Exception exp){
-            Log.i("Error",exp.toString());
+        } catch (Exception exp) {
+            Log.i("Error", exp.toString());
         }
 
     }
