@@ -77,6 +77,7 @@ public class ShowFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 delete();
+                updateUI();
                 fab.collapse();
             }
         });
@@ -207,7 +208,6 @@ public class ShowFragment extends Fragment {
         }
 
         updateUI();
-
         Collections.reverse(list);
         adapter = new ShowAdapter(getContext(), list);
         recyclerView.setHasFixedSize(true);
@@ -237,10 +237,8 @@ public class ShowFragment extends Fragment {
     private void updateUI() {
         if (list.size() <= 0) {
             no_item.setVisibility(View.VISIBLE);
-            fab.setVisibility(View.GONE);
         } else {
             no_item.setVisibility(View.GONE);
-            fab.setVisibility(View.VISIBLE);
         }
     }
 
@@ -248,6 +246,7 @@ public class ShowFragment extends Fragment {
     public void onResume() {
         super.onResume();
         setView();
+        updateUI();
         fab.collapse();
     }
 
@@ -255,5 +254,10 @@ public class ShowFragment extends Fragment {
     public void onStart() {
         super.onStart();
         fab.collapse();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 }

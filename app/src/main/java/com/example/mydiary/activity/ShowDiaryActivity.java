@@ -63,6 +63,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private ImageButton btnMic;
     private ImageButton mDelete;
     private ImageButton btnColor;
+    private ImageButton btnClock;
     private TextView date;
     private TextView filter;
     private TextView title;
@@ -114,6 +115,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         mDelete = findViewById(R.id.mDelete);
         background = findViewById(R.id.background);
         btnColor = findViewById(R.id.btnColor);
+        btnClock = findViewById(R.id.btnClock);
 
 
         layout_edit = findViewById(R.id.layout_edit);
@@ -450,6 +452,12 @@ public class ShowDiaryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 color();
+            }
+        });
+        btnClock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateClick();
             }
         });
 

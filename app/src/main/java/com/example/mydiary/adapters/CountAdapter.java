@@ -53,7 +53,6 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
     }
 
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -76,7 +75,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
                             + " " + minute + " " + activity.getResources().getString(R.string._minute_item)
                             + " " + seconds + " " + activity.getResources().getString(R.string._seconds_item));
                 } else {
-                    holder.count.setText("Đã hoàn thành");
+                    holder.count.setText(activity.getResources().getString(R.string._finished));
                     DatabaseCount count = new DatabaseCount(activity);
                     model.setVote(1);
                     model.setPrioritize(0);
@@ -87,9 +86,8 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
                 e.printStackTrace();
             }
         } else {
-            holder.count.setText("Đã hoàn thành");
+            holder.count.setText(activity.getResources().getString(R.string._finished));
         }
-
 
 
         if (choice == 0) {
@@ -100,9 +98,9 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
             holder.ovel.setBackgroundResource(R.drawable.bg_frame_3);
         }
 
-        if (list.get(choice).getPrioritize()==1){
+        if (list.get(choice).getPrioritize() == 1) {
             holder.mVote.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             holder.mVote.setVisibility(View.GONE);
         }
 
@@ -154,10 +152,11 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
 
 
     }
-    private void stopService(Context c,int id){
+
+    private void stopService(Context c, int id) {
         AlarmManager manager = (AlarmManager) c.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(c, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(c,id,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(c, id, intent, 0);
         manager.cancel(pendingIntent);
     }
 

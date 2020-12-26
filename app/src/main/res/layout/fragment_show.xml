@@ -31,28 +31,28 @@
             android:id="@+id/tab1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="@string/_all" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="@string/_event" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="@string/_mood" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="@string/_work" />
 
         <com.google.android.material.tabs.TabItem
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_text"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="@string/_shopping" />
 
         <com.google.android.material.tabs.TabItem
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_text"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="@string/_travel" />
 
         <com.google.android.material.tabs.TabItem
@@ -76,13 +76,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_text"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="@string/_celebration" />
 
 
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+
         android:id="@+id/mRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -107,7 +108,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="@string/_no_item"
             android:textAlignment="center" />
     </LinearLayout>

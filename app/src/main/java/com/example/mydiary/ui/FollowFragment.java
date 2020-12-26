@@ -40,7 +40,6 @@ public class FollowFragment extends Fragment {
     private RecyclerView mRecyclerview;
     private CountAdapter adapter;
     private TabLayout tablayout;
-    private TabItem tab1;
     private TabItem tab2;
     private TabItem tab3;
     private int filter = 0;
@@ -71,6 +70,7 @@ public class FollowFragment extends Fragment {
         fabRecyclerview();
         initClick();
         countDown();
+
     }
 
     private void initClick() {
@@ -120,7 +120,6 @@ public class FollowFragment extends Fragment {
         mRecyclerview = v.findViewById(R.id.mRecyclerview);
         tablayout = v.findViewById(R.id.tablayout);
         no_item = v.findViewById(R.id.no_item);
-        tab1 = v.findViewById(R.id.tab1);
         tab2 = v.findViewById(R.id.tab2);
         tab3 = v.findViewById(R.id.tab3);
         fab = v.findViewById(R.id.fab);
@@ -142,6 +141,7 @@ public class FollowFragment extends Fragment {
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mRecyclerview.setAdapter(adapter);
+        updateFilter();
     }
 
     private void fabRecyclerview() {
@@ -201,13 +201,9 @@ public class FollowFragment extends Fragment {
     private void updateFilter() {
         list.clear();
         ArrayList<Count> test = new ArrayList<>();
-        if (filter == 0) {
-            test = listRes;
-        } else {
-            for (Count count : listRes) {
-                if (count.getVote() == (filter - 1)) {
-                    test.add(count);
-                }
+        for (Count count : listRes) {
+            if (count.getVote() == (filter)) {
+                test.add(count);
             }
         }
 
@@ -261,6 +257,7 @@ public class FollowFragment extends Fragment {
         fab.collapse();
         setUp();
         updateUI();
+        updateFilter();
         super.onResume();
         if (count != null) {
             count.start();

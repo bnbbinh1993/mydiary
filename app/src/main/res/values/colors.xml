@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="blackfake">#202020</color>
     <color name="white">#F4F4F4</color>
+    <color name="white_true">#fff</color>
     <color name="note">#7CFFCAB9</color>
     <color name="top_note">#FF3D00</color>
     <color name="event">#94B7E9FF</color>
@@ -29,6 +30,8 @@
     <color name="select">#4cd137</color>
     <color name="nul">#00000000</color>
     <color name="red_orange">#ff3f34</color>
+    <color name="red_orange_fake">#FFD5D3</color>
+    <color name="black_fake_2">#717171</color>
     <color name="gradient2">#DCB29C</color>
     <color name="gradient3">#FBBFBF</color>
     <color name="gradient4">#F8C9FF</color>

@@ -64,6 +64,7 @@ public class NoteActivity extends AppCompatActivity {
     private ImageButton btnImage;
     private ImageButton btnMic;
     private ImageButton btnColor;
+    private ImageButton btnClock;
     private TextView mDate;
     private EditText mTitle;
     private EditText mContent;
@@ -183,6 +184,7 @@ public class NoteActivity extends AppCompatActivity {
         btnImage = findViewById(R.id.btnImage);
         btnMic = findViewById(R.id.btnMic);
         btnColor = findViewById(R.id.btnColor);
+        btnClock = findViewById(R.id.btnClock);
 
     }
 
@@ -209,6 +211,12 @@ public class NoteActivity extends AppCompatActivity {
             }
         });
         mDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                date();
+            }
+        });
+        btnClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 date();
@@ -352,7 +360,6 @@ public class NoteActivity extends AppCompatActivity {
     }
 
 
-
     private void mic() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, PackageManager.PERMISSION_GRANTED);
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -392,7 +399,7 @@ public class NoteActivity extends AppCompatActivity {
             diary.setVote(mColor);
             helper.add(diary);
             try {
-                Thread.sleep(500);
+                Thread.sleep(300);
                 Intent intent = new Intent(NoteActivity.this, FinishActivity.class);
                 intent.putExtra("I", 1);
                 startActivity(intent);

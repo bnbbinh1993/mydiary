@@ -241,7 +241,7 @@ public class ShowFollowActivity extends AppCompatActivity {
                     mStatus.setText(getResources().getString(R.string._status_false));
 
                 } else {
-                    mStatus.setText(getResources().getString(R.string._status_true));
+                    mStatus.setText(getResources().getString(R.string._finished));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();

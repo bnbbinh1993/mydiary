@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img1"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:text="@string/_use_of_password"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/imagekeys"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:text="@string/_change_password"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/imageRate"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:text="@string/_rate_app"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img2"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:text="@string/_feed_back"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img3"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:text="@string/_privacy_policy"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -158,58 +158,60 @@
             android:padding="15dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:gravity="center"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
-                android:textStyle="bold"
-                android:fontFamily="@font/crete_round"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
+                android:fontFamily="@font/cardo"
                 android:gravity="center"
                 android:text="Premium upgrades"
-                android:textColor="#0277BD"
-                android:textSize="16sp" />
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:fontFamily="@font/crete_round"
-                android:textStyle="normal"
                 style="@style/TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
+                android:fontFamily="@font/cardo"
                 android:gravity="center"
-                android:text="Remove ads for only 1 USD" />
+                android:text="Remove ads for only 1 USD"
+                android:textStyle="normal" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:textSize="20sp"
-        android:fontFamily="@font/playball"
+        style="@style/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        style="@style/TextView"
+        android:fontFamily="@font/playball"
         android:text="Daily Life"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:textStyle="normal"
-        android:textSize="12sp"
-        android:fontFamily="@font/crete_round"
-        android:layout_gravity="center"
         android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/version"
         style="@style/TextView"
-        android:text="Version: 1.0.0"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/crete_round"
+        android:text="Version: 1.0.0"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:textStyle="normal" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

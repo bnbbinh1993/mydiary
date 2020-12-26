@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -25,7 +25,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -33,7 +33,7 @@
             android:text="@string/_successfully" />
 
         <TextView
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -50,7 +50,7 @@
         android:layout_centerHorizontal="true" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:fontFamily="@font/nobile"
+        android:fontFamily="@font/cardo"
         android:id="@+id/mCreate"
         android:textAllCaps="false"
         android:layout_marginBottom="5dp"
@@ -64,7 +64,7 @@
         android:textColor="@color/black" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:fontFamily="@font/nobile"
+        android:fontFamily="@font/cardo"
         android:textAllCaps="false"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"

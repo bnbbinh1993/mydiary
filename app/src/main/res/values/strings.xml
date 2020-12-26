@@ -3,10 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-    <string name="app_id" translatable="false">ca-app-pub-3584862127630500~5166487614</string>
-    <string name="banner_id" translatable="false">ca-app-pub-3584862127630500/9753434037</string>
-    <string name="interstitial_full_screen" translatable="false">ca-app-pub-3584862127630500/8468272526</string>
-
     <string name="app_test" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     <string name="id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="id_test2" translatable="false">ca-app-pub-3940256099942544/8691691433</string>
@@ -57,7 +53,6 @@
     <string name="_messenger_delete_all">Are you sure you want to delete all of them?</string>
     <string name="_delete">Delete</string>
     <string name="_all">All</string>
-    <string name="_watching">Watching</string>
     <string name="_past">Past</string>
     <string name="_type_a_title_here">Type a title here</string>
     <string name="_note_here">Note here</string>
@@ -107,4 +102,8 @@
     <string name="_sat">Sat</string>
     <string name="_choose_the_background">Choose the background color you like</string>
     <string name="_erro_add_event">Error! Content is still available!</string>
+    <string name="_seconds">Seconds</string>
+    <string name="_messenger_notification">No event yet! Press (+) to create your schedule!</string>
+    <string name="_in_progress">In Progress</string>
+    <string name="_finished">Finished</string>
 </resources>

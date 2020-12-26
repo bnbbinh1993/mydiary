@@ -30,7 +30,7 @@
         <TextView
             android:id="@+id/mName"
             android:textColor="@color/black"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:textSize="12sp"
             android:paddingStart="10dp"
             android:text="Bùi Ngọc bình"
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/mCategory"
             android:textColor="#4E4E4E"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:textSize="10sp"
             android:paddingStart="10dp"
             android:text="Giải trí"

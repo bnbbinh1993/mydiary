@@ -15,13 +15,16 @@ import com.example.mydiary.utils.ItemClick;
 import com.example.mydiary.utils.OnClickItem;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class EventCalendarAdapter extends RecyclerView.Adapter<EventCalendarAdapter.ViewHolder>{
+public class EventCalendarAdapter extends RecyclerView.Adapter<EventCalendarAdapter.ViewHolder> {
     private Context context;
     private List<EventCalendar> list = new ArrayList<>();
     private ItemClick itemClick;
     private int choice;
+    private Calendar calendar = Calendar.getInstance();
+    private long check = calendar.getTimeInMillis();
 
     public EventCalendarAdapter(Context context, List<EventCalendar> list) {
         this.context = context;
@@ -32,25 +35,38 @@ public class EventCalendarAdapter extends RecyclerView.Adapter<EventCalendarAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_event_calendar,parent,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_event_calendar, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EventCalendar model = list.get(choice);
+        String s[] = model.getContent().split(":");
+
+        calendar.setTimeInMillis(model.getLoc());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(s[0].trim()));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(s[1].trim()));
         holder.timeText.setText(model.getContent());
         holder.contentText.setText(model.getTime());
+        if (calendar.getTimeInMillis() < check) {
+            holder.timeText.setTextColor(context.getResources().getColor(R.color.red_orange_fake));
+            holder.contentText.setTextColor(context.getResources().getColor(R.color.black_fake_2));
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
+
     @Override
     public int getItemViewType(int position) {
         choice = position;
         return choice;
     }
+
     public void setOnClickItem(ItemClick itemClick) {
         this.itemClick = itemClick;
     }
@@ -58,6 +74,7 @@ public class EventCalendarAdapter extends RecyclerView.Adapter<EventCalendarAdap
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView timeText;
         private TextView contentText;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             timeText = itemView.findViewById(R.id.timeText);

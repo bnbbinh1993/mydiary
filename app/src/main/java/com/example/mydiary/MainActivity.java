@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         if (!rate) {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             ViewGroup viewGroup = findViewById(R.id.container);
-            View view = LayoutInflater.from(this).inflate(R.layout.dialog_daily, viewGroup, false);
+            View view = LayoutInflater.from(this).inflate(R.layout.dialog_mood, viewGroup, false);
             LinearLayout normal = view.findViewById(R.id.normal);
             LinearLayout sad = view.findViewById(R.id.sad);
             LinearLayout happy = view.findViewById(R.id.happy);

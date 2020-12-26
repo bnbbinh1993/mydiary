@@ -26,26 +26,20 @@
         app:tabSelectedTextColor="#FFFFFF"
         app:tabTextAppearance="@style/MyTabLayoutTextAppearance">
 
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nobile"
-            android:text="@string/_all" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nobile"
-            android:text="@string/_watching" />
+            android:fontFamily="@font/cardo"
+            android:text="@string/_in_progress" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/tab3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nobile"
-            android:text="@string/_past" />
+            android:fontFamily="@font/cardo"
+            android:text="@string/_finished" />
 
 
     </com.google.android.material.tabs.TabLayout>
@@ -55,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tablayout"
+        android:layout_marginTop="0dp"
         android:overScrollMode="never" />
 
     <LinearLayout
@@ -75,8 +70,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/nobile"
-            android:text="@string/_no_item"
+            android:fontFamily="@font/cardo"
+            android:text="@string/_messenger_notification"
             android:textAlignment="center" />
     </LinearLayout>
 

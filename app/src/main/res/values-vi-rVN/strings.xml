@@ -48,7 +48,6 @@
     <string name="_messenger_delete_all">Bạn có chắc chắn muốn xóa tất cả chúng không?</string>
     <string name="_delete">Xóa</string>
     <string name="_all">Tất cả</string>
-    <string name="_watching">Đang theo dõi</string>
     <string name="_past">Đã qua</string>
     <string name="_type_a_title_here">Nhập tiêu đề ở đây</string>
     <string name="_note_here">Ghi chú ở đây</string>
@@ -97,4 +96,8 @@
     <string name="_sat">T.7</string>
     <string name="_choose_the_background">Chọn màu nền bạn thích</string>
     <string name="_erro_add_event">Lỗi! Nội dung còn trống!</string>
+    <string name="_seconds">Giây</string>
+    <string name="_messenger_notification">Chưa có sự kiện nào! Nhấn (+) để tạo lịch trình của bạn!</string>
+    <string name="_in_progress">Đang diễn ra</string>
+    <string name="_finished">Đã hoàn thành</string>
 </resources>

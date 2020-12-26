@@ -142,7 +142,7 @@ public class CountDownActivity extends AppCompatActivity {
             start(Pef.getLongTime(date), title);
 
             try {
-                Thread.sleep(500);
+                Thread.sleep(300);
                 Intent intent = new Intent(CountDownActivity.this, FinishActivity.class);
                 intent.putExtra("I", 0);
                 startActivity(intent);

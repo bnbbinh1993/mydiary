@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/workId"
-        android:fontFamily="@font/nobile"
+        android:fontFamily="@font/cardo"
         android:icon="@drawable/ic_pen"
         android:title="@string/_calendar"/>
     <item android:id="@+id/homeId"
-        android:fontFamily="@font/nobile"
+        android:fontFamily="@font/cardo"
         android:icon="@drawable/ic_notebook"
         android:title="@string/_diary"/>
     <item android:id="@+id/historyId"
-        android:fontFamily="@font/nobile"
+        android:fontFamily="@font/cardo"
         android:icon="@drawable/ic_clock_1_"
-        android:title="@string/_follow"/>
+        android:title="@string/_count_time"/>
 <!--    <item android:id="@+id/analysisId"-->
 <!--        android:fontFamily="@font/nobile"-->
 <!--        android:icon="@drawable/ic_pie_chart"-->
 <!--        android:title="@string/_analysis"/>-->
     <item android:id="@+id/profileId"
-        android:fontFamily="@font/nobile"
+        android:fontFamily="@font/cardo"
         android:icon="@drawable/ic_setting"
         android:title="@string/_setting"/>
 </menu>

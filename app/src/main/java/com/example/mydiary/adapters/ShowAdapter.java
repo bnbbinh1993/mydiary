@@ -1,6 +1,7 @@
 package com.example.mydiary.adapters;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,11 @@ import com.example.mydiary.models.Diary;
 import com.example.mydiary.utils.OnClickItem;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
@@ -26,6 +31,11 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     private List<Diary> list = new ArrayList<>();
     private static OnClickItem onClickItem;
     private int choice;
+    private SimpleDateFormat f = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
+    private SimpleDateFormat fmoth = new SimpleDateFormat("MMM");
+    private SimpleDateFormat fday = new SimpleDateFormat("EEE");
+    private Calendar calendar = Calendar.getInstance();
+    private Date date = new Date();
 
     public ShowAdapter(Context context, List<Diary> list) {
         this.context = context;
@@ -51,7 +61,22 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         Diary model = list.get(choice);
         holder.name.setText(model.getTitle());
         holder.content.setText(model.getContent());
-        holder.date.setText(model.getDate());
+        String d[] = model.getDate().split(" - ");
+        holder.date.setText(d[0]);
+
+        try {
+            calendar.setTimeInMillis(f.parse(model.getDate()).getTime());
+
+            date.setTime(f.parse(model.getDate()).getTime());
+            holder.txtDay.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
+            holder.txtThu.setText(fday.format(date));
+            holder.txtMonth.setText(fmoth.format(date));
+            holder.txtYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         if (model.getImage() != null) {
             if (!model.getImage().trim().isEmpty()) {
                 String s[] = model.getImage().split("<->");
@@ -97,7 +122,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
                 break;
             }
-             case 7: {
+            case 7: {
                 holder.body.setBackgroundResource(R.drawable.bg_gradent_7);
                 break;
             }
@@ -149,8 +174,12 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         private TextView name;
         private TextView content;
         private TextView date;
+        private TextView txtDay;
+        private TextView txtThu;
+        private TextView txtMonth;
+        private TextView txtYear;
         private ImageView image;
-        private RelativeLayout body;
+        private LinearLayout body;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -160,6 +189,10 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             date = itemView.findViewById(R.id.date);
             image = itemView.findViewById(R.id.image);
             body = itemView.findViewById(R.id.body);
+            txtDay = itemView.findViewById(R.id.txtDay);
+            txtThu = itemView.findViewById(R.id.txtThu);
+            txtMonth = itemView.findViewById(R.id.txtMonth);
+            txtYear = itemView.findViewById(R.id.txtYear);
 
 
             itemView.setOnClickListener(this::onClick);

@@ -89,7 +89,7 @@
                         android:id="@+id/date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nobile"
+                        android:fontFamily="@font/cardo"
                         android:text="11.07.2020"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
@@ -103,7 +103,7 @@
                             android:id="@+id/date2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/nobile"
+                            android:fontFamily="@font/cardo"
                             android:text="Hôm nay, 02:39"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
@@ -148,7 +148,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_edt"
-                        android:fontFamily="@font/nobile"
+                        android:fontFamily="@font/cardo"
                         android:hint="@string/_write_here"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"

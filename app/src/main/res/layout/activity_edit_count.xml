@@ -20,7 +20,7 @@
             android:padding="10dp"
             android:src="@drawable/ic_left_arrow" />
         <TextView
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:textSize="16sp"
             android:textColor="@color/blackfake"
             android:textStyle="bold"
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:textColorHint="#DCDCDC"
                 android:id="@+id/mTitle"
                 android:hint="@string/_title"
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:textColorHint="#DCDCDC"
                 android:id="@+id/mDes"
                 android:hint="@string/_description"
@@ -119,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <EditText
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:textColorHint="#DCDCDC"
                 android:id="@+id/mPlace"
                 android:hint="@string/_place"
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:id="@+id/mDate"
                 android:padding="10dp"
                 android:textSize="14sp"

@@ -44,7 +44,7 @@
 
 
         <TextView
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:layout_toStartOf="@+id/filter"
             android:id="@+id/date"
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             android:textSize="12sp" />
         <TextView
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:gravity="center"
             android:text="accasdsa"
             android:padding="10dp"
@@ -91,7 +91,7 @@
             android:padding="10dp">
 
             <TextView
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:id="@+id/title"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
@@ -115,7 +115,7 @@
 
             <TextView
 
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:id="@+id/body"
                 android:paddingTop="10dp"
                 android:paddingBottom="100dp"

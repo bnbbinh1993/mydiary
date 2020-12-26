@@ -1,6 +1,8 @@
 package com.example.mydiary.ui;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,6 +38,7 @@ public class SettingFragment extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private TextView mFeedback, mLogin, mPollicy, mRate, mKeys, mText;
     private CircleImageView mAvt;
+    private TextView mVersion;
     private Switch mKey;
     private static final int SIGN_IN = 1;
     private GoogleSignInClient mGoogleSignInClient;
@@ -64,6 +67,17 @@ public class SettingFragment extends Fragment {
     private void initSetUp() {
         Pef.getReference(getActivity());
         mKey.setChecked(Pef.getBoolean("isPassWord"));
+        checkVersion();
+    }
+
+    private void checkVersion() {
+        try {
+            PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+            String version = pInfo.versionName;
+            mVersion.setText("Version: " + version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initClick() {
@@ -152,6 +166,7 @@ public class SettingFragment extends Fragment {
         mRate = view.findViewById(R.id.mRate);
         mText = view.findViewById(R.id.mText);
         mAvt = view.findViewById(R.id.mAvt);
+        mVersion = view.findViewById(R.id.version);
     }
 
     private void feedback() {

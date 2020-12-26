@@ -2,6 +2,7 @@ package com.example.mydiary.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -78,6 +80,7 @@ public class AnalysisFragment extends Fragment {
         listEvent.clear();
         listEventAll.clear();
         listEventAll = helper.getData();
+
         int d = a.get(Calendar.DAY_OF_MONTH);
         int m = a.get(Calendar.MONTH) + 1;
         int y = a.get(Calendar.YEAR);
@@ -96,9 +99,16 @@ public class AnalysisFragment extends Fragment {
 
 
         dateF.setTime(today);
-        SimpleDateFormat format = new SimpleDateFormat("EEE");
-        txtDate.setText(d + " " + m + " " + y + ", " + format.format(dateF));
-        txtDate2.setText(d + " " + m + " " + y + ", " + format.format(dateF));
+
+        String thu = (String) DateFormat.format("EEE", dateF); // T.4
+        String dayOfTheWeek = (String) DateFormat.format("EEEE", dateF); // Thursday
+        String day = (String) DateFormat.format("dd", dateF); // 20
+        String monthString = (String) DateFormat.format("MMM", dateF); // Jun
+        String monthNumber = (String) DateFormat.format("MM", dateF); // 06
+        String year = (String) DateFormat.format("yyyy", dateF); // 2013
+
+        txtDate.setText(day + " " + monthString + " " + year + ", " + dayOfTheWeek);
+        txtDate2.setText(day + " " + monthString + " " + year + ", " + dayOfTheWeek);
 
         for (int i = 0; i < listEventAll.size(); i++) {
             if (!list.contains(listEventAll.get(i).getLoc())) {
@@ -115,6 +125,7 @@ public class AnalysisFragment extends Fragment {
                 listEvent.clear();
                 listEventAll.clear();
                 listEventAll = helper.getData();
+
                 a.setTimeInMillis(date.get(p).getTime());
                 int d = a.get(Calendar.DAY_OF_MONTH);
                 int m = a.get(Calendar.MONTH) + 1;
@@ -123,9 +134,15 @@ public class AnalysisFragment extends Fragment {
                 try {
                     today = f.parse(d + "." + m + "." + y).getTime();
                     dateF.setTime(today);
-                    SimpleDateFormat format = new SimpleDateFormat("EEE");
-                    txtDate.setText(d + " " + m + " " + y + ", " + format.format(dateF));
-                    txtDate2.setText(d + " " + m + " " + y + ", " + format.format(dateF));
+                    String thu = (String) DateFormat.format("EEE", dateF); // T.4
+                    String dayOfTheWeek = (String) DateFormat.format("EEEE", dateF); // Thursday
+                    String day = (String) DateFormat.format("dd", dateF); // 20
+                    String monthString = (String) DateFormat.format("MMM", dateF); // Jun
+                    String monthNumber = (String) DateFormat.format("MM", dateF); // 06
+                    String year = (String) DateFormat.format("yyyy", dateF); // 2013
+
+                    txtDate.setText(day + " " + monthString + " " + year + ", " + dayOfTheWeek);
+                    txtDate2.setText(day + " " + monthString + " " + year + ", " + dayOfTheWeek);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -140,7 +157,7 @@ public class AnalysisFragment extends Fragment {
                 updateUI();
             }
         });
-
+        Collections.sort(listEvent);
         adapter = new EventCalendarAdapter(getContext(), listEvent);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         recyclerView.setHasFixedSize(true);

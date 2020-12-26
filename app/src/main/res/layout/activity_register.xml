@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:text="Always with you in every moment"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -115,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:text="Bạn đã có tài khoản?"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -126,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:text="Đăng nhập"
                 android:textAlignment="center"
                 android:textColor="#0048FF"
@@ -135,7 +135,7 @@
         </LinearLayout>
     </LinearLayout>
     <TextView
-        android:fontFamily="@font/nobile"
+        android:fontFamily="@font/cardo"
         android:textSize="10sp"
         android:layout_margin="20dp"
         android:textColor="@color/white"

@@ -55,16 +55,27 @@
 
         <TextView
             android:id="@+id/dateEdit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageEdit"
             android:layout_marginTop="10dp"
-            android:layout_toStartOf="@+id/spinnerEdit"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:padding="10dp"
             android:text="11.07.2020 02:22"
             android:textColor="@color/black"
             android:textSize="12sp" />
+
+        <ImageButton
+            android:padding="12dp"
+            android:background="?attr/actionBarItemBackground"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageEdit"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@+id/dateEdit"
+            android:src="@drawable/ic_clock" />
 
         <Spinner
             android:id="@+id/spinnerEdit"
@@ -73,7 +84,7 @@
             android:layout_below="@+id/imageEdit"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"
-            android:fontFamily="@font/nobile"
+            android:fontFamily="@font/cardo"
             android:padding="10dp"
             android:text="accasdsa" />
 
@@ -106,7 +117,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edt"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:hint="Type a title here"
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
@@ -129,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edt"
-                android:fontFamily="@font/nobile"
+                android:fontFamily="@font/cardo"
                 android:hint="Note here"
                 android:paddingStart="10dp"
                 android:paddingTop="10dp"
