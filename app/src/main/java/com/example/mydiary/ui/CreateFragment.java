@@ -306,20 +306,20 @@ public class CreateFragment extends Fragment {
     }
 
     private void loadAd(){
-        mAdView = new AdView(getContext());
-        mAdView.setAdUnitId(getString(R.string.id_test));
-        layout.addView(mAdView);
-        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-
-            }
-        });
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        AdSize adSize = getAdSize();
-        mAdView.setAdSize(adSize);
-        mAdView.loadAd(adRequest);
+//        mAdView = new AdView(getContext());
+//        mAdView.setAdUnitId(getString(R.string.id_test));
+//        layout.addView(mAdView);
+//        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//
+//            }
+//        });
+//        AdRequest adRequest = new AdRequest.Builder()
+//                .build();
+//        AdSize adSize = getAdSize();
+//        mAdView.setAdSize(adSize);
+//        mAdView.loadAd(adRequest);
     }
     private AdSize getAdSize() {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
