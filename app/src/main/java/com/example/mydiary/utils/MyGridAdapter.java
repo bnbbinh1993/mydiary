@@ -35,6 +35,7 @@ public class MyGridAdapter extends ArrayAdapter implements DisableGridView {
         this.currentCalendar = currentCalendar;
         this.calendar = calendar;
         this.toDay = today;
+
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -67,12 +68,15 @@ public class MyGridAdapter extends ArrayAdapter implements DisableGridView {
             day_number.setTextColor(getContext().getResources().getColor(R.color.red));
         } else if (months == currentMonth && years == currentYear) {
             day_number.setTextColor(getContext().getResources().getColor(R.color.black));
-        } else {
+        }
+        if (!(months == currentMonth)){
             view.setVisibility(View.GONE);
         }
+
         for (int i = 0; i < events.size(); i++) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(events.get(i));
+
             int m = calendar.get(Calendar.MONTH) + 1;
             int y = calendar.get(Calendar.YEAR);
             int d = calendar.get(Calendar.DAY_OF_MONTH);

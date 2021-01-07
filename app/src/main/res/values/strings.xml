@@ -2,9 +2,9 @@
     <string name="app_name">Daily Life</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-
+    <string name="_interstitial" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="_id_app_test_ads" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
     <string name="_create">Create</string>
-    <string name="_diary">Diary</string>
     <string name="_follow">Follow</string>
     <string name="_setting">Setting</string>
     <string name="_note">Note</string>
@@ -102,4 +102,5 @@
     <string name="_messenger_notification">No event yet! Press (+) to create your schedule!</string>
     <string name="_in_progress">In Progress</string>
     <string name="_finished">Finished</string>
+    <string name="_diary">Diary</string>
 </resources>

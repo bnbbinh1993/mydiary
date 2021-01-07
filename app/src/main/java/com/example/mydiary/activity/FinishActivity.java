@@ -19,6 +19,10 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class FinishActivity extends AppCompatActivity {
     private AppCompatButton mCreate;
@@ -30,8 +34,12 @@ public class FinishActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish);
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId(getString(R.string.id_test2));
-        MobileAds.initialize(this, getResources().getString(R.string.app_test));
+        mInterstitialAd.setAdUnitId(getString(R.string._interstitial));
+        MobileAds.initialize(this, getResources().getString(R.string._id_app_test_ads));
+        //List<String> testDeviceIds = Arrays.asList("33BE2250B43518CCDA7DE426D04EE231");
+        //RequestConfiguration configuration = new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+        //MobileAds.setRequestConfiguration(configuration);
+
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("C04B1BFFB0774708339BC273F8A43708")

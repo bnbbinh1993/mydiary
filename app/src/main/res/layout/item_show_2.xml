@@ -6,91 +6,27 @@
     android:layout_gravity="center"
     android:layout_marginTop="1dp"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <LinearLayout
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="20dp"
         android:id="@+id/body"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="130dp"
         android:background="@color/note"
-        android:orientation="horizontal"
-        android:weightSum="5">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/txtDay"
-                style="@style/TextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="18"
-                android:textAlignment="center"
-                android:textColor="@color/blackfake"
-                android:textSize="25sp"
-                android:textStyle="normal" />
-
-            <TextView
-                android:id="@+id/txtThu"
-                style="@style/TextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="T.6"
-                android:textAlignment="center"
-                android:textColor="@color/blackfake"
-                android:textSize="14sp"
-                android:textStyle="normal" />
-
-            <TextView
-                android:id="@+id/txtMonth"
-                style="@style/TextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="Nov"
-                android:textAlignment="center"
-                android:textColor="@color/blackfake"
-                android:textSize="13sp"
-                android:textStyle="normal" />
-
-            <TextView
-                android:id="@+id/txtYear"
-                style="@style/TextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="2020"
-                android:textAlignment="center"
-                android:textColor="@color/blackfake"
-                android:textSize="12sp"
-                android:textStyle="normal" />
-        </LinearLayout>
-
+        android:orientation="horizontal">
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
                 android:maxLines="1"
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_toStartOf="@+id/card"
                 android:fontFamily="@font/cardo"
                 android:text="Bùi Ngọc Bình"
@@ -130,6 +66,7 @@
                     android:src="@drawable/ic_clock" />
 
                 <TextView
+                    android:layout_marginStart="10dp"
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,7 +91,7 @@
                     android:id="@+id/image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:background="#00FFFFFF" />
+                   />
             </androidx.cardview.widget.CardView>
 
         </RelativeLayout>

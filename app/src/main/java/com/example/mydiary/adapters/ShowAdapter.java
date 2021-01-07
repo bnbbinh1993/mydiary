@@ -66,12 +66,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
         try {
             calendar.setTimeInMillis(f.parse(model.getDate()).getTime());
-
             date.setTime(f.parse(model.getDate()).getTime());
-            holder.txtDay.setText(String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)));
-            holder.txtThu.setText(fday.format(date));
-            holder.txtMonth.setText(fmoth.format(date));
-            holder.txtYear.setText(String.valueOf(calendar.get(Calendar.YEAR)));
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -174,10 +170,6 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         private TextView name;
         private TextView content;
         private TextView date;
-        private TextView txtDay;
-        private TextView txtThu;
-        private TextView txtMonth;
-        private TextView txtYear;
         private ImageView image;
         private LinearLayout body;
 
@@ -189,10 +181,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             date = itemView.findViewById(R.id.date);
             image = itemView.findViewById(R.id.image);
             body = itemView.findViewById(R.id.body);
-            txtDay = itemView.findViewById(R.id.txtDay);
-            txtThu = itemView.findViewById(R.id.txtThu);
-            txtMonth = itemView.findViewById(R.id.txtMonth);
-            txtYear = itemView.findViewById(R.id.txtYear);
+
 
 
             itemView.setOnClickListener(this::onClick);

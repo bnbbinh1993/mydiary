@@ -20,24 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="380dp">
 
-            <androidx.cardview.widget.CardView
+            <com.example.mydiary.utils.CustomCalendarView
+                android:id="@+id/mCustomCalendarView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="?attr/selectableItemBackground"
-                android:elevation="5dp"
-                android:layoutMode="opticalBounds"
-                app:cardCornerRadius="5dp"
-                app:cardElevation="5dp"
-                app:cardMaxElevation="5dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false">
-
-                <com.example.mydiary.utils.CustomCalendarView
-                    android:id="@+id/mCustomCalendarView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btnFloat"
