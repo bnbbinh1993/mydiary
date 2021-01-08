@@ -1,36 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
     tools:context=".ui.DairyFragment">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tablayout"
-            style="@style/MineCustomTabText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/bottom_navigation2"
-            app:tabIndicatorHeight="3dp"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/bottom_navigation2"
-            app:tabTextAppearance="@style/MineCustomTabText" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/mLinealayoutTrue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never" />
+        android:orientation="vertical">
 
-</LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tablayout"
+                style="@style/MineCustomTabText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/bottom_navigation2"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/bottom_navigation2"
+                app:tabTextAppearance="@style/MineCustomTabText" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:id="@+id/mLinealayoutFalse"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="50dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_zombie" />
+        <TextView
+            android:textSize="15sp"
+            android:padding="5dp"
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cardo"
+            android:text="@string/_nothing_is_here"
+            android:textAlignment="center" />
+
+        <TextView
+            android:textSize="13sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cardo"
+            android:text="@string/_messenger_notification"
+            android:textAlignment="center" />
+
+
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:overScrollMode="never"
+        android:src="@drawable/ic_add"
+        app:fab_colorDisabled="@color/white"
+        app:fab_colorNormal="@color/white"
+        app:fab_colorPressed="@color/bottom_navigation2"
+        app:fab_size="mini"
+        app:maxImageSize="18dp"
+        app:rippleColor="@color/white" />
+</RelativeLayout>

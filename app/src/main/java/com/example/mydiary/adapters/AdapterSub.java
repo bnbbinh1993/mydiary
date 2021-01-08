@@ -58,9 +58,9 @@ public class AdapterSub extends RecyclerView.Adapter<AdapterSub.ViewHolder> {
         if (calendarEvent.get(Calendar.DAY_OF_MONTH) == calendarToDay.get(Calendar.DAY_OF_MONTH)
                 && calendarEvent.get(Calendar.MONTH) + 1 == calendarToDay.get(Calendar.MONTH) + 1
                 && calendarEvent.get(Calendar.YEAR) == calendarToDay.get(Calendar.YEAR)) {
-            holder.mDate.setText("Today - " + String.valueOf(fmoth.format(calendarToDay.getTimeInMillis())).toUpperCase() + " " + calendarEvent.get(Calendar.DAY_OF_MONTH) + " " + calendarToDay.get(Calendar.YEAR));
+            holder.mDate.setText("Today - " + calendarEvent.get(Calendar.DAY_OF_MONTH) + " " + String.valueOf(fmoth.format(calendarToDay.getTimeInMillis())).toUpperCase() + " " + calendarToDay.get(Calendar.YEAR));
         } else {
-            holder.mDate.setText(String.valueOf(fmoth.format(calendarEvent.getTimeInMillis())).toUpperCase() + " " + calendarEvent.get(Calendar.DAY_OF_MONTH) + " " + calendarEvent.get(Calendar.YEAR));
+            holder.mDate.setText(calendarEvent.get(Calendar.DAY_OF_MONTH) + " " + String.valueOf(fmoth.format(calendarEvent.getTimeInMillis())).toUpperCase() + " " + calendarEvent.get(Calendar.YEAR));
         }
 
         List<Diary> diaryList = model.getList();

@@ -179,7 +179,6 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
         int i = getIntent().getIntExtra("position", 0);
         list = new DatabaseHelper(this).getData();
-        Collections.reverse(list);
         String s[] = list.get(i).getImage().trim().split("<->");
         if (s.length > 0) {
             for (int j = 0; j < s.length; j++) {
@@ -189,7 +188,6 @@ public class ShowDiaryActivity extends AppCompatActivity {
                 }
             }
         }
-
 
         adapter = new ImageAdapter(listPath, this);
         mRecyclerview.setHasFixedSize(true);
@@ -787,7 +785,6 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private void save() {
         int i = getIntent().getIntExtra("position", 0);
         list = new DatabaseHelper(this).getData();
-        Collections.reverse(list);
         String image = "";
         for (String s : listPath2) {
             image = image + s + "<->";

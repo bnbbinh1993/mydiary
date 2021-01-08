@@ -29,8 +29,12 @@ import com.example.mydiary.models.ItemSub;
 import com.example.mydiary.utils.OnClickItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class ShowFragment extends Fragment {
@@ -38,7 +42,7 @@ public class ShowFragment extends Fragment {
     private AdapterSub adapter;
     private static ArrayList<Diary> list;
     private ArrayList<ItemSub> result;
-    private ArrayList<Long> listDate;
+    private List<Long> listDate;
     private LinearLayout no_item;
     private DatabaseHelper helper;
     private FloatingActionButton fab;
@@ -72,44 +76,63 @@ public class ShowFragment extends Fragment {
     private void addDateTest() {
 
         list = helper.getData();
-        buildListDate(list);
+        listDate = buildListDate(list);
         List<ItemSub> listTest = new ArrayList<>();
-        List<Diary> listdiary = new ArrayList<>();
-//        for (long a : listDate) {
-//            listdiary = buildListDiary(a, list);
-//            listTest.add(new ItemSub(String.valueOf(a), listdiary));
-//            listdiary.clear();
-//        }
-
-        listTest.add(new ItemSub(String.valueOf(list.get(0).getRealtime()), list));
-        listTest.add(new ItemSub(String.valueOf(list.get(0).getRealtime()), list));
-        listTest.add(new ItemSub(String.valueOf(list.get(0).getRealtime()), list));
+        ;
         adapter = new AdapterSub(listTest, getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+        for (int i = 0; i < listDate.size(); i++) {
+            List<Diary> listdiary = buildListDiary(listDate.get(i), list);
+            Log.d("TAG", "Size: " + listdiary.size());
+            listTest.add(new ItemSub(String.valueOf(listDate.get(i)), listdiary));
+
+        }
+        Collections.reverse(listTest);
         adapter.notifyDataSetChanged();
         updateUI();
 
     }
 
-    private void buildListDate(List<Diary> data) {
-        listDate = new ArrayList<>();
+    private List<Long> buildListDate(List<Diary> data) {
+        List<Long> res = new ArrayList<>();
+
         for (Diary model : list) {
-            if (!listDate.contains(model.getRealtime())) {
-                listDate.add(model.getRealtime());
-                Log.d("TAG",""+model.getRealtime());
-            } else {
-                Log.d("TAG", "Đã tồn tại!");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(model.getRealtime());
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int year = calendar.get(Calendar.YEAR);
+            String key = day + "/" + month + "/" + year;
+            try {
+                calendar.setTimeInMillis(new SimpleDateFormat("dd/MM/yyyy").parse(key).getTime());
+                if (!res.contains(calendar.getTimeInMillis())) {
+                    res.add(model.getRealtime());
+                    Log.d("TAG", "" + model.getRealtime());
+                } else {
+                    Log.d("TAG", "Đã tồn tại!");
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
+
         }
-        Log.d("TAG", "ListDate: " + listDate.size());
+        Log.d("TAG", "ListDate: " + res.size());
+        return res;
     }
 
     private List<Diary> buildListDiary(long key, List<Diary> data) {
         List<Diary> res = new ArrayList<>();
+        Calendar calendarKey = Calendar.getInstance();
+        calendarKey.setTimeInMillis(key);
+        Calendar calendarEvent = Calendar.getInstance();
+
         for (Diary model : data) {
-            if (model.getRealtime() == key) {
+            calendarEvent.setTimeInMillis(model.getRealtime());
+            if (calendarKey.get(Calendar.DAY_OF_MONTH) == calendarEvent.get(Calendar.DAY_OF_MONTH)
+                    && calendarKey.get(Calendar.MONTH) + 1 == calendarEvent.get(Calendar.MONTH) + 1
+                    && calendarKey.get(Calendar.YEAR) == calendarEvent.get(Calendar.YEAR)) {
                 res.add(model);
             } else {
                 Log.d("TAG", "buildListDiary: Faild");
@@ -165,16 +188,6 @@ public class ShowFragment extends Fragment {
     }
 
 
-    private void setView() {
-        adapter = new AdapterSub(result, getActivity());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        updateUI();
-    }
-
-
     private void updateUI() {
         if (list.size() <= 0) {
             no_item.setVisibility(View.VISIBLE);
@@ -186,6 +199,7 @@ public class ShowFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        addDateTest();
         updateUI();
     }
 

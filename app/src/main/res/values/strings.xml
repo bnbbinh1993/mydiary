@@ -103,4 +103,5 @@
     <string name="_in_progress">In Progress</string>
     <string name="_finished">Finished</string>
     <string name="_diary">Diary</string>
+    <string name="_nothing_is_here">Nothing is here!</string>
 </resources>

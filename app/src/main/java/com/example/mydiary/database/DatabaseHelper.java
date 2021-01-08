@@ -26,10 +26,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_7 = "filter";
     private static final String COL_8 = "realtimee";
     private static final String ID = "id";
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sqlQuery = "CREATE TABLE " + TABLE_NAME + " (" +
@@ -39,27 +41,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_3 + " TEXT, " +
                 COL_4 + " TEXT, " +
                 COL_5 + " TEXT, " +
-                COL_6 + " INTEGER, "+
-                COL_7 + " INTEGER, "+
+                COL_6 + " INTEGER, " +
+                COL_7 + " INTEGER, " +
                 COL_8 + " LONG)";
         db.execSQL(sqlQuery);
-      //  Toast.makeText(context, "Create successfylly", Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(context, "Create successfylly", Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
 
-       // Toast.makeText(context, "Drop successfylly", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(context, "Drop successfylly", Toast.LENGTH_SHORT).show();
     }
 
-    public ArrayList<Diary> getData(){
+    public ArrayList<Diary> getData() {
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase database = getReadableDatabase();
-        Cursor cursor = database.rawQuery(selectQuery,null);
+        Cursor cursor = database.rawQuery(selectQuery, null);
         ArrayList<Diary> list = new ArrayList<>();
-        if (cursor != null && cursor.getCount()>0){
-            while (cursor.moveToNext()){
+        if (cursor != null && cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
                 list.add(new Diary(
                         cursor.getInt(0),
                         cursor.getString(1),
@@ -75,7 +78,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return list;
     }
-    public void add(Diary event){
+
+    public void add(Diary event) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_1, event.getTitle());
@@ -86,35 +90,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_6, event.getVote());
         values.put(COL_7, event.getFilter());
         values.put(COL_8, event.getRealtime());
-        db.insert(TABLE_NAME,null,values);
+        db.insert(TABLE_NAME, null, values);
         db.close();
         //Toast.makeText(context, R.string._success, Toast.LENGTH_SHORT).show();
     }
-    public boolean update(Diary event){
+
+    public boolean update(Diary event) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
-        values.put("title",event.getTitle());
-        values.put("content",event.getContent());
-        values.put("date",event.getDate());
-        values.put("address",event.getAddress());
-        values.put("image",event.getImage());
-        values.put("vote",event.getVote());
-        values.put("filter",event.getFilter());
-        values.put("realtime",event.getRealtime());
-        return db.update(TABLE_NAME,values,ID+"=?",new String[]{String.valueOf(event.getId())})>0;
+        values.put(COL_1, event.getTitle());
+        values.put(COL_2, event.getContent());
+        values.put(COL_3, event.getDate());
+        values.put(COL_4, event.getAddress());
+        values.put(COL_5, event.getImage());
+        values.put(COL_6, event.getVote());
+        values.put(COL_7, event.getFilter());
+        values.put(COL_8, event.getRealtime());
+        return db.update(TABLE_NAME, values, ID + "=?", new String[]{String.valueOf(event.getId())}) > 0;
     }
+
     public void delete(Diary event) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, ID + " = ?",
-                new String[] { String.valueOf(event.getId()) });
+                new String[]{String.valueOf(event.getId())});
         db.close();
     }
+
     public void deleteAll(ArrayList<Diary> list) {
         SQLiteDatabase db = this.getWritableDatabase();
-        for (int i = 0;i<list.size();i++){
+        for (int i = 0; i < list.size(); i++) {
             Diary diary = list.get(i);
             db.delete(TABLE_NAME, ID + " = ?",
-                    new String[] { String.valueOf(diary.getId()) });
+                    new String[]{String.valueOf(diary.getId())});
         }
         db.close();
     }

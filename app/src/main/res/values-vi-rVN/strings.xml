@@ -100,4 +100,5 @@
     <string name="_messenger_notification">Chưa có sự kiện nào! Nhấn (+) để tạo lịch trình của bạn!</string>
     <string name="_in_progress">Đang diễn ra</string>
     <string name="_finished">Đã hoàn thành</string>
+    <string name="_nothing_is_here">Không có gì ở đây!</string>
 </resources>

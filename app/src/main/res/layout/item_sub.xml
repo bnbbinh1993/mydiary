@@ -8,14 +8,14 @@
     android:orientation="vertical">
 
     <TextView
-        android:textStyle="normal"
         android:id="@+id/txtDate"
         style="@style/TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="10dp"
         android:text="Nov 23, 2020"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        android:textStyle="normal" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecyclerview"
