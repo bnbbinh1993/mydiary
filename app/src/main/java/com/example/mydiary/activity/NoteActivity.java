@@ -380,6 +380,19 @@ public class NoteActivity extends AppCompatActivity {
         String content = mContent.getText().toString();
         String date = mDate.getText().toString();
         String image = "";
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+        String dateRealTime = day + "/" + month + "/" + year;
+        SimpleDateFormat formatRealTime = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            calendar.setTime(formatRealTime.parse(dateRealTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         for (String s : resPath) {
             image = image + s + "<->";
         }
@@ -397,7 +410,7 @@ public class NoteActivity extends AppCompatActivity {
             diary.setFilter(filter);
             diary.setImage(image.trim());
             diary.setVote(mColor);
-            diary.setRealtime(System.currentTimeMillis());
+            diary.setRealtime(calendar.getTimeInMillis());
             helper.add(diary);
             try {
                 Thread.sleep(200);

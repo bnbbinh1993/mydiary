@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.util.StringUtil;
 
 import com.example.mydiary.R;
 import com.example.mydiary.activity.ShowDiaryActivity;
@@ -19,14 +20,19 @@ import com.example.mydiary.models.Diary;
 import com.example.mydiary.models.ItemSub;
 import com.example.mydiary.utils.OnClickItem;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 public class AdapterSub extends RecyclerView.Adapter<AdapterSub.ViewHolder> {
 
-
+    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private List<ItemSub> list;
     protected int i = 0;
     private Activity activity;
+    private SimpleDateFormat f = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
+    private SimpleDateFormat fmoth = new SimpleDateFormat("MMM");
+    private SimpleDateFormat fday = new SimpleDateFormat("EEE");
 
     public AdapterSub(List<ItemSub> list, Activity activity) {
         this.list = list;
@@ -43,12 +49,32 @@ public class AdapterSub extends RecyclerView.Adapter<AdapterSub.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ItemSub model = list.get(i);
-        holder.mDate.setText(model.getmDate());
+
+        Calendar calendarEvent = Calendar.getInstance();
+        Calendar calendarToDay = Calendar.getInstance();
+
+        calendarEvent.setTimeInMillis(Long.parseLong(model.getmDate()));
+
+        if (calendarEvent.get(Calendar.DAY_OF_MONTH) == calendarToDay.get(Calendar.DAY_OF_MONTH)
+                && calendarEvent.get(Calendar.MONTH) + 1 == calendarToDay.get(Calendar.MONTH) + 1
+                && calendarEvent.get(Calendar.YEAR) == calendarToDay.get(Calendar.YEAR)) {
+            holder.mDate.setText("Today - " + String.valueOf(fmoth.format(calendarToDay.getTimeInMillis())).toUpperCase() + " " + calendarEvent.get(Calendar.DAY_OF_MONTH) + " " + calendarToDay.get(Calendar.YEAR));
+        } else {
+            holder.mDate.setText(String.valueOf(fmoth.format(calendarEvent.getTimeInMillis())).toUpperCase() + " " + calendarEvent.get(Calendar.DAY_OF_MONTH) + " " + calendarEvent.get(Calendar.YEAR));
+        }
+
         List<Diary> diaryList = model.getList();
         ShowAdapter showAdapter = new ShowAdapter(diaryList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+                activity, LinearLayoutManager.VERTICAL, false
+        );
+        linearLayoutManager.setInitialPrefetchItemCount(model.getList().size());
+
         holder.mRecyclerview.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         holder.mRecyclerview.setHasFixedSize(true);
         holder.mRecyclerview.setAdapter(showAdapter);
+
+        holder.mRecyclerview.setRecycledViewPool(viewPool);
         showAdapter.setOnClickItem(new OnClickItem() {
             @Override
             public void click(int position) {

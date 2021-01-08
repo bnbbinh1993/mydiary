@@ -37,7 +37,8 @@ public class ShowFragment extends Fragment {
     private RecyclerView recyclerView;
     private AdapterSub adapter;
     private static ArrayList<Diary> list;
-    private static ArrayList<ItemSub> result;
+    private ArrayList<ItemSub> result;
+    private ArrayList<Long> listDate;
     private LinearLayout no_item;
     private DatabaseHelper helper;
     private FloatingActionButton fab;
@@ -65,6 +66,56 @@ public class ShowFragment extends Fragment {
         setUp();
         initClick();
         fabRecyclerview();
+        addDateTest();
+    }
+
+    private void addDateTest() {
+
+        list = helper.getData();
+        buildListDate(list);
+        List<ItemSub> listTest = new ArrayList<>();
+        List<Diary> listdiary = new ArrayList<>();
+//        for (long a : listDate) {
+//            listdiary = buildListDiary(a, list);
+//            listTest.add(new ItemSub(String.valueOf(a), listdiary));
+//            listdiary.clear();
+//        }
+
+        listTest.add(new ItemSub(String.valueOf(list.get(0).getRealtime()), list));
+        listTest.add(new ItemSub(String.valueOf(list.get(0).getRealtime()), list));
+        listTest.add(new ItemSub(String.valueOf(list.get(0).getRealtime()), list));
+        adapter = new AdapterSub(listTest, getActivity());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        updateUI();
+
+    }
+
+    private void buildListDate(List<Diary> data) {
+        listDate = new ArrayList<>();
+        for (Diary model : list) {
+            if (!listDate.contains(model.getRealtime())) {
+                listDate.add(model.getRealtime());
+                Log.d("TAG",""+model.getRealtime());
+            } else {
+                Log.d("TAG", "Đã tồn tại!");
+            }
+        }
+        Log.d("TAG", "ListDate: " + listDate.size());
+    }
+
+    private List<Diary> buildListDiary(long key, List<Diary> data) {
+        List<Diary> res = new ArrayList<>();
+        for (Diary model : data) {
+            if (model.getRealtime() == key) {
+                res.add(model);
+            } else {
+                Log.d("TAG", "buildListDiary: Faild");
+            }
+        }
+        return res;
     }
 
     private void initClick() {
@@ -82,7 +133,7 @@ public class ShowFragment extends Fragment {
         helper = new DatabaseHelper(getContext());
         list = new ArrayList<>();
         result = new ArrayList<>();
-        setView();
+
     }
 
     private void init(View view) {
@@ -115,36 +166,12 @@ public class ShowFragment extends Fragment {
 
 
     private void setView() {
-        buildListItemSub();
         adapter = new AdapterSub(result, getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         updateUI();
-    }
-
-    private void buildListItemSub() {
-        list.clear();
-        list = helper.getData();
-        Collections.reverse(list);
-        List<Long> listDate = new ArrayList<>();
-        List<Diary> diaryArrayList = new ArrayList<>();
-        for (Diary model : list) {
-            if (!listDate.contains(model.getRealtime())) {
-                listDate.add(model.getRealtime());
-            }
-        }
-        for (int i = 0; i < listDate.size(); i++) {
-            for (Diary model : list) {
-                if (listDate.get(i) == model.getRealtime()) {
-                    diaryArrayList.add(model);
-                }
-            }
-            result.add(new ItemSub(String.valueOf(listDate.get(i)), diaryArrayList));
-            diaryArrayList.clear();
-        }
-        listDate.clear();
     }
 
 
@@ -159,7 +186,6 @@ public class ShowFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        setView();
         updateUI();
     }
 
