@@ -1,6 +1,8 @@
 package com.example.mydiary.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
+import com.example.mydiary.activity.ShowDiaryActivity;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.utils.OnClickItem;
 
@@ -27,7 +30,6 @@ import java.util.Date;
 import java.util.List;
 
 public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
-    private Context context;
     private List<Diary> list = new ArrayList<>();
     private static OnClickItem onClickItem;
     private int choice;
@@ -37,8 +39,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     private Calendar calendar = Calendar.getInstance();
     private Date date = new Date();
 
-    public ShowAdapter(Context context, List<Diary> list) {
-        this.context = context;
+    public ShowAdapter(List<Diary> list) {
         this.list = list;
     }
 
@@ -52,7 +53,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_show_2, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_show_2, parent, false));
     }
 
     @Override
@@ -77,7 +78,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             if (!model.getImage().trim().isEmpty()) {
                 String s[] = model.getImage().split("<->");
                 File file = new File(s[0]);
-                Glide.with(context)
+                Glide.with(holder.itemView.getContext())
                         .load(file)
                         .centerCrop()
                         .into(holder.image);
@@ -155,6 +156,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         }
 
 
+
     }
 
     public void setOnClickItem(OnClickItem onClickItem1) {
@@ -181,8 +183,6 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
             date = itemView.findViewById(R.id.date);
             image = itemView.findViewById(R.id.image);
             body = itemView.findViewById(R.id.body);
-
-
 
             itemView.setOnClickListener(this::onClick);
         }

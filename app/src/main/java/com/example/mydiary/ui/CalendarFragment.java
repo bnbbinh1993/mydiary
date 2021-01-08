@@ -36,7 +36,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class AnalysisFragment extends Fragment {
+public class CalendarFragment extends Fragment {
 
     private CustomCalendarView mCustomCalendarView;
     private List<Long> list = new ArrayList<>();
@@ -55,15 +55,15 @@ public class AnalysisFragment extends Fragment {
     private Date dateF = new Date();
 
 
-    public static AnalysisFragment newInstance() {
-        AnalysisFragment fragment = new AnalysisFragment();
+    public static CalendarFragment newInstance() {
+        CalendarFragment fragment = new CalendarFragment();
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_analysis, container, false);
+        return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
 
     @Override

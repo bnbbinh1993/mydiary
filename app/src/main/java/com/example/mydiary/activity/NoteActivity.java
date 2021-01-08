@@ -397,9 +397,10 @@ public class NoteActivity extends AppCompatActivity {
             diary.setFilter(filter);
             diary.setImage(image.trim());
             diary.setVote(mColor);
+            diary.setRealtime(System.currentTimeMillis());
             helper.add(diary);
             try {
-                Thread.sleep(300);
+                Thread.sleep(200);
                 Intent intent = new Intent(NoteActivity.this, FinishActivity.class);
                 intent.putExtra("I", 1);
                 startActivity(intent);

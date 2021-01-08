@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private Context context;
 
     private static final String DATABASE_NAME = "data";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String TABLE_NAME = "binh";
     private static final String COL_1 = "title";
     private static final String COL_2 = "content";
@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL_5 = "image";
     private static final String COL_6 = "vote";
     private static final String COL_7 = "filter";
+    private static final String COL_8 = "realtimee";
     private static final String ID = "id";
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,7 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL_4 + " TEXT, " +
                 COL_5 + " TEXT, " +
                 COL_6 + " INTEGER, "+
-                COL_7 + " INTEGER)";
+                COL_7 + " INTEGER, "+
+                COL_8 + " LONG)";
         db.execSQL(sqlQuery);
       //  Toast.makeText(context, "Create successfylly", Toast.LENGTH_SHORT).show();
     }
@@ -47,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
+
        // Toast.makeText(context, "Drop successfylly", Toast.LENGTH_SHORT).show();
     }
 
@@ -65,7 +68,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         cursor.getString(4),
                         cursor.getString(5),
                         cursor.getInt(6),
-                        cursor.getInt(7)));
+                        cursor.getInt(7),
+                        cursor.getLong(8)));
             }
         }
 
@@ -81,6 +85,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_5, event.getImage());
         values.put(COL_6, event.getVote());
         values.put(COL_7, event.getFilter());
+        values.put(COL_8, event.getRealtime());
         db.insert(TABLE_NAME,null,values);
         db.close();
         //Toast.makeText(context, R.string._success, Toast.LENGTH_SHORT).show();
@@ -95,6 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("image",event.getImage());
         values.put("vote",event.getVote());
         values.put("filter",event.getFilter());
+        values.put("realtime",event.getRealtime());
         return db.update(TABLE_NAME,values,ID+"=?",new String[]{String.valueOf(event.getId())})>0;
     }
     public void delete(Diary event) {

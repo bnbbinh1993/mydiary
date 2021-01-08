@@ -70,7 +70,6 @@ public class FollowFragment extends Fragment {
         fabRecyclerview();
         initClick();
         countDown();
-
     }
 
     private void initClick() {

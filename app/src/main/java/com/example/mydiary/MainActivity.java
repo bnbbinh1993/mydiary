@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.mydiary.adapters.ViewPagerAdapter;
-import com.example.mydiary.ui.AnalysisFragment;
+import com.example.mydiary.ui.CalendarFragment;
 import com.example.mydiary.ui.CreateFragment;
 import com.example.mydiary.ui.DairyFragment;
 import com.example.mydiary.ui.FollowFragment;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private DairyFragment dairyFragment = new DairyFragment();
     private FollowFragment followFragment = new FollowFragment();
     private SettingFragment settingFragment = new SettingFragment();
-    private AnalysisFragment analysisFragment = new AnalysisFragment();
+    private CalendarFragment analysisFragment = new CalendarFragment();
     private int backClick = 0;
     private Fragment selectedFragment = null;
 
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         //viewPager = findViewById(R.id.viewpager);
         //viewPager.setEnabled(false);
         // viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-        selectedFragment = AnalysisFragment.newInstance();
+        selectedFragment = CalendarFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.content, selectedFragment).commit();
     }
 
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         dairyFragment = new DairyFragment();
         followFragment = new FollowFragment();
         settingFragment = new SettingFragment();
-        analysisFragment = new AnalysisFragment();
+        analysisFragment = new CalendarFragment();
         adapter.addFragment(createFragment);
         adapter.addFragment(dairyFragment);
         adapter.addFragment(followFragment);

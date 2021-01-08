@@ -9,12 +9,14 @@ public class Diary {
     private String image;
     private int vote;
     private int filter;
+    private long realtime;
 
 
     public Diary() {
     }
 
-    public Diary(int id, String title, String content, String date, String address, String image, int vote, int filter) {
+
+    public Diary(int id, String title, String content, String date, String address, String image, int vote, int filter, long realtime) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -23,6 +25,7 @@ public class Diary {
         this.image = image;
         this.vote = vote;
         this.filter = filter;
+        this.realtime = realtime;
     }
 
     public int getId() {
@@ -87,5 +90,13 @@ public class Diary {
 
     public void setFilter(int filter) {
         this.filter = filter;
+    }
+
+    public long getRealtime() {
+        return realtime;
+    }
+
+    public void setRealtime(long realtime) {
+        this.realtime = realtime;
     }
 }
