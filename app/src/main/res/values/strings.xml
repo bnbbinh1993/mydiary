@@ -48,7 +48,6 @@
     <string name="_messenger_delete">Are you sure you want to delete it?</string>
     <string name="_messenger_delete_all">Are you sure you want to delete all of them?</string>
     <string name="_delete">Delete</string>
-    <string name="_all">All</string>
     <string name="_past">Past</string>
     <string name="_type_a_title_here">Type a title here</string>
     <string name="_note_here">Note here</string>
@@ -82,7 +81,7 @@
     <string name="_bands_2">Sorry ! Your account is temporarily locked!</string>
     <string name="_enter_code">Enter code</string>
     <string name="_sigin_with_google">  sign in with google  </string>
-    <string name="_image">Image</string>
+    <string name="_image">Picture</string>
     <string name="_fancy_text">Fancy text</string>
     <string name="_alone">Lonely day counter</string>
     <string name="_entertaiment">Entertaiment</string>
@@ -104,4 +103,5 @@
     <string name="_finished">Finished</string>
     <string name="_diary">Diary</string>
     <string name="_nothing_is_here">Nothing is here!</string>
+    <string name="_all">Saved</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.mydiary.utils;
+package com.example.mydiary.callback;
 
 public interface OnClickItem {
     void click(int position);

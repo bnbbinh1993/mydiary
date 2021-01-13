@@ -2,7 +2,6 @@ package com.example.mydiary.utils;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,11 +9,11 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.mydiary.R;
+import com.example.mydiary.callback.ItemClickCalendar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

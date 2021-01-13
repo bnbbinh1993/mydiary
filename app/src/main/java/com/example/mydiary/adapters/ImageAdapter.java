@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
-import com.example.mydiary.utils.OnClickItem;
+import com.example.mydiary.callback.OnClickItem;
 
 import java.io.File;
 import java.util.ArrayList;

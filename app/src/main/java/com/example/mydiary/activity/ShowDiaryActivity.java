@@ -1,7 +1,6 @@
 package com.example.mydiary.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,15 +8,12 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -41,10 +37,9 @@ import com.example.mydiary.adapters.ImageAdapterEdit;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.utils.ImageFilePath;
-import com.example.mydiary.utils.OnClickItem;
+import com.example.mydiary.callback.OnClickItem;
 import com.example.mydiary.utils.Pef;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -52,7 +47,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Locale;
 
 public class ShowDiaryActivity extends AppCompatActivity {

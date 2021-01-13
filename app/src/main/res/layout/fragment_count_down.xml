@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.DairyFragment">
+    android:orientation="vertical"
+    tools:context=".ui.CreateFragment">
 
     <LinearLayout
         android:id="@+id/mLinealayoutTrue"
@@ -15,12 +16,12 @@
         android:visibility="gone">
 
         <com.google.android.material.tabs.TabLayout
-            android:backgroundTint="@color/white_true"
             android:id="@+id/tablayout"
             style="@style/MineCustomTabText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:backgroundTint="@color/white_true"
             app:tabGravity="start"
             app:tabIndicatorColor="@color/bottom_navigation2"
             app:tabIndicatorHeight="3dp"
@@ -88,4 +89,5 @@
         app:fab_size="mini"
         app:maxImageSize="18dp"
         app:rippleColor="@color/white" />
+
 </RelativeLayout>

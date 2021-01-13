@@ -47,7 +47,6 @@
     <string name="_messenger_delete">Bạn có chắc chắn muốn xóa nó?</string>
     <string name="_messenger_delete_all">Bạn có chắc chắn muốn xóa tất cả chúng không?</string>
     <string name="_delete">Xóa</string>
-    <string name="_all">Tất cả</string>
     <string name="_past">Đã qua</string>
     <string name="_type_a_title_here">Nhập tiêu đề ở đây</string>
     <string name="_note_here">Ghi chú ở đây</string>
@@ -80,7 +79,7 @@
     <string name="_bands_2">Hãy liên hệ với chúng tôi để được hỗ trợ.</string>
     <string name="_enter_code">Nhập mã</string>
     <string name="_sigin_with_google">"  Đăng nhập bằng Google  "</string>
-    <string name="_image">Ảnh</string>
+    <string name="_image">Hình ảnh</string>
     <string name="_fancy_text">Kí tự đặc biệt</string>
     <string name="_alone">Đếm ngày cô đơn</string>
     <string name="_entertaiment">Giải trí</string>
@@ -101,4 +100,5 @@
     <string name="_in_progress">Đang diễn ra</string>
     <string name="_finished">Đã hoàn thành</string>
     <string name="_nothing_is_here">Không có gì ở đây!</string>
+    <string name="_all">Đã lưu</string>
 </resources>

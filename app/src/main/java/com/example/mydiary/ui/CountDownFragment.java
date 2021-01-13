@@ -1,6 +1,5 @@
 package com.example.mydiary.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,45 +13,59 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.mydiary.R;
-import com.example.mydiary.activity.NoteActivity;
+import com.example.mydiary.activity.CountDownActivity;
 import com.example.mydiary.adapters.DairyAdapter;
-import com.example.mydiary.database.DatabaseHelper;
+import com.example.mydiary.database.DatabaseCount;
+import com.example.mydiary.models.Count;
 import com.example.mydiary.models.Diary;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-
-public class DairyFragment extends Fragment {
+public class CountDownFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tablayout;
     private DairyAdapter adapter;
-    private DatabaseHelper helper;
-    private List<Diary> list = new ArrayList<>();
+    private DatabaseCount helper;
+    private  List<Count> list = new ArrayList<>();
     private LinearLayout layoutTrue, layoutFalse;
     private FloatingActionButton fab;
 
-    public static DairyFragment newInstance() {
-        DairyFragment fragment = new DairyFragment();
+
+    public static CountDownFragment newInstance() {
+        CountDownFragment fragment = new CountDownFragment();
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_dairy, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_count_down, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         init(view);
         setupViewPager(viewPager);
-        helper = new DatabaseHelper(getContext());
+        helper = new DatabaseCount(getContext());
+        checkUI();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), CountDownActivity.class));
+                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+            }
+        });
+    }
+
+    private void checkUI() {
+        list.clear();
         list = helper.getData();
         if (list.size() <= 0) {
             layoutTrue.setVisibility(View.GONE);
@@ -63,14 +76,9 @@ public class DairyFragment extends Fragment {
             layoutFalse.setVisibility(View.GONE);
             fab.setVisibility(View.GONE);
         }
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), NoteActivity.class));
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
-            }
-        });
+
     }
+
 
     private void init(View view) {
         viewPager = view.findViewById(R.id.viewpager);
@@ -82,8 +90,8 @@ public class DairyFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new DairyAdapter(getChildFragmentManager());
-        adapter.addFragment(new ShowFragment(), getString(R.string._all));
-        adapter.addFragment(new ImageFragment(), getString(R.string._image));
+        adapter.addFragment(new CountingDownFragment(), getString(R.string._in_progress));
+        adapter.addFragment(new FinishedFragment(), getString(R.string._finished));
         viewPager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewPager);
     }
@@ -91,16 +99,10 @@ public class DairyFragment extends Fragment {
 
     @Override
     public void onResume() {
-        list = helper.getData();
-        if (list.size() <= 0) {
-            layoutTrue.setVisibility(View.GONE);
-            layoutFalse.setVisibility(View.VISIBLE);
-            fab.setVisibility(View.VISIBLE);
-        } else {
-            layoutTrue.setVisibility(View.VISIBLE);
-            layoutFalse.setVisibility(View.GONE);
-            fab.setVisibility(View.GONE);
-        }
+
+        checkUI();
         super.onResume();
     }
+
+
 }

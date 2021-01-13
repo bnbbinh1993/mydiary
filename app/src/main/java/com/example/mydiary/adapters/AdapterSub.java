@@ -1,24 +1,21 @@
 package com.example.mydiary.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.util.StringUtil;
 
 import com.example.mydiary.R;
 import com.example.mydiary.activity.ShowDiaryActivity;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.models.ItemSub;
-import com.example.mydiary.utils.OnClickItem;
+import com.example.mydiary.callback.OnClickItem;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

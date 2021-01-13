@@ -9,24 +9,19 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiary.R;
 import com.example.mydiary.activity.NoteActivity;
-import com.example.mydiary.activity.ShowDiaryActivity;
 import com.example.mydiary.adapters.AdapterSub;
-import com.example.mydiary.adapters.ShowAdapter;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.models.ItemSub;
-import com.example.mydiary.utils.OnClickItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
@@ -34,7 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class ShowFragment extends Fragment {
@@ -74,15 +68,15 @@ public class ShowFragment extends Fragment {
     }
 
     private void addDateTest() {
-
+        list.clear();
         list = helper.getData();
         listDate = buildListDate(list);
         List<ItemSub> listTest = new ArrayList<>();
-        ;
         adapter = new AdapterSub(listTest, getActivity());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+
         for (int i = 0; i < listDate.size(); i++) {
             List<Diary> listdiary = buildListDiary(listDate.get(i), list);
             Log.d("TAG", "Size: " + listdiary.size());
@@ -194,13 +188,14 @@ public class ShowFragment extends Fragment {
         } else {
             no_item.setVisibility(View.GONE);
         }
+
     }
 
     @Override
     public void onResume() {
-        super.onResume();
         addDateTest();
-        updateUI();
+        super.onResume();
+
     }
 
 }

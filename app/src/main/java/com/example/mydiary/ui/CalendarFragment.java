@@ -23,8 +23,8 @@ import com.example.mydiary.adapters.EventCalendarAdapter;
 import com.example.mydiary.database.DatabaseEvent;
 import com.example.mydiary.models.EventCalendar;
 import com.example.mydiary.utils.CustomCalendarView;
-import com.example.mydiary.utils.ItemClick;
-import com.example.mydiary.utils.ItemClickCalendar;
+import com.example.mydiary.callback.ItemClick;
+import com.example.mydiary.callback.ItemClickCalendar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;

@@ -1,5 +1,6 @@
 package com.example.mydiary.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -20,7 +21,7 @@ import com.example.mydiary.activity.ShowFollowActivity;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
 import com.example.mydiary.receiver.AlarmReceiver;
-import com.example.mydiary.utils.OnClickItem;
+import com.example.mydiary.callback.OnClickItem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +33,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
     private List<Count> list = new ArrayList<>();
     private static OnClickItem onClickItem;
     private int choice;
-    private Activity activity;
+    private final Activity activity;
 
     public CountAdapter(Activity activity, List<Count> list) {
         this.activity = activity;
@@ -53,6 +54,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
@@ -61,7 +63,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
         holder.time.setText(model.getDate());
         holder.place.setText(model.getPlace());
         if (model.getVote() == 0) {
-            SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyyy");
             try {
                 long timeCount = format.parse(model.getDate()).getTime();
                 long timeRes = timeCount - System.currentTimeMillis();
@@ -70,10 +72,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
                     long hours = (timeRes / 1000) % 86400 / 60 / 60;
                     long minute = (timeRes / 1000) % 86400 / 60 % 60;
                     long seconds = (timeRes / 1000) % 86400 % 60;
-                    holder.count.setText(day + " " + activity.getResources().getString(R.string._day_item)
-                            + " " + hours + " " + activity.getResources().getString(R.string._hours_item)
-                            + " " + minute + " " + activity.getResources().getString(R.string._minute_item)
-                            + " " + seconds + " " + activity.getResources().getString(R.string._seconds_item));
+                    holder.count.setText(day + " " + activity.getResources().getString(R.string._day_item) + " " + hours + " " + activity.getResources().getString(R.string._hours_item) + " " + minute + " " + activity.getResources().getString(R.string._minute_item) + " " + seconds + " " + activity.getResources().getString(R.string._seconds_item));
                 } else {
                     holder.count.setText(activity.getResources().getString(R.string._finished));
                     DatabaseCount count = new DatabaseCount(activity);
@@ -85,18 +84,20 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+            if (choice == 0) {
+                holder.opel.setBackgroundResource(R.drawable.bg_frame_1);
+            } else if (choice == 1) {
+                holder.opel.setBackgroundResource(R.drawable.bg_frame_2);
+            } else if (choice == 2) {
+                holder.opel.setBackgroundResource(R.drawable.bg_frame_3);
+            }
+
+
         } else {
             holder.count.setText(activity.getResources().getString(R.string._finished));
         }
 
-
-        if (choice == 0) {
-            holder.ovel.setBackgroundResource(R.drawable.bg_frame_1);
-        } else if (choice == 1) {
-            holder.ovel.setBackgroundResource(R.drawable.bg_frame_2);
-        } else if (choice == 2) {
-            holder.ovel.setBackgroundResource(R.drawable.bg_frame_3);
-        }
 
         if (list.get(choice).getPrioritize() == 1) {
             holder.mVote.setVisibility(View.VISIBLE);
@@ -113,7 +114,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
                 activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
-        holder.ovel.setOnClickListener(new View.OnClickListener() {
+        holder.opel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ShowFollowActivity.class);
@@ -161,7 +162,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
     }
 
     public void setOnClickItem(OnClickItem onClickItem1) {
-        this.onClickItem = onClickItem1;
+        onClickItem = onClickItem1;
     }
 
     @Override
@@ -169,13 +170,13 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private TextView name;
-        private TextView time;
-        private TextView count;
-        private TextView place;
-        private FrameLayout ovel;
-        private ImageView mVote;
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+        private final TextView name;
+        private final TextView time;
+        private final TextView count;
+        private final TextView place;
+        private final FrameLayout opel;
+        private final ImageView mVote;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -183,7 +184,7 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
             name = itemView.findViewById(R.id.mName);
             time = itemView.findViewById(R.id.mTime);
             count = itemView.findViewById(R.id.mCount);
-            ovel = itemView.findViewById(R.id.mOvel);
+            opel = itemView.findViewById(R.id.mOvel);
             place = itemView.findViewById(R.id.mPlace);
             mVote = itemView.findViewById(R.id.mVote);
 

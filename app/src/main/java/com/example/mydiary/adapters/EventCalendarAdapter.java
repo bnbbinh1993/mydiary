@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiary.R;
 import com.example.mydiary.models.EventCalendar;
-import com.example.mydiary.utils.ItemClick;
-import com.example.mydiary.utils.OnClickItem;
+import com.example.mydiary.callback.ItemClick;
 
 import java.util.ArrayList;
 import java.util.Calendar;
