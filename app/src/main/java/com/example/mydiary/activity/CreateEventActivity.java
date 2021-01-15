@@ -1,13 +1,12 @@
 package com.example.mydiary.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.SwitchCompat;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.net.sip.SipSession;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,16 +21,19 @@ import android.widget.Toast;
 import com.example.mydiary.R;
 import com.example.mydiary.database.DatabaseEvent;
 import com.example.mydiary.models.EventCalendar;
-import com.example.mydiary.utils.DatePef;
+
 import com.example.mydiary.utils.Pef;
+
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddEventActivity extends AppCompatActivity {
+@SuppressLint("SimpleDateFormat")
+public class CreateEventActivity extends AppCompatActivity {
     private ImageButton btnTime;
     private ImageButton mBack;
     private ImageButton mSave;
@@ -39,23 +41,26 @@ public class AddEventActivity extends AppCompatActivity {
     private TextView mTime;
     private EditText body;
     private String res;
+    private SwitchCompat switchNotification;
     private long loc = 1000;
     private long toDay = 1000;
+    private long check = 1000;
     private DatabaseEvent helper = new DatabaseEvent(this);
     private SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyy");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_event);
+        setContentView(R.layout.activity_create_event);
         toDay = getIntent().getLongExtra("keyTime", 1000);
 
         initUI();
         initEvent();
 
-
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     private void initEvent() {
         Calendar calendar = Calendar.getInstance();
         int h = calendar.get(Calendar.HOUR_OF_DAY);
@@ -71,11 +76,12 @@ public class AddEventActivity extends AppCompatActivity {
         }
         body.requestFocus();
         res = String.format("%02d", h) + ":" + String.format("%02d", p);
-        mDate.setText(d + "." + m + "." + y);
-        Date dateaa = new Date();
-        dateaa.setTime(toDay);
+        mDate.setText(String.format("%02d", d) + "." + String.format("%02d", m) + "." + String.format("%02d", y));
+        Date dated = new Date();
+        dated.setTime(toDay);
         SimpleDateFormat format = new SimpleDateFormat("EEE");
-        mTime.setText(format.format(dateaa) + " - " + String.format("%02d", h) + ":" + String.format("%02d", p));
+
+        mTime.setText(format.format(dated) + " - " + String.format("%02d", h) + ":" + String.format("%02d", p));
         btnTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +105,7 @@ public class AddEventActivity extends AppCompatActivity {
     }
 
     private void add() {
+
         if (!body.getText().toString().trim().isEmpty()) {
             EventCalendar model = new EventCalendar();
             model.setContent(body.getText().toString());
@@ -121,27 +128,41 @@ public class AddEventActivity extends AppCompatActivity {
         mBack = findViewById(R.id.mBack);
         mSave = findViewById(R.id.save);
         body = findViewById(R.id.body);
+        switchNotification = findViewById(R.id.switchNotification);
     }
 
-    private void ui(String time, String date, String ngay, String thang, String nam) {
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
+    private void ui(String gio, String ph, String date, String ngay, String thang, String nam) {
         Calendar calendar = Calendar.getInstance();
         int d = calendar.get(Calendar.DAY_OF_MONTH);
         int m = calendar.get(Calendar.MONTH) + 1;
         int y = calendar.get(Calendar.YEAR);
+        int p = calendar.get(Calendar.MINUTE);
+        int h = calendar.get(Calendar.HOUR_OF_DAY);
+
         mDate.setText(date);
         if (d == Integer.parseInt(ngay) && m == Integer.parseInt(thang) && y == Integer.parseInt(nam)) {
-            mTime.setText(getResources().getString(R.string._today) + " - " + time);
+            mTime.setText(getResources().getString(R.string._today) + " - " + gio + ":" + ph);
+            if (Integer.parseInt(gio) > h) {
+                switchNotification.setClickable(true);
+            } else if (Integer.parseInt(ph) > p) {
+                switchNotification.setClickable(true);
+            } else {
+                switchNotification.setChecked(false);
+                switchNotification.setClickable(false);
+                Toast.makeText(this, "Thời gian đã trồi qua không thể nhận thông báo!", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            Date dateaa = new Date();
+            Date dated = new Date();
             SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
             try {
-                dateaa.setTime(f.parse(date).getTime());
+                dated.setTime(f.parse(date).getTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
             SimpleDateFormat format = new SimpleDateFormat("EEE");
-            mTime.setText(format.format(dateaa) + " - " + time);
+            mTime.setText(format.format(dated) + " - " + gio + ":" + ph);
         }
         try {
             loc = f.parse(date).getTime();
@@ -149,12 +170,13 @@ public class AddEventActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
     }
 
     private void date() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(AddEventActivity.this);
-        ViewGroup viewGroup = AddEventActivity.this.findViewById(android.R.id.content);
-        View view = LayoutInflater.from(AddEventActivity.this).inflate(R.layout.number_picker, viewGroup, false);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CreateEventActivity.this);
+        ViewGroup viewGroup = CreateEventActivity.this.findViewById(android.R.id.content);
+        View view = LayoutInflater.from(CreateEventActivity.this).inflate(R.layout.number_picker_hous, viewGroup, false);
         final NumberPicker day = view.findViewById(R.id.numberDay);
         final NumberPicker month = view.findViewById(R.id.numberMonth);
         final NumberPicker year = view.findViewById(R.id.numberYear);
@@ -197,14 +219,12 @@ public class AddEventActivity extends AppCompatActivity {
                 int p4 = hours.getValue();
                 int p5 = minute.getValue();
                 if (isDateFormat(Pef.dayList[p1], Pef.monthList[p2])) {
-                    String time = Pef.hoursList[p4] + ":" +
-                            Pef.minuteList[p5];
                     String date = Pef.dayList[p1] + "." + Pef.monthList[p2]
                             + "." + Pef.isListYear()[p3];
                     String ngay = Pef.dayList[p1];
                     String thang = Pef.monthList[p2];
                     String nam = Pef.isListYear()[p3];
-                    ui(time, date, ngay, thang, nam);
+                    ui(Pef.hoursList[p4], Pef.minuteList[p5], date, ngay, thang, nam);
                     res = Pef.hoursList[p4] + ":" + Pef.minuteList[p5];
 
                     dialog.dismiss();
@@ -227,7 +247,7 @@ public class AddEventActivity extends AppCompatActivity {
     }
 
     private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
             if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
                 return true;
@@ -256,6 +276,7 @@ public class AddEventActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("DefaultLocale")
     private int isPositon(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
@@ -274,11 +295,7 @@ public class AddEventActivity extends AppCompatActivity {
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
             ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
-        } catch (NoSuchFieldException e) {
-            Log.w("hihi", e);
-        } catch (IllegalAccessException e) {
-            Log.w("hihi", e);
-        } catch (IllegalArgumentException e) {
+        } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
 

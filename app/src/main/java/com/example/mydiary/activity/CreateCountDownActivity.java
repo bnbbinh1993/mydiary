@@ -1,6 +1,5 @@
 package com.example.mydiary.activity;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -10,15 +9,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -43,7 +39,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class CountDownActivity extends AppCompatActivity {
+public class CreateCountDownActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;
     private String employees[];
     private ImageButton mBack;
@@ -61,9 +57,9 @@ public class CountDownActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_count_down);
+        setContentView(R.layout.activity_create_count_down);
         Pef.getReference(this);
-        Pef.setFullScreen(CountDownActivity.this);
+        Pef.setFullScreen(CreateCountDownActivity.this);
         helper = new DatabaseCount(this);
         init();
         setSpinner();
@@ -143,13 +139,13 @@ public class CountDownActivity extends AppCompatActivity {
 
             try {
                 Thread.sleep(300);
-                Intent intent = new Intent(CountDownActivity.this, FinishActivity.class);
+                Intent intent = new Intent(CreateCountDownActivity.this, FinishActivity.class);
                 intent.putExtra("I", 0);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.out_left, R.anim.in_left);
             } catch (InterruptedException e) {
-                Intent intent = new Intent(CountDownActivity.this, FinishActivity.class);
+                Intent intent = new Intent(CreateCountDownActivity.this, FinishActivity.class);
                 intent.putExtra("I", 0);
                 startActivity(intent);
                 finish();
@@ -213,8 +209,9 @@ public class CountDownActivity extends AppCompatActivity {
     }
 
     private void showdialog() {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(CountDownActivity.this);
-        builder.setTitle(getResources().getString(R.string._messenger_back));
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(CreateCountDownActivity.this);
+        builder.setTitle(getResources().getString(R.string._exit));
+        builder.setMessage(getResources().getString(R.string._messenger_back));
         builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -237,9 +234,9 @@ public class CountDownActivity extends AppCompatActivity {
     }
 
     private void date() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(CountDownActivity.this);
-        ViewGroup viewGroup = CountDownActivity.this.findViewById(android.R.id.content);
-        View view = LayoutInflater.from(CountDownActivity.this).inflate(R.layout.number_picker, viewGroup, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(CreateCountDownActivity.this);
+        ViewGroup viewGroup = CreateCountDownActivity.this.findViewById(android.R.id.content);
+        View view = LayoutInflater.from(CreateCountDownActivity.this).inflate(R.layout.number_picker, viewGroup, false);
         final NumberPicker day = view.findViewById(R.id.numberDay);
         final NumberPicker month = view.findViewById(R.id.numberMonth);
         final NumberPicker year = view.findViewById(R.id.numberYear);
@@ -384,14 +381,14 @@ public class CountDownActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(key);
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(CountDownActivity.this, AlarmReceiver.class);
+        Intent intent = new Intent(CreateCountDownActivity.this, AlarmReceiver.class);
         intent.putExtra("title", title);
         intent.putExtra("id", id);
-        intent.putExtra("key",getString(R.string._messenger_notiofication));
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(CountDownActivity.this, id, intent, 0);
+        intent.putExtra("key", getString(R.string._messenger_notiofication));
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(CreateCountDownActivity.this, id, intent, 0);
         manager.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + timedelay, pendingIntent);
-        ComponentName receiver = new ComponentName(CountDownActivity.this, AlarmReceiver.class);
-        PackageManager pm = CountDownActivity.this.getPackageManager();
+        ComponentName receiver = new ComponentName(CreateCountDownActivity.this, AlarmReceiver.class);
+        PackageManager pm = CreateCountDownActivity.this.getPackageManager();
         pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
     }
 }

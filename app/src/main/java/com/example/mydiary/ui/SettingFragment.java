@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.mydiary.R;
@@ -30,6 +31,8 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
@@ -39,21 +42,19 @@ public class SettingFragment extends Fragment {
     private TextView mFeedback, mLogin, mPollicy, mRate, mKeys, mText;
     private CircleImageView mAvt;
     private TextView mVersion;
-    private Switch mKey;
+    private SwitchCompat mKey;
     private static final int SIGN_IN = 1;
     private GoogleSignInClient mGoogleSignInClient;
 
     public static SettingFragment newInstance() {
-        SettingFragment fragment = new SettingFragment();
-        return fragment;
+        return new SettingFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_setting, container, false);
 
-        return view;
+        return inflater.inflate(R.layout.fragment_setting, container, false);
     }
 
     @Override
@@ -124,11 +125,11 @@ public class SettingFragment extends Fragment {
                 if (Pef.getString("PassWord", "isPassWord").equals("isPassWord")) {
                     Intent intent = new Intent(getContext(), CreatePassWordActivity.class);
                     startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
+                    Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 } else {
                     Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
                     startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
+                    Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 }
             }
         });
@@ -154,7 +155,7 @@ public class SettingFragment extends Fragment {
 
     private void login() {
         startActivity(new Intent(getContext(), LoginActivity.class));
-        getActivity().overridePendingTransition(R.anim.out_left, R.anim.in_left);
+        Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_left, R.anim.in_left);
     }
 
     private void init(View view) {

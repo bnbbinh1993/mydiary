@@ -17,30 +17,38 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:visibility="visible">
 
             <ImageView
                 android:id="@+id/img1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:src="@drawable/ic_key" />
 
-            <Switch
-                android:id="@+id/mKey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/img1"
                 android:fontFamily="@font/cardo"
                 android:text="@string/_use_of_password"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/mKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:checked="true"
+                android:thumb="@drawable/thumb_selector"
+                app:track="@drawable/track_selector" />
         </RelativeLayout>
 
         <RelativeLayout

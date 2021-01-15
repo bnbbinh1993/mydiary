@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener;
-import androidx.viewpager.widget.ViewPager;
 
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -20,27 +19,21 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
 import com.example.mydiary.R;
-import com.example.mydiary.activity.CountDownActivity;
-import com.example.mydiary.activity.NoteActivity;
+import com.example.mydiary.activity.CreateCountDownActivity;
 import com.example.mydiary.adapters.CountAdapter;
-import com.example.mydiary.adapters.DairyAdapter;
 import com.example.mydiary.database.DatabaseCount;
-import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Count;
-import com.example.mydiary.models.Diary;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Objects;
 
 import static java.util.Collections.*;
 
 
 public class CountingDownFragment extends Fragment {
     private DatabaseCount helper;
-    private static ArrayList<Count> list;
+    private static ArrayList<Count> list = new ArrayList<>();
     private ArrayList<Count> listData = new ArrayList<>();
     private RecyclerView mRecyclerview;
     private CountAdapter adapter;
@@ -76,8 +69,8 @@ public class CountingDownFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), CountDownActivity.class));
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                startActivity(new Intent(getContext(), CreateCountDownActivity.class));
+                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
     }
@@ -91,6 +84,8 @@ public class CountingDownFragment extends Fragment {
     }
 
     private void setUp() {
+        list.clear();
+        listData.clear();
         helper = new DatabaseCount(getContext());
         list = helper.getData();
         for (int i = 0; i < list.size(); i++) {
@@ -101,7 +96,7 @@ public class CountingDownFragment extends Fragment {
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mRecyclerview.setAdapter(adapter);
-
+        updateUI();
     }
 
     private void fabRecyclerview() {
@@ -126,7 +121,7 @@ public class CountingDownFragment extends Fragment {
     }
 
     private void updateUI() {
-        if (list.size() <= 0) {
+        if (listData.size() <= 0) {
             no_item.setVisibility(View.VISIBLE);
             mRecyclerview.setVisibility(View.GONE);
         } else {
@@ -161,7 +156,7 @@ public class CountingDownFragment extends Fragment {
     @Override
     public void onResume() {
         setUp();
-        updateUI();
+
         super.onResume();
         if (count != null) {
             count.start();

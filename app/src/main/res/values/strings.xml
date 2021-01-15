@@ -104,4 +104,6 @@
     <string name="_diary">Diary</string>
     <string name="_nothing_is_here">Nothing is here!</string>
     <string name="_all">Saved</string>
+    <string name="_save">Save</string>
+    <string name="_exit">Exit</string>
 </resources>

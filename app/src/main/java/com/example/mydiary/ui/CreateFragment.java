@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -15,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,22 +21,18 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
-import com.example.mydiary.activity.CountDownActivity;
-import com.example.mydiary.activity.NoteActivity;
-import com.example.mydiary.activity.SettingActivity;
+import com.example.mydiary.activity.CreateCountDownActivity;
+import com.example.mydiary.activity.CreateNoteActivity;
 import com.example.mydiary.models.App;
 import com.example.mydiary.models.Create;
 import com.example.mydiary.utils.ImageFilePath;
 import com.example.mydiary.utils.Pef;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CreateFragment extends Fragment {
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -105,11 +99,11 @@ public class CreateFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 0) {
-                    startActivity(new Intent(getContext(), NoteActivity.class));
-                    getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                    startActivity(new Intent(getContext(), CreateNoteActivity.class));
+                    Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
                 } else if (position == 1) {
-                    startActivity(new Intent(getContext(), CountDownActivity.class));
-                    getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                    startActivity(new Intent(getContext(), CreateCountDownActivity.class));
+                    Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
                 } else if (position == 2) {
                     // startActivity(new Intent(getContext(), MoodActivity.class));
                 } else if (position == 3) {

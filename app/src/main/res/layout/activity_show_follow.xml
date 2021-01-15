@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/background"
-    android:background="@color/white"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".activity.ShowFollowActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -44,25 +44,26 @@
                     android:src="@drawable/ic_badge"
                     android:visibility="gone" />
 
-                <ImageButton
-                    android:id="@+id/mDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_toStartOf="@+id/mEdit"
-                    android:background="?attr/actionBarItemBackground"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_dustbin_black"
-                    android:visibility="visible" />
 
                 <ImageButton
                     android:id="@+id/mEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:layout_toStartOf="@+id/mDelete"
                     android:background="?attr/actionBarItemBackground"
                     android:padding="10dp"
                     android:src="@drawable/ic_pencil"
+                    android:visibility="visible" />
+
+                <ImageButton
+                    android:id="@+id/mDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp"
+                    android:background="?attr/actionBarItemBackground"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_dustbin_black"
                     android:visibility="visible" />
 
             </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.mydiary.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,13 +15,16 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.mydiary.R;
+import com.example.mydiary.activity.ShowFollowActivity;
 import com.example.mydiary.adapters.CountAdapter;
+import com.example.mydiary.callback.OnClickItem;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 
 import static java.util.Collections.*;
 
@@ -33,9 +37,9 @@ public class FinishedFragment extends Fragment {
     public FinishedFragment() {
     }
 
+
     public static FinishedFragment newInstance(String param1, String param2) {
-        FinishedFragment fragment = new FinishedFragment();
-        return fragment;
+        return new FinishedFragment();
     }
 
     @Override
@@ -52,17 +56,20 @@ public class FinishedFragment extends Fragment {
     }
 
     private void setup() {
-
+        list.clear();
         for (int i = 0; i < CountingDownFragment.getList().size(); i++) {
             if (CountingDownFragment.getList().get(i).getVote() == 1) {
                 list.add(CountingDownFragment.getList().get(i));
             }
         }
         sort(list);
+        Collections.reverse(list);
         adapter = new CountAdapter(getActivity(), list);
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mRecyclerview.setAdapter(adapter);
+
+
     }
 
     private void init(View v) {

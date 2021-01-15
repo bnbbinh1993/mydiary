@@ -43,15 +43,12 @@ public class EditCountActivity extends AppCompatActivity {
     private ImageButton mBack;
     private ImageButton mSave;
     private TextView mDate;
-    private String title;
-    private String resultTime;
-    private DatabaseCount helper;
     private LinearLayout layout;
     private EditText mTitle;
     private EditText mPlace;
     private EditText mDes;
     private int filter;
-    private ArrayList<Count> list = new ArrayList<>();
+    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +63,6 @@ public class EditCountActivity extends AppCompatActivity {
         setOnclick();
 
     }
-
-
 
 
     private void init() {
@@ -93,16 +88,13 @@ public class EditCountActivity extends AppCompatActivity {
     }
 
     private void setUp() {
-        helper = new DatabaseCount(this);
-        int i = getIntent().getIntExtra("POSITION", 0);
-        list = helper.getData();
-        Collections.sort(list);
-        filter = list.get(i).getFilter();
-        mTitle.setText(list.get(i).getTitle());
-        mDes.setText(list.get(i).getDes());
-        mPlace.setText(list.get(i).getPlace());
-        mDate.setText(list.get(i).getDate());
-        spinnerEmployee.setSelection(list.get(i).getFilter());
+
+        filter = ShowFollowActivity.model.getFilter();
+        mTitle.setText(ShowFollowActivity.model.getTitle());
+        mDes.setText(ShowFollowActivity.model.getDes());
+        mPlace.setText(ShowFollowActivity.model.getPlace());
+        mDate.setText(ShowFollowActivity.model.getDate());
+        spinnerEmployee.setSelection(ShowFollowActivity.model.getFilter());
     }
 
     private void setOnclick() {
@@ -139,15 +131,14 @@ public class EditCountActivity extends AppCompatActivity {
         } else if (!checkDate(date)) {
             Toast.makeText(this, "Không được chọn thời gian trong quá khứ", Toast.LENGTH_SHORT).show();
         } else {
-            Count count = list.get(getIntent().getIntExtra("POSITION", 0));
-            count.setTitle(title);
-            count.setDes(des);
-            count.setPlace(place);
-            count.setDate(date);
-            count.setFilter(filter);
-            count.setVote(0);
-            boolean update = helper.update(count);
 
+            ShowFollowActivity.model.setTitle(title);
+            ShowFollowActivity.model.setDes(des);
+            ShowFollowActivity.model.setPlace(place);
+            ShowFollowActivity.model.setDate(date);
+            ShowFollowActivity.model.setFilter(filter);
+            ShowFollowActivity.model.setVote(0);
+            boolean update = new DatabaseCount(this).update(ShowFollowActivity.model);
             if (update) {
                 Toast.makeText(this, getResources().getString(R.string._update_successful), Toast.LENGTH_SHORT).show();
             } else {
@@ -351,7 +342,8 @@ public class EditCountActivity extends AppCompatActivity {
 
     private void showdialog() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(EditCountActivity.this);
-        builder.setTitle(getResources().getString(R.string._messenger_back));
+        builder.setTitle(getResources().getString(R.string._exit));
+        builder.setMessage(getResources().getString(R.string._messenger_back));
         builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

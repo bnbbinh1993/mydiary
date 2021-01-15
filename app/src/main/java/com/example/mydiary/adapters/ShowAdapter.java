@@ -1,5 +1,8 @@
 package com.example.mydiary.adapters;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
+import com.example.mydiary.activity.ShowDiaryActivity;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.callback.OnClickItem;
 
@@ -32,9 +36,11 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     private SimpleDateFormat fday = new SimpleDateFormat("EEE");
     private Calendar calendar = Calendar.getInstance();
     private Date date = new Date();
+    private Activity activity;
 
-    public ShowAdapter(List<Diary> list) {
+    public ShowAdapter(List<Diary> list, Activity activity) {
         this.list = list;
+        this.activity = activity;
     }
 
     @Override
@@ -68,8 +74,8 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         }
 
 
-        if (model.getImage() != null) {
-            if (!model.getImage().trim().isEmpty()) {
+        if (!model.getImage().trim().isEmpty()) {
+            if (!model.getImage().trim().equals("<->")) {
                 String s[] = model.getImage().split("<->");
                 File file = new File(s[0]);
                 Glide.with(holder.itemView.getContext())
@@ -84,10 +90,6 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         }
 
         switch (model.getVote()) {
-            case 1: {
-                holder.body.setBackgroundResource(R.drawable.bg_gradent_1);
-                break;
-            }
             case 2: {
                 holder.body.setBackgroundResource(R.drawable.bg_gradent_2);
 
@@ -148,7 +150,25 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
                 break;
             }
         }
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ShowDiaryActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", model.getId());
+                bundle.putInt("vote", model.getVote());
+                bundle.putInt("filter", model.getFilter());
+                bundle.putLong("realtime", model.getRealtime());
+                bundle.putString("title", model.getTitle());
+                bundle.putString("content", model.getContent());
+                bundle.putString("date", model.getDate());
+                bundle.putString("address", model.getAddress());
+                bundle.putString("image", model.getImage());
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
+                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+            }
+        });
 
 
     }

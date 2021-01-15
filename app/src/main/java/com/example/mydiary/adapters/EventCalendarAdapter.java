@@ -22,8 +22,7 @@ public class EventCalendarAdapter extends RecyclerView.Adapter<EventCalendarAdap
     private List<EventCalendar> list = new ArrayList<>();
     private ItemClick itemClick;
     private int choice;
-    private Calendar calendar = Calendar.getInstance();
-    private long check = calendar.getTimeInMillis();
+
 
     public EventCalendarAdapter(Context context, List<EventCalendar> list) {
         this.context = context;
@@ -40,19 +39,8 @@ public class EventCalendarAdapter extends RecyclerView.Adapter<EventCalendarAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         EventCalendar model = list.get(choice);
-        String s[] = model.getContent().split(":");
-
-        calendar.setTimeInMillis(model.getLoc());
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(s[0].trim()));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(s[1].trim()));
         holder.timeText.setText(model.getContent());
         holder.contentText.setText(model.getTime());
-        if (calendar.getTimeInMillis() < check) {
-            holder.timeText.setTextColor(context.getResources().getColor(R.color.red_orange_fake));
-            holder.contentText.setTextColor(context.getResources().getColor(R.color.black_fake_2));
-        }
-
-
     }
 
     @Override

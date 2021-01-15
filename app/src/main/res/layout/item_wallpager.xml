@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_weight="3"
+    android:layout_margin="5dp"
+    android:minWidth="130dp"
     android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_weight="1"
-        android:background="@color/white" />
-
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:maxWidth="130dp"
+        android:maxHeight="130dp"
+        android:minWidth="130dp"
+        android:minHeight="130dp" />
 </LinearLayout>

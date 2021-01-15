@@ -5,7 +5,6 @@
     android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="35dp"
     tools:context=".activity.ShowDiaryActivity">
 
     <include layout="@layout/layout_show" />

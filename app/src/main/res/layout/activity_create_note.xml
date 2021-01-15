@@ -6,12 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".activity.NoteActivity">
+    tools:context=".activity.CreateNoteActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="35dp">
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/top"
@@ -63,7 +62,7 @@
                 android:layout_alignParentEnd="true"
                 android:background="?attr/actionBarItemBackground"
                 android:padding="10dp"
-                android:src="@drawable/ic_save_file"
+                android:src="@drawable/ic_check"
                 android:visibility="visible" />
 
             <TextView
@@ -89,6 +88,7 @@
                 android:background="?attr/actionBarItemBackground"
                 android:padding="12dp"
                 android:src="@drawable/ic_clock" />
+
             <ImageButton
                 android:id="@+id/btnMood"
                 android:layout_width="40dp"

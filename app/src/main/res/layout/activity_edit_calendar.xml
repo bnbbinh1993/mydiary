@@ -54,7 +54,7 @@
                 android:layout_alignParentEnd="true"
                 android:background="?attr/actionBarItemBackground"
                 android:padding="10dp"
-                android:src="@drawable/ic_save_file"
+                android:src="@drawable/ic_check"
                 android:visibility="visible" />
 
             <LinearLayout

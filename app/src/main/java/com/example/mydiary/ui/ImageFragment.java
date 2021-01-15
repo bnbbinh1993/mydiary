@@ -1,7 +1,9 @@
 package com.example.mydiary.ui;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,31 +17,38 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
+import com.example.mydiary.adapters.AdapterImageSub;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
+import com.example.mydiary.models.ImageSub;
+import com.example.mydiary.models.ItemSub;
 import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.List;
 
 public class ImageFragment extends Fragment {
-    private GridView mGridView;
-    private ArrayList<String> list = new ArrayList<>();
+
+    private ArrayList<ImageSub> list = new ArrayList<>();
     private ArrayList<Diary> res = new ArrayList<>();
-    private CustomAdapter customAdapter;
+    private AdapterImageSub adapterImageSub;
+    private RecyclerView mRecyclerview;
     private LinearLayout no_item;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.fragment_image, container, false);
-
-        return v;
+        return inflater.inflate(R.layout.fragment_image, container, false);
     }
 
     @Override
@@ -47,129 +56,117 @@ public class ImageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initUI(view);
         initAction();
-        checkUI();
+
     }
 
-    private void checkUI() {
-        list.clear();
-        res = ShowFragment.getList();
 
-        for (int i = 0; i < res.size(); i++) {
-            String s[] = res.get(i).getImage().trim().split("<->");
-            if (s.length > 0) {
-                for (int j = 0; j < s.length; j++) {
-                    if (!s[j].isEmpty()) {
-                        list.add(s[j]);
+    @SuppressLint("SimpleDateFormat")
+    private List<Long> buildListDate(List<Diary> data) {
+        List<Long> result = new ArrayList<>();
+        for (Diary diary : res) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(diary.getRealtime());
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            int month = calendar.get(Calendar.MONTH) + 1;
+            int year = calendar.get(Calendar.YEAR);
+            String key = day + "/" + month + "/" + year;
+            try {
+                calendar.setTimeInMillis(new SimpleDateFormat("dd/MM/yyyy").parse(key).getTime());
+                if (!result.contains(calendar.getTimeInMillis())) {
+                    result.add(diary.getRealtime());
+                    Log.d("TAG", "" + diary.getRealtime());
+                } else {
+                    Log.d("TAG", "Đã tồn tại!");
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        Log.d("TAG", "ListDate: " + res.size());
+        return result;
+    }
+
+
+    private void updateUI() {
+        if (list.size() > 0) {
+            no_item.setVisibility(View.GONE);
+        } else {
+            no_item.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private List<String> buildListImage(long key, List<Diary> data) {
+        List<String> result = new ArrayList<>();
+        Calendar calendarKey = Calendar.getInstance();
+        calendarKey.setTimeInMillis(key);
+        Calendar calendarEvent = Calendar.getInstance();
+
+        for (Diary model : data) {
+            calendarEvent.setTimeInMillis(model.getRealtime());
+            if (calendarKey.get(Calendar.DAY_OF_MONTH) == calendarEvent.get(Calendar.DAY_OF_MONTH)
+                    && calendarKey.get(Calendar.MONTH) + 1 == calendarEvent.get(Calendar.MONTH) + 1
+                    && calendarKey.get(Calendar.YEAR) == calendarEvent.get(Calendar.YEAR)) {
+                String s[] = model.getImage().trim().split("<->");
+                if (s.length > 0) {
+                    for (int j = 0; j < s.length; j++) {
+                        if (!s[j].isEmpty()) {
+                            result.add(s[j]);
+                        }
                     }
                 }
             }
         }
-
-        if (list.size() > 0) {
-            mGridView.setVisibility(View.VISIBLE);
-            no_item.setVisibility(View.GONE);
-        } else {
-            mGridView.setVisibility(View.GONE);
-            no_item.setVisibility(View.VISIBLE);
-        }
+        return result;
     }
 
     private void initAction() {
         list.clear();
         res = ShowFragment.getList();
-        for (int i = 0; i < res.size(); i++) {
-            String s[] = res.get(i).getImage().trim().split("<->");
-            if (s.length > 0) {
-                for (int j = 0; j < s.length; j++) {
-                    if (!s[j].isEmpty()) {
-                        list.add(s[j]);
-                    }
+        List<Long> listDay = buildListDate(res);
+
+        mRecyclerview.setHasFixedSize(true);
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        for (int i = 0; i < listDay.size(); i++) {
+            List<String> result = buildListImage(listDay.get(i), res);
+            list.add(new ImageSub(String.valueOf(listDay.get(i)), result));
+        }
+        List<String> test = new ArrayList<>();
+        String s[] = res.get(0).getImage().trim().split("<->");
+        if (s.length > 0) {
+            for (int j = 0; j < s.length; j++) {
+                if (!s[j].isEmpty()) {
+                    test.add(s[j]);
                 }
             }
         }
-
-        customAdapter = new CustomAdapter();
-        mGridView.setAdapter(customAdapter);
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder build = new AlertDialog.Builder(getContext(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-                ViewGroup viewGroup = getActivity().findViewById(android.R.id.content);
-                View view1 = LayoutInflater.from(getContext()).inflate(R.layout.item_full_image, viewGroup, false);
-                ImageButton btnCancel = view1.findViewById(R.id.btnCancel);
-                PhotoView imageShowFull = view1.findViewById(R.id.photo_view);
-                File file = new File(list.get(position));
-                Glide.with(getContext())
-                        .load(file)
-                        .error(R.mipmap.ic_launcher)
-                        .into(imageShowFull);
-
-
-                build.setView(view1);
-                final AlertDialog dialog = build.create();
-                btnCancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
-        });
+        Collections.reverse(list);
+        adapterImageSub = new AdapterImageSub(list, getActivity());
+        mRecyclerview.setAdapter(adapterImageSub);
+        adapterImageSub.notifyDataSetChanged();
     }
 
     private void initUI(View v) {
-        mGridView = v.findViewById(R.id.mGridView);
         no_item = v.findViewById(R.id.no_item);
-    }
-
-    private class CustomAdapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            View view1 = getLayoutInflater().inflate(R.layout.item_wallpager, null);
-
-            ImageView image = view1.findViewById(R.id.image);
-
-            Glide.with(getContext())
-                    .load(list.get(i))
-                    .centerCrop()
-                    .into(image);
-            return view1;
-
-        }
+        mRecyclerview = v.findViewById(R.id.mRecyclerview);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        checkUI();
+        initAction();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        checkUI();
+        initAction();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        checkUI();
+        initAction();
     }
 
 }

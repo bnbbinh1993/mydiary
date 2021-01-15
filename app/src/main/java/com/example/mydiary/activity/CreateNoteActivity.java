@@ -1,6 +1,7 @@
 package com.example.mydiary.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -47,7 +48,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class NoteActivity extends AppCompatActivity {
+public class CreateNoteActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
     private static final int REQ_CODE_SPEECH_INPUT = 100;
     private static final int SELECT_PICTURES = 1;
@@ -79,7 +80,7 @@ public class NoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note);
+        setContentView(R.layout.activity_create_note);
         init();
         initSetUp();
         setOnclick();
@@ -135,10 +136,9 @@ public class NoteActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     private void initSetUp() {
-
         Pef.getReference(this);
-        Pef.setFullScreen(NoteActivity.this);
 
         helper = new DatabaseHelper(this);
         resPath = new ArrayList<>();
@@ -233,7 +233,7 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void color() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(NoteActivity.this);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CreateNoteActivity.this);
         ViewGroup viewGroup = findViewById(R.id.container);
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_color, viewGroup, false);
         TextView tv1 = view.findViewById(R.id.tv1);
@@ -379,7 +379,7 @@ public class NoteActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH) + 1;
         int year = calendar.get(Calendar.YEAR);
         String dateRealTime = day + "/" + month + "/" + year;
-        SimpleDateFormat formatRealTime = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatRealTime = new SimpleDateFormat("dd/MM/yyyy");
         try {
             calendar.setTime(formatRealTime.parse(dateRealTime));
         } catch (ParseException e) {
@@ -408,13 +408,13 @@ public class NoteActivity extends AppCompatActivity {
             helper.add(diary);
             try {
                 Thread.sleep(200);
-                Intent intent = new Intent(NoteActivity.this, FinishActivity.class);
+                Intent intent = new Intent(CreateNoteActivity.this, FinishActivity.class);
                 intent.putExtra("I", 1);
                 startActivity(intent);
                 overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 finish();
             } catch (InterruptedException e) {
-                Intent intent = new Intent(NoteActivity.this, FinishActivity.class);
+                Intent intent = new Intent(CreateNoteActivity.this, FinishActivity.class);
                 intent.putExtra("I", 1);
                 startActivity(intent);
                 overridePendingTransition(R.anim.out_left, R.anim.in_left);
@@ -426,9 +426,9 @@ public class NoteActivity extends AppCompatActivity {
 
 
     private void date() {
-        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(NoteActivity.this);
-        ViewGroup viewGroup = NoteActivity.this.findViewById(android.R.id.content);
-        View view = LayoutInflater.from(NoteActivity.this).inflate(R.layout.number_picker, viewGroup, false);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(CreateNoteActivity.this);
+        ViewGroup viewGroup = CreateNoteActivity.this.findViewById(android.R.id.content);
+        View view = LayoutInflater.from(CreateNoteActivity.this).inflate(R.layout.number_picker, viewGroup, false);
         final NumberPicker day = view.findViewById(R.id.numberDay);
         final NumberPicker month = view.findViewById(R.id.numberMonth);
         final NumberPicker year = view.findViewById(R.id.numberYear);
@@ -496,7 +496,7 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
             if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
                 return true;
@@ -543,11 +543,7 @@ public class NoteActivity extends AppCompatActivity {
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
             ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
-        } catch (NoSuchFieldException e) {
-            Log.w("hihi", e);
-        } catch (IllegalAccessException e) {
-            Log.w("hihi", e);
-        } catch (IllegalArgumentException e) {
+        } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
 
@@ -562,8 +558,9 @@ public class NoteActivity extends AppCompatActivity {
 
 
     private void showdialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(NoteActivity.this);
-        builder.setTitle(getResources().getString(R.string._messenger_back));
+        AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteActivity.this);
+        builder.setTitle(getResources().getString(R.string._exit));
+        builder.setMessage(getResources().getString(R.string._messenger_back));
         builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -614,13 +611,13 @@ public class NoteActivity extends AppCompatActivity {
                         int count = data.getClipData().getItemCount();
                         for (int i = 0; i < count; i++) {
                             Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                            path = ImageFilePath.getPath(NoteActivity.this, imageUri);
+                            path = ImageFilePath.getPath(CreateNoteActivity.this, imageUri);
                             resPath.add(path);
                         }
                     } else if (data.getData() != null) {
                         String imagePath = data.getData().getPath();
                         Uri imageUri = data.getData();
-                        path = ImageFilePath.getPath(NoteActivity.this, imageUri);
+                        path = ImageFilePath.getPath(CreateNoteActivity.this, imageUri);
                         resPath.add(path);
                     }
                     updateData(resPath);
@@ -638,9 +635,11 @@ public class NoteActivity extends AppCompatActivity {
                     if (mTitle.isFocused()) {
                         mTitle.setText((mTitle.getText().toString() + " " + result.get(0)).trim());
                         mTitle.requestFocusFromTouch();
+                        mTitle.requestFocus(mTitle.length() + 1);
                     } else if (mContent.isFocused()) {
                         mContent.setText((mContent.getText().toString() + " " + result.get(0)).trim());
                         mContent.requestFocusFromTouch();
+                        mContent.requestFocus();
                     }
 
                 }

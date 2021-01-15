@@ -6,6 +6,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,47 +110,21 @@ public class CountAdapter extends RecyclerView.Adapter<CountAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, ShowFollowActivity.class);
-                intent.putExtra("POSITION", position);
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", list.get(position).getId());
+                bundle.putString("title", list.get(position).getTitle());
+                bundle.putString("des", list.get(position).getDes());
+                bundle.putString("place", list.get(position).getPlace());
+                bundle.putString("date", list.get(position).getDate());
+                bundle.putInt("filter", list.get(position).getFilter());
+                bundle.putInt("vote", list.get(position).getVote());
+                bundle.putInt("prioritize", list.get(position).getPrioritize());
+                intent.putExtras(bundle);
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
-        holder.opel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, ShowFollowActivity.class);
-                intent.putExtra("POSITION", position);
-                activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
-            }
-        });
-        holder.name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, ShowFollowActivity.class);
-                intent.putExtra("POSITION", position);
-                activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
-            }
-        });
-        holder.time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, ShowFollowActivity.class);
-                intent.putExtra("POSITION", position);
-                activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
-            }
-        });
-        holder.place.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, ShowFollowActivity.class);
-                intent.putExtra("POSITION", position);
-                activity.startActivity(intent);
-                activity.overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
-            }
-        });
+
 
 
     }

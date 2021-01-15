@@ -79,10 +79,9 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private int mColor;
     private String path;
     private String employees[];
-    private String s;
     private ArrayList<String> listPath = new ArrayList<>();
     private ArrayList<String> listPath2 = new ArrayList<>();
-    private ArrayList<Diary> list = new ArrayList<>();
+    private Diary model;
 
 
     @Override
@@ -90,11 +89,27 @@ public class ShowDiaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_diary);
         init();
+        getData();
         setUp();
         setSpinner();
         initClick();
         setLayoutShow();
 
+    }
+
+    private void getData() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            model = new Diary(bundle.getInt("id"), bundle.getString("title"), bundle.getString("content"), bundle.getString("date"), bundle.getString("address"), bundle.getString("image"), bundle.getInt("vote"), bundle.getInt("filter"), bundle.getLong("realtime"));
+            title.setText(model.getTitle());
+            body.setText(model.getContent());
+            date.setText(model.getDate());
+            filterEdit = model.getFilter();
+            mColor = model.getVote();
+        } else {
+            model = new Diary();
+        }
     }
 
     private void init() {
@@ -155,25 +170,12 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
 
     private void setUp() {
-
         Pef.getReference(this);
-        Pef.setFullScreen(ShowDiaryActivity.this);
-        employees = new String[]{
-                getResources().getString(R.string._event),
-                getResources().getString(R.string._mood),
-                getResources().getString(R.string._work),
-                getResources().getString(R.string._shopping),
-                getResources().getString(R.string._travel),
-                getResources().getString(R.string._celebration)};
-
-        list.clear();
+        employees = new String[]{getResources().getString(R.string._event), getResources().getString(R.string._mood), getResources().getString(R.string._work), getResources().getString(R.string._shopping), getResources().getString(R.string._travel), getResources().getString(R.string._celebration)};
         listPath.clear();
         listPath2.clear();
 
-
-        int i = getIntent().getIntExtra("position", 0);
-        list = new DatabaseHelper(this).getData();
-        String s[] = list.get(i).getImage().trim().split("<->");
+        String s[] = model.getImage().split("<->");
         if (s.length > 0) {
             for (int j = 0; j < s.length; j++) {
                 if (!s[j].isEmpty()) {
@@ -187,14 +189,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerview.setAdapter(adapter);
-        title.setText(list.get(i).getTitle());
-        body.setText(list.get(i).getContent());
-        date.setText(list.get(i).getDate());
-        //filter.setText(list.get(i).getFilter());
-        filterEdit = list.get(i).getFilter();
-
         updateFilter(filterEdit);
-        mColor = list.get(i).getVote();
         updateVote(mColor);
         adapter.setOnClickItem(new OnClickItem() {
             @Override
@@ -227,10 +222,9 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
             }
         });
-
-        titleEdit.setText(list.get(i).getTitle());
-        bodyEdit.setText(list.get(i).getContent());
-        dateEdit.setText(list.get(i).getDate());
+        titleEdit.setText(model.getTitle());
+        bodyEdit.setText(model.getContent());
+        dateEdit.setText(model.getDate());
         //spinnerEdit.setPromptId(list.get(i).getFilter());
         adapterEdit = new ImageAdapterEdit(listPath2, this);
         mRecyclerviewEdit.setHasFixedSize(true);
@@ -250,6 +244,9 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
             }
         });
+
+        updateUI();
+
     }
 
     private void daleteImage(ArrayList<String> listImage, int position) {
@@ -257,9 +254,9 @@ public class ShowDiaryActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        setViewRecyclerview();
         adapter.notifyDataSetChanged();
         adapterEdit.notifyDataSetChanged();
+        setViewRecyclerview();
     }
 
     private void updateFilter(int a) {
@@ -302,13 +299,8 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private void updateVote(int color) {
 
         switch (color) {
-            case 1: {
-                background.setBackgroundResource(R.drawable.bg_gradent_1);
-                break;
-            }
             case 2: {
                 background.setBackgroundResource(R.drawable.bg_gradent_2);
-
                 break;
             }
             case 3: {
@@ -367,12 +359,6 @@ public class ShowDiaryActivity extends AppCompatActivity {
             }
         }
 
-    }
-
-    private void updateData(ArrayList<String> viewModels) {
-        listPath.clear();
-        listPath.addAll(viewModels);
-        adapterEdit.notifyDataSetChanged();
     }
 
     private void setSpinner() {
@@ -646,18 +632,6 @@ public class ShowDiaryActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
-        try {
-            if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
-                return true;
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     private void setNubmerPicker(NumberPicker nubmerPicker, String[] numbers) {
         nubmerPicker.setMaxValue(numbers.length - 1);
         nubmerPicker.setMinValue(0);
@@ -733,7 +707,8 @@ public class ShowDiaryActivity extends AppCompatActivity {
         builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new DatabaseHelper(ShowDiaryActivity.this).delete(list.get(getIntent().getIntExtra("position", 0)));
+
+                new DatabaseHelper(ShowDiaryActivity.this).delete(model);
                 Toast.makeText(ShowDiaryActivity.this, getResources().getString(R.string._deleted), Toast.LENGTH_SHORT).show();
                 finish();
                 dialog.dismiss();
@@ -752,8 +727,8 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
     private void showdialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ShowDiaryActivity.this);
-        builder.setTitle("Lưu dữ liệu");
-        builder.setTitle(getResources().getString(R.string._messenger));
+        builder.setTitle(getResources().getString(R.string._save));
+        builder.setMessage(getResources().getString(R.string._messenger));
         builder.setPositiveButton(getResources().getString(R.string._yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -777,21 +752,18 @@ public class ShowDiaryActivity extends AppCompatActivity {
     }
 
     private void save() {
-        int i = getIntent().getIntExtra("position", 0);
-        list = new DatabaseHelper(this).getData();
         String image = "";
         for (String s : listPath2) {
             image = image + s + "<->";
         }
         Log.d("TAG", "save: " + image);
-        Diary diary = list.get(i);
-        diary.setTitle(titleEdit.getText().toString());
-        diary.setContent(bodyEdit.getText().toString());
-        diary.setDate(dateEdit.getText().toString());
-        diary.setFilter(filterEdit);
-        diary.setVote(mColor);
-        diary.setImage(image.trim());
-        boolean update = new DatabaseHelper(this).update(diary);
+        model.setTitle(titleEdit.getText().toString());
+        model.setContent(bodyEdit.getText().toString());
+        model.setDate(dateEdit.getText().toString());
+        model.setFilter(filterEdit);
+        model.setVote(mColor);
+        model.setImage(image.trim());
+        boolean update = new DatabaseHelper(this).update(model);
         if (update) {
             Toast.makeText(this, getResources().getString(R.string._update_successful), Toast.LENGTH_SHORT).show();
         } else {

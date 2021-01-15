@@ -7,27 +7,30 @@
     android:layout_marginTop="1dp"
     android:gravity="center"
     android:orientation="vertical">
+
     <LinearLayout
-        android:paddingEnd="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingStart="20dp"
         android:id="@+id/body"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:background="@color/note"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp">
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
-                android:maxLines="1"
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@+id/card"
                 android:fontFamily="@font/cardo"
+                android:maxLines="1"
                 android:text="Bùi Ngọc Bình"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -48,12 +51,12 @@
                 android:textSize="13sp" />
 
             <LinearLayout
-                android:layout_marginBottom="5dp"
                 android:id="@+id/viewbottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
                 android:layout_toStartOf="@+id/card"
                 android:gravity="start"
                 android:orientation="horizontal">
@@ -65,10 +68,10 @@
                     android:src="@drawable/ic_clock" />
 
                 <TextView
-                    android:layout_marginStart="10dp"
                     android:id="@+id/date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/cardo"
                     android:text="12:65"
                     android:textColor="@color/black"
@@ -89,8 +92,7 @@
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="70dp"
-                    android:layout_height="70dp"
-                   />
+                    android:layout_height="70dp" />
             </androidx.cardview.widget.CardView>
 
         </RelativeLayout>

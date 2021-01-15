@@ -1,6 +1,5 @@
 package com.example.mydiary.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.mydiary.R;
-import com.example.mydiary.activity.NoteActivity;
+import com.example.mydiary.activity.CreateNoteActivity;
 import com.example.mydiary.adapters.DairyAdapter;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
@@ -23,6 +22,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class DairyFragment extends Fragment {
@@ -35,16 +35,14 @@ public class DairyFragment extends Fragment {
     private FloatingActionButton fab;
 
     public static DairyFragment newInstance() {
-        DairyFragment fragment = new DairyFragment();
-        return fragment;
+        return new DairyFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_dairy, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_dairy, container, false);
     }
 
     @Override
@@ -66,8 +64,8 @@ public class DairyFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), NoteActivity.class));
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                startActivity(new Intent(getContext(), CreateNoteActivity.class));
+                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
     }

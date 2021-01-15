@@ -3,6 +3,7 @@ package com.example.mydiary.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -60,6 +61,7 @@ public class EditCalendarActivity extends AppCompatActivity {
         initEvent();
     }
 
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     private void initEvent() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(model.getLoc());
@@ -130,6 +132,7 @@ public class EditCalendarActivity extends AppCompatActivity {
         body = findViewById(R.id.body);
     }
 
+    @SuppressLint({"SimpleDateFormat", "SetTextI18n"})
     private void ui(String time, String date, String ngay, String thang, String nam) {
         Calendar calendar = Calendar.getInstance();
         int d = calendar.get(Calendar.DAY_OF_MONTH);
@@ -234,7 +237,7 @@ public class EditCalendarActivity extends AppCompatActivity {
     }
 
     private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
             if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
                 return true;
@@ -263,6 +266,7 @@ public class EditCalendarActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("DefaultLocale")
     private int isPositon(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
@@ -281,11 +285,7 @@ public class EditCalendarActivity extends AppCompatActivity {
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
             ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
-        } catch (NoSuchFieldException e) {
-            Log.w("hihi", e);
-        } catch (IllegalAccessException e) {
-            Log.w("hihi", e);
-        } catch (IllegalArgumentException e) {
+        } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
 

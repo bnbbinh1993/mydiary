@@ -101,4 +101,6 @@
     <string name="_finished">Đã hoàn thành</string>
     <string name="_nothing_is_here">Không có gì ở đây!</string>
     <string name="_all">Đã lưu</string>
+    <string name="_save">Lưu</string>
+    <string name="_exit">Thoát</string>
 </resources>

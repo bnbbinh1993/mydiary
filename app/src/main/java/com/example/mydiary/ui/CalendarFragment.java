@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiary.R;
-import com.example.mydiary.activity.AddEventActivity;
+import com.example.mydiary.activity.CreateEventActivity;
 import com.example.mydiary.activity.ShowCalendarActivity;
 import com.example.mydiary.adapters.EventCalendarAdapter;
 import com.example.mydiary.database.DatabaseEvent;
@@ -34,6 +34,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 public class CalendarFragment extends Fragment {
@@ -72,7 +73,6 @@ public class CalendarFragment extends Fragment {
         helper = new DatabaseEvent(getContext());
         initUI(view);
         initEvent();
-        checkUI();
     }
 
 
@@ -80,13 +80,13 @@ public class CalendarFragment extends Fragment {
         listEvent.clear();
         listEventAll.clear();
         listEventAll = helper.getData();
-
         int d = a.get(Calendar.DAY_OF_MONTH);
         int m = a.get(Calendar.MONTH) + 1;
         int y = a.get(Calendar.YEAR);
         SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         try {
             today = f.parse(d + "." + m + "." + y).getTime();
+            dateF.setTime(today);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -96,9 +96,6 @@ public class CalendarFragment extends Fragment {
             }
             Log.d("LOC", "Click: " + listEventAll.get(i).getLoc() + " - " + today);
         }
-
-
-        dateF.setTime(today);
 
         String thu = (String) DateFormat.format("EEE", dateF); // T.4
         String dayOfTheWeek = (String) DateFormat.format("EEEE", dateF); // Thursday
@@ -153,8 +150,8 @@ public class CalendarFragment extends Fragment {
                     Log.d("LOC", "Click: " + listEventAll.get(i).getLoc() + " - " + today);
                 }
                 Log.d("SIZE", "Click: " + listEvent.size());
-
                 updateUI();
+
             }
         });
         Collections.sort(listEvent);
@@ -169,27 +166,23 @@ public class CalendarFragment extends Fragment {
                 int id = listEvent.get(position).getId();
                 intent.putExtra("keyPosition", id);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
         btnFloat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AddEventActivity.class);
+                Intent intent = new Intent(getContext(), CreateEventActivity.class);
                 intent.putExtra("keyTime", today);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
-
+        updateUI();
     }
+
 
     private void updateUI() {
-        checkUI();
-        adapter.notifyDataSetChanged();
-    }
-
-    private void checkUI() {
         if (listEvent.size() > 0) {
             mLayoutNotNull.setVisibility(View.VISIBLE);
             mLayoutNull.setVisibility(View.GONE);
@@ -198,6 +191,7 @@ public class CalendarFragment extends Fragment {
             mLayoutNotNull.setVisibility(View.GONE);
             mLayoutNull.setVisibility(View.VISIBLE);
         }
+        adapter.notifyDataSetChanged();
     }
 
     private void initUI(View view) {
@@ -213,8 +207,8 @@ public class CalendarFragment extends Fragment {
     @Override
     public void onResume() {
         initEvent();
-        updateUI();
         super.onResume();
 
     }
+
 }

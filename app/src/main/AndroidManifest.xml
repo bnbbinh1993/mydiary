@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Mydiary">
         <activity android:name=".activity.EditCalendarActivity"></activity>
         <activity android:name=".activity.ShowCalendarActivity" />
-        <activity android:name=".activity.AddEventActivity" />
+        <activity android:name=".activity.CreateEventActivity" />
         <activity
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
@@ -64,11 +64,11 @@
             android:name=".activity.FinishActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.CountDownActivity"
+            android:name=".activity.CreateCountDownActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.NoteActivity"
+            android:name=".activity.CreateNoteActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity

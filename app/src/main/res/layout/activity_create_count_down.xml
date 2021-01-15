@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/note"
     android:orientation="vertical"
-    tools:context=".activity.CountDownActivity">
+    tools:context=".activity.CreateCountDownActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:layout_alignParentEnd="true"
             android:background="?attr/actionBarItemBackground"
             android:padding="10dp"
-            android:src="@drawable/ic_save_file"
+            android:src="@drawable/ic_check"
             android:visibility="visible" />
 
     </RelativeLayout>

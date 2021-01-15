@@ -13,17 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.mydiary.R;
-import com.example.mydiary.activity.CountDownActivity;
+import com.example.mydiary.activity.CreateCountDownActivity;
 import com.example.mydiary.adapters.DairyAdapter;
 import com.example.mydiary.database.DatabaseCount;
 import com.example.mydiary.models.Count;
-import com.example.mydiary.models.Diary;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class CountDownFragment extends Fragment {
     private ViewPager viewPager;
@@ -58,8 +57,8 @@ public class CountDownFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), CountDownActivity.class));
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                startActivity(new Intent(getContext(), CreateCountDownActivity.class));
+                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
     }

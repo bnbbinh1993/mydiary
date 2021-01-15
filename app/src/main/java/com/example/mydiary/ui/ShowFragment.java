@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mydiary.R;
-import com.example.mydiary.activity.NoteActivity;
+import com.example.mydiary.activity.CreateNoteActivity;
 import com.example.mydiary.adapters.AdapterSub;
 import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class ShowFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -46,15 +47,13 @@ public class ShowFragment extends Fragment {
     }
 
     public static ShowFragment newInstance() {
-        ShowFragment fragment = new ShowFragment();
-        return fragment;
+        return new ShowFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_show, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_show, container, false);
     }
 
     @Override
@@ -78,9 +77,9 @@ public class ShowFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         for (int i = 0; i < listDate.size(); i++) {
-            List<Diary> listdiary = buildListDiary(listDate.get(i), list);
-            Log.d("TAG", "Size: " + listdiary.size());
-            listTest.add(new ItemSub(String.valueOf(listDate.get(i)), listdiary));
+            List<Diary> diaryList = buildListDiary(listDate.get(i), list);
+            Log.d("TAG", "Size: " + diaryList.size());
+            listTest.add(new ItemSub(String.valueOf(listDate.get(i)), diaryList));
 
         }
         Collections.reverse(listTest);
@@ -139,8 +138,8 @@ public class ShowFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), NoteActivity.class));
-                getActivity().overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
+                startActivity(new Intent(getContext(), CreateNoteActivity.class));
+                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
             }
         });
     }

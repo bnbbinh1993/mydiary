@@ -1,28 +1,17 @@
 package com.example.mydiary.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.mydiary.R;
 import com.example.mydiary.utils.Pef;
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.RequestConfiguration;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class FinishActivity extends AppCompatActivity {
     private AppCompatButton mCreate;
@@ -66,11 +55,11 @@ public class FinishActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (i == 0) {
-                    startActivity(new Intent(getApplication(), CountDownActivity.class));
+                    startActivity(new Intent(getApplication(), CreateCountDownActivity.class));
                     finish();
                     overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 } else if (i == 1) {
-                    startActivity(new Intent(getApplication(), NoteActivity.class));
+                    startActivity(new Intent(getApplication(), CreateNoteActivity.class));
                     finish();
                     overridePendingTransition(R.anim.out_left, R.anim.in_left);
                 }
