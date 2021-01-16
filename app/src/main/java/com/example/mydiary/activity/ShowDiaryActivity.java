@@ -1,6 +1,7 @@
 package com.example.mydiary.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,11 +44,10 @@ import com.github.chrisbanes.photoview.PhotoView;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ShowDiaryActivity extends AppCompatActivity {
     private ImageButton edit;
@@ -77,10 +77,9 @@ public class ShowDiaryActivity extends AppCompatActivity {
     private static final int REQ_CODE_SPEECH_INPUT = 100;
     private int filterEdit;
     private int mColor;
-    private String path;
-    private String employees[];
-    private ArrayList<String> listPath = new ArrayList<>();
-    private ArrayList<String> listPath2 = new ArrayList<>();
+    private String[] employees;
+    private final ArrayList<String> listPath = new ArrayList<>();
+    private final ArrayList<String> listPath2 = new ArrayList<>();
     private Diary model;
 
 
@@ -177,10 +176,10 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
         String s[] = model.getImage().split("<->");
         if (s.length > 0) {
-            for (int j = 0; j < s.length; j++) {
-                if (!s[j].isEmpty()) {
-                    listPath.add(s[j]);
-                    listPath2.add(s[j]);
+            for (String value : s) {
+                if (!value.isEmpty()) {
+                    listPath.add(value);
+                    listPath2.add(value);
                 }
             }
         }
@@ -235,7 +234,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
             public void click(int position) {
                 Log.d("TAG", "click: " + listPath2.size());
                 Log.d("TAG", "click: " + position);
-                daleteImage(listPath2, position);
+                deleteImage(listPath2, position);
                 updateUI();
             }
 
@@ -249,7 +248,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
     }
 
-    private void daleteImage(ArrayList<String> listImage, int position) {
+    private void deleteImage(ArrayList<String> listImage, int position) {
         listImage.remove(position);
     }
 
@@ -392,7 +391,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         saveEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showdialog();
+                shoddily();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -578,9 +577,9 @@ public class ShowDiaryActivity extends AppCompatActivity {
         setNubmerPicker(hours, Pef.hoursList);
         setNubmerPicker(minute, Pef.minuteList);
 
-        setNumberPickerTextColor(day, Color.BLACK);
-        setNumberPickerTextColor(month, Color.BLACK);
-        setNumberPickerTextColor(year, Color.BLACK);
+        setNumberPickerTextColor(day);
+        setNumberPickerTextColor(month);
+        setNumberPickerTextColor(year);
 
         Calendar calendar = Calendar.getInstance();
         int d = calendar.get(Calendar.DAY_OF_MONTH);
@@ -643,13 +642,12 @@ public class ShowDiaryActivity extends AppCompatActivity {
         int isDay = Integer.parseInt(day);
         int isMonth = Integer.parseInt(month);
         if (isMonth == 2 || isMonth == 4 || isMonth == 6 || isMonth == 9 || isMonth == 11) {
-            if (isDay > 30) {
-                return false;
-            }
+            return isDay <= 30;
         }
         return true;
     }
 
+    @SuppressLint("DefaultLocale")
     private int isPositon(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
@@ -661,18 +659,14 @@ public class ShowDiaryActivity extends AppCompatActivity {
         return res;
     }
 
-    private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+    private static void setNumberPickerTextColor(NumberPicker numberPicker) {
 
         try {
             Field selectorWheelPaintField = numberPicker.getClass()
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
-            ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
-        } catch (NoSuchFieldException e) {
-            Log.w("hihi", e);
-        } catch (IllegalAccessException e) {
-            Log.w("hihi", e);
-        } catch (IllegalArgumentException e) {
+            ((Paint) Objects.requireNonNull(selectorWheelPaintField.get(numberPicker))).setColor(Color.BLACK);
+        } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
 
@@ -680,7 +674,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             View child = numberPicker.getChildAt(i);
             if (child instanceof EditText)
-                ((EditText) child).setTextColor(color);
+                ((EditText) child).setTextColor(Color.BLACK);
         }
         numberPicker.invalidate();
     }
@@ -725,7 +719,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
     }
 
-    private void showdialog() {
+    private void shoddily() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ShowDiaryActivity.this);
         builder.setTitle(getResources().getString(R.string._save));
         builder.setMessage(getResources().getString(R.string._messenger));
@@ -774,7 +768,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (layout_edit.getVisibility() == View.VISIBLE) {
-            showdialog();
+            shoddily();
         } else {
             super.onBackPressed();
             overridePendingTransition(R.anim.out_bottom, R.anim.in_bottom);
@@ -806,6 +800,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         switch (requestCode) {
             case SELECT_PICTURES: {
                 if (resultCode == RESULT_OK) {
+                    String path;
                     if (data.getClipData() != null) {
                         int count = data.getClipData().getItemCount();
                         for (int i = 0; i < count; i++) {

@@ -1,5 +1,6 @@
 package com.example.mydiary.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -36,12 +37,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.Collections.*;
+
 
 public class CalendarFragment extends Fragment {
 
     private CustomCalendarView mCustomCalendarView;
-    private List<Long> list = new ArrayList<>();
-    private List<EventCalendar> listEvent = new ArrayList<>();
+    private final List<Long> list = new ArrayList<>();
+    private final List<EventCalendar> listEvent = new ArrayList<>();
     private List<EventCalendar> listEventAll = new ArrayList<>();
     private RecyclerView recyclerView;
     private EventCalendarAdapter adapter;
@@ -52,13 +55,12 @@ public class CalendarFragment extends Fragment {
     private long today = 1000;
     private TextView txtDate;
     private TextView txtDate2;
-    private Calendar a = Calendar.getInstance();
-    private Date dateF = new Date();
+    private final Calendar a = Calendar.getInstance();
+    private final Date dateF = new Date();
 
 
     public static CalendarFragment newInstance() {
-        CalendarFragment fragment = new CalendarFragment();
-        return fragment;
+        return new CalendarFragment();
     }
 
     @Override
@@ -76,6 +78,7 @@ public class CalendarFragment extends Fragment {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void initEvent() {
         listEvent.clear();
         listEventAll.clear();
@@ -83,9 +86,9 @@ public class CalendarFragment extends Fragment {
         int d = a.get(Calendar.DAY_OF_MONTH);
         int m = a.get(Calendar.MONTH) + 1;
         int y = a.get(Calendar.YEAR);
-        SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
         try {
-            today = f.parse(d + "." + m + "." + y).getTime();
+            today = Objects.requireNonNull(f.parse(d + "." + m + "." + y)).getTime();
             dateF.setTime(today);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -127,9 +130,9 @@ public class CalendarFragment extends Fragment {
                 int d = a.get(Calendar.DAY_OF_MONTH);
                 int m = a.get(Calendar.MONTH) + 1;
                 int y = a.get(Calendar.YEAR);
-                SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyyy");
                 try {
-                    today = f.parse(d + "." + m + "." + y).getTime();
+                    today = Objects.requireNonNull(f.parse(d + "." + m + "." + y)).getTime();
                     dateF.setTime(today);
                     String thu = (String) DateFormat.format("EEE", dateF); // T.4
                     String dayOfTheWeek = (String) DateFormat.format("EEEE", dateF); // Thursday
@@ -154,7 +157,7 @@ public class CalendarFragment extends Fragment {
 
             }
         });
-        Collections.sort(listEvent);
+        sort(listEvent);
         adapter = new EventCalendarAdapter(getContext(), listEvent);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         recyclerView.setHasFixedSize(true);

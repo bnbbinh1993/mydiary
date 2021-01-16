@@ -1,5 +1,6 @@
 package com.example.mydiary.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,8 +41,6 @@ public class CreateFragment extends Fragment {
     private ArrayList<Create> list;
     private ArrayList<Create> list2;
     private ArrayList<App> list3;
-    private GridView mGridView;
-    private GridView mGridView3;
     private String path;
     private ImageView mAvtar;
     private AdView mAdView;
@@ -49,8 +48,7 @@ public class CreateFragment extends Fragment {
 
 
     public static CreateFragment newInstance() {
-        CreateFragment fragment = new CreateFragment();
-        return fragment;
+        return new CreateFragment();
     }
 
     @Override
@@ -62,8 +60,8 @@ public class CreateFragment extends Fragment {
     }
 
     private void init(View v) {
-        mGridView = v.findViewById(R.id.mGridView);
-        mGridView3 = v.findViewById(R.id.mGridView3);
+        GridView mGridView = v.findViewById(R.id.mGridView);
+        GridView mGridView3 = v.findViewById(R.id.mGridView3);
         mAvtar = v.findViewById(R.id.mAvtar);
         layout = v.findViewById(R.id.adView);
 
@@ -73,7 +71,7 @@ public class CreateFragment extends Fragment {
         String res = Pef.getString("AVATAR", "ERROR");
         if (!res.equals("ERROR")) {
             File file = new File(res);
-            Glide.with(getContext())
+            Glide.with(Objects.requireNonNull(getContext()))
                     .load(file)
                     .centerCrop()
                     .error(R.drawable.test5)
@@ -171,7 +169,7 @@ public class CreateFragment extends Fragment {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            View view1 = getLayoutInflater().inflate(R.layout.item_create, null);
+            @SuppressLint({"ViewHolder", "InflateParams"}) View view1 = getLayoutInflater().inflate(R.layout.item_create, null);
 
             ImageView image = view1.findViewById(R.id.mIcon);
             TextView name = view1.findViewById(R.id.mName);
@@ -202,7 +200,7 @@ public class CreateFragment extends Fragment {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            View view2 = getLayoutInflater().inflate(R.layout.item_create, null);
+            @SuppressLint({"ViewHolder", "InflateParams"}) View view2 = getLayoutInflater().inflate(R.layout.item_create, null);
 
             ImageView image = view2.findViewById(R.id.mIcon);
             TextView name = view2.findViewById(R.id.mName);
@@ -233,7 +231,7 @@ public class CreateFragment extends Fragment {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            View view2 = getLayoutInflater().inflate(R.layout.item_app, null);
+            @SuppressLint({"ViewHolder", "InflateParams"}) View view2 = getLayoutInflater().inflate(R.layout.item_app, null);
 
             ImageView image = view2.findViewById(R.id.mIcon);
             TextView name = view2.findViewById(R.id.mName);
@@ -262,38 +260,32 @@ public class CreateFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case SELECT_PICTURES: {
-                if (resultCode == Activity.RESULT_OK) {
-                    if (data.getClipData() != null) {
-                        int count = data.getClipData().getItemCount();
-                        for (int i = 0; i < count; i++) {
-                            Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                            path = ImageFilePath.getPath(getContext(), imageUri);
-                        }
-                    } else if (data.getData() != null) {
-                        Uri imageUri = data.getData();
+        if (requestCode == SELECT_PICTURES) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data.getClipData() != null) {
+                    int count = data.getClipData().getItemCount();
+                    for (int i = 0; i < count; i++) {
+                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
                         path = ImageFilePath.getPath(getContext(), imageUri);
                     }
-
-                    try {
-                        Pef.setString("AVATAR", path);
-                        File file = new File(path);
-                        Glide.with(getContext())
-                                .load(file)
-                                .centerCrop()
-                                .error(R.drawable.test5)
-                                .into(mAvtar);
-                    } catch (NullPointerException e) {
-                        e.printStackTrace();
-                    }
-
+                } else if (data.getData() != null) {
+                    Uri imageUri = data.getData();
+                    path = ImageFilePath.getPath(getContext(), imageUri);
                 }
 
+                try {
+                    Pef.setString("AVATAR", path);
+                    File file = new File(path);
+                    Glide.with(Objects.requireNonNull(getContext()))
+                            .load(file)
+                            .centerCrop()
+                            .error(R.drawable.test5)
+                            .into(mAvtar);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
 
-                break;
             }
-
         }
 
 
@@ -316,7 +308,7 @@ public class CreateFragment extends Fragment {
 //        mAdView.loadAd(adRequest);
     }
     private AdSize getAdSize() {
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Display display = Objects.requireNonNull(getActivity()).getWindowManager().getDefaultDisplay();
         DisplayMetrics outMetrics = new DisplayMetrics();
         display.getMetrics(outMetrics);
         float widthPixels = outMetrics.widthPixels;

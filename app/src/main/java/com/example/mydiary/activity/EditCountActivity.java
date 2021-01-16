@@ -1,17 +1,14 @@
 package com.example.mydiary.activity;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -27,19 +24,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mydiary.R;
 import com.example.mydiary.database.DatabaseCount;
-import com.example.mydiary.models.Count;
 import com.example.mydiary.utils.Pef;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
+import java.util.Objects;
 
 public class EditCountActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;
-    private String employees[];
+    private String[] employees;
     private ImageButton mBack;
     private ImageButton mSave;
     private TextView mDate;
@@ -48,7 +43,6 @@ public class EditCountActivity extends AppCompatActivity {
     private EditText mPlace;
     private EditText mDes;
     private int filter;
-    private String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,7 +164,7 @@ public class EditCountActivity extends AppCompatActivity {
     }
 
     private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
-        title = employees[position];
+        String title = employees[position];
         switch (position) {
             case 0: {
                 filter = 0;
@@ -221,9 +215,9 @@ public class EditCountActivity extends AppCompatActivity {
         setNubmerPicker(hours, Pef.hoursList);
         setNubmerPicker(minute, Pef.minuteList);
 
-        setNumberPickerTextColor(day, Color.BLACK);
-        setNumberPickerTextColor(month, Color.BLACK);
-        setNumberPickerTextColor(year, Color.BLACK);
+        setNumberPickerTextColor(day);
+        setNumberPickerTextColor(month);
+        setNumberPickerTextColor(year);
 
         Calendar calendar = Calendar.getInstance();
         int d = calendar.get(Calendar.DAY_OF_MONTH);
@@ -236,11 +230,11 @@ public class EditCountActivity extends AppCompatActivity {
         Log.d("M", "onClick: " + m);
         Log.d("Y", "onClick: " + y);
 
-        day.setValue(isPositon(d, Pef.dayList));
-        month.setValue(isPositon(m, Pef.monthList));
-        year.setValue(isPositon(y, Pef.isListYear()));
-        hours.setValue(isPositon(h, Pef.hoursList));
-        minute.setValue(isPositon(p, Pef.minuteList));
+        day.setValue(isPosition(d, Pef.dayList));
+        month.setValue(isPosition(m, Pef.monthList));
+        year.setValue(isPosition(y, Pef.isListYear()));
+        hours.setValue(isPosition(h, Pef.hoursList));
+        minute.setValue(isPosition(p, Pef.minuteList));
 
         builder.setPositiveButton(R.string._yes, new DialogInterface.OnClickListener() {
             @Override
@@ -276,9 +270,9 @@ public class EditCountActivity extends AppCompatActivity {
     }
 
     private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
-            if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
+            if (Objects.requireNonNull(format.parse(s)).getTime() > (System.currentTimeMillis() + 60000)) {
                 return true;
             }
         } catch (ParseException e) {
@@ -305,7 +299,8 @@ public class EditCountActivity extends AppCompatActivity {
         return true;
     }
 
-    private int isPositon(int check, String[] list) {
+    @SuppressLint("DefaultLocale")
+    private int isPosition(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
             if (list[i].equals(String.format("%02d", check))) {
@@ -316,18 +311,14 @@ public class EditCountActivity extends AppCompatActivity {
         return res;
     }
 
-    private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+    private static void setNumberPickerTextColor(NumberPicker numberPicker) {
 
         try {
             Field selectorWheelPaintField = numberPicker.getClass()
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
-            ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
-        } catch (NoSuchFieldException e) {
-            Log.w("hihi", e);
-        } catch (IllegalAccessException e) {
-            Log.w("hihi", e);
-        } catch (IllegalArgumentException e) {
+            ((Paint) Objects.requireNonNull(selectorWheelPaintField.get(numberPicker))).setColor(Color.BLACK);
+        } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
 
@@ -335,7 +326,7 @@ public class EditCountActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             View child = numberPicker.getChildAt(i);
             if (child instanceof EditText)
-                ((EditText) child).setTextColor(color);
+                ((EditText) child).setTextColor(Color.BLACK);
         }
         numberPicker.invalidate();
     }

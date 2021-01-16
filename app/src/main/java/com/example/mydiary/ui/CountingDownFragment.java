@@ -32,9 +32,8 @@ import static java.util.Collections.*;
 
 
 public class CountingDownFragment extends Fragment {
-    private DatabaseCount helper;
     private static ArrayList<Count> list = new ArrayList<>();
-    private ArrayList<Count> listData = new ArrayList<>();
+    private final ArrayList<Count> listData = new ArrayList<>();
     private RecyclerView mRecyclerview;
     private CountAdapter adapter;
     private CountDownTimer count;
@@ -86,7 +85,7 @@ public class CountingDownFragment extends Fragment {
     private void setUp() {
         list.clear();
         listData.clear();
-        helper = new DatabaseCount(getContext());
+        DatabaseCount helper = new DatabaseCount(getContext());
         list = helper.getData();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getVote() == 0) listData.add(list.get(i));

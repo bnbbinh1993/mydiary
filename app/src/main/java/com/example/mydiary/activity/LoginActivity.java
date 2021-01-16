@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     private TextView mRegister;
-    private TextView mResetPassword;
     private AppCompatButton mLogin;
     private EditText mEmail;
     private EditText mPassword;
@@ -70,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initUI() {
         mRegister = findViewById(R.id.mRegister);
-        mResetPassword = findViewById(R.id.mResetPassword);
+        TextView mResetPassword = findViewById(R.id.mResetPassword);
         mLogin = findViewById(R.id.mLogin);
         mEmail = findViewById(R.id.mEmail);
         mPassword = findViewById(R.id.mPassword);

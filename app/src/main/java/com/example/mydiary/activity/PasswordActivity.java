@@ -27,14 +27,13 @@ import com.hanks.passcodeview.PasscodeView;
 import java.util.Calendar;
 
 public class PasswordActivity extends AppCompatActivity {
-    private PasscodeView passcodeView;
     private int mSyntaxerror = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
-        passcodeView = findViewById(R.id.passcodeView);
+        PasscodeView passcodeView = findViewById(R.id.passcodeView);
         Pef.getReference(this);
         Pef.setFullScreen(PasswordActivity.this);
 

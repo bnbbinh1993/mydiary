@@ -2,6 +2,7 @@ package com.example.mydiary.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ public class ShowCalendarActivity extends AppCompatActivity {
     private ImageButton mBack;
     private ImageButton mDelete;
     private ImageButton mEdit;
-    private ImageButton btnTime;
     private TextView date;
     private TextView date2;
     private TextView body;
@@ -43,6 +43,7 @@ public class ShowCalendarActivity extends AppCompatActivity {
         initFunction();
     }
 
+    @SuppressLint("SetTextI18n")
     private void initSetUp() {
         list.clear();
         helper = new DatabaseEvent(ShowCalendarActivity.this);
@@ -56,7 +57,7 @@ public class ShowCalendarActivity extends AppCompatActivity {
         int m = cal.get(Calendar.MONTH) + 1;
         int y = cal.get(Calendar.YEAR);
 
-        SimpleDateFormat f = new SimpleDateFormat("EEE");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat f = new SimpleDateFormat("EEE");
         Date aaa = new Date();
         aaa.setTime(model.getLoc());
         date.setText(d + "." + m + "." + y);
@@ -99,7 +100,7 @@ public class ShowCalendarActivity extends AppCompatActivity {
         mEdit = findViewById(R.id.mEdit);
         date = findViewById(R.id.date);
         date2 = findViewById(R.id.date2);
-        btnTime = findViewById(R.id.btnTime);
+        ImageButton btnTime = findViewById(R.id.btnTime);
         body = findViewById(R.id.body);
     }
 

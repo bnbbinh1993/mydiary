@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class DairyFragment extends Fragment {
+public class NoteFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tablayout;
     private DairyAdapter adapter;
@@ -34,15 +34,15 @@ public class DairyFragment extends Fragment {
     private LinearLayout layoutTrue, layoutFalse;
     private FloatingActionButton fab;
 
-    public static DairyFragment newInstance() {
-        return new DairyFragment();
+    public static NoteFragment newInstance() {
+        return new NoteFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_dairy, container, false);
+        return inflater.inflate(R.layout.fragment_note, container, false);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class DairyFragment extends Fragment {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new DairyAdapter(getChildFragmentManager());
-        adapter.addFragment(new ShowFragment(), getString(R.string._all));
+        adapter.addFragment(new SaveNoteFragment(), getString(R.string._all));
         adapter.addFragment(new ImageFragment(), getString(R.string._image));
         viewPager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewPager);

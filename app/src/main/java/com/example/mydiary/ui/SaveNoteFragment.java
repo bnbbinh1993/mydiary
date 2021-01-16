@@ -32,7 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class ShowFragment extends Fragment {
+public class SaveNoteFragment extends Fragment {
     private RecyclerView recyclerView;
     private AdapterSub adapter;
     private static ArrayList<Diary> list;
@@ -46,14 +46,14 @@ public class ShowFragment extends Fragment {
         return list;
     }
 
-    public static ShowFragment newInstance() {
-        return new ShowFragment();
+    public static SaveNoteFragment newInstance() {
+        return new SaveNoteFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_show, container, false);
+        return inflater.inflate(R.layout.fragment_save_note, container, false);
     }
 
     @Override

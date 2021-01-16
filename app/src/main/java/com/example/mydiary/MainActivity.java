@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -22,7 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.mydiary.adapters.ViewPagerAdapter;
 import com.example.mydiary.ui.CalendarFragment;
 import com.example.mydiary.ui.CreateFragment;
-import com.example.mydiary.ui.DairyFragment;
+import com.example.mydiary.ui.NoteFragment;
 import com.example.mydiary.ui.CountDownFragment;
 import com.example.mydiary.ui.SettingFragment;
 import com.example.mydiary.utils.ZoomOutPageTransformer;
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private MenuItem prevMenuItem;
     private CreateFragment createFragment = new CreateFragment();
-    private DairyFragment dairyFragment = new DairyFragment();
+    private NoteFragment noteFragment = new NoteFragment();
     private CountDownFragment countDownFragment = new CountDownFragment();
     private SettingFragment settingFragment = new SettingFragment();
     private CalendarFragment analysisFragment = new CalendarFragment();
@@ -118,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.homeId:
 
-                        selectedFragment = dairyFragment;
+                        selectedFragment = noteFragment;
                         // viewPager.setCurrentItem(1);
                         break;
                     case R.id.historyId:
@@ -150,12 +148,12 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         createFragment = new CreateFragment();
-        dairyFragment = new DairyFragment();
+        noteFragment = new NoteFragment();
         countDownFragment = new CountDownFragment();
         settingFragment = new SettingFragment();
         analysisFragment = new CalendarFragment();
         adapter.addFragment(createFragment);
-        adapter.addFragment(dairyFragment);
+        adapter.addFragment(noteFragment);
         adapter.addFragment(countDownFragment);
         adapter.addFragment(analysisFragment);
         adapter.addFragment(settingFragment);

@@ -26,11 +26,10 @@ import com.example.mydiary.utils.Pef;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.StringJoiner;
+import java.util.Objects;
 
 public class EditCalendarActivity extends AppCompatActivity {
     private ImageButton btnTime;
@@ -40,11 +39,9 @@ public class EditCalendarActivity extends AppCompatActivity {
     private TextView mTime;
     private EditText body;
     private DatabaseEvent helper;
-    private SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyy");
-    private int id = 0;
+    private final SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyy");
     private long loc = 0;
     private long today = 0;
-    private List<EventCalendar> list = new ArrayList<>();
     private EventCalendar model;
     private String res;
     private String timekey;
@@ -54,8 +51,8 @@ public class EditCalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_calendar);
         helper = new DatabaseEvent(EditCalendarActivity.this);
-        id = getIntent().getIntExtra("key", 0);
-        list = helper.getDataById(id);
+        int id = getIntent().getIntExtra("key", 0);
+        List<EventCalendar> list = helper.getDataById(id);
         model = list.get(0);
         initUI();
         initEvent();
@@ -73,7 +70,7 @@ public class EditCalendarActivity extends AppCompatActivity {
         SimpleDateFormat f = new SimpleDateFormat("hh:mm - dd.MM.yyyy");
         SimpleDateFormat fm = new SimpleDateFormat("EEE");
         try {
-            today = f.parse(keydate).getTime();
+            today = Objects.requireNonNull(f.parse(keydate)).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -178,9 +175,9 @@ public class EditCalendarActivity extends AppCompatActivity {
         setNubmerPicker(hours, Pef.hoursList);
         setNubmerPicker(minute, Pef.minuteList);
 
-        setNumberPickerTextColor(day, Color.BLACK);
-        setNumberPickerTextColor(month, Color.BLACK);
-        setNumberPickerTextColor(year, Color.BLACK);
+        setNumberPickerTextColor(day);
+        setNumberPickerTextColor(month);
+        setNumberPickerTextColor(year);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(today);
@@ -278,13 +275,13 @@ public class EditCalendarActivity extends AppCompatActivity {
         return res;
     }
 
-    private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+    private static void setNumberPickerTextColor(NumberPicker numberPicker) {
 
         try {
             Field selectorWheelPaintField = numberPicker.getClass()
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
-            ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
+            ((Paint) Objects.requireNonNull(selectorWheelPaintField.get(numberPicker))).setColor(Color.BLACK);
         } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
@@ -293,7 +290,7 @@ public class EditCalendarActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             View child = numberPicker.getChildAt(i);
             if (child instanceof EditText)
-                ((EditText) child).setTextColor(color);
+                ((EditText) child).setTextColor(Color.BLACK);
         }
         numberPicker.invalidate();
     }

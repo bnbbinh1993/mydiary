@@ -29,9 +29,8 @@ import java.util.Objects;
 import static java.util.Collections.*;
 
 public class FinishedFragment extends Fragment {
-    private ArrayList<Count> list = new ArrayList<>();
+    private final ArrayList<Count> list = new ArrayList<>();
     private RecyclerView mRecyclerview;
-    private CountAdapter adapter;
     private LinearLayout no_item;
 
     public FinishedFragment() {
@@ -64,7 +63,7 @@ public class FinishedFragment extends Fragment {
         }
         sort(list);
         Collections.reverse(list);
-        adapter = new CountAdapter(getActivity(), list);
+        CountAdapter adapter = new CountAdapter(getActivity(), list);
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new GridLayoutManager(getContext(), 1));
         mRecyclerview.setAdapter(adapter);

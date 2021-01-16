@@ -1,5 +1,6 @@
 package com.example.mydiary.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.example.mydiary.R;
 
 public class SettingActivity extends AppCompatActivity {
     private TextView mFeedback, mLogin, mPollicy, mRate;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch mSound;
     private ImageButton mBack;
     @Override

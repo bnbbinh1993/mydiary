@@ -1,5 +1,6 @@
 package com.example.mydiary.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -38,14 +39,14 @@ import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class CreateCountDownActivity extends AppCompatActivity {
     private Spinner spinnerEmployee;
-    private String employees[];
+    private String[] employees;
     private ImageButton mBack;
     private ImageButton mSave;
     private TextView mDate;
-    private String title;
     private String resultTime;
     private DatabaseCount helper;
     private LinearLayout layout;
@@ -53,6 +54,8 @@ public class CreateCountDownActivity extends AppCompatActivity {
     private EditText mPlace;
     private EditText mDes;
     private int filter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class CreateCountDownActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void init() {
         spinnerEmployee = findViewById(R.id.spinner_employee);
         mBack = findViewById(R.id.mBack);
@@ -173,7 +177,7 @@ public class CreateCountDownActivity extends AppCompatActivity {
     }
 
     private void onItemSelectedHandler(AdapterView<?> adapterView, View view, int position, long id) {
-        title = employees[position];
+        String title = employees[position];
         switch (position) {
             case 0: {
                 filter = 0;
@@ -249,9 +253,9 @@ public class CreateCountDownActivity extends AppCompatActivity {
         setNubmerPicker(hours, Pef.hoursList);
         setNubmerPicker(minute, Pef.minuteList);
 
-        setNumberPickerTextColor(day, Color.BLACK);
-        setNumberPickerTextColor(month, Color.BLACK);
-        setNumberPickerTextColor(year, Color.BLACK);
+        setNumberPickerTextColor(day);
+        setNumberPickerTextColor(month);
+        setNumberPickerTextColor(year);
 
         Calendar calendar = Calendar.getInstance();
         int d = calendar.get(Calendar.DAY_OF_MONTH);
@@ -304,9 +308,9 @@ public class CreateCountDownActivity extends AppCompatActivity {
     }
 
     private boolean checkDate(String s) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
-            if (format.parse(s).getTime() > (System.currentTimeMillis())) {
+            if (Objects.requireNonNull(format.parse(s)).getTime() > (System.currentTimeMillis())) {
                 return true;
             }
         } catch (ParseException e) {
@@ -326,13 +330,12 @@ public class CreateCountDownActivity extends AppCompatActivity {
         int isDay = Integer.parseInt(day);
         int isMonth = Integer.parseInt(month);
         if (isMonth == 2 || isMonth == 4 || isMonth == 6 || isMonth == 9 || isMonth == 11) {
-            if (isDay > 30) {
-                return false;
-            }
+            return isDay <= 30;
         }
         return true;
     }
 
+    @SuppressLint("DefaultLocale")
     private int isPositon(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
@@ -344,18 +347,14 @@ public class CreateCountDownActivity extends AppCompatActivity {
         return res;
     }
 
-    private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+    private static void setNumberPickerTextColor(NumberPicker numberPicker) {
 
         try {
             Field selectorWheelPaintField = numberPicker.getClass()
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
-            ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
-        } catch (NoSuchFieldException e) {
-            Log.w("hihi", e);
-        } catch (IllegalAccessException e) {
-            Log.w("hihi", e);
-        } catch (IllegalArgumentException e) {
+            ((Paint) Objects.requireNonNull(selectorWheelPaintField.get(numberPicker))).setColor(Color.BLACK);
+        } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
 
@@ -363,7 +362,7 @@ public class CreateCountDownActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             View child = numberPicker.getChildAt(i);
             if (child instanceof EditText)
-                ((EditText) child).setTextColor(color);
+                ((EditText) child).setTextColor(Color.BLACK);
         }
         numberPicker.invalidate();
     }

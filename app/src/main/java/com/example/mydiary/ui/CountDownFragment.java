@@ -27,7 +27,6 @@ import java.util.Objects;
 public class CountDownFragment extends Fragment {
     private ViewPager viewPager;
     private TabLayout tablayout;
-    private DairyAdapter adapter;
     private DatabaseCount helper;
     private  List<Count> list = new ArrayList<>();
     private LinearLayout layoutTrue, layoutFalse;
@@ -35,8 +34,7 @@ public class CountDownFragment extends Fragment {
 
 
     public static CountDownFragment newInstance() {
-        CountDownFragment fragment = new CountDownFragment();
-        return fragment;
+        return new CountDownFragment();
     }
 
     @Override
@@ -88,7 +86,7 @@ public class CountDownFragment extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        adapter = new DairyAdapter(getChildFragmentManager());
+        DairyAdapter adapter = new DairyAdapter(getChildFragmentManager());
         adapter.addFragment(new CountingDownFragment(), getString(R.string._in_progress));
         adapter.addFragment(new FinishedFragment(), getString(R.string._finished));
         viewPager.setAdapter(adapter);

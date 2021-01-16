@@ -1,17 +1,11 @@
 package com.example.mydiary.ui;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -20,16 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mydiary.R;
 import com.example.mydiary.adapters.AdapterImageSub;
-import com.example.mydiary.database.DatabaseHelper;
 import com.example.mydiary.models.Diary;
 import com.example.mydiary.models.ImageSub;
-import com.example.mydiary.models.ItemSub;
-import com.github.chrisbanes.photoview.PhotoView;
 
-import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,9 +28,8 @@ import java.util.List;
 
 public class ImageFragment extends Fragment {
 
-    private ArrayList<ImageSub> list = new ArrayList<>();
+    private final ArrayList<ImageSub> list = new ArrayList<>();
     private ArrayList<Diary> res = new ArrayList<>();
-    private AdapterImageSub adapterImageSub;
     private RecyclerView mRecyclerview;
     private LinearLayout no_item;
 
@@ -109,9 +97,9 @@ public class ImageFragment extends Fragment {
                     && calendarKey.get(Calendar.YEAR) == calendarEvent.get(Calendar.YEAR)) {
                 String s[] = model.getImage().trim().split("<->");
                 if (s.length > 0) {
-                    for (int j = 0; j < s.length; j++) {
-                        if (!s[j].isEmpty()) {
-                            result.add(s[j]);
+                    for (String value : s) {
+                        if (!value.isEmpty()) {
+                            result.add(value);
                         }
                     }
                 }
@@ -122,26 +110,27 @@ public class ImageFragment extends Fragment {
 
     private void initAction() {
         list.clear();
-        res = ShowFragment.getList();
+        res = SaveNoteFragment.getList();
         List<Long> listDay = buildListDate(res);
-
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         for (int i = 0; i < listDay.size(); i++) {
             List<String> result = buildListImage(listDay.get(i), res);
-            list.add(new ImageSub(String.valueOf(listDay.get(i)), result));
+            if (result.size() > 0) {
+                list.add(new ImageSub(String.valueOf(listDay.get(i)), result));
+            }
         }
         List<String> test = new ArrayList<>();
-        String s[] = res.get(0).getImage().trim().split("<->");
+        String[] s = res.get(0).getImage().trim().split("<->");
         if (s.length > 0) {
-            for (int j = 0; j < s.length; j++) {
-                if (!s[j].isEmpty()) {
-                    test.add(s[j]);
+            for (String value : s) {
+                if (!value.isEmpty()) {
+                    test.add(value);
                 }
             }
         }
         Collections.reverse(list);
-        adapterImageSub = new AdapterImageSub(list, getActivity());
+        AdapterImageSub adapterImageSub = new AdapterImageSub(list, getActivity());
         mRecyclerview.setAdapter(adapterImageSub);
         adapterImageSub.notifyDataSetChanged();
     }

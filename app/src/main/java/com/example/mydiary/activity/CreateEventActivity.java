@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 @SuppressLint("SimpleDateFormat")
 public class CreateEventActivity extends AppCompatActivity {
@@ -44,9 +45,9 @@ public class CreateEventActivity extends AppCompatActivity {
     private SwitchCompat switchNotification;
     private long loc = 1000;
     private long toDay = 1000;
-    private long check = 1000;
-    private DatabaseEvent helper = new DatabaseEvent(this);
-    private SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyy");
+    private final long check = 1000;
+    private final DatabaseEvent helper = new DatabaseEvent(this);
+    private final SimpleDateFormat f = new SimpleDateFormat("dd.MM.yyy");
 
 
     @Override
@@ -70,7 +71,7 @@ public class CreateEventActivity extends AppCompatActivity {
         int m = calendar.get(Calendar.MONTH) + 1;
         int y = calendar.get(Calendar.YEAR);
         try {
-            loc = f.parse(d + "." + m + "." + y).getTime();
+            loc = Objects.requireNonNull(f.parse(d + "." + m + "." + y)).getTime();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -189,9 +190,9 @@ public class CreateEventActivity extends AppCompatActivity {
         setNubmerPicker(hours, Pef.hoursList);
         setNubmerPicker(minute, Pef.minuteList);
 
-        setNumberPickerTextColor(day, Color.BLACK);
-        setNumberPickerTextColor(month, Color.BLACK);
-        setNumberPickerTextColor(year, Color.BLACK);
+        setNumberPickerTextColor(day);
+        setNumberPickerTextColor(month);
+        setNumberPickerTextColor(year);
 
         Calendar calendar = Calendar.getInstance();
         int h = calendar.get(Calendar.HOUR_OF_DAY);
@@ -288,13 +289,13 @@ public class CreateEventActivity extends AppCompatActivity {
         return res;
     }
 
-    private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+    private static void setNumberPickerTextColor(NumberPicker numberPicker) {
 
         try {
             Field selectorWheelPaintField = numberPicker.getClass()
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
-            ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
+            ((Paint) Objects.requireNonNull(selectorWheelPaintField.get(numberPicker))).setColor(Color.BLACK);
         } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
@@ -303,7 +304,7 @@ public class CreateEventActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             View child = numberPicker.getChildAt(i);
             if (child instanceof EditText)
-                ((EditText) child).setTextColor(color);
+                ((EditText) child).setTextColor(Color.BLACK);
         }
         numberPicker.invalidate();
     }

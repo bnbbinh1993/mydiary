@@ -47,6 +47,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class CreateNoteActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -69,12 +70,14 @@ public class CreateNoteActivity extends AppCompatActivity {
     private Spinner spinner;
     private String employees[];
     private String title;
-    private String path;
     private ArrayList<String> resPath;
-    private ArrayList<String> list = new ArrayList<>();
+    private final ArrayList<String> list = new ArrayList<>();
     private RecyclerView test_image;
     private ImageAdapterEdit adapter;
     private int mColor = 0;
+
+    public CreateNoteActivity() {
+    }
 
 
     @Override
@@ -194,7 +197,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showdialog();
+                showily();
             }
         });
         mSave.setOnClickListener(new View.OnClickListener() {
@@ -435,15 +438,15 @@ public class CreateNoteActivity extends AppCompatActivity {
         final NumberPicker hours = view.findViewById(R.id.numberHours);
         final NumberPicker minute = view.findViewById(R.id.numberminute);
 
-        setNubmerPicker(day, Pef.dayList);
-        setNubmerPicker(month, Pef.monthList);
-        setNubmerPicker(year, Pef.isListYear());
-        setNubmerPicker(hours, Pef.hoursList);
-        setNubmerPicker(minute, Pef.minuteList);
+        setNumberPicker(day, Pef.dayList);
+        setNumberPicker(month, Pef.monthList);
+        setNumberPicker(year, Pef.isListYear());
+        setNumberPicker(hours, Pef.hoursList);
+        setNumberPicker(minute, Pef.minuteList);
 
-        setNumberPickerTextColor(day, Color.BLACK);
-        setNumberPickerTextColor(month, Color.BLACK);
-        setNumberPickerTextColor(year, Color.BLACK);
+        setNumberPickerTextColor(day);
+        setNumberPickerTextColor(month);
+        setNumberPickerTextColor(year);
 
         Calendar calendar = Calendar.getInstance();
         int d = calendar.get(Calendar.DAY_OF_MONTH);
@@ -456,11 +459,11 @@ public class CreateNoteActivity extends AppCompatActivity {
         Log.d("M", "onClick: " + m);
         Log.d("Y", "onClick: " + y);
 
-        day.setValue(isPositon(d, Pef.dayList));
-        month.setValue(isPositon(m, Pef.monthList));
-        year.setValue(isPositon(y, Pef.isListYear()));
-        hours.setValue(isPositon(h, Pef.hoursList));
-        minute.setValue(isPositon(p, Pef.minuteList));
+        day.setValue(isPosition(d, Pef.dayList));
+        month.setValue(isPosition(m, Pef.monthList));
+        year.setValue(isPosition(y, Pef.isListYear()));
+        hours.setValue(isPosition(h, Pef.hoursList));
+        minute.setValue(isPosition(p, Pef.minuteList));
 
         builder.setPositiveButton(R.string._yes, new DialogInterface.OnClickListener() {
             @Override
@@ -498,7 +501,7 @@ public class CreateNoteActivity extends AppCompatActivity {
     private boolean checkDate(String s) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("HH:mm - dd.MM.yyy");
         try {
-            if (format.parse(s).getTime() > (System.currentTimeMillis() + 60000)) {
+            if (Objects.requireNonNull(format.parse(s)).getTime() > (System.currentTimeMillis() + 60000)) {
                 return true;
             }
         } catch (ParseException e) {
@@ -507,7 +510,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         return false;
     }
 
-    private void setNubmerPicker(NumberPicker nubmerPicker, String[] numbers) {
+    private void setNumberPicker(NumberPicker nubmerPicker, String[] numbers) {
         nubmerPicker.setMaxValue(numbers.length - 1);
         nubmerPicker.setMinValue(0);
         nubmerPicker.setWrapSelectorWheel(true);
@@ -525,7 +528,8 @@ public class CreateNoteActivity extends AppCompatActivity {
         return true;
     }
 
-    private int isPositon(int check, String[] list) {
+    @SuppressLint("DefaultLocale")
+    private int isPosition(int check, String[] list) {
         int res = 1;
         for (int i = 0; i < list.length; i++) {
             if (list[i].equals(String.format("%02d", check))) {
@@ -536,13 +540,13 @@ public class CreateNoteActivity extends AppCompatActivity {
         return res;
     }
 
-    private static void setNumberPickerTextColor(NumberPicker numberPicker, int color) {
+    private static void setNumberPickerTextColor(NumberPicker numberPicker) {
 
         try {
             Field selectorWheelPaintField = numberPicker.getClass()
                     .getDeclaredField("mSelectorWheelPaint");
             selectorWheelPaintField.setAccessible(true);
-            ((Paint) selectorWheelPaintField.get(numberPicker)).setColor(color);
+            ((Paint) Objects.requireNonNull(selectorWheelPaintField.get(numberPicker))).setColor(Color.BLACK);
         } catch (NoSuchFieldException | IllegalAccessException | IllegalArgumentException e) {
             Log.w("hihi", e);
         }
@@ -551,13 +555,13 @@ public class CreateNoteActivity extends AppCompatActivity {
         for (int i = 0; i < count; i++) {
             View child = numberPicker.getChildAt(i);
             if (child instanceof EditText)
-                ((EditText) child).setTextColor(color);
+                ((EditText) child).setTextColor(Color.BLACK);
         }
         numberPicker.invalidate();
     }
 
 
-    private void showdialog() {
+    private void showily() {
         AlertDialog.Builder builder = new AlertDialog.Builder(CreateNoteActivity.this);
         builder.setTitle(getResources().getString(R.string._exit));
         builder.setMessage(getResources().getString(R.string._messenger_back));
@@ -607,6 +611,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         switch (requestCode) {
             case SELECT_PICTURES: {
                 if (resultCode == Activity.RESULT_OK) {
+                    String path;
                     if (data.getClipData() != null) {
                         int count = data.getClipData().getItemCount();
                         for (int i = 0; i < count; i++) {
@@ -656,7 +661,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        showdialog();
+        showily();
     }
 }
 
