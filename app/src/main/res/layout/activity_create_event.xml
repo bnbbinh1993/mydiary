@@ -32,7 +32,8 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/actionBarItemBackground"
                     android:padding="10dp"
-                    android:src="@drawable/ic_left_arrow" />
+                    android:src="@drawable/ic_left_arrow"
+                    tools:ignore="ContentDescription" />
 
                 <ImageButton
                     android:id="@+id/btnMic"
@@ -101,7 +102,8 @@
                             android:layout_height="20dp"
                             android:layout_marginStart="10dp"
                             android:background="?attr/actionBarItemBackground"
-                            android:src="@drawable/ic_clock" />
+                            android:src="@drawable/ic_clock"
+                            tools:ignore="ContentDescription" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -200,7 +202,8 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
-                        android:src="@drawable/ic_notes_2" />
+                        android:src="@drawable/ic_notes_2"
+                        tools:ignore="ContentDescription" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text_save"

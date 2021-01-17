@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -17,12 +18,14 @@
         android:paddingStart="20dp"
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        tools:ignore="UselessParent">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <TextView
                 android:id="@+id/name"
@@ -31,7 +34,6 @@
                 android:layout_toStartOf="@+id/card"
                 android:fontFamily="@font/cardo"
                 android:maxLines="1"
-                android:text="Bùi Ngọc Bình"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -46,7 +48,6 @@
                 android:layout_toStartOf="@+id/card"
                 android:fontFamily="@font/cardo"
                 android:maxLines="3"
-                android:text="Hôm nay chúng ta đi đâu được nhỉ hihi"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 
@@ -59,7 +60,8 @@
                 android:layout_marginBottom="5dp"
                 android:layout_toStartOf="@+id/card"
                 android:gravity="start"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="12dp"
@@ -73,7 +75,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/cardo"
-                    android:text="12:65"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -85,14 +86,18 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginBottom="10dp"
                 android:elevation="0dp"
                 app:cardCornerRadius="5dp">
 
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="70dp"
-                    android:layout_height="70dp" />
+                    android:layout_height="70dp"
+                    tools:ignore="ContentDescription" />
             </androidx.cardview.widget.CardView>
 
         </RelativeLayout>

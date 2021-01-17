@@ -1,28 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="@color/white"
-    android:paddingEnd="5dp"
-    android:paddingStart="5dp"
-    android:paddingBottom="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/timeText"
-        android:textSize="16sp"
-        android:textColor="@color/red_orange"
-        style="@style/TextView"
-        android:text="09:50 pm"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white"
+    android:maxHeight="100dp"
+    android:minHeight="100dp"
+    android:orientation="vertical"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+    android:paddingBottom="10dp">
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:textStyle="normal"
-        android:textSize="16sp"
-        android:id="@+id/contentText"
-        android:textColor="@color/black"
-        style="@style/TextView"
-        android:text="Đi chơi nét với 500 ae "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="100dp"
+        android:maxHeight="100dp"
+        android:minHeight="100dp"
+        tools:ignore="UselessParent">
+
+        <TextView
+            android:id="@+id/textField"
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="#Technology"
+            android:textColor="@color/red_orange"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/timeText"
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textField"
+            android:layout_toStartOf="@+id/imageCalendar"
+            android:gravity="bottom"
+            android:paddingStart="3dp"
+            android:text="09:50 pm"
+            android:textColor="@color/color_time_blue"
+            android:textSize="15sp"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/contentText"
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeText"
+            android:layout_toStartOf="@+id/imageCalendar"
+            android:maxLines="2"
+            android:paddingStart="3dp"
+            android:text="Đi chơi nét với 500 ae "
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            tools:ignore="RtlSymmetry,UnusedAttribute" />
+
+        <ImageView
+            android:id="@+id/imageCalendar"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/textField"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:cropToPadding="true"
+            android:src="@drawable/background"
+            tools:ignore="ContentDescription" />
+
+
+    </RelativeLayout>
 </LinearLayout>

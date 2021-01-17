@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/ic_zombie" />
+        android:src="@drawable/ic_zombie"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +43,6 @@
         android:layout_gravity="center"
         android:fontFamily="@font/cardo"
         android:gravity="center"
-        android:text="Gmail: bnbbinh@gmail.com"
         android:textColor="@color/black"
         android:textSize="14sp" />
 
@@ -58,7 +58,8 @@
         android:maxLength="9"
         android:maxLines="1"
         android:padding="10dp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        tools:ignore="Autofill" />
 
     <ImageButton
         android:id="@+id/btnSend"
@@ -68,6 +69,7 @@
         android:background="?attr/selectableItemBackground"
         android:padding="10dp"
         android:src="@drawable/ic_send"
-        android:visibility="gone" />
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
 
 </LinearLayout>

@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:background="?attr/actionBarItemBackground"
                 android:padding="10dp"
-                android:src="@drawable/ic_left_arrow" />
+                android:src="@drawable/ic_left_arrow"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/btnColor"
@@ -35,7 +36,8 @@
                 android:layout_toStartOf="@+id/btnMic"
                 android:background="?attr/actionBarItemBackground"
                 android:padding="10dp"
-                android:src="@drawable/ic_color_palette" />
+                android:src="@drawable/ic_color_palette"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/btnMic"
@@ -44,7 +46,8 @@
                 android:layout_toStartOf="@+id/btnImage"
                 android:background="?attr/actionBarItemBackground"
                 android:padding="10dp"
-                android:src="@drawable/ic_microphone" />
+                android:src="@drawable/ic_microphone"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/btnImage"
@@ -53,7 +56,8 @@
                 android:layout_toStartOf="@+id/save"
                 android:background="?attr/actionBarItemBackground"
                 android:padding="10dp"
-                android:src="@drawable/ic_gallery" />
+                android:src="@drawable/ic_gallery"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/save"
@@ -63,7 +67,8 @@
                 android:background="?attr/actionBarItemBackground"
                 android:padding="10dp"
                 android:src="@drawable/ic_check"
-                android:visibility="visible" />
+                android:visibility="visible"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/date"
@@ -87,7 +92,8 @@
                 android:layout_toEndOf="@+id/date"
                 android:background="?attr/actionBarItemBackground"
                 android:padding="12dp"
-                android:src="@drawable/ic_clock" />
+                android:src="@drawable/ic_clock"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/btnMood"
@@ -99,7 +105,8 @@
                 android:layout_toEndOf="@+id/btnClock"
                 android:background="?attr/actionBarItemBackground"
                 android:padding="12dp"
-                android:src="@drawable/ic_happy" />
+                android:src="@drawable/ic_happy"
+                tools:ignore="ContentDescription" />
 
             <Spinner
                 android:id="@+id/spinner"
@@ -146,7 +153,8 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    tools:ignore="Autofill,RtlSymmetry,TextFields" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/test_image"
@@ -167,7 +175,8 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="100dp"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:ignore="Autofill,RtlSymmetry,TextFields" />
 
 
             </LinearLayout>

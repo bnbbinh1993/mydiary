@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <LinearLayout
+
+    <RelativeLayout
         android:id="@+id/viewtop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,11 +14,13 @@
             android:id="@+id/btnCancel"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
             android:background="?attr/actionBarItemBackground"
             android:padding="10dp"
-            android:src="@drawable/ic_back_white" />
-    </LinearLayout>
+            android:src="@drawable/ic_back_white"
+            tools:ignore="ContentDescription" />
+
+
+    </RelativeLayout>
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/photo_view"

@@ -39,5 +39,6 @@
     <color name="gradient6">#CEFBF6C2</color>
     <color name="gradient7">#94B7E9FF</color>
     <color name="gradient8">#E5FFC7</color>
+    <color name="color_time_blue">#BA3801FF</color>
 
 </resources>

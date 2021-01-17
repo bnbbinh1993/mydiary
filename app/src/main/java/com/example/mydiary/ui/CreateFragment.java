@@ -145,8 +145,8 @@ public class CreateFragment extends Fragment {
 //        list.add(new Create(getResources().getString(R.string._celebration),R.drawable.ic_fireworks,R.color.cele));
         list.add(new Create(getResources().getString(R.string._follow), R.drawable.ic_flow_red, R.color.countdown));
         //list2.add(new Create(getResources().getString(R.string._emotion),R.drawable.ic_emoticons,R.color.event));
-        list3.add(new App(getResources().getString(R.string._alone), getResources().getString(R.string._entertaiment), R.drawable.alone, R.color.note));
-        list3.add(new App(getResources().getString(R.string._fancy_text), getResources().getString(R.string._tools), R.drawable.fancytext, R.color.work));
+
+
 
 
     }

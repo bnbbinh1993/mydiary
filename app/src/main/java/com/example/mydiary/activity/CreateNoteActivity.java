@@ -94,7 +94,7 @@ public class CreateNoteActivity extends AppCompatActivity {
 
     private void setRecyclerview() {
         test_image.setHasFixedSize(true);
-        test_image.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+        test_image.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
         Log.d("TEST", "setRecyclerview: " + resPath.size());
         adapter = new ImageAdapterEdit(list, this);
         test_image.setAdapter(adapter);
@@ -376,7 +376,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         String title = mTitle.getText().toString();
         String content = mContent.getText().toString();
         String date = mDate.getText().toString();
-        String image = "";
+        StringBuilder image = new StringBuilder();
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH) + 1;
@@ -384,45 +384,34 @@ public class CreateNoteActivity extends AppCompatActivity {
         String dateRealTime = day + "/" + month + "/" + year;
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatRealTime = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            calendar.setTime(formatRealTime.parse(dateRealTime));
+            calendar.setTime(Objects.requireNonNull(formatRealTime.parse(dateRealTime)));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
 
         for (String s : resPath) {
-            image = image + s + "<->";
+            image.append(s).append("<->");
         }
         if (title.isEmpty()) {
             mTitle.requestFocus();
             Toast.makeText(this, getResources().getString(R.string._notification_title), Toast.LENGTH_SHORT).show();
-        } else if (content.isEmpty()) {
-            mContent.requestFocus();
-            Toast.makeText(this, getResources().getString(R.string._notification_des), Toast.LENGTH_SHORT).show();
         } else {
-            Diary diary = new Diary();
-            diary.setTitle(title);
-            diary.setContent(content);
-            diary.setDate(date);
-            diary.setFilter(filter);
-            diary.setImage(image.trim());
-            diary.setVote(mColor);
-            diary.setRealtime(calendar.getTimeInMillis());
-            helper.add(diary);
-            try {
-                Thread.sleep(200);
-                Intent intent = new Intent(CreateNoteActivity.this, FinishActivity.class);
-                intent.putExtra("I", 1);
-                startActivity(intent);
-                overridePendingTransition(R.anim.out_left, R.anim.in_left);
-                finish();
-            } catch (InterruptedException e) {
-                Intent intent = new Intent(CreateNoteActivity.this, FinishActivity.class);
-                intent.putExtra("I", 1);
-                startActivity(intent);
-                overridePendingTransition(R.anim.out_left, R.anim.in_left);
-                finish();
-            }
+            Diary model = new Diary();
+            model.setTitle(title);
+            model.setContent(content);
+            model.setDate(date);
+            model.setFilter(filter);
+            model.setImage(image.toString().trim());
+            model.setVote(mColor);
+            model.setRealtime(calendar.getTimeInMillis());
+            helper.add(model);
+            Intent intent = new Intent(CreateNoteActivity.this, FinishActivity.class);
+            intent.putExtra("I", 1);
+            startActivity(intent);
+            overridePendingTransition(R.anim.out_left, R.anim.in_left);
+            finish();
+
         }
 
     }

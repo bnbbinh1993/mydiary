@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:background="?attr/actionBarItemBackground"
             android:padding="10dp"
-            android:src="@drawable/ic_left_arrow" />
+            android:src="@drawable/ic_left_arrow"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,7 +32,8 @@
             android:text="@string/_count_time"
             android:textColor="@color/blackfake"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
 
         <ImageButton
             android:id="@+id/mSave"
@@ -41,7 +43,8 @@
             android:background="?attr/actionBarItemBackground"
             android:padding="10dp"
             android:src="@drawable/ic_check"
-            android:visibility="visible" />
+            android:visibility="visible"
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 
@@ -70,7 +73,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_title" />
+                android:src="@drawable/ic_title"
+                tools:ignore="ContentDescription" />
 
             <EditText
                 android:id="@+id/mTitle"
@@ -85,7 +89,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DCDCDC"
                 android:textSize="15sp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                tools:ignore="Autofill" />
         </LinearLayout>
 
         <LinearLayout
@@ -128,7 +133,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_address" />
+                android:src="@drawable/ic_address"
+                tools:ignore="ContentDescription" />
 
             <EditText
                 android:id="@+id/mPlace"
@@ -143,7 +149,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="#DCDCDC"
                 android:textSize="15sp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                tools:ignore="Autofill" />
 
         </LinearLayout>
 
@@ -153,12 +160,14 @@
             android:layout_gravity="center"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="10dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_calendar" />
+                android:src="@drawable/ic_calendar"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/mDate"
@@ -166,7 +175,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/cardo"
                 android:padding="10dp"
-                android:text="12:32 - 12.12.2020"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="normal" />
@@ -181,12 +189,14 @@
             android:orientation="horizontal"
             android:paddingStart="10dp"
             android:paddingTop="15dp"
-            android:paddingBottom="15dp">
+            android:paddingBottom="15dp"
+            tools:ignore="RtlSymmetry">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_category" />
+                android:src="@drawable/ic_category"
+                tools:ignore="ContentDescription" />
 
             <Spinner
                 android:id="@+id/spinner_employee"

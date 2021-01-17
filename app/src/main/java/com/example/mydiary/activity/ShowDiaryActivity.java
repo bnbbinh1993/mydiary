@@ -28,6 +28,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -186,7 +187,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
         adapter = new ImageAdapter(listPath, this);
         mRecyclerview.setHasFixedSize(true);
-        mRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerview.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerview.setAdapter(adapter);
         updateFilter(filterEdit);
         updateVote(mColor);
@@ -227,7 +228,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         //spinnerEdit.setPromptId(list.get(i).getFilter());
         adapterEdit = new ImageAdapterEdit(listPath2, this);
         mRecyclerviewEdit.setHasFixedSize(true);
-        mRecyclerviewEdit.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerviewEdit.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerviewEdit.setAdapter(adapterEdit);
         adapterEdit.setOnClickItem(new OnClickItem() {
             @Override
