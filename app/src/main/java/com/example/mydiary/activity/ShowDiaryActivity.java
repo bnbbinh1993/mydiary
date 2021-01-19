@@ -102,11 +102,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             model = new Diary(bundle.getInt("id"), bundle.getString("title"), bundle.getString("content"), bundle.getString("date"), bundle.getString("address"), bundle.getString("image"), bundle.getInt("vote"), bundle.getInt("filter"), bundle.getLong("realtime"));
-            title.setText(model.getTitle());
-            body.setText(model.getContent());
-            date.setText(model.getDate());
-            filterEdit = model.getFilter();
-            mColor = model.getVote();
+
         } else {
             model = new Diary();
         }
@@ -175,6 +171,7 @@ public class ShowDiaryActivity extends AppCompatActivity {
         listPath.clear();
         listPath2.clear();
 
+
         String s[] = model.getImage().split("<->");
         if (s.length > 0) {
             for (String value : s) {
@@ -222,6 +219,13 @@ public class ShowDiaryActivity extends AppCompatActivity {
 
             }
         });
+
+        title.setText(model.getTitle());
+        body.setText(model.getContent());
+        date.setText(model.getDate());
+        filterEdit = model.getFilter();
+        mColor = model.getVote();
+
         titleEdit.setText(model.getTitle());
         bodyEdit.setText(model.getContent());
         dateEdit.setText(model.getDate());

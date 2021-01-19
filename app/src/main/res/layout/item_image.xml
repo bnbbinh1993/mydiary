@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -26,7 +27,8 @@
                 android:maxWidth="130dp"
                 android:maxHeight="130dp"
                 android:minWidth="130dp"
-                android:minHeight="130dp" />
+                android:minHeight="130dp"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/mDelete"
@@ -34,7 +36,8 @@
                 android:layout_height="25dp"
                 android:layout_margin="5dp"
                 android:background="?attr/actionBarItemBackground"
-                android:src="@drawable/ic_cancel_2_" />
+                android:src="@drawable/ic_cancel_2_"
+                tools:ignore="ContentDescription" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
