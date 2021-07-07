@@ -1,5 +1,6 @@
 package com.example.mydiary.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -88,6 +89,7 @@ public class SaveNoteFragment extends Fragment {
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     private List<Long> buildListDate(List<Diary> data) {
         List<Long> res = new ArrayList<>();
 

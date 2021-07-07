@@ -174,7 +174,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     }
 
     public void setOnClickItem(OnClickItem onClickItem1) {
-        this.onClickItem = onClickItem1;
+        onClickItem = onClickItem1;
     }
 
     @Override
